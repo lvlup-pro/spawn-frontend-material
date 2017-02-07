@@ -75,7 +75,7 @@ function updateMeta (head, context) {
 }
 
 app.use(compression({ threshold: 0 }))
-app.use(favicon('./public/favicon-32x32.png'))
+app.use(favicon('./public/favicon-256x256.png'))
 app.use('/dist', serve('./dist'))
 app.use('/public', serve('./public'))
 
