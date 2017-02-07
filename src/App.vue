@@ -88,7 +88,7 @@
                     {header: 'Menu'},
                     //{title: this.$t('news'), action: 'star', href: "/"},
                     //{title: this.$t('order'), action: 'widgets', href: ""},
-                    {title: this.$t('services'), action: 'reorder', href: "/services"},
+                    {title: this.$t('services'), action: 'reorder', href: "/service"},
                     //{title: this.$t('payments'), action: 'widgets', href: ""},
                     {title: this.$t('help'), action: 'help', href: "/ticket"},
                 ]

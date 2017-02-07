@@ -19,6 +19,7 @@ export default new Vuex.Store({
             }
         ],
         ticket:{},
+        vps:{},
         ticketMessages: {},
         services: {"paging":{"total_pages":1}},
         pagination: {"paging":{"total_pages":1}},
@@ -142,7 +143,18 @@ export default new Vuex.Store({
                 }).catch(function () {
                     console.log("connection error")
                 })
-        }
+        },
+        vpsInfo ({commit, state}, args) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
+            return axios.get(state.apiUrl + 'vps/'+args.id)
+                .then(function (res) {
+                    if (typeof res.data.active !== 'undefined') {
+                        commit('setVps', res.data)
+                    }
+                }).catch(function () {
+                    console.log("vps connection error")
+                })
+        },
     },
     mutations: {
         setUsername (state, newUsername) {
@@ -156,6 +168,9 @@ export default new Vuex.Store({
         },
         setTicket (state, newTicket) {
             state.ticket = newTicket;
+        },
+        setVps (state, newVps) {
+            state.vps = newVps;
         },
         setTicketMessages (state, newTicketMessages) {
             state.ticketMessages = newTicketMessages;

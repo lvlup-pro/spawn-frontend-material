@@ -32,10 +32,10 @@
                                             <v-checkbox v-bind:id="'checkbox' + index" filled
                                                         class="text-xs-center"></v-checkbox>
                                         </td>
-                                        <td>VPS</td>
-                                        <td>{{item.id}}</td>
-                                        <td>{{item.name}}</td>
-                                        <td>{{item.payed_to | prettyDate}}</td>
+                                        <td v-on:click="goToVps(item.id)">VPS</td>
+                                        <td v-on:click="goToVps(item.id)">{{item.id}}</td>
+                                        <td v-on:click="goToVps(item.id)">{{item.name}}</td>
+                                        <td v-on:click="goToVps(item.id)">{{item.payed_to | prettyDate}}</td>
                                     </tr>
                                 </template>
                                 </tbody>
@@ -124,6 +124,9 @@
                     description: 'Pagination component for Vuetify Framework',
                     keywords: 'vuetify, pagination, components'
                 }
+            },
+            goToVps(id) {
+                this.$router.push('/service/vps/' + id)
             }
         },
         locales: {
