@@ -10,8 +10,6 @@ const configProd = {
     apiUrl: 'https://api.lvlup.pro/v3/'
 }
 
-console.log(process.env.NODE_ENV)
-
 if (typeof module !== "undefined" && process.env.NODE_ENV == "development") module.exports = configDev;
 if (typeof module !== "undefined" && process.env.NODE_ENV == "staging") module.exports = configStage;
 if (typeof module !== "undefined" && process.env.NODE_ENV == "production") module.exports = configProd;
