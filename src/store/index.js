@@ -24,9 +24,13 @@ export default new Vuex.Store({
         services: {"paging":{"total_pages":1}},
         pagination: {"paging":{"total_pages":1}},
         count: 1,
-        navbarTitle: ""
+        navbarTitle: "",
+        version: ""
     },
     actions: {
+        boot ({dispatch, state, commit}) {
+            commit('setVersion', "v"+storeConfig.version)
+        },
         logOut ({dispatch, state, commit}) {
             localStorage.removeItem("token");
             commit('setAccount', {})
@@ -157,6 +161,9 @@ export default new Vuex.Store({
         },
     },
     mutations: {
+        setVersion (state, newVersion) {
+            state.version = newVersion;
+        },
         setUsername (state, newUsername) {
             state.account.username = newUsername;
         },

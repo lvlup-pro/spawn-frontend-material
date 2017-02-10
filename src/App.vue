@@ -29,7 +29,7 @@
             <v-sidebar id="mainsidebar" fixed v-bind:items="menu" ripple router unshift>
                 <div slot="top">
                     <img src="https://lvlup.pro/assets/home/img/logo.png"/>
-                    <p class="text-xs-center white--text">{{$t('panel')}}</p>
+                    <p class="text-xs-center white--text">{{$t('panel')}} {{version}}</p>
                     <ul data-uid="15" class="list list--dense list--sub-header">
                         <hr class="divider divider--light">
                         <li class="list__sub-header">{{$t('account')}}</li>
@@ -79,6 +79,9 @@
             },
             wallet() {
                 return this.$store.state.wallet[0]
+            },
+            version() {
+                return this.$store.state.version
             }
         },
         data () {
@@ -118,13 +121,14 @@
         },
         mounted () {
             this.$vuetify.init();
+            this.$store.dispatch('boot')
         },
         locales: {
             en: {
                 login: "Log in",
                 account: "Account",
                 wallet: "Wallet",
-                panel: "Customer panel v3.0.0",
+                panel: "Customer panel",
                 news: "News",
                 order: "Order",
                 services: "Services",
@@ -135,7 +139,7 @@
                 login: "Zaloguj się",
                 account: "Konto",
                 wallet: "Portfel",
-                panel: "Panel klienta v3.0.0",
+                panel: "Panel klienta",
                 news: "Nowości",
                 order: "Zamów",
                 services: "Usługi",
