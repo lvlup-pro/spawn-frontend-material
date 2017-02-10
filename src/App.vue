@@ -30,7 +30,7 @@
                 <div slot="top">
                     <img src="https://lvlup.pro/assets/home/img/logo.png"/>
                     <p class="text-xs-center white--text">{{$t('panel')}} {{version}}</p>
-                    <ul data-uid="15" class="list list--dense list--sub-header">
+                    <ul data-uid="15" class="noclick list list--dense list--sub-header">
                         <hr class="divider divider--light">
                         <li class="list__sub-header">{{$t('account')}}</li>
                         <li v-if="account.email" class="list__item"><a href="#!" class="list__tile list__tile">
@@ -91,6 +91,7 @@
                     {header: 'Menu'},
                     //{title: this.$t('news'), action: 'star', href: "/"},
                     //{title: this.$t('order'), action: 'widgets', href: ""},
+                    {title: this.$t('home'), action: 'home', href: "/"},
                     {title: this.$t('services'), action: 'reorder', href: "/service"},
                     //{title: this.$t('payments'), action: 'widgets', href: ""},
                     {title: this.$t('help'), action: 'help', href: "/ticket"},
@@ -125,6 +126,7 @@
         },
         locales: {
             en: {
+                home: "Home",
                 login: "Log in",
                 account: "Account",
                 wallet: "Wallet",
@@ -136,6 +138,7 @@
                 help: "Help"
             },
             pl: {
+                home: "Nowości",
                 login: "Zaloguj się",
                 account: "Konto",
                 wallet: "Portfel",
@@ -151,6 +154,10 @@
 </script>
 
 <style>
+    .noclick li a{
+        cursor: not-allowed;
+    }
+
     header .navbar__side-icon {
         margin: 0 1rem;
     }
