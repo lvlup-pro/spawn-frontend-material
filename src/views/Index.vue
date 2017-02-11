@@ -15,7 +15,7 @@
     export default {
         mounted () {
             this.$vuetify.init();
-            this.$store.commit('setNavbarTitle', "Index")
+            this.$store.commit('setNavbarTitle', this.$t('header_home'))
             if (typeof this.$route.params.lang === 'undefined') {
                 this.$router.push('/en/home')
             }

@@ -17,14 +17,26 @@ var locales = {
         auth_no: "Log in first",
         auth_already: 'Logged in already',
         auth_success: 'Auth success',
-        auth_fail: 'Login failed'
+        auth_fail: 'Login failed',
+        header_home: 'Home',
+        header_login: 'Log in',
+        header_services: 'Services',
+        header_ticket: 'Ticket',
+        header_tickets: 'Tickets',
+        header_vps: 'VPS'
     },
     pl: {
         loading: "Ładowanie",
         auth_no: "Zaloguj się",
         auth_already: 'Zalogowano już wcześniej',
         auth_success: 'Zalogowano poprawnie',
-        auth_fail: 'Logowanie nieudane'
+        auth_fail: 'Logowanie nieudane',
+        header_home: 'Nowości',
+        header_login: 'Zaloguj się',
+        header_services: 'Usługi',
+        header_ticket: 'Zgłoszenie',
+        header_tickets: 'Zgłoszenia',
+        header_vps: 'VPS'
     }
 }
 

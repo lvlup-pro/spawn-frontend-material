@@ -17,7 +17,7 @@
                     <v-dropdown id="dropdown3" right>
                         <li>
                             <div v-on:click="logOut" class="dropdown__item">
-                                Logout
+                                {{$t('logout')}}
                                 <v-icon class="secondary--text right">cloud_off</v-icon>
                             </div>
                         </li>
@@ -177,6 +177,7 @@
                 lang: "Language",
                 home: "Home",
                 login: "Log in",
+                logout: "Logout",
                 account: "Account",
                 wallet: "Wallet",
                 panel: "Customer panel",
@@ -190,6 +191,7 @@
                 lang: "Język",
                 home: "Nowości",
                 login: "Zaloguj się",
+                logout: "Wyloguj się",
                 account: "Konto",
                 wallet: "Portfel",
                 panel: "Panel klienta",
