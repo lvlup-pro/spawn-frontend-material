@@ -39,7 +39,9 @@ var locales = {
 //     lang = lang.split('_')[0];
 
 //localStorage.setItem("lang", lang);
-Vue.config.lang = 'en' //FIXME user should select language
+//Vue.config.lang = 'en' //FIXME user should select language
+//console.log(router.currentRoute)
+//Vue.config.lang = router.params.lang
 
 Vue.config.fallbackLang = 'en'
 // set locales

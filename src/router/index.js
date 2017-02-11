@@ -13,11 +13,16 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+      //no auth needed
       { path: '/', component: Index },
-      { path: '/service', component: Services},
-      { path: '/service/vps/:id', component: Vps},
-      { path: '/ticket', component: Tickets},
-      { path: '/ticket/:id', component: Ticket},
+      { path: '/home', component: Index },
+      { path: '/:lg/home', component: Index },
+      { path: '/:lg/login', component: Login},
       { path: '/login', component: Login},
+      //auth needed
+      { path: '/:lg/service', component: Services},
+      { path: '/:lg/service/vps/:id', component: Vps},
+      { path: '/:lg/ticket', component: Tickets},
+      { path: '/:lg/ticket/:id', component: Ticket},
   ]
 })

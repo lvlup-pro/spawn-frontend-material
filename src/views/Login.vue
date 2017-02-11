@@ -58,6 +58,7 @@
 </style>
 
 <script>
+    import Vue from 'vue' //FIXME use global or something
     export default {
         data () {
             return {
@@ -80,6 +81,9 @@
         },
         mounted () {
             this.$store.commit('setNavbarTitle', this.$t('log_in'))
+            if (typeof this.$route.params.lang === 'undefined') {
+                this.$router.push('/en/login')
+            }
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
                     //this.$vuetify.toast.create(this.$t('auth_no'), "right")

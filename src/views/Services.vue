@@ -126,7 +126,7 @@
                 }
             },
             goToVps(id) {
-                this.$router.push('/service/vps/' + id)
+                this.$router.push('/'+this.$route.params.lg+'/service/vps/' + id)
             }
         },
         locales: {

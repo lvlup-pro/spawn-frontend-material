@@ -16,12 +16,15 @@
         mounted () {
             this.$vuetify.init();
             this.$store.commit('setNavbarTitle', "Index")
-            this.$store.dispatch('checkSession').then((nosession) => {
-                if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth_no'), "right")
-                    this.$router.push('/login')
-                }
-            })
+            if (typeof this.$route.params.lang === 'undefined') {
+                this.$router.push('/en/home')
+            }
+//            this.$store.dispatch('checkSession').then((nosession) => {
+//                if (nosession) {
+//                    this.$vuetify.toast.create(this.$t('auth_no'), "right")
+//                    this.$router.push('/login')
+//                }
+//            })
         }
     }
 </script>

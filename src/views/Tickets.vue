@@ -126,7 +126,7 @@
                 }
             },
             goToTicket(id) {
-                this.$router.push('/ticket/' + id)
+                this.$router.push('/'+this.$route.params.lg+'/ticket/' + id)
             }
         },
         locales: {
