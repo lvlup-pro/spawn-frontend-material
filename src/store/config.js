@@ -1,4 +1,4 @@
-var version = "3.0.0-alpha.2"
+var version = require('../../package.json').version
 
 const configDev = {
     apiUrl: 'http://127.0.0.1/v3/',
