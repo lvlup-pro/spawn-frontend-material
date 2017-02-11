@@ -80,7 +80,7 @@
             }
         },
         mounted () {
-            this.$store.commit('setNavbarTitle', this.$t('log_in'))
+            this.$store.commit('setNavbarTitle', this.$t('header_login'))
             if (typeof this.$route.params.lang === 'undefined') {
                 this.$router.push('/en/login')
             }
