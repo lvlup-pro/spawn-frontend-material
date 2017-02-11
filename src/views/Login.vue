@@ -89,7 +89,7 @@
                     //this.$vuetify.toast.create(this.$t('auth_no'), "right")
                 } else {
                     this.$vuetify.toast.create(this.$t('auth_already'), "right")
-                    this.$router.push('/service')
+                    this.$router.push('/'+this.$route.params.lg+'/service')
                 }
             })
         },
@@ -103,7 +103,7 @@
                     if (res) {
                         var auth = this.$t('auth_success');
                         this.$vuetify.toast.create(auth, "right")
-                        this.$router.push('/service')
+                        this.$router.push('/'+this.$route.params.lg+'/service')
                     } else {
                         var auth = this.$t('auth_fail');
                         this.$vuetify.toast.create(auth, "right")
