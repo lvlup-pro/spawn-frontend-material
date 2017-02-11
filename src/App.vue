@@ -234,4 +234,8 @@
     #dropdown3 li {
         cursor: pointer;
     }
+    
+    i.material-icons.right {
+        padding-left: 6px;
+    }
 </style>
