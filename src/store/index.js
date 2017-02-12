@@ -115,7 +115,7 @@ export default new Vuex.Store({
         },
         ticketMessages ({commit, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'help/ticket/'+args.id+'/messages')
+            return axios.get(state.apiUrl + 'help/ticket/'+args.id+'/message')
                 .then(function (res) {
                     if (typeof res.data[0] !== 'undefined') {
                         //http://stackoverflow.com/a/784547/1351857
