@@ -3,7 +3,7 @@ a<template>
         <header>
             <v-progress-linear v-if="loading" v-bind:indeterminate="true"></v-progress-linear>
             <v-navbar class="green">
-                <v-navbar-side-icon v-side-bar:mainsidebar="" class="hidden-md-and-up white--text">
+                <v-navbar-side-icon class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-navbar-side-icon>
                 <!--<v-navbar-logo class="hidden-sm-and-down">{{navbarTitle}}</v-navbar-logo>-->
