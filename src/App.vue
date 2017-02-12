@@ -1,4 +1,4 @@
-<template>
+a<template>
     <v-app top-navbar left-fixed-sidebar>
         <header>
             <v-progress-linear v-if="loading" v-bind:indeterminate="true"></v-progress-linear>
@@ -27,82 +27,80 @@
         </header>
         <main>
             <v-sidebar id="mainsidebar" fixed ripple router unshift>
-                <div slot="top">
-                    <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
-                    <p class="text-xs-center white--text">{{$t('panel')}} {{version}}</p>
-                    <ul data-uid="15" class="list list--dense list--sub-header">
-                        <hr class="divider divider--light">
+                <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
+                <p class="text-xs-center white--text">{{$t('panel')}} {{version}}</p>
+                <ul data-uid="15" class="list list--dense list--sub-header">
+                    <hr class="divider divider--light">
 
-                        <li class="list__sub-header">{{$t('account')}}</li>
-                        <li v-if="account.email" class="list__item noclick"><a class="list__tile list__tile">
-                            <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-user"></i></div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">{{account.email}}</div>
-                            </div>
-                        </a></li>
-                        <li v-if="wallet.balance_pretty" class="list__item noclick"><a class="list__tile">
-                            <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-money"></i></div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">{{wallet.balance_pretty}}</div>
-                            </div>
-                        </a></li>
-                        <li v-if="!account.email" class="list__item click"><router-link :to="'/'+lg+'/login'" class="list__tile">
-                            <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-sign-in"></i></div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">{{$t('login')}}</div>
-                            </div>
-                        </router-link></li>
+                    <li class="list__sub-header">{{$t('account')}}</li>
+                    <li v-if="account.email" class="list__item noclick"><a class="list__tile list__tile">
+                        <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-user"></i></div>
+                        <div class="list__tile__content">
+                            <div class="list__tile__title">{{account.email}}</div>
+                        </div>
+                    </a></li>
+                    <li v-if="wallet.balance_pretty" class="list__item noclick"><a class="list__tile">
+                        <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-money"></i></div>
+                        <div class="list__tile__content">
+                            <div class="list__tile__title">{{wallet.balance_pretty}}</div>
+                        </div>
+                    </a></li>
+                    <li v-if="!account.email" class="list__item click"><router-link :to="'/'+lg+'/login'" class="list__tile">
+                        <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-sign-in"></i></div>
+                        <div class="list__tile__content">
+                            <div class="list__tile__title">{{$t('login')}}</div>
+                        </div>
+                    </router-link></li>
 
-                        <li class="list__sub-header">Menu</li>
-                        <li class="list__item"><router-link :to="'/'+lg+'/home'"
-                                class="list__tile list__tile">
-                            <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-home"></i></div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">
-                                    {{$t('home')}}
-                                </div>
+                    <li class="list__sub-header">Menu</li>
+                    <li class="list__item"><router-link :to="'/'+lg+'/home'"
+                            class="list__tile list__tile">
+                        <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-home"></i></div>
+                        <div class="list__tile__content">
+                            <div class="list__tile__title">
+                                {{$t('home')}}
                             </div>
-                        </router-link></li>
-                        <li class="list__item"><router-link :to="'/'+lg+'/service'"
-                                                            class="list__tile list__tile">
-                            <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-server"></i></div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">
-                                    {{$t('services')}}
-                                </div>
+                        </div>
+                    </router-link></li>
+                    <li class="list__item"><router-link :to="'/'+lg+'/service'"
+                                                        class="list__tile list__tile">
+                        <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-server"></i></div>
+                        <div class="list__tile__content">
+                            <div class="list__tile__title">
+                                {{$t('services')}}
                             </div>
-                        </router-link></li>
-                        <li class="list__item"><router-link :to="'/'+lg+'/ticket'"
-                                                            class="list__tile list__tile">
-                            <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-question-circle"></i></div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">
-                                    {{$t('help')}}
-                                </div>
+                        </div>
+                    </router-link></li>
+                    <li class="list__item"><router-link :to="'/'+lg+'/ticket'"
+                                                        class="list__tile list__tile">
+                        <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-question-circle"></i></div>
+                        <div class="list__tile__content">
+                            <div class="list__tile__title">
+                                {{$t('help')}}
                             </div>
-                        </router-link></li>
+                        </div>
+                    </router-link></li>
 
-                        <li class="list__sub-header">{{$t('lang')}}</li>
-                        <li v-if="lg == 'en'" v-on:click="changeLang('pl')" class="click list__item"><a
-                                class="list__tile list__tile">
-                            <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-globe"></i></div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">
-                                    English (EN)
-                                </div>
+                    <li class="list__sub-header">{{$t('lang')}}</li>
+                    <li v-if="lg == 'en'" v-on:click="changeLang('pl')" class="click list__item"><a
+                            class="list__tile list__tile">
+                        <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-globe"></i></div>
+                        <div class="list__tile__content">
+                            <div class="list__tile__title">
+                                English (EN)
                             </div>
-                        </a></li>
-                        <li v-if="lg == 'pl'" v-on:click="changeLang('en')" class="click list__item"><a
-                                class="list__tile list__tile">
-                            <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-globe"></i></div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">
-                                    Polski (PL)
-                                </div>
+                        </div>
+                    </a></li>
+                    <li v-if="lg == 'pl'" v-on:click="changeLang('en')" class="click list__item"><a
+                            class="list__tile list__tile">
+                        <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-globe"></i></div>
+                        <div class="list__tile__content">
+                            <div class="list__tile__title">
+                                Polski (PL)
                             </div>
-                        </a></li>
-                    </ul>
-                </div>
+                        </div>
+                    </a></li>
+                </ul>
             </v-sidebar>
             <v-content>
                 <v-container fluid>
@@ -168,7 +166,7 @@
             }
         },
         mounted () {
-            this.$vuetify.init();
+            this.$vuetify.load();
             this.$store.dispatch('boot')
             this.changeLang(this.$route.params.lg)
         },
@@ -236,7 +234,7 @@
     #dropdown3 li {
         cursor: pointer;
     }
-    
+
     i.material-icons.right {
         padding-left: 6px;
     }
