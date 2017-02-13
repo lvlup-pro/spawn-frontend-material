@@ -3,7 +3,7 @@
         <header>
             <v-progress-linear v-if="loading" v-bind:indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
-                <v-toolbar-side-icon class="hidden-md-and-up white--text">
+                <v-toolbar-side-icon @click.native.stop="nav = !nav" class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
                 <v-toolbar-logo class="hidden-xs-and-down">{{navbarTitle}}</v-toolbar-logo>
@@ -29,7 +29,7 @@
             </v-toolbar>
         </header>
         <main>
-            <v-sidebar id="mainsidebar" fixed ripple router unshift>
+            <v-sidebar fixed ripple router unshift v-model="nav">
                 <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
                 <p class="text-xs-center white--text">{{$t('panel')}} {{version}}</p>
                 <ul data-uid="15" class="list list--dense list--sub-header">
@@ -138,7 +138,8 @@
         },
         data () {
             return {
-                lg: ''
+                lg: '',
+                nav: null
             }
         },
         methods: {
