@@ -8,7 +8,10 @@
                 </v-toolbar-side-icon>
                 <v-toolbar-logo class="hidden-xs-and-down">{{navbarTitle}}</v-toolbar-logo>
                 <v-toolbar-items>
-                    <v-menu>
+                    <v-toolbar-item v-on:click="logOut">
+                        {{$t('logout')}}
+                    </v-toolbar-item>
+                    <!--<v-menu>
                         <v-btn dark icon slot="activator">
                             <v-icon>more_vert</v-icon>
                         </v-btn>
@@ -21,7 +24,7 @@
                                 </v-list-tile>
                             </v-dropdown>
                         </v-list>
-                    </v-menu>
+                    </v-menu>!-->
                 </v-toolbar-items>
             </v-toolbar>
         </header>
