@@ -82,7 +82,17 @@
         mounted () {
             this.$store.commit('setNavbarTitle', this.$t('header_login'))
             if (typeof this.$route.params.lang === 'undefined') {
-                this.$router.push('/en/login')
+                var lang = localStorage.getItem('lang')
+                if (lang === 'undefined') {
+                    lang = window.navigator.languages ? window.navigator.languages[0] : null
+                    lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage || 'en';
+                    if (lang.indexOf('-') !== -1)
+                        lang = lang.split('-')[0];
+                    if (lang.indexOf('_') !== -1)
+                        lang = lang.split('_')[0]
+                    localStorage.setItem('lang', lang)
+                }
+                this.$router.push('/' + lang + '/login')
             }
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
