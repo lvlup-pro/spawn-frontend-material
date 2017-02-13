@@ -40,22 +40,6 @@ var locales = {
     }
 }
 
-// //http://stackoverflow.com/a/26889118/1351857
-// var lang = window.navigator.languages ? window.navigator.languages[0] : null;
-// lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
-//
-// if (lang.indexOf('-') !== -1)
-//     lang = lang.split('-')[0];
-//
-// if (lang.indexOf('_') !== -1)
-//     lang = lang.split('_')[0];
-
-//localStorage.setItem("lang", lang);
-//Vue.config.lang = 'en' //FIXME user should select language
-//console.log(router.currentRoute)
-//Vue.config.lang = router.params.lang
-
-Vue.config.fallbackLang = 'en'
 // set locales
 Object.keys(locales).forEach(function (lang) {
     Vue.locale(lang, locales[lang])
