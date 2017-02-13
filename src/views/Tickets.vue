@@ -1,9 +1,9 @@
 <template>
     <div>
-        <v-container v-if="!loading">
+        <v-container>
 
             <div class="mt-4"></div>
-            <v-pagination v-bind:length.number="pagination.paging.total_pages" v-model="page"></v-pagination>
+            <v-pagination v-bind:length.number="pagination.paging.total_pages" v-bind:disabled="loading" v-model="page"></v-pagination>
             <div class="mt-4"></div>
 
             <v-row>
@@ -43,7 +43,7 @@
             </v-row>
 
             <div class="mt-4"></div>
-            <v-pagination v-bind:length.number="pagination.paging.total_pages" v-model="page"></v-pagination>
+            <v-pagination v-bind:length.number="pagination.paging.total_pages" v-bind:disabled="loading" v-model="page"></v-pagination>
 
         </v-container>
     </div>

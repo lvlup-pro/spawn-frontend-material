@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container v-if="!loading">
+        <v-container>
             <v-row>
                 <v-col xs12>
                     <v-alert info>{{$t('panel_preview')}}</v-alert>
@@ -8,7 +8,7 @@
             </v-row>
 
             <div class="mt-4"></div>
-            <v-pagination v-bind:length="totalPages" v-model="page"></v-pagination>
+            <v-pagination v-bind:length="totalPages" v-bind:disabled="loading" v-model="page"></v-pagination>
             <div class="mt-4"></div>
 
             <v-row>
@@ -46,7 +46,7 @@
             </v-row>
 
             <div class="mt-4"></div>
-            <v-pagination v-bind:length="totalPages" v-model="page"></v-pagination>
+            <v-pagination v-bind:length="totalPages" v-bind:disabled="loading" v-model="page"></v-pagination>
 
         </v-container>
     </div>
