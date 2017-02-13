@@ -159,15 +159,16 @@
 //                this.$vuetify.bus.pub('meta:description', obj.description)
 //                this.$vuetify.bus.pub('meta:keywords', obj.keywords)
 //            },
-            logOut(){
+            logOut() {
                 this.$store.dispatch('logOut').then((res) => {
                     this.$router.push('/login')
                 })
             },
-            changeLang(lg){
-                Vue.config.lang = lg
-                this.lg = lg
-                //this.$router.push('/' + lg + '/login')
+            changeLang(lang) {
+                Vue.config.lang = lang;
+                this.lg = lang;
+                this.$router.replace({'params': {'lg': lang}});
+                localStorage.setItem('lang', lang);
             }
         },
         mounted () {
