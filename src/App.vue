@@ -2,28 +2,28 @@ a<template>
     <v-app top-navbar left-fixed-sidebar>
         <header>
             <v-progress-linear v-if="loading" v-bind:indeterminate="true"></v-progress-linear>
-            <v-navbar class="green">
-                <v-navbar-side-icon class="hidden-md-and-up white--text">
+            <v-toolbar class="green">
+                <v-toolbar-side-icon class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
-                </v-navbar-side-icon>
-                <!--<v-navbar-logo class="hidden-sm-and-down">{{navbarTitle}}</v-navbar-logo>-->
-                <v-navbar-logo>{{navbarTitle}}</v-navbar-logo>
-                <v-navbar-items>
-                    <!--<v-navbar-item v-if="wallet.balance_pretty">{{wallet.balance_pretty}}</v-navbar-item>-->
-                    <!--<v-navbar-item v-if="account.username">{{account.username}}</v-navbar-item>-->
-                    <v-navbar-item v-dropdown:dropdown3>
-                        <v-icon>more_vert</v-icon>
-                    </v-navbar-item>
-                    <v-dropdown id="dropdown3" right>
-                        <li>
-                            <div v-on:click="logOut" class="dropdown__item">
-                                {{$t('logout')}}
-                                <v-icon class="secondary--text right">cloud_off</v-icon>
-                            </div>
-                        </li>
-                    </v-dropdown>
-                </v-navbar-items>
-            </v-navbar>
+                </v-toolbar-side-icon>
+                <v-toolbar-logo>{{navbarTitle}}</v-toolbar-logo>
+                <v-toolbar-items>
+                    <v-menu>
+                        <v-btn dark icon slot="activator">
+                            <v-icon>more_vert</v-icon>
+                        </v-btn>
+                        <v-list>
+                            <v-list-item>
+                                <v-list-tile v-on:click="logOut">
+                                    <v-list-tile-title>
+                                        {{$t('logout')}}
+                                    </v-list-tile-title>
+                                </v-list-tile>
+                            </v-dropdown>
+                        </v-list>
+                    </v-menu>
+                </v-toolbar-items>
+            </v-toolbar>
         </header>
         <main>
             <v-sidebar id="mainsidebar" fixed ripple router unshift>
@@ -233,9 +233,5 @@ a<template>
 
     #dropdown3 li {
         cursor: pointer;
-    }
-
-    i.material-icons.right {
-        padding-left: 6px;
     }
 </style>
