@@ -9,7 +9,7 @@
                 <v-toolbar-logo class="hidden-xs-and-down">{{navbarTitle}}</v-toolbar-logo>
                 <v-toolbar-items>
                     <v-toolbar-item v-on:click.native="logOut">
-                        {{$t('logout')}}
+                        {{$t('logout')}} <v-icon class="right">cloud_off</v-icon>
                     </v-toolbar-item>
                     <!--<v-menu>
                         <v-btn dark icon slot="activator">
@@ -234,11 +234,11 @@
         color: #00cc00;
     }
 
-    #dropdown3 li {
-        cursor: pointer;
-    }
-
     .toolbar__logo {
         font-size: 2rem;
+    }
+
+    .material-icons.right {
+        padding-left: 6px;
     }
 </style>
