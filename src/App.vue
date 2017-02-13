@@ -238,7 +238,7 @@
         cursor: pointer;
     }
 
-    .navbar__logo {
+    .toolbar__logo {
         font-size: 2rem;
     }
 </style>
