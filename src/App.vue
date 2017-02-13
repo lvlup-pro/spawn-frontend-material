@@ -107,6 +107,7 @@
             </v-sidebar>
             <v-content>
                 <v-container fluid>
+                    <div class="mt-3"></div>
                     <transition mode="out-in">
                         <router-view></router-view>
                     </transition>
@@ -214,10 +215,6 @@
 
     .click a {
         cursor: pointer;
-    }
-
-    header .navbar__side-icon {
-        margin: 0 1rem;
     }
 
     .progress-linear {
