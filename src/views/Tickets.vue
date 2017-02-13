@@ -2,9 +2,9 @@
     <div>
         <v-container v-if="!loading">
 
-            <br><!-- ouch! -->
+            <div class="mt-4"></div>
             <v-pagination v-bind:length.number="pagination.paging.total_pages" v-model="page"></v-pagination>
-            <br><!-- ouch! -->
+            <div class="mt-4"></div>
 
             <v-row>
                 <v-col xs12>
@@ -42,7 +42,7 @@
                 </v-col>
             </v-row>
 
-            <br><!-- ouch! -->
+            <div class="mt-4"></div>
             <v-pagination v-bind:length.number="pagination.paging.total_pages" v-model="page"></v-pagination>
 
         </v-container>
