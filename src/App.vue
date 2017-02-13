@@ -8,7 +8,7 @@
                 </v-toolbar-side-icon>
                 <v-toolbar-logo class="hidden-xs-and-down">{{navbarTitle}}</v-toolbar-logo>
                 <v-toolbar-items>
-                    <v-toolbar-item v-on:click="logOut">
+                    <v-toolbar-item v-on:click.native="logOut">
                         {{$t('logout')}}
                     </v-toolbar-item>
                     <!--<v-menu>
