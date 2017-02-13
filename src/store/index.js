@@ -18,23 +18,23 @@ export default new Vuex.Store({
                 balance_pretty: ""
             }
         ],
-        ticket:{},
-        vps:{},
+        ticket: {},
+        vps: {},
         ticketMessages: {},
-        services: {"paging":{"total_pages":1}},
-        pagination: {"paging":{"total_pages":1}},
+        services: {"paging": {"total_pages": 1}},
+        pagination: {"paging": {"total_pages": 1}},
         count: 1,
         navbarTitle: "",
         version: ""
     },
     actions: {
         boot ({dispatch, state, commit}) {
-            commit('setVersion', "v"+storeConfig.version)
+            commit('setVersion', "v" + storeConfig.version)
         },
         logOut ({dispatch, state, commit}) {
             localStorage.removeItem("token");
             commit('setAccount', {})
-            commit('setWallet', [{balance_pretty:""}])
+            commit('setWallet', [{balance_pretty: ""}])
             commit('setServices', [])
             state.errorOnReq = true;
         },
@@ -102,7 +102,7 @@ export default new Vuex.Store({
         },
         ticketInfo ({commit, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'help/ticket/'+args.id)
+            return axios.get(state.apiUrl + 'help/ticket/' + args.id)
                 .then(function (res) {
                     if (typeof res.data.id !== 'undefined') {
                         //http://stackoverflow.com/a/784547/1351857
@@ -115,7 +115,7 @@ export default new Vuex.Store({
         },
         ticketMessages ({commit, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'help/ticket/'+args.id+'/message')
+            return axios.get(state.apiUrl + 'help/ticket/' + args.id + '/message')
                 .then(function (res) {
                     if (typeof res.data[0] !== 'undefined') {
                         //http://stackoverflow.com/a/784547/1351857
@@ -126,9 +126,21 @@ export default new Vuex.Store({
                     console.log("ticketmsg connection error")
                 })
         },
+        ticketAddMessage ({commit, state}, args) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
+            return axios.post(state.apiUrl + 'help/ticket/' + args.id + '/message', args)
+                .then(function (res) {
+                    if (typeof res.data.error !== false) {
+                        //commit('setTicketMessages', res.data)
+                        return true
+                    }
+                }).catch(function () {
+                    console.log("ticketAddMessage connection error")
+                })
+        },
         servicesList ({commit, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'vps?page='+args.page+'&limit='+args.limit)
+            return axios.get(state.apiUrl + 'vps?page=' + args.page + '&limit=' + args.limit)
                 .then(function (res) {
                     if (typeof res.data !== 'undefined') {
                         commit('setServices', res.data)
@@ -139,7 +151,7 @@ export default new Vuex.Store({
         },
         paginationList ({commit, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + args.url +'?page='+args.page+'&limit='+args.limit)
+            return axios.get(state.apiUrl + args.url + '?page=' + args.page + '&limit=' + args.limit)
                 .then(function (res) {
                     if (typeof res.data !== 'undefined') {
                         commit('setPagination', res.data)
@@ -150,7 +162,7 @@ export default new Vuex.Store({
         },
         vpsInfo ({commit, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'vps/'+args.id)
+            return axios.get(state.apiUrl + 'vps/' + args.id)
                 .then(function (res) {
                     if (typeof res.data.active !== 'undefined') {
                         commit('setVps', res.data)

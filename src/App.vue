@@ -6,7 +6,7 @@
                 <v-toolbar-side-icon class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
-                <v-toolbar-logo>{{navbarTitle}}</v-toolbar-logo>
+                <v-toolbar-logo class="hidden-xs-and-down">{{navbarTitle}}</v-toolbar-logo>
                 <v-toolbar-items>
                     <v-menu>
                         <v-btn dark icon slot="activator">
@@ -233,5 +233,9 @@
 
     #dropdown3 li {
         cursor: pointer;
+    }
+
+    .navbar__logo {
+        font-size: 2rem;
     }
 </style>

@@ -8,7 +8,7 @@
             </v-row>
 
             <br><!-- ouch! -->
-            <v-pagination v-bind:length.number="services.paging.total_pages" v-model="page"></v-pagination>
+            <v-pagination v-bind:length="totalPages" v-model="page"></v-pagination>
             <br><!-- ouch! -->
 
             <v-row>
@@ -46,7 +46,7 @@
             </v-row>
 
             <br><!-- ouch! -->
-            <v-pagination v-bind:length.number="services.paging.total_pages" v-model="page"></v-pagination>
+            <v-pagination v-bind:length="totalPages" v-model="page"></v-pagination>
 
         </v-container>
     </div>
@@ -73,6 +73,7 @@
                         'page': 1,
                         'limit': 10
                     }).then(() => {
+                        this.totalPages = this.$store.state.services.paging.total_pages
                         this.$store.commit('setLoaded')
                     })
                 }
@@ -88,7 +89,8 @@
         },
         data () {
             return {
-                page: 1
+                page: 1,
+                totalPages: 1
             }
         },
         watch: {
@@ -126,7 +128,7 @@
                 }
             },
             goToVps(id) {
-                this.$router.push('/'+this.$route.params.lg+'/service/vps/' + id)
+                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + id)
             }
         },
         locales: {
