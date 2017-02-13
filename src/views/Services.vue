@@ -8,7 +8,9 @@
             </v-row>
 
             <div class="mt-4"></div>
-            <v-pagination v-bind:length="totalPages" v-bind:disabled="loading" v-model="page"></v-pagination>
+            <div class="text-xs-center">
+                <v-pagination v-bind:length="totalPages" v-bind:disabled="loading" v-model="page"></v-pagination>
+            </div>
             <div class="mt-4"></div>
 
             <v-row>
@@ -46,7 +48,9 @@
             </v-row>
 
             <div class="mt-4"></div>
-            <v-pagination v-bind:length="totalPages" v-bind:disabled="loading" v-model="page"></v-pagination>
+            <div class="text-xs-center">
+                <v-pagination v-bind:length="totalPages" v-bind:disabled="loading" v-model="page"></v-pagination>
+            </div>
 
         </v-container>
     </div>

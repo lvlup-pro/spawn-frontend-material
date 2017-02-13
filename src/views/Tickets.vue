@@ -3,7 +3,12 @@
         <v-container>
 
             <div class="mt-4"></div>
-            <v-pagination v-bind:length.number="pagination.paging.total_pages" v-bind:disabled="loading" v-model="page"></v-pagination>
+            <div class="text-xs-center">
+                <v-pagination v-bind:length.number="pagination.paging.total_pages"
+                              v-bind:disabled="loading"
+                              v-model="page"
+                ></v-pagination>
+            </div>
             <div class="mt-4"></div>
 
             <v-row>
@@ -43,8 +48,12 @@
             </v-row>
 
             <div class="mt-4"></div>
-            <v-pagination v-bind:length.number="pagination.paging.total_pages" v-bind:disabled="loading" v-model="page"></v-pagination>
-
+            <div class="text-xs-center">
+                <v-pagination v-bind:length.number="pagination.paging.total_pages"
+                              v-bind:disabled="loading"
+                              v-model="page"
+                ></v-pagination>
+            </div>
         </v-container>
     </div>
 </template>
@@ -52,7 +61,10 @@
     .pagination {
         justify-content: center;
     }
-    tr {cursor:pointer}
+
+    tr {
+        cursor: pointer
+    }
 </style>
 <script>
     import moment from 'moment'
@@ -126,7 +138,7 @@
                 }
             },
             goToTicket(id) {
-                this.$router.push('/'+this.$route.params.lg+'/ticket/' + id)
+                this.$router.push('/' + this.$route.params.lg + '/ticket/' + id)
             }
         },
         locales: {
