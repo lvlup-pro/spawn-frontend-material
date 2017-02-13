@@ -1,62 +1,87 @@
 <template>
     <div>
         <v-container v-if="!loading">
+            <v-row>
+                <v-col xl2></v-col>
+                <v-col xs12 xl8>
 
-            <v-alert info>
-                {{$t('response_time')}}
-            </v-alert>
-            <br>
-            <h4>{{$t('subject')}}: {{ticket.subject}}</h4>
+                    <v-alert info>
+                        {{$t('response_time')}}
+                    </v-alert>
+                    <br>
+                    <h4>{{$t('subject')}}: {{ticket.subject}}</h4>
 
-            <v-card class="grey lighten-4">
-                <v-card-row actions class="blue">
-                    <v-icon class="white--text">face</v-icon>
-                    <v-btn flat class="white--text">{{$t('client')}}</v-btn>
-                    <!--<v-spacer></v-spacer>-->
-                    <v-icon class="white--text">event</v-icon>
-                    <v-btn flat class="white--text">{{ticket.created_at | prettyDate}}</v-btn>
-                </v-card-row>
-                <v-card-text>
-                    <div v-html="ticket.message">
+                    <v-card class="grey lighten-4">
+                        <v-card-row actions class="blue">
+                            <v-btn flat class="white--text">
+                                <v-icon class="white--text">face</v-icon>
+                                <div class="ml-2"></div>
+                                {{$t('client')}}
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn flat class="white--text">
+                                <v-icon class="white--text">event</v-icon>
+                                <div class="mr-1"></div>
+                                {{ticket.created_at | prettyDate}}
+                            </v-btn>
+                        </v-card-row>
+                        <v-card-text>
+                            <div v-html="ticket.message">
+                            </div>
+                        </v-card-text>
+                    </v-card>
+
+                    <div class="mt-4"></div>
+
+                    <div v-for="tmsg in ticketMessages">
+                        <v-card class="grey lighten-4">
+
+                            <v-card-row actions class="green" v-if="tmsg.staff">
+                                <v-btn flat class="white--text">
+                                    <v-icon class="white--text">grade</v-icon>
+                                    <div class="ml-2"></div>
+                                    {{$t('staff')}}
+                                </v-btn>
+                                <v-spacer></v-spacer>
+                                <v-btn flat class="white--text">
+                                    <v-icon class="white--text">event</v-icon>
+                                    <div class="mr-1"></div>
+                                    {{tmsg.created_at | prettyDate}}
+                                </v-btn>
+                            </v-card-row>
+
+                            <v-card-row actions class="blue" v-if="!tmsg.staff">
+                                <v-btn flat class="white--text">
+                                    <v-icon class="white--text">face</v-icon>
+                                    <div class="ml-2"></div>
+                                    {{$t('client')}}
+                                </v-btn>
+                                <v-spacer></v-spacer>
+                                <v-btn flat class="white--text">
+                                    <v-icon class="white--text">event</v-icon>
+                                    <div class="mr-1"></div>
+                                    {{tmsg.created_at | prettyDate}}
+                                </v-btn>
+                            </v-card-row>
+
+                            <v-card-text>
+                                <div v-html="tmsg.message">
+                                </div>
+                            </v-card-text>
+                        </v-card>
+                        <br>
                     </div>
-                </v-card-text>
-            </v-card>
+                    <br>
+                    <textarea v-bind:placeholder="$t('textarea')" v-model="msg"></textarea>
+                    <p>
+                        <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
+                        <span id="counter-ok" v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
+                        <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
+                    </p>
+                    <v-btn v-on:click.native="addTicketMessage(msg)" class="btn-flat-focused">{{$t('send')}}</v-btn>
 
-            <br>
-
-            <div v-for="tmsg in ticketMessages">
-                <v-card class="grey lighten-4">
-
-                    <v-card-row actions class="green" v-if="tmsg.staff">
-                        <v-icon class="white--text">face</v-icon>
-                        <v-btn flat class="white--text">{{$t('staff')}}</v-btn>
-                        <!--<v-spacer></v-spacer>-->
-                        <v-icon class="white--text">event</v-icon>
-                        <v-btn flat class="white--text">{{tmsg.created_at | prettyDate}}</v-btn>
-                    </v-card-row>
-
-                    <v-card-row actions class="blue" v-if="!tmsg.staff">
-                        <v-icon class="white--text">face</v-icon>
-                        <v-btn flat class="white--text">{{$t('client')}}</v-btn>
-                        <v-icon class="white--text">event</v-icon>
-                        <v-btn flat class="white--text">{{tmsg.created_at | prettyDate}}</v-btn>
-                    </v-card-row>
-
-                    <v-card-text>
-                        <div v-html="tmsg.message">
-                        </div>
-                    </v-card-text>
-                </v-card>
-                <br>
-            </div>
-            <br>
-            <textarea v-bind:placeholder="$t('textarea')" v-model="msg"></textarea>
-            <p>
-                <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
-                <span id="counter-ok" v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
-                <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
-            </p>
-            <v-btn v-on:click.native="addTicketMessage(msg)" class="btn-flat-focused">{{$t('send')}}</v-btn>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>
