@@ -7,7 +7,7 @@
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-navbar-side-icon>
                 <!--<v-navbar-logo class="hidden-sm-and-down">{{navbarTitle}}</v-navbar-logo>-->
-                <v-navbar-logo>{{navbarTitle}}</v-navbar-logo>
+                <v-navbar-logo class="hidden-xs-and-down">{{navbarTitle}}</v-navbar-logo>
                 <v-navbar-items>
                     <!--<v-navbar-item v-if="wallet.balance_pretty">{{wallet.balance_pretty}}</v-navbar-item>-->
                     <!--<v-navbar-item v-if="account.username">{{account.username}}</v-navbar-item>-->
@@ -236,8 +236,12 @@
     #dropdown3 li {
         cursor: pointer;
     }
-    
+
     i.material-icons.right {
         padding-left: 6px;
+    }
+
+    .navbar__logo {
+        font-size: 2rem;
     }
 </style>
