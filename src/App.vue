@@ -206,8 +206,8 @@
             pl: {
                 lang: "Język",
                 home: "Nowości",
-                login: "Zaloguj się",
-                logout: "Wyloguj się",
+                login: "Zaloguj",
+                logout: "Wyloguj",
                 account: "Konto",
                 menu: "Menu",
                 wallet: "Portfel",

@@ -1,13 +1,34 @@
 # Changelog
 
+## 3.0.0-alpha.5
+
+### Features
+
++ Profile page [#3](https://github.com/lvlup-pro/spawn-frontend-material/issues/3)
++ Payments page (initial version) [#2](https://github.com/lvlup-pro/spawn-frontend-material/issues/2)
++ Creation date of services [#44](https://github.com/lvlup-pro/spawn-frontend-material/issues/44)
++ New style of info and warning alerts [#46](https://github.com/lvlup-pro/spawn-frontend-material/pull/46)
++ Detect and save user preferred language [#38](https://github.com/lvlup-pro/spawn-frontend-material/pull/38)
+
+### Fixes
+
++ Static toolbar i18n titles [#39](https://github.com/lvlup-pro/spawn-frontend-material/issues/39)
++ Date count description [#41](https://github.com/lvlup-pro/spawn-frontend-material/issues/41)
++ Better date format for ticket [#47](https://github.com/lvlup-pro/spawn-frontend-material/pull/47)
++ More stable code for sidebar [#45](https://github.com/lvlup-pro/spawn-frontend-material/pull/45)
+
 ## 3.0.0-alpha.4
+
+### Features
 
 + Updated to Vuetify 0.8.8 [#14](https://github.com/lvlup-pro/spawn-frontend-material/issues/14)
 + Don't hide content on pagination loading [#4](https://github.com/lvlup-pro/spawn-frontend-material/issues/4)
 
-- Fix for crash on login and logout [#26](https://github.com/lvlup-pro/spawn-frontend-material/issues/26)
-- Smaller title font on toolbar [#12](https://github.com/lvlup-pro/spawn-frontend-material/issues/12)
-- Fix session detect on Home page [#36](https://github.com/lvlup-pro/spawn-frontend-material/issues/36)
+### Fixes
+
++ Crash on login and logout [#26](https://github.com/lvlup-pro/spawn-frontend-material/issues/26)
++ Smaller title font on toolbar [#12](https://github.com/lvlup-pro/spawn-frontend-material/issues/12)
++ Session detect on Home page [#36](https://github.com/lvlup-pro/spawn-frontend-material/issues/36)
 
 ## 3.0.0-alpha.3
 
