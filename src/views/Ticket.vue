@@ -11,7 +11,7 @@
                     <br>
                     <h4>{{$t('subject')}}: {{ticket.subject}}</h4>
 
-                    <v-card class="grey lighten-4">
+                    <v-card class="grey lighten-4" id="ticket-topic">
                         <v-card-row actions class="blue">
                             <v-btn flat class="white--text">
                                 <v-icon class="white--text">face</v-icon>
@@ -33,7 +33,7 @@
 
                     <div class="mt-4"></div>
 
-                    <div v-for="tmsg in ticketMessages">
+                    <div v-for="tmsg in ticketMessages" id="ticket-messages">
                         <v-card class="grey lighten-4">
 
                             <v-card-row actions class="green" v-if="tmsg.staff">
@@ -99,6 +99,11 @@
         border-bottom: 1px solid #ddd;
         outline: none;
         height: 5rem;
+    }
+
+    #ticket-messages button,
+    #ticket-topic button {
+        pointer-events: none;
     }
 </style>
 <script>
