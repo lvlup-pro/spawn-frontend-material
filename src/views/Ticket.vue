@@ -5,7 +5,7 @@
                 <v-col xl2></v-col>
                 <v-col xs12 xl8>
 
-                    <v-alert info>
+                    <v-alert warning>
                         {{$t('response_time')}}
                     </v-alert>
                     <br>
