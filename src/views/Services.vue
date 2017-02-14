@@ -25,6 +25,7 @@
                                     <th>ID</th>
                                     <th>{{$t('name')}}</th>
                                     <th>{{$t('payed_to')}}</th>
+                                    <th>{{$t('created_at')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -38,6 +39,7 @@
                                         <td v-on:click="goToVps(item.id)">{{item.id}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.name}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.payed_to | prettyDate}}</td>
+                                        <td v-on:click="goToVps(item.id)">{{item.created_at | prettyDate}}</td>
                                     </tr>
                                 </template>
                                 </tbody>
@@ -56,9 +58,6 @@
     </div>
 </template>
 <style>
-    .pagination {
-        justify-content: center;
-    }
 </style>
 <script>
     import moment from 'moment'
@@ -84,6 +83,9 @@
             })
         },
         computed: {
+            currentTimestamp () {
+                return Math.floor(Date.now() / 1000)
+            },
             services () {
                 return this.$store.state.services
             },
@@ -116,7 +118,7 @@
             prettyDate (unixtimestamp) {
                 var timestamp = moment.unix(unixtimestamp);
                 //DD.MM.YYYY or "L"
-                return timestamp.format("L") + " - " + timestamp.to()
+                return timestamp.format("L") + " - " + timestamp.from()
             }
         },
         preFetch () {
@@ -138,6 +140,7 @@
         locales: {
             en: {
                 payed_to: 'Valid for',
+                created_at: "Created",
                 name: "Name",
                 service: "Service",
                 select: "Select",
@@ -145,6 +148,7 @@
             },
             pl: {
                 payed_to: 'Koniec ważności usługi',
+                created_at: "Utworzono",
                 name: "Nazwa",
                 service: "Usługa",
                 select: "Zaznaczenie",

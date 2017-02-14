@@ -122,7 +122,7 @@
             prettyDate (unixtimestamp) {
                 var timestamp = moment.unix(unixtimestamp);
                 //DD.MM.YYYY or "L"
-                return timestamp.format("L") + " - " + timestamp.to()
+                return timestamp.format("L") + " - " + timestamp.from()
             }
         },
         preFetch () {

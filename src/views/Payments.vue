@@ -35,7 +35,7 @@
                                             {{item.id}}
                                         </td>
                                         <td>{{item.amount}}</td>
-                                        <td>{{item.created_at | prettyDate}}</td>
+                                        <td>{{item.created_at | prettyDateFrom}}</td>
                                     </tr>
                                 </template>
                                 </tbody>
@@ -111,7 +111,7 @@
             }
         },
         filters: {
-            prettyDate (unixtimestamp) {
+            prettyDateFrom (unixtimestamp) {
                 var timestamp = moment.unix(unixtimestamp);
                 //DD.MM.YYYY or "L"
                 return timestamp.format("L") + " - " + timestamp.from()
