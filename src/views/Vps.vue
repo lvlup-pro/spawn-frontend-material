@@ -34,7 +34,7 @@
         mounted () {
             this.$emit('view', this.meta())
             moment.locale(this.$lang)
-            this.$store.commit('setNavbarTitle', this.$t('header_vps'))
+            this.$store.commit('setToolbarTitle', 'header_vps')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
                     this.$vuetify.toast.create(this.$t('auth_no'), "right")
@@ -46,7 +46,7 @@
                     }).then(() => {
                         this.interval = setInterval(this.stats, 3500)
                         this.$store.commit('setLoaded')
-                        this.$store.commit('setNavbarTitle', "VPS #" + this.$route.params.id)//FIXME set by API not user input
+                        this.$store.commit('setToolbarTitle', "VPS #" + this.$route.params.id)//FIXME set by API not user input
                     })
                 }
             })
@@ -103,4 +103,3 @@
         }
     }
 </script>
-

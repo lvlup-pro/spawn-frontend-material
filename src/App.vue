@@ -6,7 +6,7 @@
                 <v-toolbar-side-icon @click.native.stop="nav = !nav" class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
-                <v-toolbar-logo class="hidden-xs-and-down">{{navbarTitle}}</v-toolbar-logo>
+                <v-toolbar-logo class="hidden-xs-and-down">{{$t(this.$store.state.toolbarTitle)}}</v-toolbar-logo>
                 <v-toolbar-items>
                     <v-toolbar-item v-on:click.native="logOut">
                         {{$t('logout')}} <v-icon class="right">cloud_off</v-icon>
@@ -167,8 +167,8 @@
             changeLang(lang) {
                 Vue.config.lang = lang;
                 this.lg = lang;
-                this.$router.replace({'params': {'lg': lang}});
                 localStorage.setItem('lang', lang);
+                this.$router.replace({'params': {'lg': lang}});
             }
         },
         mounted () {
