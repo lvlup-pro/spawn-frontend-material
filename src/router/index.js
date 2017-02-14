@@ -7,6 +7,7 @@ import Services from '../views/Services.vue'
 import Vps from '../views/Vps.vue'
 import Tickets from '../views/Tickets.vue'
 import Ticket from '../views/Ticket.vue'
+import Payments from '../views/Payments.vue'
 
 Vue.use(Router)
 
@@ -24,5 +25,6 @@ export default new Router({
       { path: '/:lg/service/vps/:id', component: Vps},
       { path: '/:lg/ticket', component: Tickets},
       { path: '/:lg/ticket/:id', component: Ticket},
+      { path: '/:lg/payment', component: Payments},
   ]
 })

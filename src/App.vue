@@ -42,12 +42,12 @@
                             <div class="list__tile__title">{{account.email}}</div>
                         </div>
                     </a></li>
-                    <li v-if="wallet.balance_pretty" class="list__item noclick"><a class="list__tile">
+                    <li v-if="wallet.balance_pretty" class="list__item"><router-link :to="'/'+lg+'/payment'" class="list__tile">
                         <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-money"></i></div>
                         <div class="list__tile__content">
                             <div class="list__tile__title">{{wallet.balance_pretty}}</div>
                         </div>
-                    </a></li>
+                    </router-link></li>
                     <li v-if="!account.email" class="list__item click"><router-link :to="'/'+lg+'/login'" class="list__tile">
                         <div class="list__tile__action"><i class="fa fa-fw fa-2x fa-sign-in"></i></div>
                         <div class="list__tile__content">
