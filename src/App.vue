@@ -242,4 +242,21 @@
     .material-icons.right {
         padding-left: 6px;
     }
+
+    .alert {
+        color: #424242;
+        border: 1px solid #ccc;
+    }
+
+    .alert--info {
+        background: white;
+    }
+
+    .alert--warning {
+        border-color: #b80;
+    }
+
+    .material-icons.alert__icon {
+        color: #424242;
+    }
 </style>
