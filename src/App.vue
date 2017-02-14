@@ -240,4 +240,14 @@
     .material-icons.right {
         padding-left: 6px;
     }
+
+    .alert--info {
+        border: 1px solid #ccc;
+        color: #424242;
+        background: none;
+    }
+
+    .material-icons.alert__icon {
+        color: #424242;
+    }
 </style>
