@@ -25,6 +25,7 @@ export default new Vuex.Store({
         pagination: {"paging": {"total_pages": 1}},
         count: 1,
         toolbarTitle: "",
+        toolbarTitleArgs: {},
         version: ""
     },
     actions: {
@@ -202,6 +203,9 @@ export default new Vuex.Store({
         },
         setToolbarTitle (state, newTitle) {
             state.toolbarTitle = newTitle;
+        },
+        setToolbarTitleArgs (state, newTitleArgs) {
+            state.toolbarTitleArgs = newTitleArgs;
         },
         setLoading (state) {
             state.loading = true;

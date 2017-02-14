@@ -117,7 +117,7 @@
         mounted () {
             this.$emit('view', this.meta())
             moment.locale(this.$lang);
-            this.$store.commit('setToolbarTitle', 'header_ticket')
+            this.$store.commit('setToolbarTitle', 'header_ticket_init')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
                     this.$vuetify.toast.create(this.$t('auth_no'), "right")
@@ -173,7 +173,9 @@
                 this.$store.dispatch('ticketMessages', {
                     'id': this.$route.params.id
                 }).then(() => {
-                    this.$store.commit('setToolbarTitle', "Ticket #" + this.$route.params.id)//FIXME set by API not user input
+                    //FIXME set by API not user input
+                    this.$store.commit('setToolbarTitle', 'header_ticket')
+                    this.$store.commit('setToolbarTitleArgs', {'id' : this.$route.params.id})
                 })
             },
             addTicketMessage(msg) {

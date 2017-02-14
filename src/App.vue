@@ -6,7 +6,7 @@
                 <v-toolbar-side-icon @click.native.stop="nav = !nav" class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
-                <v-toolbar-logo class="hidden-xs-and-down">{{$t(this.$store.state.toolbarTitle)}}</v-toolbar-logo>
+                <v-toolbar-logo class="hidden-xs-and-down">{{getToolbarTitle()}}</v-toolbar-logo>
                 <v-toolbar-items>
                     <v-toolbar-item v-on:click.native="logOut">
                         {{$t('logout')}} <v-icon class="right">cloud_off</v-icon>
@@ -169,6 +169,17 @@
                 this.lg = lang;
                 localStorage.setItem('lang', lang);
                 this.$router.replace({'params': {'lg': lang}});
+            },
+            getToolbarTitle() {
+                let title = this.$t(this.$store.state.toolbarTitle);
+                let args = this.$store.state.toolbarTitleArgs;
+                for (let key in args) {
+                    let find = '{' + key + '}';
+                    while (title.indexOf(find) !== -1) {
+                        title = title.replace(find, args[key]);
+                    }
+                }
+                return title;
             }
         },
         mounted () {
