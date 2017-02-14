@@ -139,8 +139,7 @@
         filters: {
             prettyDate (unixtimestamp) {
                 var timestamp = moment.unix(unixtimestamp);
-                //DD.MM.YYYY or "L"
-                return timestamp.format("H:mm L")
+                return timestamp.format("HH:mm DD.MM.YYYY")
             }
         },
         preFetch () {
