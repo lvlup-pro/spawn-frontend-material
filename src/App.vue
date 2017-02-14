@@ -43,7 +43,7 @@
                             <v-list-tile-title v-text="account.email" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
-                    <v-list-item v-if="wallet.balance_pretty"><v-list-tile>
+                    <v-list-item v-if="wallet.balance_pretty"><v-list-tile router :href="'/' + lg + '/payment'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-money"></i>
                         </v-list-tile-action>
