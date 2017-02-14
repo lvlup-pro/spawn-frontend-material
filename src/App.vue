@@ -69,7 +69,7 @@
                             <v-list-tile-title v-text="$t('home')" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
-                    <v-list-item><v-list-tile router :href="'/' + lg + '/service'">
+                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + lg + '/service'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-server"></i>
                         </v-list-tile-action>
@@ -77,7 +77,7 @@
                             <v-list-tile-title v-text="$t('services')" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
-                    <v-list-item><v-list-tile router :href="'/' + lg + '/ticket'">
+                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + lg + '/ticket'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-question-circle"></i>
                         </v-list-tile-action>
