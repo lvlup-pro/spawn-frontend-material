@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0-alpha.5
+## 3.0.0-alpha.5 (14.02.2017)
 
 ### Features
 
@@ -17,7 +17,7 @@
 + Better date format for ticket [#47](https://github.com/lvlup-pro/spawn-frontend-material/pull/47)
 + More stable code for sidebar [#45](https://github.com/lvlup-pro/spawn-frontend-material/pull/45)
 
-## 3.0.0-alpha.4
+## 3.0.0-alpha.4 (13.02.2017)
 
 ### Features
 
@@ -30,17 +30,17 @@
 + Smaller title font on toolbar [#12](https://github.com/lvlup-pro/spawn-frontend-material/issues/12)
 + Session detect on Home page [#36](https://github.com/lvlup-pro/spawn-frontend-material/issues/36)
 
-## 3.0.0-alpha.3
+## 3.0.0-alpha.3 (12.02.2017)
 
 + Send messages in ticket page
 + Better i18n
 + Fix for logout icon too close to text
 + Frontend version is loading from package.json
 
-## 3.0.0-alpha.2
+## 3.0.0-alpha.2 (11.02.2017)
 
 + Language switch [#15](https://github.com/lvlup-pro/spawn-frontend-material/issues/15)
 
-## 3.0.0-alpha.1
+## 3.0.0-alpha.1 (06.02.2017)
 
 Initial version
