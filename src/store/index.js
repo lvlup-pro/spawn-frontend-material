@@ -20,6 +20,7 @@ export default new Vuex.Store({
         ],
         ticket: {},
         vps: {},
+        profile: {},
         ticketMessages: {},
         services: {"paging": {"total_pages": 1}},
         pagination: {"paging": {"total_pages": 1}},
@@ -171,6 +172,17 @@ export default new Vuex.Store({
                     console.log("vps connection error")
                 })
         },
+        profileInfo ({commit, state}, args) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
+            return axios.get(state.apiUrl + 'me')
+                .then(function (res) {
+                    if (typeof res.data.id !== 'undefined') {
+                        commit('setProfile', res.data)
+                    }
+                }).catch(function () {
+                    console.log("profile connection error")
+                })
+        }
     },
     mutations: {
         setVersion (state, newVersion) {
@@ -190,6 +202,9 @@ export default new Vuex.Store({
         },
         setVps (state, newVps) {
             state.vps = newVps;
+        },
+        setProfile (state, newProfile) {
+            state.profile = newProfile
         },
         setTicketMessages (state, newTicketMessages) {
             state.ticketMessages = newTicketMessages;
