@@ -72,7 +72,7 @@
         mounted () {
             this.$emit('view', this.meta())
             moment.locale(this.$lang);
-            this.$store.commit('setNavbarTitle', this.$t('header_tickets'))
+            this.$store.commit('setToolbarTitle', 'header_tickets')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
                     this.$vuetify.toast.create(this.$t('auth_no'), "right")

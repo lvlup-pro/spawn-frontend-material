@@ -15,7 +15,7 @@
     export default {
         mounted () {
             this.$vuetify.load()
-            this.$store.commit('setNavbarTitle', this.$t('header_home'))
+            this.$store.commit('setToolbarTitle', 'header_home')
             if (this.$route.params.lg === undefined) {
                 var lang = localStorage.getItem('lang')
                 if (lang != 'pl' && lang != 'en') {

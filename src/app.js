@@ -21,9 +21,11 @@ var locales = {
         header_home: 'Home',
         header_login: 'Log in',
         header_services: 'Services',
-        header_ticket: 'Ticket',
+        header_ticket_init: 'Ticket',
+        header_ticket: 'Ticket #{id}',
         header_tickets: 'Tickets',
-        header_vps: 'VPS',
+        header_vps_init: 'VPS',
+        header_vps: 'VPS #{id}',
         header_payments: 'Payments',
         header_profile: 'Profile'
     },
@@ -36,9 +38,11 @@ var locales = {
         header_home: 'Nowości',
         header_login: 'Zaloguj się',
         header_services: 'Usługi',
-        header_ticket: 'Zgłoszenie',
+        header_ticket_init: 'Zgłoszenie',
+        header_ticket: 'Zgłoszenie #{id}',
         header_tickets: 'Zgłoszenia',
-        header_vps: 'VPS',
+        header_vps_init: 'VPS',
+        header_vps: 'VPS #{id}',
         header_payments: 'Płatności',
         header_profile: 'Profil'
     }
