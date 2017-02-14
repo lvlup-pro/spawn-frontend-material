@@ -241,10 +241,17 @@
         padding-left: 6px;
     }
 
-    .alert--info {
-        border: 1px solid #ccc;
+    .alert {
         color: #424242;
-        background: none;
+        border: 1px solid #ccc;
+    }
+
+    .alert--info {
+        background: white;
+    }
+
+    .alert--warning {
+        border-color: #b80;
     }
 
     .material-icons.alert__icon {
