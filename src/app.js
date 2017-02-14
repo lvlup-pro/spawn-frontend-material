@@ -26,7 +26,8 @@ var locales = {
         header_tickets: 'Tickets',
         header_vps_init: 'VPS',
         header_vps: 'VPS #{id}',
-        header_payments: 'Payments'
+        header_payments: 'Payments',
+        header_profile: 'Profile'
     },
     pl: {
         loading: "Ładowanie",
@@ -42,7 +43,8 @@ var locales = {
         header_tickets: 'Zgłoszenia',
         header_vps_init: 'VPS',
         header_vps: 'VPS #{id}',
-        header_payments: 'Płatności'
+        header_payments: 'Płatności',
+        header_profile: 'Profil'
     }
 }
 

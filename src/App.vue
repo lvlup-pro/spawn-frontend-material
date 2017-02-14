@@ -35,7 +35,7 @@
                 <v-list dense>
                     <v-divider light />
                     <v-list-sub-header>{{$t('account')}}</v-list-sub-header>
-                    <v-list-item v-if="account.email"><v-list-tile>
+                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + lg + '/profile'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-user"></i>
                         </v-list-tile-action>
