@@ -95,6 +95,9 @@
             },
             loading () {
                 return this.$store.state.loading
+            },
+            language() {
+                return this.$store.state.language
             }
         },
         data () {
@@ -116,6 +119,9 @@
                 } else {
                     this.page = old; //FIXME find another way of blocking update when loading
                 }
+            },
+            language(val, old) {
+                moment.locale(val)
             }
         },
         filters: {
