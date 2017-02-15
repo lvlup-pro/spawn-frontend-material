@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0-alpha.6 (TBA)
+## 3.0.0-alpha.6 (15.02.2017)
 
 ### Features
 
@@ -9,6 +9,7 @@
 ### Fixes
 
 + Error when there are no ticket messages [#50](https://github.com/lvlup-pro/spawn-frontend-material/issues/50)
++ Can't login on Firefox [#52](https://github.com/lvlup-pro/spawn-frontend-material/issues/52)
 
 ## 3.0.0-alpha.5 (14.02.2017)
 

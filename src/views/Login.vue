@@ -7,7 +7,7 @@
                     <v-card class="mp-5">
                         <v-card-text>
                             <h5>{{ $t("i_have_account") }}</h5>
-                            <form>
+                            <form v-on:submit.prevent="onSubmit">
                                 <v-text-input
                                         :label="$t('username')"
                                         :placeholder="$t('username_placeholder')"
