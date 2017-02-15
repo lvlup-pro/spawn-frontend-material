@@ -273,4 +273,8 @@
     td .input-group input[type=checkbox] + label {
         padding-left: 0;
     }
+
+    div.container {
+        overflow: hidden;
+    }
 </style>
