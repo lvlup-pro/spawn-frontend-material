@@ -270,4 +270,8 @@
     .material-icons.alert__icon {
         color: #424242;
     }
+
+    div.container {
+        overflow: hidden;
+    }
 </style>
