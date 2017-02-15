@@ -8,8 +8,29 @@
                     <v-alert warning>
                         {{$t('response_time')}}
                     </v-alert>
-                    <br>
+                    <div class="mb-4"></div>
                     <h4>{{$t('subject')}}: {{ticket.subject}}</h4>
+
+                    <h5 v-if="!ticket.closed_at && !ticket.staff_response_needed">
+                        <v-chip class="blue white--text" label>
+                            {{$t('waiting_for_client_label')}}
+                        </v-chip>
+                        {{$t('waiting_for_client')}}
+                    </h5>
+
+                    <h5 v-if="!ticket.closed_at && ticket.staff_response_needed">
+                        <v-chip class="yellow" label>
+                            {{$t('staff_is_working_label')}}
+                        </v-chip>
+                        {{$t('staff_is_working')}}
+                    </h5>
+
+                    <h5 v-if="ticket.closed_at">
+                        <v-chip class="red white--text" label>
+                            {{$t('case_closed_label')}}
+                        </v-chip>
+                        {{$t('case_closed')}}
+                    </h5>
 
                     <v-card class="grey lighten-4" id="ticket-topic">
                         <v-card-row actions class="blue">
@@ -71,15 +92,16 @@
                         </v-card>
                         <br>
                     </div>
-                    <br>
-                    <textarea v-bind:placeholder="$t('textarea')" v-model="msg"></textarea>
-                    <p>
-                        <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
-                        <span id="counter-ok" v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
-                        <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
-                    </p>
-                    <v-btn v-on:click.native="addTicketMessage(msg)" class="btn-flat-focused">{{$t('send')}}</v-btn>
-
+                    <div v-if="!ticket.closed_at">
+                        <textarea v-bind:placeholder="$t('textarea')" v-model="msg"></textarea>
+                        <p>
+                            <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
+                            <span id="counter-ok"
+                                  v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
+                            <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
+                        </p>
+                        <v-btn v-on:click.native="addTicketMessage(msg)" class="btn-flat-focused">{{$t('send')}}</v-btn>
+                    </div>
                 </v-col>
             </v-row>
         </v-container>
@@ -175,12 +197,10 @@
                 }).then(() => {
                     //FIXME set by API not user input
                     this.$store.commit('setToolbarTitle', 'header_ticket')
-                    this.$store.commit('setToolbarTitleArgs', {'id' : this.$route.params.id})
+                    this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
                 })
             },
             addTicketMessage(msg) {
-                //this.$store.commit('setLoading')
-
                 //check if duplicate of previous message, precaution to prevent nervous users spamming to backend
                 //or just some network problem just occurred
                 var messages = this.$store.state.ticketMessages
@@ -210,13 +230,25 @@
                     'msg': msg
                 }).then(() => {
                     this.$store.commit('setLoaded')
-                    this.loadMessages()
+                    //prevent refresh
+                    this.$store.dispatch('ticketInfo', {
+                        'id': this.$route.params.id
+                    }).then(() => {
+                        //after ticket loaded, load messages in this ticket
+                        this.loadMessages()
+                    })
                     this.msg = ""
                 })
             }
         },
         locales: {
             en: {
+                waiting_for_client_label: "Waiting for client",
+                waiting_for_client: "Awaiting your response",
+                staff_is_working_label: "Staff is working",
+                staff_is_working: "Staff is working on response",
+                case_closed_label: "Case closed",
+                case_closed: "Staff is not working on this case anymore",
                 subject: "Subject",
                 response_time: "Dear customer, reply to your messages may take up to 48h",
                 client: "You",
@@ -228,6 +260,12 @@
                 msg_duplicate: "Message already sent (duplicate)"
             },
             pl: {
+                waiting_for_client_label: "Oczekiwanie na klienta",
+                waiting_for_client: "Czekamy na twoją odpowiedź",
+                staff_is_working_label: "Praca obsługi",
+                staff_is_working: "Obsługa pracuje nad odpowiedzią",
+                case_closed_label: "Sprawa zamknięta",
+                case_closed: "Obsługa nie zajmuje się już tym zgłoszeniem",
                 subject: "Temat",
                 response_time: "Szanowny kliencie, odpowiedź może zająć do 48h, prosimy o cierpliwość",
                 client: "Ty",

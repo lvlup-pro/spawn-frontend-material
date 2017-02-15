@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-alpha.6 (TBA)
+
+### Features
+
++ Status of ticket in ticket page [#29](https://github.com/lvlup-pro/spawn-frontend-material/issues/29)
+
 ## 3.0.0-alpha.5 (14.02.2017)
 
 ### Features
