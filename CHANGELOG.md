@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-alpha.7 (TBA)
+
+### Fixes
+
++ Strange scrollbars [#51](https://github.com/lvlup-pro/spawn-frontend-material/issues/51)
+
 ## 3.0.0-alpha.6 (15.02.2017)
 
 ### Features
