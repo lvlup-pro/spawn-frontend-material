@@ -222,6 +222,10 @@
 </script>
 
 <style>
+    html {
+        overflow-x: hidden;
+    }
+
     .noclick a {
         cursor: not-allowed;
     }
@@ -272,9 +276,5 @@
 
     td .input-group input[type=checkbox] + label {
         padding-left: 0;
-    }
-
-    div.container {
-        overflow: hidden;
     }
 </style>
