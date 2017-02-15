@@ -18,8 +18,8 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>{{$t('select')}}</th>
-                                    <th>ID</th>
+                                    <th><i class="fa fa-check"></i></th>
+                                    <th>{{$t('id')}}</th>
                                     <th>{{$t('subject')}}</th>
                                     <th>{{$t('created_at')}}</th>
                                 </tr>
@@ -95,6 +95,9 @@
             },
             loading () {
                 return this.$store.state.loading
+            },
+            language() {
+                return this.$store.state.language
             }
         },
         data () {
@@ -116,6 +119,9 @@
                 } else {
                     this.page = old; //FIXME find another way of blocking update when loading
                 }
+            },
+            language(val, old) {
+                moment.locale(val)
             }
         },
         filters: {
@@ -143,14 +149,14 @@
         },
         locales: {
             en: {
+                id: "ID",
                 subject: "Subject",
-                created_at: "Created",
-                select: "Select"
+                created_at: "Created"
             },
             pl: {
+                id: "ID",
                 subject: "Temat",
-                created_at: "Utworzono",
-                select: "Zaznaczenie"
+                created_at: "Utworzono"
             }
         }
     }

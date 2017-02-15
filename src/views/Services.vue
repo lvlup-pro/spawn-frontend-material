@@ -20,9 +20,9 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>{{$t('select')}}</th>
+                                    <th><i class="fa fa-check"></i></th>
                                     <th>{{$t('service')}}</th>
-                                    <th>ID</th>
+                                    <th>{{$t('id')}}</th>
                                     <th>{{$t('name')}}</th>
                                     <th>{{$t('payed_to')}}</th>
                                     <th>{{$t('created_at')}}</th>
@@ -91,6 +91,9 @@
             },
             loading () {
                 return this.$store.state.loading
+            },
+            language() {
+                return this.$store.state.language
             }
         },
         data () {
@@ -112,6 +115,9 @@
                 } else {
                     //this.page = old; //FIXME find another way of blocking update when loading
                 }
+            },
+            language(val, old) {
+                moment.locale(val)
             }
         },
         filters: {
@@ -143,7 +149,7 @@
                 created_at: "Created",
                 name: "Name",
                 service: "Service",
-                select: "Select",
+                id: "ID",
                 panel_preview: "This preview version of customer panel shows only VPS servers"
             },
             pl: {
@@ -151,7 +157,7 @@
                 created_at: "Utworzono",
                 name: "Nazwa",
                 service: "Usługa",
-                select: "Zaznaczenie",
+                id: "ID",
                 panel_preview: "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
             }
         }

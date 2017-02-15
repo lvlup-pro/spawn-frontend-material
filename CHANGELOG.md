@@ -2,9 +2,13 @@
 
 ## 3.0.0-alpha.7 (TBA)
 
+### Features
++ Reduce width of select column in tables by removing padding and replacing title with icon
+
 ### Fixes
 
 + Strange scrollbars [#51](https://github.com/lvlup-pro/spawn-frontend-material/issues/51)
++ Wrong language for date description on tables [#42](https://github.com/lvlup-pro/spawn-frontend-material/issues/42)
 
 ## 3.0.0-alpha.6 (15.02.2017)
 

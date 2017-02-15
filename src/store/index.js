@@ -27,7 +27,8 @@ export default new Vuex.Store({
         count: 1,
         toolbarTitle: "",
         toolbarTitleArgs: {},
-        version: ""
+        version: "",
+        language: ""
     },
     actions: {
         boot ({dispatch, state, commit}) {
@@ -221,6 +222,10 @@ export default new Vuex.Store({
         },
         setToolbarTitleArgs (state, newTitleArgs) {
             state.toolbarTitleArgs = newTitleArgs;
+        },
+        setLanguage (state, newLanguage) {
+            state.language = newLanguage;
+            Vue.config.lang = newLanguage;
         },
         setLoading (state) {
             state.loading = true;
