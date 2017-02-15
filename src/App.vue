@@ -35,7 +35,7 @@
                 <v-list dense>
                     <v-divider light />
                     <v-list-sub-header>{{$t('account')}}</v-list-sub-header>
-                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + lg + '/profile'">
+                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + language + '/profile'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-user"></i>
                         </v-list-tile-action>
@@ -43,7 +43,7 @@
                             <v-list-tile-title v-text="account.email" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
-                    <v-list-item v-if="wallet.balance_pretty"><v-list-tile router :href="'/' + lg + '/payment'">
+                    <v-list-item v-if="wallet.balance_pretty"><v-list-tile router :href="'/' + language + '/payment'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-money"></i>
                         </v-list-tile-action>
@@ -51,7 +51,7 @@
                             <v-list-tile-title v-text="wallet.balance_pretty" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
-                    <v-list-item v-if="!account.email"><v-list-tile router :href="'/' + lg + '/login'">
+                    <v-list-item v-if="!account.email"><v-list-tile router :href="'/' + language + '/login'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-sign-in"></i>
                         </v-list-tile-action>
@@ -61,7 +61,7 @@
                     </v-list-tile></v-list-item>
 
                     <v-list-sub-header>{{$t('menu')}}</v-list-sub-header>
-                    <v-list-item><v-list-tile router :href="'/' + lg + '/home'">
+                    <v-list-item><v-list-tile router :href="'/' + language + '/home'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-home"></i>
                         </v-list-tile-action>
@@ -69,7 +69,7 @@
                             <v-list-tile-title v-text="$t('home')" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
-                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + lg + '/service'">
+                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + language + '/service'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-server"></i>
                         </v-list-tile-action>
@@ -77,7 +77,7 @@
                             <v-list-tile-title v-text="$t('services')" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
-                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + lg + '/ticket'">
+                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + language + '/ticket'">
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-question-circle"></i>
                         </v-list-tile-action>
@@ -87,7 +87,7 @@
                     </v-list-tile></v-list-item>
 
                     <v-list-sub-header>{{$t('lang')}}</v-list-sub-header>
-                    <v-list-item v-if="lg == 'en'" v-on:click="changeLang('pl')"><v-list-tile>
+                    <v-list-item v-if="language == 'en'" v-on:click="changeLang('pl')"><v-list-tile>
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-globe"></i>
                         </v-list-tile-action>
@@ -95,7 +95,7 @@
                             <v-list-tile-title>English (EN)</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
-                    <v-list-item v-if="lg == 'pl'" v-on:click="changeLang('en')"><v-list-tile>
+                    <v-list-item v-if="language == 'pl'" v-on:click="changeLang('en')"><v-list-tile>
                         <v-list-tile-action>
                             <i class="fa fa-fw fa-2x fa-globe"></i>
                         </v-list-tile-action>
@@ -124,9 +124,6 @@
             loading() {
                 return this.$store.state.loading
             },
-            navbarTitle() {
-                return this.$store.state.navbarTitle
-            },
             account() {
                 return this.$store.state.account
             },
@@ -135,6 +132,9 @@
             },
             version() {
                 return this.$store.state.version
+            },
+            language() {
+                return this.$store.state.language
             }
         },
         data () {
@@ -165,9 +165,8 @@
                 })
             },
             changeLang(lang) {
-                Vue.config.lang = lang;
-                this.lg = lang;
                 localStorage.setItem('lang', lang);
+                this.$store.commit('setLanguage', lang);
                 this.$router.replace({'params': {'lg': lang}});
             },
             getToolbarTitle() {
