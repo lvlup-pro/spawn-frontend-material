@@ -6,6 +6,10 @@
 
 + Status of ticket in ticket page [#29](https://github.com/lvlup-pro/spawn-frontend-material/issues/29)
 
+### Fixes
+
++ Error when there are no ticket messages [#50](https://github.com/lvlup-pro/spawn-frontend-material/issues/50)
+
 ## 3.0.0-alpha.5 (14.02.2017)
 
 ### Features

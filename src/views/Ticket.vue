@@ -54,7 +54,7 @@
 
                     <div class="mt-4"></div>
 
-                    <div v-for="tmsg in ticketMessages" id="ticket-messages">
+                    <div v-for="tmsg in ticketMessages.messages" id="ticket-messages">
                         <v-card class="grey lighten-4">
 
                             <v-card-row actions class="green" v-if="tmsg.staff">
@@ -203,14 +203,17 @@
             addTicketMessage(msg) {
                 //check if duplicate of previous message, precaution to prevent nervous users spamming to backend
                 //or just some network problem just occurred
-                var messages = this.$store.state.ticketMessages
-                var len = messages.length
-                var lastMsg = messages[len - 1].message
-                if (msg == lastMsg) {
-                    this.$vuetify.toast.create(this.$t("msg_duplicate"), "right")
-                    //show user that message was probably send earlier when some Internet connection errors occurred
-                    this.loadMessages()
-                    return false
+                //skip if no messages so far to prevent crash on message submit
+                if (this.$store.state.ticketMessages.error === false) {
+                    var messages = this.$store.state.ticketMessages.messages
+                    var len = messages.length
+                    var lastMsg = messages[len - 1].message
+                    if (msg == lastMsg) {
+                        this.$vuetify.toast.create(this.$t("msg_duplicate"), "right")
+                        //show user that message was probably send earlier when some Internet connection errors occurred
+                        this.loadMessages()
+                        return false
+                    }
                 }
 
                 //too short?
