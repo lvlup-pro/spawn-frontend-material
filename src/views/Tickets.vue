@@ -18,8 +18,8 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>{{$t('select')}}</th>
-                                    <th>ID</th>
+                                    <th><i class="fa fa-check"></i></th>
+                                    <th>{{$t('id')}}</th>
                                     <th>{{$t('subject')}}</th>
                                     <th>{{$t('created_at')}}</th>
                                 </tr>
@@ -149,14 +149,14 @@
         },
         locales: {
             en: {
+                id: "ID",
                 subject: "Subject",
-                created_at: "Created",
-                select: "Select"
+                created_at: "Created"
             },
             pl: {
+                id: "ID",
                 subject: "Temat",
-                created_at: "Utworzono",
-                select: "Zaznaczenie"
+                created_at: "Utworzono"
             }
         }
     }

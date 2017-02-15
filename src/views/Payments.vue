@@ -18,8 +18,8 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>{{$t('select')}}</th>
-                                    <th>ID</th>
+                                    <th><i class="fa fa-check"></i></th>
+                                    <th>{{$t('id')}}</th>
                                     <th>{{$t('amount')}}</th>
                                     <th>{{$t('created_at')}}</th>
                                 </tr>
@@ -143,12 +143,12 @@
             en: {
                 amount: "Amount",
                 created_at: "Created",
-                select: "Select"
+                id: "ID"
             },
             pl: {
                 amount: "Kwota",
                 created_at: "Utworzono",
-                select: "Zaznaczenie"
+                id: "ID"
             }
         }
     }
