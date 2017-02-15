@@ -40,7 +40,7 @@
                             <i class="fa fa-fw fa-2x fa-user"></i>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title v-text="account.email" />
+                            <v-list-tile-title v-text="format($t('profile'), { 'nick': account.username })" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
                     <v-list-item v-if="wallet.balance_pretty"><v-list-tile router :href="'/' + language + '/payment'">
@@ -197,12 +197,12 @@
                 logout: "Logout",
                 account: "Account",
                 menu: "Menu",
-                wallet: "Wallet ({balance})",
+                profile: "Profile ({nick})",
+                payments: "Payments ({balance})",
                 panel: "Customer panel",
                 news: "News",
                 order: "Order",
                 services: "Services",
-                payments: "Payments",
                 help: "Help"
             },
             pl: {
@@ -212,12 +212,12 @@
                 logout: "Wyloguj",
                 account: "Konto",
                 menu: "Menu",
-                wallet: "Portfel ({balance})",
+                profile: "Profil ({nick})",
+                payments: "Płatności ({balance})",
                 panel: "Panel klienta",
                 news: "Nowości",
                 order: "Zamów",
                 services: "Usługi",
-                payments: "Płatności",
                 help: "Pomoc"
             }
         }
