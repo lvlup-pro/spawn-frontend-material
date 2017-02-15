@@ -269,4 +269,8 @@
     .material-icons.alert__icon {
         color: #424242;
     }
+
+    td .input-group input[type=checkbox] + label {
+        padding-left: 0;
+    }
 </style>
