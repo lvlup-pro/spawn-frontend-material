@@ -1,11 +1,15 @@
 # Changelog
 
-## 3.0.0-alpha.7 (TBA)
+## 3.0.0-alpha.7 (16.02.2017)
 
 ### Features
-+ Reduce width of select column in tables by removing padding and replacing title with icon
-+ Move ticket status before title and hide its label to tooltip
-+ Improve payments title in menu
++ Reduce width of select column in tables by removing padding and replacing title with icon [#54](https://github.com/lvlup-pro/spawn-frontend-material/pull/54)
++ Move ticket status before title and hide its label to tooltip [#57](https://github.com/lvlup-pro/spawn-frontend-material/pull/57)
++ Improve payments title in menu [#57](https://github.com/lvlup-pro/spawn-frontend-material/pull/57)
++ Align toolbar title to Hello page header title
++ Toolbar height reduced from 64px to 60px
++ Reduce size of sidebar from 300px to 250px when sidebar is fixed
++ Remove bottom pagination on all pages
 
 ### Fixes
 

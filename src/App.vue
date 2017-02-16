@@ -9,7 +9,8 @@
                 <v-toolbar-logo class="hidden-xs-and-down">{{getToolbarTitle()}}</v-toolbar-logo>
                 <v-toolbar-items>
                     <v-toolbar-item v-on:click.native="logOut">
-                        {{$t('logout')}} <v-icon class="right">cloud_off</v-icon>
+                        {{$t('logout')}}
+                        <v-icon class="right">cloud_off</v-icon>
                     </v-toolbar-item>
                     <!--<v-menu>
                         <v-btn dark icon slot="activator">
@@ -33,76 +34,94 @@
                 <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
                 <p class="text-xs-center white--text">{{$t('panel')}} {{version}}</p>
                 <v-list dense>
-                    <v-divider light />
+                    <v-divider light/>
                     <v-list-sub-header>{{$t('account')}}</v-list-sub-header>
-                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + language + '/profile'">
-                        <v-list-tile-action>
-                            <i class="fa fa-fw fa-2x fa-user"></i>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title v-text="format($t('profile'), { 'nick': account.username, 'email': account.email })" />
-                        </v-list-tile-content>
-                    </v-list-tile></v-list-item>
-                    <v-list-item v-if="wallet.balance_pretty"><v-list-tile router :href="'/' + language + '/payment'">
-                        <v-list-tile-action>
-                            <i class="fa fa-fw fa-2x fa-money"></i>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title v-text="format($t('payments'), { 'balance': wallet.balance_pretty })" />
-                        </v-list-tile-content>
-                    </v-list-tile></v-list-item>
-                    <v-list-item v-if="!account.email"><v-list-tile router :href="'/' + language + '/login'">
-                        <v-list-tile-action>
-                            <i class="fa fa-fw fa-2x fa-sign-in"></i>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title v-text="$t('login')" />
-                        </v-list-tile-content>
-                    </v-list-tile></v-list-item>
+                    <v-list-item v-if="account.email">
+                        <v-list-tile router :href="'/' + language + '/profile'">
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-user"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title
+                                        v-text="format($t('profile'), { 'nick': account.username, 'email': account.email })"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
+                    <v-list-item v-if="wallet.balance_pretty">
+                        <v-list-tile router :href="'/' + language + '/payment'">
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-money"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title
+                                        v-text="format($t('payments'), { 'balance': wallet.balance_pretty })"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
+                    <v-list-item v-if="!account.email">
+                        <v-list-tile router :href="'/' + language + '/login'">
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-sign-in"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t('login')"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
 
                     <v-list-sub-header>{{$t('menu')}}</v-list-sub-header>
-                    <v-list-item><v-list-tile router :href="'/' + language + '/home'">
-                        <v-list-tile-action>
-                            <i class="fa fa-fw fa-2x fa-home"></i>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title v-text="$t('home')" />
-                        </v-list-tile-content>
-                    </v-list-tile></v-list-item>
-                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + language + '/service'">
-                        <v-list-tile-action>
-                            <i class="fa fa-fw fa-2x fa-server"></i>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title v-text="$t('services')" />
-                        </v-list-tile-content>
-                    </v-list-tile></v-list-item>
-                    <v-list-item v-if="account.email"><v-list-tile router :href="'/' + language + '/ticket'">
-                        <v-list-tile-action>
-                            <i class="fa fa-fw fa-2x fa-question-circle"></i>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title v-text="$t('help')" />
-                        </v-list-tile-content>
-                    </v-list-tile></v-list-item>
+                    <v-list-item>
+                        <v-list-tile router :href="'/' + language + '/home'">
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-home"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t('home')"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
+                    <v-list-item v-if="account.email">
+                        <v-list-tile router :href="'/' + language + '/service'">
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-server"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t('services')"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
+                    <v-list-item v-if="account.email">
+                        <v-list-tile router :href="'/' + language + '/ticket'">
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-question-circle"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t('help')"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
 
                     <v-list-sub-header>{{$t('lang')}}</v-list-sub-header>
-                    <v-list-item v-if="language == 'en'" v-on:click="changeLang('pl')"><v-list-tile>
-                        <v-list-tile-action>
-                            <i class="fa fa-fw fa-2x fa-globe"></i>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title>English (EN)</v-list-tile-title>
-                        </v-list-tile-content>
-                    </v-list-tile></v-list-item>
-                    <v-list-item v-if="language == 'pl'" v-on:click="changeLang('en')"><v-list-tile>
-                        <v-list-tile-action>
-                            <i class="fa fa-fw fa-2x fa-globe"></i>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title>Polski (PL)</v-list-tile-title>
-                        </v-list-tile-content>
-                    </v-list-tile></v-list-item>
+                    <v-list-item v-if="language == 'en'" v-on:click="changeLang('pl')">
+                        <v-list-tile>
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-globe"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title>English (EN)</v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
+                    <v-list-item v-if="language == 'pl'" v-on:click="changeLang('en')">
+                        <v-list-tile>
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-globe"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title>Polski (PL)</v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
                 </v-list>
             </v-sidebar>
             <v-content>
@@ -227,6 +246,33 @@
 <style>
     html {
         overflow-x: hidden;
+    }
+
+    /* smaller toolbar */
+    .toolbar {
+        height: 60px;
+    }
+
+    @media screen and (min-width: 992px) {
+        /* fix sidebar padding after sidebar resize */
+        .with.left-fixed-sidebar main, .with.left-fixed-sidebar footer {
+            padding-left: 250px;
+        }
+
+        /* fix logo title padding after sidebar resize */
+        .with.left-fixed-sidebar header .toolbar {
+            padding-left: 277px; /*264px*/
+        }
+
+        /* smaller sidebar */
+        #app main aside {
+            width: 250px;
+        }
+    }
+
+    /* prevent dark background under sidebar */
+    #app main {
+        background: none;
     }
 
     .noclick a {

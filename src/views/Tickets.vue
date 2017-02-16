@@ -47,21 +47,10 @@
                 </v-col>
             </v-row>
 
-            <div class="mt-4"></div>
-            <div class="text-xs-center">
-                <v-pagination v-bind:length.number="pagination.paging.total_pages"
-                              v-bind:disabled="loading"
-                              v-model="page"
-                ></v-pagination>
-            </div>
         </v-container>
     </div>
 </template>
 <style>
-    .pagination {
-        justify-content: center;
-    }
-
     tr {
         cursor: pointer
     }
