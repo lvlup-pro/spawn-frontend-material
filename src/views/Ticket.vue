@@ -9,28 +9,21 @@
                         {{$t('response_time')}}
                     </v-alert>
                     <div class="mb-4"></div>
-                    <h4>{{$t('subject')}}: {{ticket.subject}}</h4>
-
-                    <h5 v-if="!ticket.closed_at && !ticket.staff_response_needed">
-                        <v-chip class="blue white--text" label>
+                    <h4>
+                        <v-chip v-if="!ticket.closed_at && !ticket.staff_response_needed" label
+                            class="blue white--text" v-tooltip:bottom="{ html: $t('waiting_for_client') }">
                             {{$t('waiting_for_client_label')}}
                         </v-chip>
-                        {{$t('waiting_for_client')}}
-                    </h5>
-
-                    <h5 v-if="!ticket.closed_at && ticket.staff_response_needed">
-                        <v-chip class="yellow" label>
+                        <v-chip v-if="!ticket.closed_at && ticket.staff_response_needed" label
+                            class="yellow" v-tooltip:bottom="{ html: $t('staff_is_working') }">
                             {{$t('staff_is_working_label')}}
                         </v-chip>
-                        {{$t('staff_is_working')}}
-                    </h5>
-
-                    <h5 v-if="ticket.closed_at">
-                        <v-chip class="red white--text" label>
+                        <v-chip v-if="ticket.closed_at" label
+                            class="red white--text" v-tooltip:bottom="{ html: $t('case_closed') }">
                             {{$t('case_closed_label')}}
                         </v-chip>
-                        {{$t('case_closed')}}
-                    </h5>
+                        {{$t('subject')}}: {{ticket.subject}}
+                    </h4>
 
                     <v-card class="grey lighten-4" id="ticket-topic">
                         <v-card-row actions class="blue">
@@ -126,6 +119,10 @@
     #ticket-messages button,
     #ticket-topic button {
         pointer-events: none;
+    }
+
+    span.chip {
+        font-size: 1rem;
     }
 </style>
 <script>

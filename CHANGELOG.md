@@ -4,6 +4,8 @@
 
 ### Features
 + Reduce width of select column in tables by removing padding and replacing title with icon
++ Move ticket status before title and hide its label to tooltip
++ Improve payments title in menu
 
 ### Fixes
 

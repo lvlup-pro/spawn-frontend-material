@@ -40,7 +40,7 @@
                             <i class="fa fa-fw fa-2x fa-user"></i>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title v-text="account.email" />
+                            <v-list-tile-title v-text="format($t('profile'), { 'nick': account.username, 'email': account.email })" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
                     <v-list-item v-if="wallet.balance_pretty"><v-list-tile router :href="'/' + language + '/payment'">
@@ -48,7 +48,7 @@
                             <i class="fa fa-fw fa-2x fa-money"></i>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title v-text="wallet.balance_pretty" />
+                            <v-list-tile-title v-text="format($t('payments'), { 'balance': wallet.balance_pretty })" />
                         </v-list-tile-content>
                     </v-list-tile></v-list-item>
                     <v-list-item v-if="!account.email"><v-list-tile router :href="'/' + language + '/login'">
@@ -172,13 +172,16 @@
             getToolbarTitle() {
                 let title = this.$t(this.$store.state.toolbarTitle);
                 let args = this.$store.state.toolbarTitleArgs;
+                return this.format(title, args);
+            },
+            format(string, args) {
                 for (let key in args) {
                     let find = '{' + key + '}';
-                    while (title.indexOf(find) !== -1) {
-                        title = title.replace(find, args[key]);
+                    while (string.indexOf(find) !== -1) {
+                        string = string.replace(find, args[key]);
                     }
                 }
-                return title;
+                return string;
             }
         },
         mounted () {
@@ -194,12 +197,12 @@
                 logout: "Logout",
                 account: "Account",
                 menu: "Menu",
-                wallet: "Wallet",
+                profile: "{email}",
+                payments: "Payments ({balance})",
                 panel: "Customer panel",
                 news: "News",
                 order: "Order",
                 services: "Services",
-                payments: "Payments",
                 help: "Help"
             },
             pl: {
@@ -209,12 +212,12 @@
                 logout: "Wyloguj",
                 account: "Konto",
                 menu: "Menu",
-                wallet: "Portfel",
+                profile: "{email}",
+                payments: "Płatności ({balance})",
                 panel: "Panel klienta",
                 news: "Nowości",
                 order: "Zamów",
                 services: "Usługi",
-                payments: "Płatności",
                 help: "Pomoc"
             }
         }
