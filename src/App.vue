@@ -163,20 +163,15 @@
             }
         },
         methods: {
-            //meta (obj) {
-            view(obj) {
-                if (typeof obj === 'string') {
-                    return this.title = obj
-                }
-                this.title = obj.h1
-                this.$vuetify.bus.pub('meta:title', obj.title)
-                this.$vuetify.bus.pub('meta:description', obj.description)
-                this.$vuetify.bus.pub('meta:keywords', obj.keywords)
-            },
+//            view (meta) {
+//                this.$store.commit('vuetify/TITLE', meta.title)
+//                this.$store.commit('vuetify/DESCRIPTION', meta.description)
+//                this.$store.commit('vuetify/KEYWORDS', meta.keywords)
+//            },
 //            view(meta){
-//                this.$vuetify.bus.pub('meta:title', obj.title)
-//                this.$vuetify.bus.pub('meta:description', obj.description)
-//                this.$vuetify.bus.pub('meta:keywords', obj.keywords)
+//                this.$vuetify.bus.pub('meta:title', meta.title)
+//                this.$vuetify.bus.pub('meta:description', meta.description)
+//                this.$vuetify.bus.pub('meta:keywords', meta.keywords)
 //            },
             logOut() {
                 this.$store.dispatch('logOut').then((res) => {
