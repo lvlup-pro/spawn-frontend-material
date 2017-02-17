@@ -203,6 +203,13 @@
                 return string;
             }
         },
+        beforeMount() {
+            //FIXME
+            if (window.localStorage.getItem("token") === null) {
+            } else {
+                this.$store.commit('setToken', window.localStorage.getItem("token"))
+            }
+        },
         mounted () {
             this.$vuetify.load();
             this.$store.dispatch('boot')
