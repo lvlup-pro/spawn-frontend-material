@@ -41,6 +41,14 @@ export default new Vuex.Store({
             commit('setServices', [])
             state.errorOnReq = true;
         },
+        handleError({}, args) {
+            console.log(args.error.message + ' in ' + args.name + '()!');
+            if (args.error.message === 'Network Error') {
+                //Network Error
+            } else {
+                //Other Error
+            }
+        },
         //return true if not authorized
         checkSession ({dispatch, state}) {
             state.apiUrl = storeConfig.apiUrl
@@ -75,11 +83,11 @@ export default new Vuex.Store({
                         //dispatch('accountInfo').dispatch('walletInfo')
                         return true;
                     }
-                }).catch(function () {
-                    console.log("accountLogin connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'accountLogin', 'error': error});
                 })
         },
-        accountInfo ({commit, state}) {
+        accountInfo ({commit, dispatch, state}) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'me')
                 .then(function (res) {
@@ -87,23 +95,22 @@ export default new Vuex.Store({
                         commit('setAccount', res.data)
                         return true
                     }
-                }).catch(function () {
-                    state.errorOnReq = true;
-                    console.log("account info connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', 'accountInfo', error)
                 })
         },
-        walletInfo ({commit, state}) {
+        walletInfo ({commit, dispatch, state}) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'me/balance')
                 .then(function (res) {
                     if (typeof res.data[0].balance !== 'undefined') {
                         commit('setWallet', res.data)
                     }
-                }).catch(function () {
-                    console.log("connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'walletInfo', 'error': error})
                 })
         },
-        ticketInfo ({commit, state}, args) {
+        ticketInfo ({commit, dispatch, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'help/ticket/' + args.id)
                 .then(function (res) {
@@ -112,11 +119,11 @@ export default new Vuex.Store({
                         res.data.message = res.data.message.replace(/(?:\r\n|\r|\n)/g, '<br>');
                         commit('setTicket', res.data)
                     }
-                }).catch(function () {
-                    console.log("ticket connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'ticketInfo', 'error': error})
                 })
         },
-        ticketMessages ({commit, state}, args) {
+        ticketMessages ({commit, dispatch, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'help/ticket/' + args.id + '/message')
                 .then(function (res) {
@@ -125,11 +132,11 @@ export default new Vuex.Store({
                         //res.data.message = res.data.message.replace(/(?:\r\n|\r|\n)/g, '<br>'); //FIXME iterate all msg
                         commit('setTicketMessages', res.data)
                     }
-                }).catch(function () {
-                    console.log("ticketmsg connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'ticketMessages', 'error': error})
                 })
         },
-        ticketAddMessage ({commit, state}, args) {
+        ticketAddMessage ({commit, dispatch, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.post(state.apiUrl + 'help/ticket/' + args.id + '/message', args)
                 .then(function (res) {
@@ -137,52 +144,52 @@ export default new Vuex.Store({
                         //commit('setTicketMessages', res.data)
                         return true
                     }
-                }).catch(function () {
-                    console.log("ticketAddMessage connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'ticketAddMessage', 'error': error})
                 })
         },
-        servicesList ({commit, state}, args) {
+        servicesList ({commit, dispatch, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'vps?page=' + args.page + '&limit=' + args.limit)
                 .then(function (res) {
                     if (typeof res.data !== 'undefined') {
                         commit('setServices', res.data)
                     }
-                }).catch(function () {
-                    console.log("connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'servicesList', 'error': error})
                 })
         },
-        paginationList ({commit, state}, args) {
+        paginationList ({commit, dispatch, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + args.url + '?page=' + args.page + '&limit=' + args.limit)
                 .then(function (res) {
                     if (typeof res.data !== 'undefined') {
                         commit('setPagination', res.data)
                     }
-                }).catch(function () {
-                    console.log("connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'paginationList', 'error': error})
                 })
         },
-        vpsInfo ({commit, state}, args) {
+        vpsInfo ({commit, dispatch, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'vps/' + args.id)
                 .then(function (res) {
                     if (typeof res.data.active !== 'undefined') {
                         commit('setVps', res.data)
                     }
-                }).catch(function () {
-                    console.log("vps connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'vpsInfo', 'error': error})
                 })
         },
-        profileInfo ({commit, state}, args) {
+        profileInfo ({commit, dispatch, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'me')
                 .then(function (res) {
                     if (typeof res.data.id !== 'undefined') {
                         commit('setProfile', res.data)
                     }
-                }).catch(function () {
-                    console.log("profile connection error")
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'profileInfo', 'error': error})
                 })
         }
     },
