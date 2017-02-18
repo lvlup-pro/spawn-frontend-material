@@ -12,8 +12,9 @@ module.exports = Object.assign({}, base, {
   externals: Object.keys(require('../package.json').dependencies),
   plugins: (base.plugins || []).concat([
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process.env.VUE_ENV': '"server"'
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+        'process.env.VUE_ENV': '"server"',
+        'process.env.API': JSON.stringify(process.env.API || 'development'),
     })
   ])
 })

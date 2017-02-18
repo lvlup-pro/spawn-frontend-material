@@ -1,5 +1,5 @@
 process.env.VUE_ENV = 'server'
-const isProd = process.env.NODE_ENV !== 'development'
+const isProd = process.env.NODE_ENV === 'production'
 
 const fs = require('fs')
 const path = require('path')

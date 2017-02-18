@@ -64,7 +64,12 @@ const config = {
       }
     ]
   },
-  plugins: [],
+  plugins: [
+      new webpack.DefinePlugin({
+          //http://stackoverflow.com/questions/34499450/react-webpack-where-to-configure-rest-endpoints
+          'process.env.API': JSON.stringify(process.env.API || 'https://demoapi.lvlup.pro/v3/'),
+      })
+  ],
   performance: false
 }
 
