@@ -1,7 +1,7 @@
 <template>
     <v-app top-navbar left-fixed-sidebar>
         <header>
-            <v-progress-linear v-if="loading" v-bind:indeterminate="true"></v-progress-linear>
+            <v-progress-linear id="loadingBar" v-if="loading" v-bind:indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
                 <v-toolbar-side-icon @click.native.stop="nav = !nav" class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
@@ -270,6 +270,11 @@
         #app main aside {
             width: 250px;
         }
+
+        /* don't hide loading bar behind sidebar */
+        #loadingBar {
+            margin: 0 0 0 250px;
+        }
     }
 
     /* prevent dark background under sidebar */
@@ -285,8 +290,10 @@
         cursor: pointer;
     }
 
-    .progress-linear {
+    /* smaller and more stylish loading bar */
+    #loadingBar {
         margin: 0px;
+        height: 5px!important;
         position: absolute;
     }
 

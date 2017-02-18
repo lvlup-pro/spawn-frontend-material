@@ -1,8 +1,16 @@
 # Changelog
 
+## 3.0.0-alpha.8 (TBA)
+
+### Features
+
++ Vuetify 0.8.9
++ Smaller top loading bar
+
 ## 3.0.0-alpha.7 (16.02.2017)
 
 ### Features
+
 + Reduce width of select column in tables by removing padding and replacing title with icon [#54](https://github.com/lvlup-pro/spawn-frontend-material/pull/54)
 + Move ticket status before title and hide its label to tooltip [#57](https://github.com/lvlup-pro/spawn-frontend-material/pull/57)
 + Improve payments title in menu [#57](https://github.com/lvlup-pro/spawn-frontend-material/pull/57)
