@@ -2,6 +2,14 @@
     <div>
         <v-container id="vps-stats" v-if="!loading">
             <v-row>
+                <v-col xs12 lg4>
+                    <h4>{{$t('state')}}</h4>
+                    <v-chip v-if="vps.running" label class="green white--text">On</v-chip>
+                    <v-chip v-if="!vps.running" label class="red white--text">Off</v-chip>
+                    <div class="mb-4"></div>
+                </v-col>
+            </v-row>
+            <v-row>
                 <v-col md6 xs12="xs12">
                     <h3>CPU</h3><h4>{{vps.cpu}}%</h4>
                     <v-progress-linear v-model="vps.cpu"></v-progress-linear>
@@ -95,12 +103,10 @@
         },
         locales: {
             en: {
-                subject: "Subject",
-                response_time: "Dear customer, reply to your messages may take up to 48h",
+                state: "State"
             },
             pl: {
-                subject: "Temat",
-                response_time: "Szanowny kliencie, odpowiedź może zająć do 48h, prosimy o cierpliwość",
+                state: "Stan"
             }
         }
     }
