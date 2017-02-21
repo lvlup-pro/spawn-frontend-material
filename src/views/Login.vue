@@ -80,6 +80,7 @@
             }
         },
         mounted () {
+            this.$emit('view', this.meta())
             this.$store.commit('setToolbarTitle', 'header_login')
             if (typeof this.$route.params.lg === 'undefined') {
                 var lang = localStorage.getItem('lang')
@@ -103,7 +104,17 @@
                 }
             })
         },
+        preFetch (store) {
+            store.commit('setMeta', this.methods.meta())
+        },
         methods: {
+            meta() {
+                return {
+                    title: 'Login',
+                    description: 'Example login description',
+                    keywords: 'vuetify, login'
+                }
+            },
             login(username, password) {
                 this.$store.commit('setLoading')
                 this.$store.dispatch('accountLogin', {

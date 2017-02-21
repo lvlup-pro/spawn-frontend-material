@@ -14,6 +14,7 @@
 <script>
     export default {
         mounted () {
+            this.$emit('view', this.meta())
             this.$vuetify.load()
             this.$store.commit('setToolbarTitle', 'header_home')
             if (this.$route.params.lg === undefined) {
@@ -30,6 +31,18 @@
                 this.$router.push('/' + lang + '/home')
             }
             this.$store.dispatch('checkSession')
+        },
+        preFetch (store) {
+            store.commit('setMeta', this.methods.meta())
+        },
+        methods: {
+            meta() {
+                return {
+                    title: 'Index',
+                    description: 'Example index description',
+                    keywords: 'vuetify, index'
+                }
+            }
         }
     }
 </script>
