@@ -4,8 +4,8 @@
             <v-row>
                 <v-col xs12 lg4>
                     <h4>{{$t('state')}}</h4>
-                    <v-chip v-if="vps.running" label class="green white--text">On</v-chip>
-                    <v-chip v-if="!vps.running" label class="red white--text">Off</v-chip>
+                    <v-chip v-if="vps.status == 'running'" label class="green white--text">On</v-chip>
+                    <v-chip v-if="vps.status == 'stopped'" label class="red white--text">Off</v-chip>
                     <div class="mb-4"></div>
                 </v-col>
             </v-row>
@@ -56,7 +56,7 @@
                         this.$store.commit('setLoaded')
                         //FIXME set by API not user input
                         this.$store.commit('setToolbarTitle', 'header_vps')
-                        this.$store.commit('setToolbarTitleArgs', {'id' : this.$route.params.id})
+                        this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
                     })
                 }
             })
@@ -72,7 +72,7 @@
                 return this.$store.state.vps
             },
             ram () {
-                return Math.round((this.$store.state.vps.mem / this.$store.state.vps.maxmem) * 100)
+                return Math.round((this.$store.state.vps.mem_mb / this.$store.state.vps.max_mem_mb) * 100)
             }
         },
         watch: {},
