@@ -335,4 +335,8 @@
     td .input-group input[type=checkbox] + label {
         padding-left: 0;
     }
+
+    th.select {
+        width: 35px;
+    }
 </style>

@@ -20,7 +20,7 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <th><i class="fa fa-check"></i></th>
+                                    <th class="select"><i class="fa fa-check"></i></th>
                                     <th>{{$t('service')}}</th>
                                     <th>{{$t('id')}}</th>
                                     <th>{{$t('name')}}</th>
