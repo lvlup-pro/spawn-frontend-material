@@ -243,6 +243,15 @@ export default new Vuex.Store({
         },
         setLoaded (state) {
             state.loading = false;
+        },
+        setTitle (state, newTitle) {
+          document.title = newTitle;
+        },
+        setDescription (state, newDescription) {
+          document.head.querySelector('meta[name=description]').content = newDescription;
+        },
+        setKeywords (state, newKeywords) {
+          document.head.querySelector('meta[name=keywords]').content = newKeywords;
         }
     }
 })

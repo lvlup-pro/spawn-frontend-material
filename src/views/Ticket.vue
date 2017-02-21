@@ -134,7 +134,8 @@
             }
         },
         mounted () {
-            moment.locale(this.$lang);
+            moment.locale(this.$lang)
+            this.$emit('view', this.meta())
             this.$store.commit('setToolbarTitle', 'header_ticket_init')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {

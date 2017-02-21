@@ -128,7 +128,7 @@
                 <v-container fluid>
                     <div class="mt-3"></div>
                     <transition mode="out-in">
-                        <router-view></router-view>
+                        <router-view v-on:view="view"></router-view>
                     </transition>
                 </v-container>
             </v-content>
@@ -163,6 +163,11 @@
             }
         },
         methods: {
+            view (meta) {
+                this.$store.commit('setTitle', meta.title)
+                this.$store.commit('setDescription', meta.description)
+                this.$store.commit('setKeywords', meta.keywords)
+            },
             logOut() {
                 this.$store.dispatch('logOut').then((res) => {
                     this.$router.push('/login')
