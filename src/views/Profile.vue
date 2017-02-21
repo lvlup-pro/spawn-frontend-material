@@ -10,7 +10,7 @@
                                 <v-icon class="mr-5">label</v-icon>
                                 <div>
                                     <div>ID</div>
-                                    <strong>{{profile.id}}</strong>
+                                    <strong>#{{profile.id}}</strong>
                                 </div>
                             </v-card-row>
                             <v-card-row height="75px">

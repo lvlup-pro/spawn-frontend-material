@@ -32,7 +32,7 @@
                                                         class="text-xs-center"></v-checkbox>
                                         </td>
                                         <td>
-                                            {{item.id}}
+                                            #{{item.id}}
                                         </td>
                                         <td>{{item.amount}}</td>
                                         <td>{{item.created_at | prettyDateFrom}}</td>

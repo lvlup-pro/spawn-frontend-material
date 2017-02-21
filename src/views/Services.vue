@@ -36,7 +36,7 @@
                                                         class="text-xs-center"></v-checkbox>
                                         </td>
                                         <td v-on:click="goToVps(item.id)">VPS</td>
-                                        <td v-on:click="goToVps(item.id)">{{item.id}}</td>
+                                        <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.name}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.payed_to | prettyDate}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.created_at | prettyDate}}</td>
