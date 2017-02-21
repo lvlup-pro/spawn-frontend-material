@@ -28,14 +28,9 @@
                                 <template v-for="(item, index) in pagination.items">
                                     <tr>
                                         <td>
-                                            <v-checkbox v-bind:id="'checkbox' + index" filled
-                                                        class="text-xs-center"></v-checkbox>
+                                            <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                         </td>
-                                        <td v-on:click="goToTicket(item.id)">
-                                            <!--<router-link :to="{ path: '/ticket/', params: { id: item.id }}">-->
-                                            {{item.id}}
-                                            <!--</router-link>-->
-                                        </td>
+                                        <td v-on:click="goToTicket(item.id)">#{{item.id}}</td>
                                         <td v-on:click="goToTicket(item.id)">{{item.subject}}</td>
                                         <td v-on:click="goToTicket(item.id)">{{item.created_at | prettyDate}}</td>
                                     </tr>
