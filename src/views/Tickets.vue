@@ -20,6 +20,7 @@
                                 <tr>
                                     <th><i class="fa fa-check"></i></th>
                                     <th>{{$t('id')}}</th>
+                                    <th>{{$t('status')}}</th>
                                     <th>{{$t('subject')}}</th>
                                     <th>{{$t('created_at')}}</th>
                                 </tr>
@@ -31,6 +32,7 @@
                                             <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                         </td>
                                         <td v-on:click="goToTicket(item.id)">#{{item.id}}</td>
+                                        <td v-on:click="goToTicket(item.id)">[status]</td>
                                         <td v-on:click="goToTicket(item.id)">{{item.subject}}</td>
                                         <td v-on:click="goToTicket(item.id)">{{item.created_at | prettyDate}}</td>
                                     </tr>
@@ -133,14 +135,16 @@
         },
         locales: {
             en: {
-                id: "ID",
-                subject: "Subject",
-                created_at: "Created"
+                id: 'ID',
+                status: 'Status',
+                subject: 'Subject',
+                created_at: 'Created'
             },
             pl: {
-                id: "ID",
-                subject: "Temat",
-                created_at: "Utworzono"
+                id: 'ID',
+                status: 'Status',
+                subject: 'Temat',
+                created_at: 'Utworzono'
             }
         }
     }
