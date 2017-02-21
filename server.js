@@ -55,9 +55,9 @@ const serve = (path, cache) => express.static(resolve(path), {
 })
 
 function updateMeta (head, context) {
-  const title = context.title || false
-  const description = context.description || false
-  const keywords = context.keywords || false
+  const title = context.initialState.meta.title || false
+  const description = context.initialState.meta.description || false
+  const keywords = context.initialState.meta.keywords || false
 
   if (title) {
     head = head.replace(/(<title>)(.*?)(<\/title>)/, `$1${title}$3`)
