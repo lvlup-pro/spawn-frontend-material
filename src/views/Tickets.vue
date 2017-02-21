@@ -35,15 +35,15 @@
                                         <td v-on:click="goToTicket(ticket.id)">
                                             <span v-if="!ticket.closed_at && !ticket.staff_response_needed"
                                                 v-tooltip:bottom="{ html: $t('waiting_for_client') }">
-                                                {{$t('waiting_for_client_label')}}
+                                                <i class="fa fa-circle blue--text"></i> {{$t('waiting_for_client_label')}}
                                             </span>
                                             <span v-if="!ticket.closed_at && ticket.staff_response_needed"
                                                 v-tooltip:bottom="{ html: $t('staff_is_working') }">
-                                                {{$t('staff_is_working_label')}}
+                                                <i class="fa fa-circle yellow--text"></i> {{$t('staff_is_working_label')}}
                                             </span>
                                             <span v-if="ticket.closed_at"
                                                 v-tooltip:bottom="{ html: $t('case_closed') }">
-                                                {{$t('case_closed_label')}}
+                                                <i class="fa fa-circle red--text"></i> {{$t('case_closed_label')}}
                                             </span>
                                         </td>
                                         <td v-on:click="goToTicket(ticket.id)">{{ticket.subject}}</td>
