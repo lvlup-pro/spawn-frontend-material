@@ -58,7 +58,6 @@
     import moment from 'moment'
     export default {
         mounted () {
-            this.$emit('view', this.meta())
             moment.locale(this.$lang)
             this.$store.commit('setToolbarTitle', 'header_services')
             this.$store.dispatch('checkSession').then((nosession) => {
@@ -122,8 +121,8 @@
                 return timestamp.format("L") + " - " + timestamp.from()
             }
         },
-        preFetch () {
-            return this.methods.meta()
+        preFetch (store) {
+            store.commit('setMeta', this.methods.meta())
         },
         methods: {
             meta() {

@@ -134,7 +134,6 @@
             }
         },
         mounted () {
-            this.$emit('view', this.meta())
             moment.locale(this.$lang);
             this.$store.commit('setToolbarTitle', 'header_ticket_init')
             this.$store.dispatch('checkSession').then((nosession) => {
@@ -166,8 +165,8 @@
                 return timestamp.format("HH:mm DD.MM.YYYY")
             }
         },
-        preFetch () {
-            return this.methods.meta()
+        preFetch (store) {
+            store.commit('setMeta', this.methods.meta())
         },
         methods: {
             meta() {
