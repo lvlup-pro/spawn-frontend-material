@@ -171,10 +171,9 @@
         methods: {
             meta() {
                 return {
-                    title: 'Pagination Component | Vuetify.js',
-                    h1: 'Pagination',
-                    description: 'Pagination component for Vuetify Framework',
-                    keywords: 'vuetify, pagination, components'
+                    title: 'Ticket',
+                    description: 'Example ticket description',
+                    keywords: 'vuetify, ticket'
                 }
             },
             loadTicket() {
