@@ -81,7 +81,7 @@
         },
         mounted () {
             this.$emit('view', this.meta())
-            this.$store.commit('setToolbarTitle', 'header_login')
+            this.$store.commit('setToolbarTitle', 'header.login')
             if (typeof this.$route.params.lg === 'undefined') {
                 var lang = localStorage.getItem('lang')
                 if (lang != 'pl' && lang != 'en') {
