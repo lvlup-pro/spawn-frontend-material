@@ -75,7 +75,11 @@
         "msg_too_short": "Wiadomość jest za krótka",
         "msg_duplicate": "Wiadomość już wysłana (duplikat)"
     },
+    "vps": {
+        "state": "Stan",
+        "cpu": "CPU",
+        "ram": "RAM"
+    },
     "loading": "Ładowanie",
-    "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS",
-    "state": "Stan"
+    "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
 }

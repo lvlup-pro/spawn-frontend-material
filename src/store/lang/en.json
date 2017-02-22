@@ -75,7 +75,11 @@
         "msg_too_short": "Message is too short",
         "msg_duplicate": "Message already sent (duplicate)"
     },
+    "vps": {
+        "state": "State",
+        "cpu": "CPU",
+        "ram": "RAM"
+    },
     "loading": "Loading",
-    "panel_preview": "This preview version of customer panel shows only VPS servers",
-    "state": "State"
+    "panel_preview": "This preview version of customer panel shows only VPS servers"
 }

@@ -3,7 +3,7 @@
         <v-container id="vps-stats" v-if="!loading">
             <v-row>
                 <v-col xs12 lg4>
-                    <h4>{{$t('state')}}</h4>
+                    <h4>{{$t('vps.state')}}</h4>
                     <v-chip v-if="vps.status == 'running'" label class="green white--text">On</v-chip>
                     <v-chip v-if="vps.status == 'stopped'" label class="red white--text">Off</v-chip>
                     <div class="mb-4"></div>
@@ -11,11 +11,11 @@
             </v-row>
             <v-row>
                 <v-col md6 xs12="xs12">
-                    <h3>CPU</h3><h4>{{vps.cpu}}%</h4>
+                    <h3>{{$t('vps.cpu')}}</h3><h4>{{vps.cpu}}%</h4>
                     <v-progress-linear v-model="vps.cpu"></v-progress-linear>
                 </v-col>
                 <v-col md6 xs12="xs12">
-                    <h3>RAM</h3><h4>{{ram}}%</h4>
+                    <h3>{{$t('vps.ram')}}</h3><h4>{{ram}}%</h4>
                     <!-- 0 - 70% green -->
                     <v-progress-linear v-if="ram <= 70" v-model="ram" success></v-progress-linear>
                     <!-- 71 - 90% yellow-->
