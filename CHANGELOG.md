@@ -1,11 +1,21 @@
 # Changelog
 
-## 3.0.0-alpha.8 (TBA)
+## 3.0.0-alpha.8 (23.02.2017)
 
 ### Features
 
-+ Vuetify 0.8.9
++ Centralized i18n files [#64](https://github.com/lvlup-pro/spawn-frontend-material/pull/64)
++ Working title and meta tags [#27](https://github.com/lvlup-pro/spawn-frontend-material/issues/27)
++ Small select column in tables [#62](https://github.com/lvlup-pro/spawn-frontend-material/pull/62)
++ Hash prefix for IDs [#61](https://github.com/lvlup-pro/spawn-frontend-material/pull/61)
++ Ticket status in ticket list page [#60](https://github.com/lvlup-pro/spawn-frontend-material/pull/60)
++ Centralized error handling for API requests [#58](https://github.com/lvlup-pro/spawn-frontend-material/pull/58)
 + Smaller top loading bar
++ Prevent cursor pointer in payments page
++ Payment amounts in color
++ Better current VPS status page
++ Fixes for dev and production deploy scripts
++ Vuetify 0.8.10
 
 ## 3.0.0-alpha.7 (16.02.2017)
 
@@ -68,9 +78,9 @@
 ## 3.0.0-alpha.3 (12.02.2017)
 
 + Send messages in ticket page
-+ Better i18n
-+ Fix for logout icon too close to text
-+ Frontend version is loading from package.json
++ Better i18n [#19](https://github.com/lvlup-pro/spawn-frontend-material/pull/19)
++ Fix for logout icon too close to text [#1](https://github.com/lvlup-pro/spawn-frontend-material/issues/1)
++ Frontend version is loading from package.json [#13](https://github.com/lvlup-pro/spawn-frontend-material/issues/13)
 
 ## 3.0.0-alpha.2 (11.02.2017)
 
