@@ -46,25 +46,35 @@
         "password_placeholder": "****",
         "log_in": "Zaloguj"
     },
+    "ticket": {
+        "status": {
+            "waiting": {
+                "long": "Czekamy na twoją odpowiedź",
+                "medium": "Oczekiwanie na klienta"
+            },
+            "working": {
+                "long": "Obsługa pracuje nad odpowiedzią",
+                "medium": "Praca obsługi"
+            },
+            "closed": {
+                "long": "Obsługa nie zajmuje się już tym zgłoszeniem",
+                "medium": "Sprawa zamknięta"
+            }
+        },
+        "subject": "Temat",
+        "response_time": "Szanowny kliencie, odpowiedź może zająć do 48h, prosimy o cierpliwość",
+        "client": "Ty",
+        "staff": "Obsługa lvlup.pro",
+        "textarea": "Napisz swoją wiadomość do obsługi",
+        "send": "Wyślij",
+        "msg_too_long": "Wiadomość jest za długa",
+        "msg_too_short": "Wiadomość jest za krótka",
+        "msg_duplicate": "Wiadomość już wysłana (duplikat)"
+    },
     "loading": "Ładowanie",
     "logout": "Wyloguj",
     "fullname": "Imię i nazwisko",
     "username": "Login",
     "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS",
-    "waiting_for_client_label": "Oczekiwanie na klienta",
-    "waiting_for_client": "Czekamy na twoją odpowiedź",
-    "staff_is_working_label": "Praca obsługi",
-    "staff_is_working": "Obsługa pracuje nad odpowiedzią",
-    "case_closed_label": "Sprawa zamknięta",
-    "case_closed": "Obsługa nie zajmuje się już tym zgłoszeniem",
-    "subject": "Temat",
-    "response_time": "Szanowny kliencie, odpowiedź może zająć do 48h, prosimy o cierpliwość",
-    "client": "Ty",
-    "staff": "Obsługa lvlup.pro",
-    "textarea": "Napisz swoją wiadomość do obsługi",
-    "send": "Wyślij",
-    "msg_too_long": "Wiadomość jest za długa",
-    "msg_too_short": "Wiadomość jest za krótka",
-    "msg_duplicate": "Wiadomość już wysłana (duplikat)",
     "state": "Stan"
 }

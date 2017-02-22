@@ -6,23 +6,23 @@
                 <v-col xs12 xl8>
 
                     <v-alert warning>
-                        {{$t('response_time')}}
+                        {{$t('ticket.response_time')}}
                     </v-alert>
                     <div class="mb-4"></div>
                     <h4>
                         <v-chip v-if="!ticket.closed_at && !ticket.staff_response_needed" label
-                            class="blue white--text" v-tooltip:bottom="{ html: $t('waiting_for_client') }">
-                            {{$t('waiting_for_client_label')}}
+                            class="blue white--text" v-tooltip:bottom="{ html: $t('ticket.status.waiting.long') }">
+                            {{$t('ticket.status.waiting.medium')}}
                         </v-chip>
                         <v-chip v-if="!ticket.closed_at && ticket.staff_response_needed" label
-                            class="yellow" v-tooltip:bottom="{ html: $t('staff_is_working') }">
-                            {{$t('staff_is_working_label')}}
+                            class="yellow" v-tooltip:bottom="{ html: $t('ticket.status.working.long') }">
+                            {{$t('ticket.status.working.medium')}}
                         </v-chip>
                         <v-chip v-if="ticket.closed_at" label
-                            class="red white--text" v-tooltip:bottom="{ html: $t('case_closed') }">
-                            {{$t('case_closed_label')}}
+                            class="red white--text" v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
+                            {{$t('ticket.status.closed.medium')}}
                         </v-chip>
-                        {{$t('subject')}}: {{ticket.subject}}
+                        {{$t('ticket.subject')}}: {{ticket.subject}}
                     </h4>
 
                     <v-card class="grey lighten-4" id="ticket-topic">
@@ -30,7 +30,7 @@
                             <v-btn flat class="white--text">
                                 <v-icon class="white--text">face</v-icon>
                                 <div class="ml-2"></div>
-                                {{$t('client')}}
+                                {{$t('ticket.client')}}
                             </v-btn>
                             <v-spacer></v-spacer>
                             <v-btn flat class="white--text">
@@ -54,7 +54,7 @@
                                 <v-btn flat class="white--text">
                                     <v-icon class="white--text">grade</v-icon>
                                     <div class="ml-2"></div>
-                                    {{$t('staff')}}
+                                    {{$t('ticket.staff')}}
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                 <v-btn flat class="white--text">
@@ -68,7 +68,7 @@
                                 <v-btn flat class="white--text">
                                     <v-icon class="white--text">face</v-icon>
                                     <div class="ml-2"></div>
-                                    {{$t('client')}}
+                                    {{$t('ticket.client')}}
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                 <v-btn flat class="white--text">
@@ -86,14 +86,14 @@
                         <br>
                     </div>
                     <div v-if="!ticket.closed_at">
-                        <textarea v-bind:placeholder="$t('textarea')" v-model="msg"></textarea>
+                        <textarea v-bind:placeholder="$t('ticket.textarea')" v-model="msg"></textarea>
                         <p>
                             <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
                             <span id="counter-ok"
                                   v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
                             <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
                         </p>
-                        <v-btn v-on:click.native="addTicketMessage(msg)" class="btn-flat-focused">{{$t('send')}}</v-btn>
+                        <v-btn v-on:click.native="addTicketMessage(msg)" class="btn-flat-focused">{{$t('ticket.send')}}</v-btn>
                     </div>
                 </v-col>
             </v-row>
@@ -205,7 +205,7 @@
                     var len = messages.length
                     var lastMsg = messages[len - 1].message
                     if (msg == lastMsg) {
-                        this.$vuetify.toast.create(this.$t("msg_duplicate"), "right")
+                        this.$vuetify.toast.create(this.$t("ticket.msg_duplicate"), "right")
                         //show user that message was probably send earlier when some Internet connection errors occurred
                         this.loadMessages()
                         return false
@@ -214,13 +214,13 @@
 
                 //too short?
                 if (msg.length < 2) {
-                    this.$vuetify.toast.create(this.$t("msg_too_short"), "right")
+                    this.$vuetify.toast.create(this.$t("ticket.msg_too_short"), "right")
                     return false
                 }
 
                 //too long?
                 if (msg.length > 3000) {
-                    this.$vuetify.toast.create(this.$t("msg_too_long"), "right")
+                    this.$vuetify.toast.create(this.$t("ticket.msg_too_long"), "right")
                     return false
                 }
 
