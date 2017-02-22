@@ -29,6 +29,7 @@
         "service": "Usługa",
         "subject": "Temat",
         "amount": "Kwota",
+        "status": "Status",
         "created_at": "Utworzono",
         "payed_to": "Koniec ważności usługi"
     },

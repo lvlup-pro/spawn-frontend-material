@@ -20,24 +20,34 @@
                                 <tr>
                                     <th class="select"><i class="fa fa-check"></i></th>
                                     <th>{{$t('table.id')}}</th>
+                                    <th>{{$t('table.status')}}</th>
                                     <th>{{$t('table.subject')}}</th>
                                     <th>{{$t('table.created_at')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <template v-for="(item, index) in pagination.items">
+                                <template v-for="(ticket, index) in pagination.items">
                                     <tr>
                                         <td>
-                                            <v-checkbox v-bind:id="'checkbox' + index" filled
-                                                        class="text-xs-center"></v-checkbox>
+                                            <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                         </td>
-                                        <td v-on:click="goToTicket(item.id)">
-                                            <!--<router-link :to="{ path: '/ticket/', params: { id: item.id }}">-->
-                                            {{item.id}}
-                                            <!--</router-link>-->
+                                        <td v-on:click="goToTicket(ticket.id)">#{{ticket.id}}</td>
+                                        <td v-on:click="goToTicket(ticket.id)">
+                                            <span v-if="!ticket.closed_at && !ticket.staff_response_needed"
+                                                v-tooltip:bottom="{ html: $t('waiting_for_client') }">
+                                                <i class="fa fa-circle blue--text"></i> {{$t('waiting_for_client_label')}}
+                                            </span>
+                                            <span v-if="!ticket.closed_at && ticket.staff_response_needed"
+                                                v-tooltip:bottom="{ html: $t('staff_is_working') }">
+                                                <i class="fa fa-circle yellow--text"></i> {{$t('staff_is_working_label')}}
+                                            </span>
+                                            <span v-if="ticket.closed_at"
+                                                v-tooltip:bottom="{ html: $t('case_closed') }">
+                                                <i class="fa fa-circle red--text"></i> {{$t('case_closed_label')}}
+                                            </span>
                                         </td>
-                                        <td v-on:click="goToTicket(item.id)">{{item.subject}}</td>
-                                        <td v-on:click="goToTicket(item.id)">{{item.created_at | prettyDate}}</td>
+                                        <td v-on:click="goToTicket(ticket.id)">{{ticket.subject}}</td>
+                                        <td v-on:click="goToTicket(ticket.id)">{{ticket.created_at | prettyDate}}</td>
                                     </tr>
                                 </template>
                                 </tbody>
