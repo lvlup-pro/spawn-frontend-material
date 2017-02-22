@@ -1,0 +1,16 @@
+{
+    "auth_no": "Zaloguj się",
+    "auth_already": "Zalogowano już wcześniej",
+    "auth_success": "Zalogowano poprawnie",
+    "auth_fail": "Logowanie nieudane",
+    "header_home": "Nowości",
+    "header_login": "Zaloguj się",
+    "header_services": "Usługi",
+    "header_ticket_init": "Zgłoszenie",
+    "header_ticket": "Zgłoszenie #{id}",
+    "header_tickets": "Zgłoszenia",
+    "header_vps_init": "VPS",
+    "header_vps": "VPS #{id}",
+    "header_payments": "Płatności",
+    "header_profile": "Profil"
+}
