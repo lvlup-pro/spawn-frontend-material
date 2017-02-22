@@ -38,13 +38,17 @@
         "success": "Zalogowano poprawnie",
         "fail": "Logowanie nieudane"
     },
-    "login": {
-        "i_have_account": "Mam już konto lvlup.pro",
+    "user": {
+        "log_in": "Log in",
+        "logout": "Wyloguj",
+        "id": "ID",
         "username": "Login",
-        "username_placeholder": "j.kowalski@example.com",
+        "email": "E-mail",
+        "fullname": "Imię i nazwisko",
         "password": "Hasło",
+        "username_placeholder": "j.kowalski@example.com",
         "password_placeholder": "****",
-        "log_in": "Zaloguj"
+        "i_have_account": "Mam już konto lvlup.pro"
     },
     "ticket": {
         "status": {
@@ -72,9 +76,6 @@
         "msg_duplicate": "Wiadomość już wysłana (duplikat)"
     },
     "loading": "Ładowanie",
-    "logout": "Wyloguj",
-    "fullname": "Imię i nazwisko",
-    "username": "Login",
     "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS",
     "state": "Stan"
 }

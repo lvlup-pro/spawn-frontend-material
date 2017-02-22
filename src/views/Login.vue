@@ -6,17 +6,17 @@
                 <v-col xs12 md6 lg6>
                     <v-card class="mp-5">
                         <v-card-text>
-                            <h5>{{ $t('login.i_have_account') }}</h5>
+                            <h5>{{ $t('user.i_have_account') }}</h5>
                             <form v-on:submit.prevent="onSubmit">
                                 <v-text-input
-                                        :label="$t('login.username')"
-                                        :placeholder="$t('login.username_placeholder')"
+                                        :label="$t('user.username')"
+                                        :placeholder="$t('user.username_placeholder')"
                                         v-model="username"
                                 ></v-text-input>
                                 <v-text-input
-                                        :label="$t('login.password')"
+                                        :label="$t('user.password')"
                                         type="password"
-                                        :placeholder="$t('login.password_placeholder')"
+                                        :placeholder="$t('user.password_placeholder')"
                                         v-model="password"
                                 ></v-text-input>
                                 <!--<v-select-->
@@ -30,7 +30,7 @@
                                        v-bind:disabled="loading"
                                 >
                                     <v-icon left>vpn_key</v-icon>
-                                    {{$t('login.log_in')}}
+                                    {{$t('user.log_in')}}
                                 </v-btn>
                             </form>
                         </v-card-text>

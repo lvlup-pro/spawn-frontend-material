@@ -9,7 +9,7 @@
                 <v-toolbar-logo class="hidden-xs-and-down">{{getToolbarTitle()}}</v-toolbar-logo>
                 <v-toolbar-items>
                     <v-toolbar-item v-on:click.native="logOut">
-                        {{$t('logout')}}
+                        {{$t('user.logout')}}
                         <v-icon class="right">cloud_off</v-icon>
                     </v-toolbar-item>
                     <!--<v-menu>
@@ -96,7 +96,7 @@
                                 <i class="fa fa-fw fa-2x fa-question-circle"></i>
                             </v-list-tile-action>
                             <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('help')"/>
+                                <v-list-tile-title v-text="$t('sidebar.help')"/>
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list-item>

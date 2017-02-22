@@ -38,13 +38,17 @@
         "success": "Auth success",
         "fail": "Login failed"
     },
-    "login": {
-        "i_have_account": "I already have lvlup.pro account",
+    "user": {
+        "log_in": "Log in",
+        "logout": "Logout",
+        "id": "ID",
         "username": "Username",
-        "username_placeholder": "joe@example.com",
+        "email": "E-mail",
+        "fullname": "Full name",
         "password": "Password",
+        "username_placeholder": "joe@example.com",
         "password_placeholder": "****",
-        "log_in": "Log in"
+        "i_have_account": "I already have lvlup.pro account"
     },
     "ticket": {
         "status": {
@@ -72,9 +76,6 @@
         "msg_duplicate": "Message already sent (duplicate)"
     },
     "loading": "Loading",
-    "logout": "Logout",
-    "fullname": "Full name",
-    "username": "Username",
     "panel_preview": "This preview version of customer panel shows only VPS servers",
     "state": "State"
 }
