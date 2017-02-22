@@ -40,8 +40,8 @@
             }
         },
         mounted () {
-            this.$emit('view', this.meta())
             moment.locale(this.$lang)
+            this.$emit('view', this.meta())
             this.$store.commit('setToolbarTitle', 'header_vps_init')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
@@ -83,16 +83,15 @@
                 return timestamp.format("H:mm L")
             }
         },
-        preFetch () {
-            return this.methods.meta()
+        preFetch (store) {
+            store.commit('setMeta', this.methods.meta())
         },
         methods: {
             meta() {
                 return {
-                    title: 'Pagination Component | Vuetify.js',
-                    h1: 'Pagination',
-                    description: 'Pagination component for Vuetify Framework',
-                    keywords: 'vuetify, pagination, components'
+                    title: 'VPS',
+                    description: 'Example VPS description',
+                    keywords: 'vuetify, vps'
                 }
             },
             stats() {

@@ -59,8 +59,8 @@
     import moment from 'moment'
     export default {
         mounted () {
+            moment.locale(this.$lang)
             this.$emit('view', this.meta())
-            moment.locale(this.$lang);
             this.$store.commit('setToolbarTitle', 'header_tickets')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
@@ -120,16 +120,15 @@
                 return timestamp.format("L") + " - " + timestamp.from()
             }
         },
-        preFetch () {
-            return this.methods.meta()
+        preFetch (store) {
+            store.commit('setMeta', this.methods.meta())
         },
         methods: {
             meta() {
                 return {
-                    title: 'Pagination Component | Vuetify.js',
-                    h1: 'Pagination',
-                    description: 'Pagination component for Vuetify Framework',
-                    keywords: 'vuetify, pagination, components'
+                    title: 'Tickets',
+                    description: 'Example tickets description',
+                    keywords: 'vuetify, tickets'
                 }
             },
             goToTicket(id) {

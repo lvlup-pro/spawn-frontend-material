@@ -28,7 +28,8 @@ export default new Vuex.Store({
         toolbarTitle: "",
         toolbarTitleArgs: {},
         version: "",
-        language: ""
+        language: "",
+        meta: {}
     },
     actions: {
         boot ({dispatch, state, commit}) {
@@ -234,11 +235,23 @@ export default new Vuex.Store({
             state.language = newLanguage;
             Vue.config.lang = newLanguage;
         },
+        setMeta(state, newMeta) {
+            state.meta = newMeta;
+        },
         setLoading (state) {
             state.loading = true;
         },
         setLoaded (state) {
             state.loading = false;
+        },
+        setTitle (state, newTitle) {
+          document.title = newTitle;
+        },
+        setDescription (state, newDescription) {
+          document.head.querySelector('meta[name=description]').content = newDescription;
+        },
+        setKeywords (state, newKeywords) {
+          document.head.querySelector('meta[name=keywords]').content = newKeywords;
         }
     }
 })
