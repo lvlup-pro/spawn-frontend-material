@@ -48,8 +48,8 @@
         </v-container>
     </div>
 </template>
-<style>
-
+<style scoped>
+tr {cursor:default}
 </style>
 <script>
     import moment from 'moment'
