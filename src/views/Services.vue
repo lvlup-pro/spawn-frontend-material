@@ -21,11 +21,11 @@
                                 <thead>
                                 <tr>
                                     <th class="select"><i class="fa fa-check"></i></th>
-                                    <th>{{$t('service')}}</th>
-                                    <th>{{$t('id')}}</th>
-                                    <th>{{$t('name')}}</th>
-                                    <th>{{$t('payed_to')}}</th>
-                                    <th>{{$t('created_at')}}</th>
+                                    <th>{{$t('table.service')}}</th>
+                                    <th>{{$t('table.id')}}</th>
+                                    <th>{{$t('table.name')}}</th>
+                                    <th>{{$t('table.payed_to')}}</th>
+                                    <th>{{$t('table.created_at')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

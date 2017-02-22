@@ -19,9 +19,9 @@
                                 <thead>
                                 <tr>
                                     <th class="select"><i class="fa fa-check"></i></th>
-                                    <th>{{$t('id')}}</th>
-                                    <th>{{$t('amount')}}</th>
-                                    <th>{{$t('created_at')}}</th>
+                                    <th>{{$t('table.id')}}</th>
+                                    <th>{{$t('table.amount')}}</th>
+                                    <th>{{$t('table.created_at')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

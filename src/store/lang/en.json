@@ -23,6 +23,15 @@
         "payments": "Payments",
         "profile": "Profile"
     },
+    "table": {
+        "id": "ID",
+        "name": "Name",
+        "service": "Service",
+        "subject": "Subject",
+        "amount": "Amount",
+        "created_at": "Created",
+        "payed_to": "Valid for"
+    },
     "auth": {
         "no": "Log in first",
         "already": "Logged in already",
@@ -39,16 +48,8 @@
     },
     "loading": "Loading",
     "logout": "Logout",
-    "amount": "Amount",
-    "created_at": "Created",
-    "id": "ID",
     "fullname": "Full name",
     "username": "Username",
-    "payed_to": "Valid for",
-    "created_at": "Created",
-    "name": "Name",
-    "service": "Service",
-    "id": "ID",
     "panel_preview": "This preview version of customer panel shows only VPS servers",
     "waiting_for_client_label": "Waiting for client",
     "waiting_for_client": "Awaiting your response",
@@ -65,8 +66,5 @@
     "msg_too_long": "Message is too long",
     "msg_too_short": "Message is too short",
     "msg_duplicate": "Message already sent (duplicate)",
-    "id": "ID",
-    "subject": "Subject",
-    "created_at": "Created",
     "state": "State"
 }
