@@ -11,11 +11,13 @@
         "payments": "Payments",
         "profile": "Profile"
     },
+    "auth": {
+        "no": "Log in first",
+        "already": "Logged in already",
+        "success": "Auth success",
+        "fail": "Login failed"
+    },
     "loading": "Loading",
-    "auth_no": "Log in first",
-    "auth_already": "Logged in already",
-    "auth_success": "Auth success",
-    "auth_fail": "Login failed",
     "lang": "Language",
     "home": "Home",
     "login": "Log in",

@@ -11,11 +11,13 @@
         "payments": "Płatności",
         "profile": "Profil"
     },
+    "auth": {
+        "no": "Zaloguj się",
+        "already": "Zalogowano już wcześniej",
+        "success": "Zalogowano poprawnie",
+        "fail": "Logowanie nieudane"
+    },
     "loading": "Ładowanie",
-    "auth_no": "Zaloguj się",
-    "auth_already": "Zalogowano już wcześniej",
-    "auth_success": "Zalogowano poprawnie",
-    "auth_fail": "Logowanie nieudane",
     "lang": "Język",
     "home": "Nowości",
     "login": "Zaloguj",

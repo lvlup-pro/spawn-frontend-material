@@ -58,7 +58,7 @@
             this.$store.commit('setToolbarTitle', 'header.profile')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    //this.$vuetify.toast.create(this.$t('auth_no'), "right")
+                    //this.$vuetify.toast.create(this.$t('auth.no'), "right")
                     this.$router.push('/login')
                 } else {
                     this.loadProfile()

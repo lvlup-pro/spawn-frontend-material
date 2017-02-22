@@ -97,9 +97,9 @@
             }
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    //this.$vuetify.toast.create(this.$t('auth_no'), "right")
+                    //this.$vuetify.toast.create(this.$t('auth.no'), "right")
                 } else {
-                    this.$vuetify.toast.create(this.$t('auth_already'), "right")
+                    this.$vuetify.toast.create(this.$t('auth.already'), "right")
                     this.$router.push('/'+this.$route.params.lg+'/service')
                 }
             })
@@ -122,11 +122,11 @@
                     password: password
                 }).then((res) => {
                     if (res) {
-                        var auth = this.$t('auth_success');
+                        var auth = this.$t('auth.success');
                         this.$vuetify.toast.create(auth, "right")
                         this.$router.push('/'+this.$route.params.lg+'/service')
                     } else {
-                        var auth = this.$t('auth_fail');
+                        var auth = this.$t('auth.fail');
                         this.$vuetify.toast.create(auth, "right")
                     }
                     this.$store.commit('setLoaded')
