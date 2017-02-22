@@ -1,4 +1,16 @@
 {
+    "sidebar": {
+        "panel": "Customer panel",
+        "account": "Account",
+        "login": "Log in",
+        "profile": "{email}",
+        "payments": "Payments ({balance})",
+        "menu": "Menu",
+        "home": "Home",
+        "services": "Services",
+        "help": "Help",
+        "lang": "Language"
+    },
     "header": {
         "home": "Home",
         "login": "Log in",
@@ -18,19 +30,7 @@
         "fail": "Login failed"
     },
     "loading": "Loading",
-    "lang": "Language",
-    "home": "Home",
-    "login": "Log in",
     "logout": "Logout",
-    "account": "Account",
-    "menu": "Menu",
-    "profile": "{email}",
-    "payments": "Payments ({balance})",
-    "panel": "Customer panel",
-    "news": "News",
-    "order": "Order",
-    "services": "Services",
-    "help": "Help",
     "i_have_account": "I already have lvlup.pro account",
     "username": "Username",
     "username_placeholder": "joe@example.com",

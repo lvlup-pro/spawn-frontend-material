@@ -32,10 +32,10 @@
         <main>
             <v-sidebar fixed ripple router unshift v-model="nav">
                 <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
-                <p class="text-xs-center white--text">{{$t('panel')}} {{version}}</p>
+                <p class="text-xs-center white--text">{{$t('sidebar.panel')}} {{version}}</p>
                 <v-list dense>
                     <v-divider light/>
-                    <v-list-sub-header>{{$t('account')}}</v-list-sub-header>
+                    <v-list-sub-header>{{$t('sidebar.account')}}</v-list-sub-header>
                     <v-list-item v-if="account.email">
                         <v-list-tile router :href="'/' + language + '/profile'">
                             <v-list-tile-action>
@@ -43,7 +43,7 @@
                             </v-list-tile-action>
                             <v-list-tile-content>
                                 <v-list-tile-title
-                                        v-text="format($t('profile'), { 'nick': account.username, 'email': account.email })"/>
+                                        v-text="format($t('sidebar.profile'), { 'nick': account.username, 'email': account.email })"/>
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list-item>
@@ -54,7 +54,7 @@
                             </v-list-tile-action>
                             <v-list-tile-content>
                                 <v-list-tile-title
-                                        v-text="format($t('payments'), { 'balance': wallet.balance_pretty })"/>
+                                        v-text="format($t('sidebar.payments'), { 'balance': wallet.balance_pretty })"/>
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list-item>
@@ -64,19 +64,19 @@
                                 <i class="fa fa-fw fa-2x fa-sign-in"></i>
                             </v-list-tile-action>
                             <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('login')"/>
+                                <v-list-tile-title v-text="$t('sidebar.login')"/>
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list-item>
 
-                    <v-list-sub-header>{{$t('menu')}}</v-list-sub-header>
+                    <v-list-sub-header>{{$t('sidebar.menu')}}</v-list-sub-header>
                     <v-list-item>
                         <v-list-tile router :href="'/' + language + '/home'">
                             <v-list-tile-action>
                                 <i class="fa fa-fw fa-2x fa-home"></i>
                             </v-list-tile-action>
                             <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('home')"/>
+                                <v-list-tile-title v-text="$t('sidebar.home')"/>
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list-item>
@@ -86,7 +86,7 @@
                                 <i class="fa fa-fw fa-2x fa-server"></i>
                             </v-list-tile-action>
                             <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('services')"/>
+                                <v-list-tile-title v-text="$t('sidebar.services')"/>
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list-item>
@@ -101,7 +101,7 @@
                         </v-list-tile>
                     </v-list-item>
 
-                    <v-list-sub-header>{{$t('lang')}}</v-list-sub-header>
+                    <v-list-sub-header>{{$t('sidebar.lang')}}</v-list-sub-header>
                     <v-list-item v-if="language == 'en'" v-on:click="changeLang('pl')">
                         <v-list-tile>
                             <v-list-tile-action>
