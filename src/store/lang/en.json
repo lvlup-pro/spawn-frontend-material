@@ -29,14 +29,16 @@
         "success": "Auth success",
         "fail": "Login failed"
     },
+    "login": {
+        "i_have_account": "I already have lvlup.pro account",
+        "username": "Username",
+        "username_placeholder": "joe@example.com",
+        "password": "Password",
+        "password_placeholder": "****",
+        "log_in": "Log in"
+    },
     "loading": "Loading",
     "logout": "Logout",
-    "i_have_account": "I already have lvlup.pro account",
-    "username": "Username",
-    "username_placeholder": "joe@example.com",
-    "password": "Password",
-    "password_placeholder": "****",
-    "log_in": "Log in",
     "amount": "Amount",
     "created_at": "Created",
     "id": "ID",

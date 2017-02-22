@@ -29,14 +29,16 @@
         "success": "Zalogowano poprawnie",
         "fail": "Logowanie nieudane"
     },
+    "login": {
+        "i_have_account": "Mam już konto lvlup.pro",
+        "username": "Login",
+        "username_placeholder": "j.kowalski@example.com",
+        "password": "Hasło",
+        "password_placeholder": "****",
+        "log_in": "Zaloguj"
+    },
     "loading": "Ładowanie",
     "logout": "Wyloguj",
-    "i_have_account": "Mam już konto lvlup.pro",
-    "username": "Login",
-    "username_placeholder": "j.kowalski@example.com",
-    "password": "Hasło",
-    "password_placeholder": "****",
-    "log_in": "Zaloguj",
     "amount": "Kwota",
     "created_at": "Utworzono",
     "id": "ID",
