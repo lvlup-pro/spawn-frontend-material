@@ -239,42 +239,6 @@
                     this.msg = ""
                 })
             }
-        },
-        locales: {
-            en: {
-                waiting_for_client_label: "Waiting for client",
-                waiting_for_client: "Awaiting your response",
-                staff_is_working_label: "Staff is working",
-                staff_is_working: "Staff is working on response",
-                case_closed_label: "Case closed",
-                case_closed: "Staff is not working on this case anymore",
-                subject: "Subject",
-                response_time: "Dear customer, reply to your messages may take up to 48h",
-                client: "You",
-                staff: "lvlup.pro Staff",
-                textarea: "Write your message to staff",
-                send: "Send",
-                msg_too_long: "Message is too long",
-                msg_too_short: "Message is too short",
-                msg_duplicate: "Message already sent (duplicate)"
-            },
-            pl: {
-                waiting_for_client_label: "Oczekiwanie na klienta",
-                waiting_for_client: "Czekamy na twoją odpowiedź",
-                staff_is_working_label: "Praca obsługi",
-                staff_is_working: "Obsługa pracuje nad odpowiedzią",
-                case_closed_label: "Sprawa zamknięta",
-                case_closed: "Obsługa nie zajmuje się już tym zgłoszeniem",
-                subject: "Temat",
-                response_time: "Szanowny kliencie, odpowiedź może zająć do 48h, prosimy o cierpliwość",
-                client: "Ty",
-                staff: "Obsługa lvlup.pro",
-                textarea: "Napisz swoją wiadomość do obsługi",
-                send: "Wyślij",
-                msg_too_long: "Wiadomość jest za długa",
-                msg_too_short: "Wiadomość jest za krótka",
-                msg_duplicate: "Wiadomość już wysłana (duplikat)"
-            }
         }
     }
 </script>

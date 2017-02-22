@@ -99,14 +99,6 @@
                     'id': this.$route.params.id
                 })
             }
-        },
-        locales: {
-            en: {
-                state: "State"
-            },
-            pl: {
-                state: "Stan"
-            }
         }
     }
 </script>

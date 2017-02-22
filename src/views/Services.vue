@@ -136,24 +136,6 @@
             goToVps(id) {
                 this.$router.push('/' + this.$route.params.lg + '/service/vps/' + id)
             }
-        },
-        locales: {
-            en: {
-                payed_to: 'Valid for',
-                created_at: "Created",
-                name: "Name",
-                service: "Service",
-                id: "ID",
-                panel_preview: "This preview version of customer panel shows only VPS servers"
-            },
-            pl: {
-                payed_to: 'Koniec ważności usługi',
-                created_at: "Utworzono",
-                name: "Nazwa",
-                service: "Usługa",
-                id: "ID",
-                panel_preview: "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
-            }
         }
     }
 </script>

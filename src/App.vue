@@ -204,38 +204,6 @@
             //this.$vuetify.load();
             this.$store.dispatch('boot')
             this.changeLang(this.$route.params.lg)
-        },
-        locales: {
-            en: {
-                lang: "Language",
-                home: "Home",
-                login: "Log in",
-                logout: "Logout",
-                account: "Account",
-                menu: "Menu",
-                profile: "{email}",
-                payments: "Payments ({balance})",
-                panel: "Customer panel",
-                news: "News",
-                order: "Order",
-                services: "Services",
-                help: "Help"
-            },
-            pl: {
-                lang: "Język",
-                home: "Nowości",
-                login: "Zaloguj",
-                logout: "Wyloguj",
-                account: "Konto",
-                menu: "Menu",
-                profile: "{email}",
-                payments: "Płatności ({balance})",
-                panel: "Panel klienta",
-                news: "Nowości",
-                order: "Zamów",
-                services: "Usługi",
-                help: "Pomoc"
-            }
         }
     }
 </script>

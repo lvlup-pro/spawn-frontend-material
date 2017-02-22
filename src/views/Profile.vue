@@ -98,16 +98,6 @@
                     console.log(this.profile)
                 })
             }
-        },
-        locales: {
-            en: {
-                fullname: 'Full name',
-                username: 'Username'
-            },
-            pl: {
-                fullname: 'Imię i nazwisko',
-                username: 'Login'
-            }
         }
     }
 </script>

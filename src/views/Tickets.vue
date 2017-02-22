@@ -134,18 +134,6 @@
             goToTicket(id) {
                 this.$router.push('/' + this.$route.params.lg + '/ticket/' + id)
             }
-        },
-        locales: {
-            en: {
-                id: "ID",
-                subject: "Subject",
-                created_at: "Created"
-            },
-            pl: {
-                id: "ID",
-                subject: "Temat",
-                created_at: "Utworzono"
-            }
         }
     }
 </script>

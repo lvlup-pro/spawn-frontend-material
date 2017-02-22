@@ -132,24 +132,6 @@
                     this.$store.commit('setLoaded')
                 })
             }
-        },
-        locales: {
-            en: {
-                i_have_account: 'I already have lvlup.pro account',
-                username: "Username",
-                username_placeholder: "joe@example.com",
-                password: "Password",
-                password_placeholder: "****",
-                log_in: "Log in"
-            },
-            pl: {
-                i_have_account: 'Mam już konto lvlup.pro',
-                username: "Login",
-                username_placeholder: "j.kowalski@example.com",
-                password: "Hasło",
-                password_placeholder: "****",
-                log_in: "Zaloguj"
-            }
         }
     }
 </script>
