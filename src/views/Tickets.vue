@@ -33,15 +33,19 @@
                                         </td>
                                         <td v-on:click="goToTicket(ticket.id)">#{{ticket.id}}</td>
                                         <td v-on:click="goToTicket(ticket.id)">
-                                            <span v-if="!ticket.closed_at && !ticket.staff_response_needed"
-                                                v-tooltip:bottom="{ html: $t('waiting_for_client') }">
-                                                <i class="fa fa-circle blue--text"></i> {{$t('waiting_for_client_label')}}
+                                            <!--<span v-if="!ticket.closed_at && !ticket.staff_response_needed"-->
+                                                <!--v-tooltip:bottom="{ html: $t('waiting_for_client') }">-->
+                                                <!--<i class="fa fa-circle blue--text"></i> {{$t('waiting_for_client_label')}}
                                             </span>
-                                            <span v-if="!ticket.closed_at && ticket.staff_response_needed"
-                                                v-tooltip:bottom="{ html: $t('staff_is_working') }">
-                                                <i class="fa fa-circle yellow--text"></i> {{$t('staff_is_working_label')}}
+                                            <span v-if="!ticket.closed_at && ticket.staff_response_needed"-->
+                                                <!--v-tooltip:bottom="{ html: $t('staff_is_working') }">-->
+                                                <!--<i class="fa fa-circle yellow--text"></i> {{$t('staff_is_working_label')}}
+                                            </span>-->
+                                            <span v-if="!ticket.closed"
+                                                  v-tooltip:bottom="{ html: $t('case_open') }">
+                                                <i class="fa fa-circle green--text"></i> {{$t('case_open_label')}}
                                             </span>
-                                            <span v-if="ticket.closed_at"
+                                            <span v-if="ticket.closed"
                                                 v-tooltip:bottom="{ html: $t('case_closed') }">
                                                 <i class="fa fa-circle red--text"></i> {{$t('case_closed_label')}}
                                             </span>
@@ -156,7 +160,9 @@
                 staff_is_working_label: "Processing",
                 staff_is_working: "Staff is working on response",
                 case_closed_label: "Closed",
-                case_closed: "Staff is not working on this case anymore"
+                case_closed: "Staff is not working on this case anymore",
+                case_open_label: "Open",
+                case_open: "Click ticket to find out more"
             },
             pl: {
                 id: "ID",
@@ -169,6 +175,8 @@
                 staff_is_working: "Obsługa pracuje nad odpowiedzią",
                 case_closed_label: "Zamknięte",
                 case_closed: "Obsługa nie zajmuje się już tym zgłoszeniem",
+                case_open_label: "Otwarte",
+                case_open: "Kliknij aby dowiedzieć się więcej"
             }
         }
     }
