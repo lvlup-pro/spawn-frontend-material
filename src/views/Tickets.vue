@@ -34,16 +34,16 @@
                                         <td v-on:click="goToTicket(ticket.id)">#{{ticket.id}}</td>
                                         <td v-on:click="goToTicket(ticket.id)">
                                             <span v-if="!ticket.closed_at && !ticket.staff_response_needed"
-                                                v-tooltip:bottom="{ html: $t('waiting_for_client') }">
-                                                <i class="fa fa-circle blue--text"></i> {{$t('waiting_for_client_label')}}
+                                                v-tooltip:bottom="{ html: $t('ticket.status.waiting.long') }">
+                                                <i class="fa fa-circle blue--text"></i> {{$t('ticket.status.waiting.short')}}
                                             </span>
                                             <span v-if="!ticket.closed_at && ticket.staff_response_needed"
-                                                v-tooltip:bottom="{ html: $t('staff_is_working') }">
-                                                <i class="fa fa-circle yellow--text"></i> {{$t('staff_is_working_label')}}
+                                                v-tooltip:bottom="{ html: $t('ticket.status.working.long') }">
+                                                <i class="fa fa-circle yellow--text"></i> {{$t('ticket.status.working.short')}}
                                             </span>
                                             <span v-if="ticket.closed_at"
-                                                v-tooltip:bottom="{ html: $t('case_closed') }">
-                                                <i class="fa fa-circle red--text"></i> {{$t('case_closed_label')}}
+                                                v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
+                                                <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
                                             </span>
                                         </td>
                                         <td v-on:click="goToTicket(ticket.id)">{{ticket.subject}}</td>

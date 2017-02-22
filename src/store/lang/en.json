@@ -55,15 +55,18 @@
         "status": {
             "waiting": {
                 "long": "Awaiting your response",
-                "medium": "Waiting for client"
+                "medium": "Waiting for client",
+                "short": "Waiting"
             },
             "working": {
                 "long": "Staff is working on response",
-                "medium": "Staff is working"
+                "medium": "Staff is working",
+                "short": "Processing"
             },
             "closed": {
                 "long": "Staff is not working on this case anymore",
-                "medium": "Case closed"
+                "medium": "Case closed",
+                "short": "Closed"
             }
         },
         "subject": "Subject",

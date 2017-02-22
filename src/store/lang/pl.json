@@ -55,15 +55,18 @@
         "status": {
             "waiting": {
                 "long": "Czekamy na twoją odpowiedź",
-                "medium": "Oczekiwanie na klienta"
+                "medium": "Oczekiwanie na klienta",
+                "short": "Oczekiwanie"
             },
             "working": {
                 "long": "Obsługa pracuje nad odpowiedzią",
-                "medium": "Praca obsługi"
+                "medium": "Praca obsługi",
+                "short": "Przetwarzanie"
             },
             "closed": {
                 "long": "Obsługa nie zajmuje się już tym zgłoszeniem",
-                "medium": "Sprawa zamknięta"
+                "medium": "Sprawa zamknięta",
+                "short": "Zamknięte"
             }
         },
         "subject": "Temat",
