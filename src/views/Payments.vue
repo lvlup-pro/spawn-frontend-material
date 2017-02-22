@@ -19,9 +19,9 @@
                                 <thead>
                                 <tr>
                                     <th class="select"><i class="fa fa-check"></i></th>
-                                    <th>{{$t('id')}}</th>
-                                    <th>{{$t('amount')}}</th>
-                                    <th>{{$t('created_at')}}</th>
+                                    <th>{{$t('table.id')}}</th>
+                                    <th>{{$t('table.amount')}}</th>
+                                    <th>{{$t('table.created_at')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -57,10 +57,10 @@ tr {cursor:default}
         mounted () {
             moment.locale(this.$lang)
             this.$emit('view', this.meta())
-            this.$store.commit('setToolbarTitle', 'header_payments')
+            this.$store.commit('setToolbarTitle', 'header.payments')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth_no'), "right")
+                    this.$vuetify.toast.create(this.$t('auth.no'), "right")
                     this.$router.push('/login')
                 } else {
                     this.$store.commit('setLoading')
@@ -129,18 +129,6 @@ tr {cursor:default}
             },
             goToTicket(id) {
                 this.$router.push('/' + this.$route.params.lg + '/ticket/' + id)
-            }
-        },
-        locales: {
-            en: {
-                amount: "Amount",
-                created_at: "Created",
-                id: "ID"
-            },
-            pl: {
-                amount: "Kwota",
-                created_at: "Utworzono",
-                id: "ID"
             }
         }
     }

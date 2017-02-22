@@ -9,28 +9,28 @@
                             <v-card-row height="75px">
                                 <v-icon class="mr-5">label</v-icon>
                                 <div>
-                                    <div>ID</div>
+                                    <div>{{$t('user.id')}}</div>
                                     <strong>#{{profile.id}}</strong>
                                 </div>
                             </v-card-row>
                             <v-card-row height="75px">
                                 <v-icon class="mr-5">face</v-icon>
                                 <div>
-                                    <div>{{$t('fullname')}}</div>
+                                    <div>{{$t('user.fullname')}}</div>
                                     <strong>{{profile.fullname}}</strong>
                                 </div>
                             </v-card-row>
                             <v-card-row height="75px">
                                 <v-icon class="mr-5">assignment_ind</v-icon>
                                 <div>
-                                    <div>{{$t('username')}}</div>
+                                    <div>{{$t('user.username')}}</div>
                                     <strong>{{profile.username}}</strong>
                                 </div>
                             </v-card-row>
                             <v-card-row height="75px">
                                 <v-icon class="mr-5">email</v-icon>
                                 <div>
-                                    <div>E-mail</div>
+                                    <div>{{$t('user.email')}}</div>
                                     <strong>{{profile.email}}</strong>
                                 </div>
                             </v-card-row>
@@ -55,10 +55,10 @@
         mounted () {
             moment.locale(this.$lang)
             this.$emit('view', this.meta())
-            this.$store.commit('setToolbarTitle', 'header_profile')
+            this.$store.commit('setToolbarTitle', 'header.profile')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    //this.$vuetify.toast.create(this.$t('auth_no'), "right")
+                    //this.$vuetify.toast.create(this.$t('auth.no'), "right")
                     this.$router.push('/login')
                 } else {
                     this.loadProfile()
@@ -97,16 +97,6 @@
                     this.$store.commit('setLoaded')
                     console.log(this.profile)
                 })
-            }
-        },
-        locales: {
-            en: {
-                fullname: 'Full name',
-                username: 'Username'
-            },
-            pl: {
-                fullname: 'Imię i nazwisko',
-                username: 'Login'
             }
         }
     }

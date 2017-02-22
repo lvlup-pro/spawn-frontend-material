@@ -6,23 +6,23 @@
                 <v-col xs12 xl8>
 
                     <v-alert warning>
-                        {{$t('response_time')}}
+                        {{$t('ticket.response_time')}}
                     </v-alert>
                     <div class="mb-4"></div>
                     <h4>
                         <v-chip v-if="!ticket.closed_at && !ticket.staff_response_needed" label
-                            class="blue white--text" v-tooltip:bottom="{ html: $t('waiting_for_client') }">
-                            {{$t('waiting_for_client_label')}}
+                            class="blue white--text" v-tooltip:bottom="{ html: $t('ticket.status.waiting.long') }">
+                            {{$t('ticket.status.waiting.medium')}}
                         </v-chip>
                         <v-chip v-if="!ticket.closed_at && ticket.staff_response_needed" label
-                            class="yellow" v-tooltip:bottom="{ html: $t('staff_is_working') }">
-                            {{$t('staff_is_working_label')}}
+                            class="yellow" v-tooltip:bottom="{ html: $t('ticket.status.working.long') }">
+                            {{$t('ticket.status.working.medium')}}
                         </v-chip>
                         <v-chip v-if="ticket.closed_at" label
-                            class="red white--text" v-tooltip:bottom="{ html: $t('case_closed') }">
-                            {{$t('case_closed_label')}}
+                            class="red white--text" v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
+                            {{$t('ticket.status.closed.medium')}}
                         </v-chip>
-                        {{$t('subject')}}: {{ticket.subject}}
+                        {{$t('ticket.subject')}}: {{ticket.subject}}
                     </h4>
 
                     <v-card class="grey lighten-4" id="ticket-topic">
@@ -30,7 +30,7 @@
                             <v-btn flat class="white--text">
                                 <v-icon class="white--text">face</v-icon>
                                 <div class="ml-2"></div>
-                                {{$t('client')}}
+                                {{$t('ticket.client')}}
                             </v-btn>
                             <v-spacer></v-spacer>
                             <v-btn flat class="white--text">
@@ -54,7 +54,7 @@
                                 <v-btn flat class="white--text">
                                     <v-icon class="white--text">grade</v-icon>
                                     <div class="ml-2"></div>
-                                    {{$t('staff')}}
+                                    {{$t('ticket.staff')}}
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                 <v-btn flat class="white--text">
@@ -68,7 +68,7 @@
                                 <v-btn flat class="white--text">
                                     <v-icon class="white--text">face</v-icon>
                                     <div class="ml-2"></div>
-                                    {{$t('client')}}
+                                    {{$t('ticket.client')}}
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                 <v-btn flat class="white--text">
@@ -86,14 +86,14 @@
                         <br>
                     </div>
                     <div v-if="!ticket.closed_at">
-                        <textarea v-bind:placeholder="$t('textarea')" v-model="msg"></textarea>
+                        <textarea v-bind:placeholder="$t('ticket.textarea')" v-model="msg"></textarea>
                         <p>
                             <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
                             <span id="counter-ok"
                                   v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
                             <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
                         </p>
-                        <v-btn v-on:click.native="addTicketMessage(msg)" class="btn-flat-focused">{{$t('send')}}</v-btn>
+                        <v-btn v-on:click.native="addTicketMessage(msg)" class="btn-flat-focused">{{$t('ticket.send')}}</v-btn>
                     </div>
                 </v-col>
             </v-row>
@@ -136,10 +136,10 @@
         mounted () {
             moment.locale(this.$lang)
             this.$emit('view', this.meta())
-            this.$store.commit('setToolbarTitle', 'header_ticket_init')
+            this.$store.commit('setToolbarTitle', 'header.ticket_init')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth_no'), "right")
+                    this.$vuetify.toast.create(this.$t('auth.no'), "right")
                     this.$router.push('/login')
                 } else {
                     this.loadTicket()
@@ -192,7 +192,7 @@
                     'id': this.$route.params.id
                 }).then(() => {
                     //FIXME set by API not user input
-                    this.$store.commit('setToolbarTitle', 'header_ticket')
+                    this.$store.commit('setToolbarTitle', 'header.ticket')
                     this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
                 })
             },
@@ -205,7 +205,7 @@
                     var len = messages.length
                     var lastMsg = messages[len - 1].message
                     if (msg == lastMsg) {
-                        this.$vuetify.toast.create(this.$t("msg_duplicate"), "right")
+                        this.$vuetify.toast.create(this.$t("ticket.msg_duplicate"), "right")
                         //show user that message was probably send earlier when some Internet connection errors occurred
                         this.loadMessages()
                         return false
@@ -214,13 +214,13 @@
 
                 //too short?
                 if (msg.length < 2) {
-                    this.$vuetify.toast.create(this.$t("msg_too_short"), "right")
+                    this.$vuetify.toast.create(this.$t("ticket.msg_too_short"), "right")
                     return false
                 }
 
                 //too long?
                 if (msg.length > 3000) {
-                    this.$vuetify.toast.create(this.$t("msg_too_long"), "right")
+                    this.$vuetify.toast.create(this.$t("ticket.msg_too_long"), "right")
                     return false
                 }
 
@@ -238,42 +238,6 @@
                     })
                     this.msg = ""
                 })
-            }
-        },
-        locales: {
-            en: {
-                waiting_for_client_label: "Waiting for client",
-                waiting_for_client: "Awaiting your response",
-                staff_is_working_label: "Staff is working",
-                staff_is_working: "Staff is working on response",
-                case_closed_label: "Case closed",
-                case_closed: "Staff is not working on this case anymore",
-                subject: "Subject",
-                response_time: "Dear customer, reply to your messages may take up to 48h",
-                client: "You",
-                staff: "lvlup.pro Staff",
-                textarea: "Write your message to staff",
-                send: "Send",
-                msg_too_long: "Message is too long",
-                msg_too_short: "Message is too short",
-                msg_duplicate: "Message already sent (duplicate)"
-            },
-            pl: {
-                waiting_for_client_label: "Oczekiwanie na klienta",
-                waiting_for_client: "Czekamy na twoją odpowiedź",
-                staff_is_working_label: "Praca obsługi",
-                staff_is_working: "Obsługa pracuje nad odpowiedzią",
-                case_closed_label: "Sprawa zamknięta",
-                case_closed: "Obsługa nie zajmuje się już tym zgłoszeniem",
-                subject: "Temat",
-                response_time: "Szanowny kliencie, odpowiedź może zająć do 48h, prosimy o cierpliwość",
-                client: "Ty",
-                staff: "Obsługa lvlup.pro",
-                textarea: "Napisz swoją wiadomość do obsługi",
-                send: "Wyślij",
-                msg_too_long: "Wiadomość jest za długa",
-                msg_too_short: "Wiadomość jest za krótka",
-                msg_duplicate: "Wiadomość już wysłana (duplikat)"
             }
         }
     }

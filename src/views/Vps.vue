@@ -3,7 +3,7 @@
         <v-container id="vps-stats" v-if="!loading">
             <v-row>
                 <v-col xs12 lg4>
-                    <h4>{{$t('state')}}</h4>
+                    <h4>{{$t('vps.state')}}</h4>
                     <v-chip v-if="vps.status == 'running'" label class="green white--text">On</v-chip>
                     <v-chip v-if="vps.status == 'stopped'" label class="red white--text">Off</v-chip>
                     <div class="mb-4"></div>
@@ -11,11 +11,11 @@
             </v-row>
             <v-row>
                 <v-col md6 xs12="xs12">
-                    <h3>CPU</h3><h4>{{vps.cpu}}%</h4>
+                    <h3>{{$t('vps.cpu')}}</h3><h4>{{vps.cpu}}%</h4>
                     <v-progress-linear v-model="vps.cpu"></v-progress-linear>
                 </v-col>
                 <v-col md6 xs12="xs12">
-                    <h3>RAM</h3><h4>{{ram}}%</h4>
+                    <h3>{{$t('vps.ram')}}</h3><h4>{{ram}}%</h4>
                     <!-- 0 - 70% green -->
                     <v-progress-linear v-if="ram <= 70" v-model="ram" success></v-progress-linear>
                     <!-- 71 - 90% yellow-->
@@ -42,10 +42,10 @@
         mounted () {
             moment.locale(this.$lang)
             this.$emit('view', this.meta())
-            this.$store.commit('setToolbarTitle', 'header_vps_init')
+            this.$store.commit('setToolbarTitle', 'header.vps_init')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth_no'), "right")
+                    this.$vuetify.toast.create(this.$t('auth.no'), "right")
                     this.$router.push('/login')
                 } else {
                     this.$store.commit('setLoading')
@@ -55,7 +55,7 @@
                         this.interval = setInterval(this.stats, 3500)
                         this.$store.commit('setLoaded')
                         //FIXME set by API not user input
-                        this.$store.commit('setToolbarTitle', 'header_vps')
+                        this.$store.commit('setToolbarTitle', 'header.vps')
                         this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
                     })
                 }
@@ -98,14 +98,6 @@
                 this.$store.dispatch('vpsInfo', {
                     'id': this.$route.params.id
                 })
-            }
-        },
-        locales: {
-            en: {
-                state: "State"
-            },
-            pl: {
-                state: "Stan"
             }
         }
     }

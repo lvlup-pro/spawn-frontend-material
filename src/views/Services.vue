@@ -21,11 +21,11 @@
                                 <thead>
                                 <tr>
                                     <th class="select"><i class="fa fa-check"></i></th>
-                                    <th>{{$t('service')}}</th>
-                                    <th>{{$t('id')}}</th>
-                                    <th>{{$t('name')}}</th>
-                                    <th>{{$t('payed_to')}}</th>
-                                    <th>{{$t('created_at')}}</th>
+                                    <th>{{$t('table.service')}}</th>
+                                    <th>{{$t('table.id')}}</th>
+                                    <th>{{$t('table.name')}}</th>
+                                    <th>{{$t('table.payed_to')}}</th>
+                                    <th>{{$t('table.created_at')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -60,10 +60,10 @@
         mounted () {
             moment.locale(this.$lang)
             this.$emit('view', this.meta())
-            this.$store.commit('setToolbarTitle', 'header_services')
+            this.$store.commit('setToolbarTitle', 'header.services')
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth_no'), "right")
+                    this.$vuetify.toast.create(this.$t('auth.no'), "right")
                     this.$router.push('/login')
                 } else {
                     this.$store.commit('setLoading')
@@ -135,24 +135,6 @@
             },
             goToVps(id) {
                 this.$router.push('/' + this.$route.params.lg + '/service/vps/' + id)
-            }
-        },
-        locales: {
-            en: {
-                payed_to: 'Valid for',
-                created_at: "Created",
-                name: "Name",
-                service: "Service",
-                id: "ID",
-                panel_preview: "This preview version of customer panel shows only VPS servers"
-            },
-            pl: {
-                payed_to: 'Koniec ważności usługi',
-                created_at: "Utworzono",
-                name: "Nazwa",
-                service: "Usługa",
-                id: "ID",
-                panel_preview: "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
             }
         }
     }

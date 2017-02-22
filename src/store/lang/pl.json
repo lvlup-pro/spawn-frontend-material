@@ -1,0 +1,93 @@
+{
+    "sidebar": {
+        "panel": "Panel klienta",
+        "account": "Konto",
+        "login": "Zaloguj",
+        "profile": "{email}",
+        "payments": "Płatności ({balance})",
+        "menu": "Menu",
+        "home": "Nowości",
+        "services": "Usługi",
+        "help": "Pomoc",
+        "lang": "Język"
+    },
+    "header": {
+        "home": "Nowości",
+        "login": "Zaloguj się",
+        "services": "Usługi",
+        "ticket_init": "Zgłoszenie",
+        "ticket": "Zgłoszenie #{id}",
+        "tickets": "Zgłoszenia",
+        "vps_init": "VPS",
+        "vps": "VPS #{id}",
+        "payments": "Płatności",
+        "profile": "Profil"
+    },
+    "table": {
+        "id": "ID",
+        "name": "Nazwa",
+        "service": "Usługa",
+        "subject": "Temat",
+        "amount": "Kwota",
+        "status": "Status",
+        "created_at": "Utworzono",
+        "payed_to": "Koniec ważności usługi"
+    },
+    "auth": {
+        "no": "Zaloguj się",
+        "already": "Zalogowano już wcześniej",
+        "success": "Zalogowano poprawnie",
+        "fail": "Logowanie nieudane"
+    },
+    "user": {
+        "log_in": "Log in",
+        "logout": "Wyloguj",
+        "id": "ID",
+        "username": "Login",
+        "email": "E-mail",
+        "fullname": "Imię i nazwisko",
+        "password": "Hasło",
+        "username_placeholder": "j.kowalski@example.com",
+        "password_placeholder": "****",
+        "i_have_account": "Mam już konto lvlup.pro"
+    },
+    "ticket": {
+        "status": {
+            "waiting": {
+                "long": "Czekamy na twoją odpowiedź",
+                "medium": "Oczekiwanie na klienta",
+                "short": "Oczekiwanie"
+            },
+            "working": {
+                "long": "Obsługa pracuje nad odpowiedzią",
+                "medium": "Praca obsługi",
+                "short": "Przetwarzanie"
+            },
+            "closed": {
+                "long": "Obsługa nie zajmuje się już tym zgłoszeniem",
+                "medium": "Sprawa zamknięta",
+                "short": "Zamknięte"
+            },
+            "open": {
+                "long": "Kliknij aby dowiedzieć się więcej",
+                "short": "Otwarte"
+            }
+        },
+        "subject": "Temat",
+        "response_time": "Szanowny kliencie, odpowiedź może zająć do 48h, prosimy o cierpliwość",
+        "client": "Ty",
+        "staff": "Obsługa lvlup.pro",
+        "textarea": "Napisz swoją wiadomość do obsługi",
+        "send": "Wyślij",
+        "msg_too_long": "Wiadomość jest za długa",
+        "msg_too_short": "Wiadomość jest za krótka",
+        "msg_duplicate": "Wiadomość już wysłana (duplikat)"
+    },
+    "vps": {
+        "state": "Stan",
+        "cpu": "CPU",
+        "ram": "RAM"
+    },
+    "loading": "Ładowanie",
+    "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
+}

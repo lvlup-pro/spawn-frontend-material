@@ -6,17 +6,17 @@
                 <v-col xs12 md6 lg6>
                     <v-card class="mp-5">
                         <v-card-text>
-                            <h5>{{ $t("i_have_account") }}</h5>
+                            <h5>{{ $t('user.i_have_account') }}</h5>
                             <form v-on:submit.prevent="onSubmit">
                                 <v-text-input
-                                        :label="$t('username')"
-                                        :placeholder="$t('username_placeholder')"
+                                        :label="$t('user.username')"
+                                        :placeholder="$t('user.username_placeholder')"
                                         v-model="username"
                                 ></v-text-input>
                                 <v-text-input
-                                        :label="$t('password')"
+                                        :label="$t('user.password')"
                                         type="password"
-                                        :placeholder="$t('password_placeholder')"
+                                        :placeholder="$t('user.password_placeholder')"
                                         v-model="password"
                                 ></v-text-input>
                                 <!--<v-select-->
@@ -30,7 +30,7 @@
                                        v-bind:disabled="loading"
                                 >
                                     <v-icon left>vpn_key</v-icon>
-                                    {{$t('log_in')}}
+                                    {{$t('user.log_in')}}
                                 </v-btn>
                             </form>
                         </v-card-text>
@@ -81,7 +81,7 @@
         },
         mounted () {
             this.$emit('view', this.meta())
-            this.$store.commit('setToolbarTitle', 'header_login')
+            this.$store.commit('setToolbarTitle', 'header.login')
             if (typeof this.$route.params.lg === 'undefined') {
                 var lang = localStorage.getItem('lang')
                 if (lang != 'pl' && lang != 'en') {
@@ -97,9 +97,9 @@
             }
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    //this.$vuetify.toast.create(this.$t('auth_no'), "right")
+                    //this.$vuetify.toast.create(this.$t('auth.no'), "right")
                 } else {
-                    this.$vuetify.toast.create(this.$t('auth_already'), "right")
+                    this.$vuetify.toast.create(this.$t('auth.already'), "right")
                     this.$router.push('/'+this.$route.params.lg+'/service')
                 }
             })
@@ -122,33 +122,15 @@
                     password: password
                 }).then((res) => {
                     if (res) {
-                        var auth = this.$t('auth_success');
+                        var auth = this.$t('auth.success');
                         this.$vuetify.toast.create(auth, "right")
                         this.$router.push('/'+this.$route.params.lg+'/service')
                     } else {
-                        var auth = this.$t('auth_fail');
+                        var auth = this.$t('auth.fail');
                         this.$vuetify.toast.create(auth, "right")
                     }
                     this.$store.commit('setLoaded')
                 })
-            }
-        },
-        locales: {
-            en: {
-                i_have_account: 'I already have lvlup.pro account',
-                username: "Username",
-                username_placeholder: "joe@example.com",
-                password: "Password",
-                password_placeholder: "****",
-                log_in: "Log in"
-            },
-            pl: {
-                i_have_account: 'Mam już konto lvlup.pro',
-                username: "Login",
-                username_placeholder: "j.kowalski@example.com",
-                password: "Hasło",
-                password_placeholder: "****",
-                log_in: "Zaloguj"
             }
         }
     }
