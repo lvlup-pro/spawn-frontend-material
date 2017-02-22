@@ -33,6 +33,7 @@
                                         </td>
                                         <td v-on:click="goToTicket(ticket.id)">#{{ticket.id}}</td>
                                         <td v-on:click="goToTicket(ticket.id)">
+                                            <!--
                                             <span v-if="!ticket.closed_at && !ticket.staff_response_needed"
                                                 v-tooltip:bottom="{ html: $t('ticket.status.waiting.long') }">
                                                 <i class="fa fa-circle blue--text"></i> {{$t('ticket.status.waiting.short')}}
@@ -42,6 +43,14 @@
                                                 <i class="fa fa-circle yellow--text"></i> {{$t('ticket.status.working.short')}}
                                             </span>
                                             <span v-if="ticket.closed_at"
+                                                v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
+                                                <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
+                                            !-->
+                                            <span v-if="!ticket.closed"
+                                                  v-tooltip:bottom="{ html: $t('ticket.status.open.long') }">
+                                                <i class="fa fa-circle green--text"></i> {{$t('ticket.status.open.short')}}
+                                            </span>
+                                            <span v-if="ticket.closed"
                                                 v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
                                                 <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
                                             </span>

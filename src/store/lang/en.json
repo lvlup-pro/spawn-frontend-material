@@ -67,6 +67,10 @@
                 "long": "Staff is not working on this case anymore",
                 "medium": "Case closed",
                 "short": "Closed"
+            },
+            "open": {
+                "long": "Click ticket to find out more",
+                "short": "Open"
             }
         },
         "subject": "Subject",

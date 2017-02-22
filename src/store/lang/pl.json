@@ -67,6 +67,10 @@
                 "long": "Obsługa nie zajmuje się już tym zgłoszeniem",
                 "medium": "Sprawa zamknięta",
                 "short": "Zamknięte"
+            },
+            "open": {
+                "long": "Kliknij aby dowiedzieć się więcej",
+                "short": "Otwarte"
             }
         },
         "subject": "Temat",
