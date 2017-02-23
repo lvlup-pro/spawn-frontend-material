@@ -12,7 +12,11 @@
         <main>
             <v-sidebar fixed ripple router unshift v-model="nav">
                 <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
-                <p class="text-xs-center white--text">{{$t('sidebar.panel')}} {{version}}</p>
+                <p class="text-xs-center">
+                    <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
+                        {{$t('sidebar.panel')}} {{version}}
+                    </router-link>
+                </p>
                 <v-list dense>
                     <v-divider light/>
                     <v-list-sub-header>{{$t('sidebar.account')}}</v-list-sub-header>
@@ -291,5 +295,9 @@
 
     th.select {
         width: 35px;
+    }
+
+    #credits-link {
+        text-decoration: none;
     }
 </style>

@@ -14,6 +14,7 @@
     },
     "header": {
         "home": "Nowości",
+        "credits": "Informacje",
         "login": "Zaloguj się",
         "services": "Usługi",
         "ticket_init": "Zgłoszenie",
@@ -87,6 +88,11 @@
         "state": "Stan",
         "cpu": "CPU",
         "ram": "RAM"
+    },
+    "credits": {
+        "contributors": "Autorzy",
+        "poweredby": "Biblioteki",
+        "changelog": "Lista zmian"
     },
     "loading": "Ładowanie",
     "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
