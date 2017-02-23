@@ -3,7 +3,7 @@
         "panel": "Customer panel",
         "account": "Account",
         "login": "Log in",
-        "logout": "Logout",
+        "logout": "Log out",
         "profile": "{email}",
         "payments": "Payments ({balance})",
         "menu": "Menu",
@@ -15,7 +15,8 @@
     "header": {
         "home": "Home",
         "credits": "Credits",
-        "login": "Log in",
+        "login": "Login",
+        "register": "Registration",
         "services": "Services",
         "ticket_init": "Ticket",
         "ticket": "Ticket #{id}",

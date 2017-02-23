@@ -2,8 +2,8 @@
     "sidebar": {
         "panel": "Panel klienta",
         "account": "Konto",
-        "login": "Zaloguj",
-        "logout": "Wyloguj",
+        "login": "Zaloguj się",
+        "logout": "Wyloguj się",
         "profile": "{email}",
         "payments": "Płatności ({balance})",
         "menu": "Menu",
@@ -15,7 +15,8 @@
     "header": {
         "home": "Nowości",
         "credits": "Informacje",
-        "login": "Zaloguj się",
+        "login": "Logowanie",
+        "register": "Rejestracja",
         "services": "Usługi",
         "ticket_init": "Zgłoszenie",
         "ticket": "Zgłoszenie #{id}",
