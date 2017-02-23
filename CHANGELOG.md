@@ -2,9 +2,15 @@
 
 ## 3.0.0-alpha.9 (TBA)
 
-+ Fix displaying VPS status
+### Features
+
++ Credits page [#5](https://github.com/lvlup-pro/spawn-frontend-material/issues/5)
 + Linear progress with color component
 + More detailed README.md
+
+### Fixes
+
++ Fix displaying VPS status
 
 ## 3.0.0-alpha.8 (23.02.2017)
 
