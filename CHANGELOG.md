@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-alpha.9 (TBA)
+
++ Fix displaying VPS status
++ Linear progress with color component
++ More detailed README.md
+
 ## 3.0.0-alpha.8 (23.02.2017)
 
 ### Features
