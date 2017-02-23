@@ -44,15 +44,25 @@
         "fail": "Login failed"
     },
     "user": {
-        "log_in": "Log in",
         "id": "ID",
         "username": "Username",
         "email": "E-mail",
-        "fullname": "Full name",
         "password": "Password",
-        "username_placeholder": "joe@example.com",
-        "password_placeholder": "****",
-        "i_have_account": "I already have lvlup.pro account"
+        "fullname": "Full name",
+        "placeholder": {
+            "username": "j.doe",
+            "email": "john.doe@example.com",
+            "password": "********",
+            "fullname": "John Doe"
+        },
+        "login": {
+            "header": "I already have lvlup.pro account",
+            "button": "Log in"
+        },
+        "register": {
+            "header": "I don't have lvlup.pro account yet",
+            "button": "Register"
+        }
     },
     "ticket": {
         "status": {

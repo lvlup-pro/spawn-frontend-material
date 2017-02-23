@@ -44,15 +44,25 @@
         "fail": "Logowanie nieudane"
     },
     "user": {
-        "log_in": "Zaloguj się",
         "id": "ID",
         "username": "Login",
         "email": "E-mail",
-        "fullname": "Imię i nazwisko",
         "password": "Hasło",
-        "username_placeholder": "j.kowalski@example.com",
-        "password_placeholder": "****",
-        "i_have_account": "Mam już konto lvlup.pro"
+        "fullname": "Imię i nazwisko",
+        "placeholder": {
+            "username": "j.kowalski",
+            "email": "jan.kowalski@example.com",
+            "password": "********",
+            "fullname": "Jan Kowalski"
+        },
+        "login": {
+            "header": "Mam już konto lvlup.pro",
+            "button": "Zaloguj się"
+        },
+        "register": {
+            "header": "Nie mam jeszcze konta lvlup.pro",
+            "button": "Zarejestruj się"
+        }
     },
     "ticket": {
         "status": {
