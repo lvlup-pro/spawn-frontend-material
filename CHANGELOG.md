@@ -7,6 +7,7 @@
 + Credits page [#5](https://github.com/lvlup-pro/spawn-frontend-material/issues/5)
 + Linear progress with color component
 + More detailed README.md
++ More VPS info
 
 ### Fixes
 

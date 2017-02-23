@@ -85,6 +85,12 @@
         "msg_duplicate": "Message already sent (duplicate)"
     },
     "vps": {
+        "control": "Control",
+        "resources": "Resources",
+        "network": "Network",
+        "disk": "Disk",
+        "turn_on": "Turn on",
+        "turn_off": "Turn off",
         "state": "State",
         "cpu": "CPU",
         "ram": "RAM"

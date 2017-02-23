@@ -85,6 +85,12 @@
         "msg_duplicate": "Wiadomość już wysłana (duplikat)"
     },
     "vps": {
+        "control": "Kontrola",
+        "resources": "Zasoby",
+        "network": "Sieć",
+        "disk": "Dysk",
+        "turn_on": "Włącz",
+        "turn_off": "Wyłącz",
         "state": "Stan",
         "cpu": "CPU",
         "ram": "RAM"
