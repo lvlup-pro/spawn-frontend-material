@@ -1,13 +1,15 @@
 # Changelog
 
-## 3.0.0-alpha.9 (TBA)
+## 3.0.0-alpha.9 (23.02.2017)
 
 ### Features
 
 + Credits page [#5](https://github.com/lvlup-pro/spawn-frontend-material/issues/5)
-+ Linear progress with color component
-+ More detailed README.md
++ Logout button on sidebar [#65](https://github.com/lvlup-pro/spawn-frontend-material/pull/65)
 + More VPS info
++ Linear progress with color component
++ More detailed README.md with badges
++ Travis CI integration
 
 ### Fixes
 
