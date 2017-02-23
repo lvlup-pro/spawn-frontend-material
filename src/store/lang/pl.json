@@ -44,7 +44,7 @@
         "fail": "Logowanie nieudane"
     },
     "user": {
-        "log_in": "Log in",
+        "log_in": "Zaloguj się",
         "id": "ID",
         "username": "Login",
         "email": "E-mail",
