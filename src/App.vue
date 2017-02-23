@@ -65,7 +65,7 @@
                             </v-list-tile>
                         </v-list-item>
                         <v-list-item>
-                            <v-list-tile router :href="{ path: 'payments' }">
+                            <v-list-tile router :href="{ path: 'payment' }">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-money"></i>
                                 </v-list-tile-action>
