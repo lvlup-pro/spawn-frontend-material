@@ -175,7 +175,7 @@ export default new Vuex.Store({
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'vps/' + args.id)
                 .then(function (res) {
-                    if (typeof res.data.active !== 'undefined') {
+                    if (typeof res.data.status !== 'undefined') {
                         commit('setVps', res.data)
                     }
                 }).catch(function (error) {
