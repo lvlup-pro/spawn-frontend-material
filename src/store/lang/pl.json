@@ -89,6 +89,10 @@
         "cpu": "CPU",
         "ram": "RAM"
     },
+    "credits": {
+        "contributors": "Autorzy",
+        "poweredby": "Biblioteki"
+    },
     "loading": "Ładowanie",
     "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
 }

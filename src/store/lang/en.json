@@ -89,6 +89,10 @@
         "cpu": "CPU",
         "ram": "RAM"
     },
+    "credits": {
+        "contributors": "Contributors",
+        "poweredby": "Powered by"
+    },
     "loading": "Loading",
     "panel_preview": "This preview version of customer panel shows only VPS servers"
 }

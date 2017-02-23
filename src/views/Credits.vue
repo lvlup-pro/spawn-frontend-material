@@ -2,14 +2,26 @@
     <div>
         <v-container>
             <v-row>
-                <v-col xs12>
-                    <h4>...</h4>
+                <v-col xs12 class="markdown-body">
+                    <h2>
+                        <a href="https://github.com/lvlup-pro/spawn-frontend-material/graphs/contributors">{{$t('credits.contributors')}}</a>:
+                    </h2>
+                    <ul>
+                        <li><a href="https://github.com/SystemZ/">SystemZ</a></li>
+                        <li><a href="https://github.com/Libter/">Libter</a></li>
+                    </ul>
+
+                    <h2>{{$t('credits.poweredby')}}:</h2>
+                    <ul>
+                        <li><a href="https://vuejs.org/">Vue.js</a></li>
+                        <li><a href="https://vuetifyjs.com/">Vuetify.js</a></li>
+                        <li><a href="https://github.com/mzabriskie/axios">axios</a></li>
+                    </ul>
                 </v-col>
             </v-row>
         </v-container>
     </div>
 </template>
-
 <script>
     export default {
         mounted () {
