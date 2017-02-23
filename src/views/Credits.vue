@@ -17,6 +17,10 @@
                         <li><a href="https://vuetifyjs.com/">Vuetify.js</a></li>
                         <li><a href="https://github.com/mzabriskie/axios">axios</a></li>
                     </ul>
+
+                    <h2>
+                        <a href="https://github.com/lvlup-pro/spawn-frontend-material/blob/master/CHANGELOG.md">{{$t('credits.changelog')}}</a>
+                    </h2>
                 </v-col>
             </v-row>
         </v-container>

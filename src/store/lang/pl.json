@@ -91,7 +91,8 @@
     },
     "credits": {
         "contributors": "Autorzy",
-        "poweredby": "Biblioteki"
+        "poweredby": "Biblioteki",
+        "changelog": "Lista zmian"
     },
     "loading": "Ładowanie",
     "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
