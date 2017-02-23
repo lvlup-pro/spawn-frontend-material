@@ -122,7 +122,7 @@
                 <v-container fluid>
                     <div class="mt-3"></div>
                     <transition mode="out-in">
-                        <router-view v-on:view="view"></router-view>
+                        <router-view v-on:view="view" v-on:redirectLang="redirectLang"></router-view>
                     </transition>
                 </v-container>
             </v-content>
@@ -171,6 +171,21 @@
                 localStorage.setItem('lang', lang);
                 this.$store.commit('setLanguage', lang);
                 this.$router.replace({'params': {'lg': lang}});
+            },
+            redirectLang(url) {
+                if (typeof this.$route.params.lg === 'undefined') {
+                    var lang = localStorage.getItem('lang')
+                    if (lang != 'pl' && lang != 'en') {
+                        lang = window.navigator.languages ? window.navigator.languages[0] : null
+                        lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage || 'en';
+                        if (lang.indexOf('-') !== -1)
+                            lang = lang.split('-')[0];
+                        if (lang.indexOf('_') !== -1)
+                            lang = lang.split('_')[0]
+                        localStorage.setItem('lang', lang)
+                    }
+                    this.$router.push('/' + lang + '/' + url)
+                }
             },
             getToolbarTitle() {
                 let title = this.$t(this.$store.state.toolbarTitle);

@@ -30,21 +30,9 @@
     export default {
         mounted () {
             this.$emit('view', this.meta())
+            this.$emit('redirectLang', 'credits')
             this.$vuetify.load()
             this.$store.commit('setToolbarTitle', 'header.credits')
-            if (typeof this.$route.params.lg === 'undefined') {
-                var lang = localStorage.getItem('lang')
-                if (lang != 'pl' && lang != 'en') {
-                    lang = window.navigator.languages ? window.navigator.languages[0] : null
-                    lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage || 'en';
-                    if (lang.indexOf('-') !== -1)
-                        lang = lang.split('-')[0];
-                    if (lang.indexOf('_') !== -1)
-                        lang = lang.split('_')[0]
-                    localStorage.setItem('lang', lang)
-                }
-                this.$router.push('/' + lang + '/credits')
-            }
         },
         preFetch (store) {
             store.commit('setMeta', this.methods.meta())
