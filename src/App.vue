@@ -13,7 +13,7 @@
             <v-sidebar fixed ripple router unshift v-model="nav">
                 <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
                 <p class="text-xs-center">
-                    <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
+                    <router-link id="credits-link" class="white--text" :to="{ path: 'credits' }">
                         {{$t('sidebar.panel')}} {{version}}
                     </router-link>
                 </p>
@@ -22,7 +22,7 @@
                     <v-list-sub-header>{{$t('sidebar.account')}}</v-list-sub-header>
                     <div v-if="!account.email">
                         <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/register'">
+                            <v-list-tile router :href="{ path: 'register' }">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-plus-circle"></i>
                                 </v-list-tile-action>
@@ -32,7 +32,7 @@
                             </v-list-tile>
                         </v-list-item>
                         <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/login'">
+                            <v-list-tile router :href="{ path: 'login' }">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-sign-in"></i>
                                 </v-list-tile-action>
@@ -54,7 +54,7 @@
                             </v-list-tile>
                         </v-list-item>
                         <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/profile'">
+                            <v-list-tile router :href="{ path: 'profile' }">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-user"></i>
                                 </v-list-tile-action>
@@ -65,7 +65,7 @@
                             </v-list-tile>
                         </v-list-item>
                         <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/payment'">
+                            <v-list-tile router :href="{ path: 'payments' }">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-money"></i>
                                 </v-list-tile-action>
@@ -79,7 +79,7 @@
 
                     <v-list-sub-header>{{$t('sidebar.menu')}}</v-list-sub-header>
                     <v-list-item>
-                        <v-list-tile router :href="'/' + language + '/home'">
+                        <v-list-tile router :href="{ path: 'home' }">
                             <v-list-tile-action>
                                 <i class="fa fa-fw fa-2x fa-home"></i>
                             </v-list-tile-action>
@@ -89,7 +89,7 @@
                         </v-list-tile>
                     </v-list-item>
                     <v-list-item v-if="account.email">
-                        <v-list-tile router :href="'/' + language + '/service'">
+                        <v-list-tile router :href="{ path: 'service' }">
                             <v-list-tile-action>
                                 <i class="fa fa-fw fa-2x fa-server"></i>
                             </v-list-tile-action>
@@ -99,7 +99,7 @@
                         </v-list-tile>
                     </v-list-item>
                     <v-list-item v-if="account.email">
-                        <v-list-tile router :href="'/' + language + '/ticket'">
+                        <v-list-tile router :href="{ path: 'ticket' }">
                             <v-list-tile-action>
                                 <i class="fa fa-fw fa-2x fa-question-circle"></i>
                             </v-list-tile-action>
