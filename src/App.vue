@@ -7,26 +7,6 @@
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
                 <v-toolbar-logo class="hidden-xs-and-down">{{getToolbarTitle()}}</v-toolbar-logo>
-                <v-toolbar-items>
-                    <v-toolbar-item v-on:click.native="logOut">
-                        {{$t('user.logout')}}
-                        <v-icon class="right">cloud_off</v-icon>
-                    </v-toolbar-item>
-                    <!--<v-menu>
-                        <v-btn dark icon slot="activator">
-                            <v-icon>more_vert</v-icon>
-                        </v-btn>
-                        <v-list>
-                            <v-list-item>
-                                <v-list-tile v-on:click="logOut">
-                                    <v-list-tile-title>
-                                        {{$t('logout')}}
-                                    </v-list-tile-title>
-                                </v-list-tile>
-                            </v-dropdown>
-                        </v-list>
-                    </v-menu>!-->
-                </v-toolbar-items>
             </v-toolbar>
         </header>
         <main>
@@ -36,6 +16,26 @@
                 <v-list dense>
                     <v-divider light/>
                     <v-list-sub-header>{{$t('sidebar.account')}}</v-list-sub-header>
+                    <v-list-item v-if="!account.email">
+                        <v-list-tile router :href="'/' + language + '/login'">
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-sign-in"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t('sidebar.login')"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
+                    <v-list-item v-if="account.email">
+                        <v-list-tile v-on:click.native="logOut">
+                            <v-list-tile-action>
+                                <i class="fa fa-fw fa-2x fa-sign-out"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t('sidebar.logout')"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
                     <v-list-item v-if="account.email">
                         <v-list-tile router :href="'/' + language + '/profile'">
                             <v-list-tile-action>
@@ -55,16 +55,6 @@
                             <v-list-tile-content>
                                 <v-list-tile-title
                                         v-text="format($t('sidebar.payments'), { 'balance': wallet.balance_pretty })"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <v-list-item v-if="!account.email">
-                        <v-list-tile router :href="'/' + language + '/login'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-sign-in"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('sidebar.login')"/>
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list-item>

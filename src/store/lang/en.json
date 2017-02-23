@@ -3,6 +3,7 @@
         "panel": "Customer panel",
         "account": "Account",
         "login": "Log in",
+        "logout": "Logout",
         "profile": "{email}",
         "payments": "Payments ({balance})",
         "menu": "Menu",
@@ -41,7 +42,6 @@
     },
     "user": {
         "log_in": "Log in",
-        "logout": "Logout",
         "id": "ID",
         "username": "Username",
         "email": "E-mail",
