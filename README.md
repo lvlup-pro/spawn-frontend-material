@@ -1,5 +1,10 @@
 # spawn-frontend-material
 
+[![Build Status](https://travis-ci.org/lvlup-pro/spawn-frontend-material.svg?branch=master)](https://travis-ci.org/lvlup-pro/spawn-frontend-material)
+[![Code Climate](https://codeclimate.com/github/lvlup-pro/spawn-frontend-material/badges/gpa.svg)](https://codeclimate.com/github/lvlup-pro/spawn-frontend-material)
+[![Dependencies](https://david-dm.org/lvlup-pro/spawn-frontend-material/status.svg)](https://david-dm.org/lvlup-pro/spawn-frontend-material)
+[![DependenciesDev](https://david-dm.org/lvlup-pro/spawn-frontend-material/dev-status.svg)](https://david-dm.org/lvlup-pro/spawn-frontend-material?type=dev)
+
 Frontend for https://lvlup.pro hosting customer panel
 
 ## How to see current release

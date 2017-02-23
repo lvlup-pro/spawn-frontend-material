@@ -5,6 +5,8 @@ node_js:
   - "6"
   - "7"
   - "node"
+notifications:
+  email: false
 install:
   - npm install
 script:
