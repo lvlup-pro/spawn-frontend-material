@@ -13,59 +13,73 @@
             <v-sidebar fixed ripple router unshift v-model="nav">
                 <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
                 <p class="text-xs-center">
-                    <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
+                    <router-link id="credits-link" class="white--text" :to="{ path: 'credits' }">
                         {{$t('sidebar.panel')}} {{version}}
                     </router-link>
                 </p>
                 <v-list dense>
                     <v-divider light/>
                     <v-list-sub-header>{{$t('sidebar.account')}}</v-list-sub-header>
-                    <v-list-item v-if="!account.email">
-                        <v-list-tile router :href="'/' + language + '/login'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-sign-in"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('sidebar.login')"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <v-list-item v-if="account.email">
-                        <v-list-tile v-on:click.native="logOut">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-sign-out"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('sidebar.logout')"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <v-list-item v-if="account.email">
-                        <v-list-tile router :href="'/' + language + '/profile'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-user"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title
-                                        v-text="format($t('sidebar.profile'), { 'nick': account.username, 'email': account.email })"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <v-list-item v-if="wallet.balance_pretty">
-                        <v-list-tile router :href="'/' + language + '/payment'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-money"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title
-                                        v-text="format($t('sidebar.payments'), { 'balance': wallet.balance_pretty })"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
+                    <div v-if="!account.email">
+                        <v-list-item>
+                            <v-list-tile router :href="{ path: 'register' }">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-plus-circle"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.register')"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-tile router :href="{ path: 'login' }">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-sign-in"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.login')"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                    </div>
+                    <div v-else>
+                        <v-list-item>
+                            <v-list-tile v-on:click.native="logOut">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-sign-out"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.logout')"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-tile router :href="{ path: 'profile' }">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-user"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title
+                                            v-text="format($t('sidebar.profile'), { 'nick': account.username, 'email': account.email })"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-tile router :href="{ path: 'payment' }">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-money"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title
+                                            v-text="format($t('sidebar.payments'), { 'balance': wallet.balance_pretty })"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                    </div>
 
                     <v-list-sub-header>{{$t('sidebar.menu')}}</v-list-sub-header>
                     <v-list-item>
-                        <v-list-tile router :href="'/' + language + '/home'">
+                        <v-list-tile router :href="{ path: 'home' }">
                             <v-list-tile-action>
                                 <i class="fa fa-fw fa-2x fa-home"></i>
                             </v-list-tile-action>
@@ -75,7 +89,7 @@
                         </v-list-tile>
                     </v-list-item>
                     <v-list-item v-if="account.email">
-                        <v-list-tile router :href="'/' + language + '/service'">
+                        <v-list-tile router :href="{ path: 'service' }">
                             <v-list-tile-action>
                                 <i class="fa fa-fw fa-2x fa-server"></i>
                             </v-list-tile-action>
@@ -85,7 +99,7 @@
                         </v-list-tile>
                     </v-list-item>
                     <v-list-item v-if="account.email">
-                        <v-list-tile router :href="'/' + language + '/ticket'">
+                        <v-list-tile router :href="{ path: 'ticket' }">
                             <v-list-tile-action>
                                 <i class="fa fa-fw fa-2x fa-question-circle"></i>
                             </v-list-tile-action>
@@ -122,7 +136,7 @@
                 <v-container fluid>
                     <div class="mt-3"></div>
                     <transition mode="out-in">
-                        <router-view v-on:view="view"></router-view>
+                        <router-view v-on:view="view" v-on:redirectLang="redirectLang"></router-view>
                     </transition>
                 </v-container>
             </v-content>
@@ -171,6 +185,21 @@
                 localStorage.setItem('lang', lang);
                 this.$store.commit('setLanguage', lang);
                 this.$router.replace({'params': {'lg': lang}});
+            },
+            redirectLang(url) {
+                if (typeof this.$route.params.lg === 'undefined') {
+                    var lang = localStorage.getItem('lang')
+                    if (lang != 'pl' && lang != 'en') {
+                        lang = window.navigator.languages ? window.navigator.languages[0] : null
+                        lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage || 'en';
+                        if (lang.indexOf('-') !== -1)
+                            lang = lang.split('-')[0];
+                        if (lang.indexOf('_') !== -1)
+                            lang = lang.split('_')[0]
+                        localStorage.setItem('lang', lang)
+                    }
+                    this.$router.push('/' + lang + '/' + url)
+                }
             },
             getToolbarTitle() {
                 let title = this.$t(this.$store.state.toolbarTitle);

@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Index from '../views/Index.vue'
 import Credits from '../views/Credits.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 import Services from '../views/Services.vue'
 import Vps from '../views/Vps.vue'
 import Tickets from '../views/Tickets.vue'
@@ -24,6 +25,8 @@ export default new Router({
       { path: '/:lg/credits', component: Credits},
       { path: '/login', component: Login},
       { path: '/:lg/login', component: Login},
+      { path: '/register', component: Register},
+      { path: '/:lg/register', component: Register},
       //auth needed
       { path: '/:lg/service', component: Services},
       { path: '/:lg/service/vps/:id', component: Vps},
