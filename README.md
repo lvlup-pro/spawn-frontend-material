@@ -2,9 +2,10 @@
 
 Frontend for https://lvlup.pro hosting customer panel
 
-## How to use (for customers)
+## How to see current release
  
 To see current version just go to https://demomy.lvlup.pro
+You can use credentials generated at this link https://demoapi.lvlup.pro/v3/auth/register
 
 ## How to run (for devs)
 
