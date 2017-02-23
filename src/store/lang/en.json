@@ -13,6 +13,7 @@
     },
     "header": {
         "home": "Home",
+        "credits": "Credits",
         "login": "Log in",
         "services": "Services",
         "ticket_init": "Ticket",

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Index from '../views/Index.vue'
+import Credits from '../views/Credits.vue'
 import Login from '../views/Login.vue'
 import Services from '../views/Services.vue'
 import Vps from '../views/Vps.vue'
@@ -19,8 +20,10 @@ export default new Router({
       { path: '/', component: Index },
       { path: '/home', component: Index },
       { path: '/:lg/home', component: Index },
-      { path: '/:lg/login', component: Login},
+      { path: '/credits', component: Credits},
+      { path: '/:lg/credits', component: Credits},
       { path: '/login', component: Login},
+      { path: '/:lg/login', component: Login},
       //auth needed
       { path: '/:lg/service', component: Services},
       { path: '/:lg/service/vps/:id', component: Vps},
