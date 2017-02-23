@@ -4,14 +4,23 @@
             <v-row>
                 <v-col xs12 lg4>
                     <h4>{{$t('vps.state')}}</h4>
-                    <v-chip v-if="vps.status == 'running'" label class="green white--text">On</v-chip>
-                    <v-chip v-if="vps.status == 'stopped'" label class="red white--text">Off</v-chip>
+                    <v-chip v-if="on" label class="green white--text">On</v-chip>
+                    <v-chip v-if="off" label class="red white--text">Off</v-chip>
+                    <v-chip v-if="on" label outline class="green green--text">
+                        <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                        {{vps.net_in_b | b_to_kb}} KB/s
+                    </v-chip>
+                    <v-chip v-if="on" label outline class="red red--text">
+                        <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                        {{vps.net_out_b | b_to_kb}} KB/s
+                    </v-chip>
                     <div class="mb-4"></div>
                 </v-col>
             </v-row>
-            <v-row>
+            <v-row v-if="on">
                 <v-col md6 xs12="xs12">
-                    <h3>{{$t('vps.cpu')}}</h3><h4>{{vps.cpu}}%</h4>
+                    <h3>{{$t('vps.cpu')}}</h3>
+                    <div class="display-1">{{vps.cpu}}%</div>
                     <progress-linear-color v-model="vps.cpu"></progress-linear-color>
                 </v-col>
                 <v-col md6 xs12="xs12">
@@ -61,6 +70,16 @@
             clearInterval(this.interval)
         },
         computed: {
+            on () {
+                if (this.$store.state.vps.status == "running") {
+                    return true;
+                }
+            },
+            off () {
+                if (this.$store.state.vps.status == "stopped") {
+                    return true;
+                }
+            },
             loading () {
                 return this.$store.state.loading
             },
@@ -77,6 +96,9 @@
                 var timestamp = moment.unix(unixtimestamp);
                 //DD.MM.YYYY or "L"
                 return timestamp.format("H:mm L")
+            },
+            b_to_kb(b) {
+                return Math.round(b / 1024);
             }
         },
         preFetch (store) {
