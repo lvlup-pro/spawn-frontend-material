@@ -12,17 +12,13 @@
             <v-row>
                 <v-col md6 xs12="xs12">
                     <h3>{{$t('vps.cpu')}}</h3><h4>{{vps.cpu}}%</h4>
-                    <v-progress-linear v-model="vps.cpu"></v-progress-linear>
+                    <progress-linear-color v-model="vps.cpu"></progress-linear-color>
                 </v-col>
                 <v-col md6 xs12="xs12">
                     <h3>{{$t('vps.ram')}}</h3><h4>{{ram}}%</h4>
-                    <!-- 0 - 70% green -->
-                    <v-progress-linear v-if="ram <= 70" v-model="ram" success></v-progress-linear>
-                    <!-- 71 - 90% yellow-->
-                    <v-progress-linear v-if="ram > 70 && ram <= 90" v-model="ram" warning></v-progress-linear>
-                    <!-- 91 - 100% red-->
-                    <v-progress-linear v-if="ram > 90" v-model="ram" error></v-progress-linear>
+                    <progress-linear-color v-model="ram"></progress-linear-color>
                 </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>
