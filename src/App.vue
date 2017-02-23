@@ -20,48 +20,62 @@
                 <v-list dense>
                     <v-divider light/>
                     <v-list-sub-header>{{$t('sidebar.account')}}</v-list-sub-header>
-                    <v-list-item v-if="!account.email">
-                        <v-list-tile router :href="'/' + language + '/login'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-sign-in"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('sidebar.login')"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <v-list-item v-if="account.email">
-                        <v-list-tile v-on:click.native="logOut">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-sign-out"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('sidebar.logout')"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <v-list-item v-if="account.email">
-                        <v-list-tile router :href="'/' + language + '/profile'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-user"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title
-                                        v-text="format($t('sidebar.profile'), { 'nick': account.username, 'email': account.email })"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <v-list-item v-if="wallet.balance_pretty">
-                        <v-list-tile router :href="'/' + language + '/payment'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-money"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title
-                                        v-text="format($t('sidebar.payments'), { 'balance': wallet.balance_pretty })"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
+                    <div v-if="!account.email">
+                        <v-list-item>
+                            <v-list-tile router :href="'/' + language + '/register'">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-plus-circle"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.register')"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-tile router :href="'/' + language + '/login'">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-sign-in"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.login')"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                    </div>
+                    <div v-else>
+                        <v-list-item>
+                            <v-list-tile v-on:click.native="logOut">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-sign-out"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.logout')"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-tile router :href="'/' + language + '/profile'">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-user"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title
+                                            v-text="format($t('sidebar.profile'), { 'nick': account.username, 'email': account.email })"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-tile router :href="'/' + language + '/payment'">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-money"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title
+                                            v-text="format($t('sidebar.payments'), { 'balance': wallet.balance_pretty })"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                    </div>
 
                     <v-list-sub-header>{{$t('sidebar.menu')}}</v-list-sub-header>
                     <v-list-item>

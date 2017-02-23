@@ -2,6 +2,7 @@
     "sidebar": {
         "panel": "Panel klienta",
         "account": "Konto",
+        "register": "Zarejestruj się",
         "login": "Zaloguj się",
         "logout": "Wyloguj się",
         "profile": "{email}",
