@@ -5,6 +5,7 @@ Frontend for https://lvlup.pro hosting customer panel
 ## How to see current release
  
 To see current version just go to https://demomy.lvlup.pro
+
 You can use credentials generated at this link https://demoapi.lvlup.pro/v3/auth/register
 
 ## How to run (for devs)
@@ -15,7 +16,7 @@ cd spawn-frontend-material
 npm install
 npm run dev
 ```
-You can change API endpoint in `src/store/config.js` file
+You can change API endpoint via `API` env var or in `src/store/config.js` file
 
 ## How to contribute
 
