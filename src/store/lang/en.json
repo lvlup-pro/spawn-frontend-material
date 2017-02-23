@@ -48,6 +48,7 @@
         "username": "Username",
         "email": "E-mail",
         "password": "Password",
+        "repeatpassword": "Repeat password",
         "fullname": "Full name",
         "placeholder": {
             "username": "j.doe",
