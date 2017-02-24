@@ -93,9 +93,7 @@
             loadProfile() {
                 this.$store.commit('setLoading')
                 this.$store.dispatch('profileInfo').then(() => {
-                    //after ticket loaded, load messages in this ticket
                     this.$store.commit('setLoaded')
-                    console.log(this.profile)
                 })
             }
         }
