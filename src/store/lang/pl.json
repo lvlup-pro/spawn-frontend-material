@@ -41,7 +41,8 @@
         "no": "Zaloguj się",
         "already": "Zalogowano już wcześniej",
         "success": "Zalogowano poprawnie",
-        "fail": "Logowanie nieudane"
+        "fail": "Logowanie nieudane",
+        "invalidsession": "Sesja wygasła, zaloguj się ponownie"
     },
     "user": {
         "id": "ID",
@@ -116,5 +117,6 @@
         "changelog": "Lista zmian"
     },
     "loading": "Ładowanie",
-    "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
+    "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS",
+    "network_error": "Wykryto błąd sieci!"
 }
