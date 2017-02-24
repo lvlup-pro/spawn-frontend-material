@@ -41,7 +41,8 @@
         "no": "Zaloguj się",
         "already": "Zalogowano już wcześniej",
         "success": "Zalogowano poprawnie",
-        "fail": "Logowanie nieudane"
+        "fail": "Logowanie nieudane",
+        "invalidsession": "Sesja wygasła, zaloguj się ponownie"
     },
     "user": {
         "id": "ID",

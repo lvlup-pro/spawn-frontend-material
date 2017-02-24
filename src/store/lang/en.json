@@ -41,7 +41,8 @@
         "no": "Log in first",
         "already": "Logged in already",
         "success": "Auth success",
-        "fail": "Login failed"
+        "fail": "Login failed",
+        "invalidsession": "Session has expired, log in again"
     },
     "user": {
         "id": "ID",

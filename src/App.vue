@@ -188,6 +188,7 @@
             'logout': function(newValue, oldValue) {
                 if (newValue) {
                     this.$store.commit('setLogout', false)
+                    this.$vuetify.toast.create(this.$t('auth.invalidsession'), 'right')
                     this.$router.push('/' + this.language + '/login')
                 }
             }
