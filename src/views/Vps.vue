@@ -104,6 +104,10 @@
     #vps-stats .progress-linear {
         position: relative
     }
+
+    span.chip i {
+        padding-right: 6px;
+    }
 </style>
 <script>
     import moment from 'moment'
@@ -127,7 +131,7 @@
                     this.$store.dispatch('vpsInfo', {
                         'id': this.$route.params.id
                     }).then(() => {
-                        this.interval = setInterval(this.stats, 3500)
+                        this.interval = setInterval(this.stats, 1000)
                         this.$store.commit('setLoaded')
                         //FIXME set by API not user input
                         this.$store.commit('setToolbarTitle', 'header.vps')
