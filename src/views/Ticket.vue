@@ -79,7 +79,7 @@
                             </v-card-row>
 
                             <v-card-text>
-                                <div v-html="tmsg.message.replace(/\n/g, '<br>')">
+                                <div v-html="tmsg.message">
                                 </div>
                             </v-card-text>
                         </v-card>
