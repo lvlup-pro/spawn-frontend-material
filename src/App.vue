@@ -248,7 +248,6 @@
         },
         mounted () {
             this.$store.dispatch('boot')
-            this.$store.dispatch('walletInfo')
         }
     }
 </script>

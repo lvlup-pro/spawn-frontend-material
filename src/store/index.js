@@ -78,6 +78,7 @@ export default new Vuex.Store({
                         return true
                     }
                 })
+                dispatch('walletInfo')
             }
         },
         accountLogin ({commit, dispatch, state}, args) {
@@ -85,7 +86,6 @@ export default new Vuex.Store({
                 .then(function (res) {
                     if (typeof res.data.token !== 'undefined') {
                         localStorage.setItem("token", res.data.token);
-                        //dispatch('accountInfo').dispatch('walletInfo')
                         return true;
                     }
                 }).catch(function (error) {
