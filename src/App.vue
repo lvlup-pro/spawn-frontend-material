@@ -224,7 +224,6 @@
             }
         },
         mounted () {
-            //this.$vuetify.load();
             this.$store.dispatch('boot')
             this.changeLang(this.$route.params.lg)
         }

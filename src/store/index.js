@@ -8,6 +8,7 @@ import storeConfig from './config.js'
 export default new Vuex.Store({
     state: {
         apiUrl: "",
+        token: null,
         reCaptchaSiteKey: "",
         loading: false,
         errorOnReq: false, //TODO check if useful
@@ -43,6 +44,7 @@ export default new Vuex.Store({
             commit('setAccount', {})
             commit('setWallet', [{balance_pretty: ""}])
             commit('setServices', [])
+            commit('setToken', null)
             state.errorOnReq = true;
         },
         handleError({}, args) {
@@ -57,9 +59,6 @@ export default new Vuex.Store({
         //return true if not authorized
         checkSession ({dispatch, state}) {
             state.apiUrl = storeConfig.apiUrl
-            // if (process.env.NODE_ENV === "development") {
-            //     state.apiUrl = 'https://demoapi.lvlup.pro/v3/';
-            // }
 
             //recent problem with request, force login
             if (state.errorOnReq) {
@@ -201,6 +200,9 @@ export default new Vuex.Store({
     mutations: {
         setVersion (state, newVersion) {
             state.version = newVersion;
+        },
+        setToken (state, newToken) {
+            state.token = newToken;
         },
         setReCaptchaSiteKey (state, newKey) {
             state.reCaptchaSiteKey = newKey;
