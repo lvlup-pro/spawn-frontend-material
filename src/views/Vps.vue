@@ -114,6 +114,7 @@
                         //FIXME set by API not user input
                         this.$store.commit('setToolbarTitle', 'header.vps')
                         this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
+                        this.$emit('view', this.meta())
                     })
                 }
             })

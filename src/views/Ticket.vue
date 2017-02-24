@@ -194,6 +194,7 @@
                     //FIXME set by API not user input
                     this.$store.commit('setToolbarTitle', 'header.ticket')
                     this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
+                    this.$emit('view', this.meta())
                 })
             },
             addTicketMessage(msg) {
