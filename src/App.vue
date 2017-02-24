@@ -173,12 +173,23 @@
             },
             language() {
                 return this.$store.state.language
+            },
+            logout() {
+                return this.$store.state.logout
             }
         },
         data () {
             return {
                 lg: '',
                 nav: null
+            }
+        },
+        watch: {
+            'logout': function(newValue, oldValue) {
+                if (newValue) {
+                    this.$store.commit('setLogout', false)
+                    this.$router.push('/' + this.language + '/login')
+                }
             }
         },
         methods: {
