@@ -49,11 +49,14 @@ export default new Vuex.Store({
             commit('setLogout', true)
         },
         handleError({dispatch, state, commit}, args) {
-            let msg = args.error.message;
-            console.log(msg + ' in ' + args.name + '()!');
+            let msg = args.error.message, fn = args.name;
+            console.log(msg + ' in ' + fn + '()!');
             if (msg === 'Network Error') {
                 commit('setNetworkError', true)
-            } else if (msg === 'Request failed with status code 401' || msg === 'Request failed with status code 403') {
+            } else if (
+                fn !== 'accountLogin' &&
+                msg === 'Request failed with status code 401' || msg === 'Request failed with status code 403'
+            ) {
                 dispatch('logOut')
             } else {
                 //Other Error
