@@ -58,6 +58,14 @@
                         <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
                         {{vps.net_out_b | b_to_gb}}
                     </v-chip>
+                    <v-chip v-if="on" label outline class="green green--text">
+                        <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                        {{vps.net_in_b / vps.uptime_s | b_to_kb}}/s
+                    </v-chip>
+                    <v-chip v-if="on" label outline class="red red--text">
+                        <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                        {{vps.net_out_b / vps.uptime_s | b_to_kb}}/s
+                    </v-chip>
                 </v-col>
             </v-row>
             <div class="mb-4"></div>
@@ -71,6 +79,14 @@
                     <v-chip v-if="on" label outline class="red red--text">
                         <i class="fa fa-fw fa-lg fa-download"></i>
                         {{vps.disk_write_b | b_to_gb}}
+                    </v-chip>
+                    <v-chip v-if="on" label outline class="green green--text">
+                        <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                        {{vps.disk_read_b / vps.uptime_s | b_to_kb}}/s
+                    </v-chip>
+                    <v-chip v-if="on" label outline class="red red--text">
+                        <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                        {{vps.disk_write_b / vps.uptime_s | b_to_kb}}/s
                     </v-chip>
                 </v-col>
             </v-row>
