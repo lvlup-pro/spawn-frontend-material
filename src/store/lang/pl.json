@@ -106,7 +106,9 @@
         "turn_off": "Wyłącz",
         "state": "Stan",
         "cpu": "CPU",
-        "ram": "RAM"
+        "ram": "RAM",
+        "on": "Włączony",
+        "off": "Wyłączony"
     },
     "credits": {
         "contributors": "Autorzy",

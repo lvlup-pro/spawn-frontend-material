@@ -26,8 +26,8 @@
             <v-row>
                 <v-col xs12 lg4>
                     <h4>{{$t('vps.state')}}</h4>
-                    <v-chip v-if="on" label class="green white--text">On</v-chip>
-                    <v-chip v-if="off" label class="red white--text">Off</v-chip>
+                    <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
+                    <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
                     <div class="mb-4"></div>
                 </v-col>
             </v-row>
