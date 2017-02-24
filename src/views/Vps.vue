@@ -52,11 +52,11 @@
                     <h5>{{$t('vps.network')}}</h5>
                     <v-chip v-if="on" label outline class="green green--text">
                         <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                        {{vps.net_in_b | b_to_kb}} KB/s
+                        {{vps.net_in_b | b_to_gb}}
                     </v-chip>
                     <v-chip v-if="on" label outline class="red red--text">
                         <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                        {{vps.net_out_b | b_to_kb}} KB/s
+                        {{vps.net_out_b | b_to_gb}}
                     </v-chip>
                 </v-col>
             </v-row>
@@ -66,11 +66,11 @@
                     <h5>{{$t('vps.disk')}}</h5>
                     <v-chip v-if="on" label outline class="green green--text">
                         <i class="fa fa-fw fa-lg fa-upload"></i>
-                        {{vps.disk_read_b | b_to_kb}} KB/s
+                        {{vps.disk_read_b | b_to_gb}}
                     </v-chip>
                     <v-chip v-if="on" label outline class="red red--text">
                         <i class="fa fa-fw fa-lg fa-download"></i>
-                        {{vps.disk_write_b | b_to_kb}} KB/s
+                        {{vps.disk_write_b | b_to_gb}}
                     </v-chip>
                 </v-col>
             </v-row>
@@ -152,7 +152,10 @@
                 return timestamp.format("H:mm L")
             },
             b_to_kb(b) {
-                return Math.round(b / 1024);
+                return Math.round(b / 1024) + ' KB'
+            },
+            b_to_gb(b) {
+                return Math.round(b / 1024 / 1024 / 1024) + ' GB'
             }
         },
         preFetch (store) {
