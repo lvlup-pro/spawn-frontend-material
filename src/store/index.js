@@ -8,8 +8,10 @@ import storeConfig from './config.js'
 export default new Vuex.Store({
     state: {
         apiUrl: "",
+        reCaptchaSiteKey: "",
         loading: false,
-        errorOnReq: false,
+        errorOnReq: false, //TODO check if useful
+        networkError: false,
         account: {
             username: ""
         },
@@ -34,6 +36,7 @@ export default new Vuex.Store({
     actions: {
         boot ({dispatch, state, commit}) {
             commit('setVersion', "v" + storeConfig.version)
+            commit('setReCaptchaSiteKey', storeConfig.reCaptchaSiteKey)
         },
         logOut ({dispatch, state, commit}) {
             localStorage.removeItem("token");
@@ -45,6 +48,7 @@ export default new Vuex.Store({
         handleError({}, args) {
             console.log(args.error.message + ' in ' + args.name + '()!');
             if (args.error.message === 'Network Error') {
+                this.networkError = true
                 //Network Error
             } else {
                 //Other Error
@@ -197,6 +201,9 @@ export default new Vuex.Store({
     mutations: {
         setVersion (state, newVersion) {
             state.version = newVersion;
+        },
+        setReCaptchaSiteKey (state, newKey) {
+            state.reCaptchaSiteKey = newKey;
         },
         setUsername (state, newUsername) {
             state.account.username = newUsername;

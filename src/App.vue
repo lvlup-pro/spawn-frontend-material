@@ -21,7 +21,7 @@
                     <v-divider light/>
                     <v-list-sub-header>{{$t('sidebar.account')}}</v-list-sub-header>
                     <div v-if="!account.email">
-                        <v-list-item>
+                        <!--<v-list-item>
                             <v-list-tile router :href="{ path: 'register' }">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-plus-circle"></i>
@@ -30,7 +30,7 @@
                                     <v-list-tile-title v-text="$t('sidebar.register')"/>
                                 </v-list-tile-content>
                             </v-list-tile>
-                        </v-list-item>
+                        </v-list-item>-->
                         <v-list-item>
                             <v-list-tile router :href="{ path: 'login' }">
                                 <v-list-tile-action>

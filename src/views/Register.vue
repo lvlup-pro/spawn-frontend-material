@@ -35,6 +35,7 @@
                                     :placeholder="$t('user.placeholder.password')"
                                     v-model="repeatpassword"
                                 ></v-text-input>
+                                <div id="captcha-register"></div>
                                 <v-btn flat="flat" dark="dark" success block type="submit">
                                     <v-icon left>vpn_key</v-icon>
                                     {{$t('user.register.button')}}
@@ -58,7 +59,18 @@
                 repeatpassword: ""
             }
         },
+        computed: {
+            reCaptchaSiteKey () {
+                return this.$store.state.reCaptchaSiteKey
+            }
+        },
         mounted () {
+            //setTimeout(function(that){ //
+            //FIXME hack to prevent using not existing grecaptcha when full page load occurs
+                grecaptcha.render('captcha-register', {
+                    'sitekey' : this.$store.state.reCaptchaSiteKey
+                })
+            //}, 500)
             this.$emit('view', this.meta())
             this.$emit('redirectLang', 'register')
             this.$store.commit('setToolbarTitle', 'header.register')
