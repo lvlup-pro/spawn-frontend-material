@@ -183,7 +183,7 @@
         },
         methods: {
             view (meta) {
-                this.$store.commit('setTitle', meta.title)
+                this.changeLang(this.$route.params.lg)
                 this.$store.commit('setDescription', meta.description)
                 this.$store.commit('setKeywords', meta.keywords)
             },
@@ -196,6 +196,7 @@
                 localStorage.setItem('lang', lang);
                 this.$store.commit('setLanguage', lang);
                 this.$router.replace({'params': {'lg': lang}});
+                this.$store.commit('setTitle', this.getToolbarTitle())
             },
             redirectLang(url) {
                 if (typeof this.$route.params.lg === 'undefined') {
@@ -236,7 +237,6 @@
         },
         mounted () {
             this.$store.dispatch('boot')
-            this.changeLang(this.$route.params.lg)
             this.$store.dispatch('walletInfo')
         }
     }

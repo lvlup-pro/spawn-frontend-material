@@ -98,8 +98,8 @@
         },
         mounted () {
             moment.locale(this.$lang)
-            this.$emit('view', this.meta())
             this.$store.commit('setToolbarTitle', 'header.vps_init')
+            this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
                     this.$vuetify.toast.create(this.$t('auth.no'), "right")
@@ -114,6 +114,7 @@
                         //FIXME set by API not user input
                         this.$store.commit('setToolbarTitle', 'header.vps')
                         this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
+                        this.$emit('view', this.meta())
                     })
                 }
             })
