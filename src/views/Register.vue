@@ -56,7 +56,8 @@
                 username: "",
                 email: "",
                 password: "",
-                repeatpassword: ""
+                repeatpassword: "",
+                captcha: ""
             }
         },
         computed: {
@@ -92,11 +93,15 @@
             checkCaptcha() {
                 if (window.grecaptcha !== undefined) {
                     grecaptcha.render('captcha-register', {
-                        'sitekey' : this.reCaptchaSiteKey
+                        'sitekey' : this.reCaptchaSiteKey,
+                        'callback' : this.captchaCallback
                     })
                 } else {
                     setTimeout(this.checkCaptcha, 10)
                 }
+            },
+            captchaCallback(response) {
+                this.captcha = response
             }
         }
     }
