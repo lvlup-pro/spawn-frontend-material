@@ -8,8 +8,11 @@ import storeConfig from './config.js'
 export default new Vuex.Store({
     state: {
         apiUrl: "",
+        token: null,
+        reCaptchaSiteKey: "",
         loading: false,
-        errorOnReq: false,
+        errorOnReq: false, //TODO check if useful
+        networkError: false,
         account: {
             username: ""
         },
@@ -34,17 +37,21 @@ export default new Vuex.Store({
     actions: {
         boot ({dispatch, state, commit}) {
             commit('setVersion', "v" + storeConfig.version)
+            commit('setReCaptchaSiteKey', storeConfig.reCaptchaSiteKey)
         },
         logOut ({dispatch, state, commit}) {
             localStorage.removeItem("token");
             commit('setAccount', {})
             commit('setWallet', [{balance_pretty: ""}])
             commit('setServices', [])
+            commit('setToken', null)
+            commit('setNetworkError', false)
             state.errorOnReq = true;
         },
-        handleError({}, args) {
+        handleError({dispatch, state, commit}, args) {
             console.log(args.error.message + ' in ' + args.name + '()!');
             if (args.error.message === 'Network Error') {
+                commit('setNetworkError', true)
                 //Network Error
             } else {
                 //Other Error
@@ -53,9 +60,6 @@ export default new Vuex.Store({
         //return true if not authorized
         checkSession ({dispatch, state}) {
             state.apiUrl = storeConfig.apiUrl
-            // if (process.env.NODE_ENV === "development") {
-            //     state.apiUrl = 'https://demoapi.lvlup.pro/v3/';
-            // }
 
             //recent problem with request, force login
             if (state.errorOnReq) {
@@ -72,7 +76,6 @@ export default new Vuex.Store({
                         return true
                     }
                 })
-                dispatch('walletInfo')
             }
         },
         accountLogin ({commit, dispatch, state}, args) {
@@ -197,6 +200,15 @@ export default new Vuex.Store({
         setVersion (state, newVersion) {
             state.version = newVersion;
         },
+        setToken (state, newToken) {
+            state.token = newToken;
+        },
+        setNetworkError (state, newErrorState) {
+            state.networkError = newErrorState;
+        },
+        setReCaptchaSiteKey (state, newKey) {
+            state.reCaptchaSiteKey = newKey;
+        },
         setUsername (state, newUsername) {
             state.account.username = newUsername;
         },
@@ -244,13 +256,13 @@ export default new Vuex.Store({
             state.loading = false;
         },
         setTitle (state, newTitle) {
-          document.title = newTitle;
+            document.title = newTitle;
         },
         setDescription (state, newDescription) {
-          document.head.querySelector('meta[name=description]').content = newDescription;
+            document.head.querySelector('meta[name=description]').content = newDescription;
         },
         setKeywords (state, newKeywords) {
-          document.head.querySelector('meta[name=keywords]').content = newKeywords;
+            document.head.querySelector('meta[name=keywords]').content = newKeywords;
         }
     }
 })
