@@ -179,6 +179,24 @@ export default new Vuex.Store({
             return axios.get(state.apiUrl + 'vps/' + args.id)
                 .then(function (res) {
                     if (typeof res.data.status !== 'undefined') {
+                        if (typeof state.vps.status !== 'undefined' && state.vps.status === 'running') {
+                            let s = res.data.uptime_s - state.vps.uptime_s;
+                            let netInChange = res.data.net_in_b - state.vps.net_in_b;
+                            let netOutChange = res.data.net_out_b - state.vps.net_out_b;
+                            res.data.net_in_bps = netInChange / s;
+                            res.data.net_out_bps = netOutChange / s;
+                            if (state.vps.virt == 'kvm') {
+                                let diskReadChange = res.data.disk_read_b - state.vps.disk_read_b;
+                                let diskWriteChange = res.data.disk_write_b - state.vps.disk_write_b;
+                                res.data.disk_read_bps = diskReadChange / s;
+                                res.data.disk_write_bps = diskWriteChange / s;
+                            }
+                        } else {
+                            res.data.net_in_bps = -1;
+                            res.data.net_out_bps = -1;
+                            res.data.disk_read_bps = -1;
+                            res.data.disk_write_bps = -1;
+                        }
                         commit('setVps', res.data)
                     }
                 }).catch(function (error) {

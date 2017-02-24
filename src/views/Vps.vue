@@ -61,11 +61,11 @@
                         </v-chip>
                         <v-chip label outline class="green green--text">
                             <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                            {{vps.net_in_b / vps.uptime_s | b_to_kb}}/s
+                            {{vps.net_in_bps | b_to_kb}}/s
                         </v-chip>
                         <v-chip label outline class="red red--text">
                             <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                            {{vps.net_out_b / vps.uptime_s | b_to_kb}}/s
+                            {{vps.net_out_bps | b_to_kb}}/s
                         </v-chip>
                     </v-col>
                 </v-row>
@@ -83,11 +83,11 @@
                         </v-chip>
                         <v-chip label outline class="green green--text">
                             <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                            {{vps.disk_read_b / vps.uptime_s | b_to_kb}}/s
+                            {{vps.disk_read_bps | b_to_kb}}/s
                         </v-chip>
                         <v-chip label outline class="red red--text">
                             <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                            {{vps.disk_write_b / vps.uptime_s | b_to_kb}}/s
+                            {{vps.disk_write_bps | b_to_kb}}/s
                         </v-chip>
                     </v-col>
                 </v-row>
@@ -170,9 +170,15 @@
                 return timestamp.format("H:mm L")
             },
             b_to_kb(b) {
+                if (b < 0) {
+                    return '... KB'
+                }
                 return Math.round(b / 1024) + ' KB'
             },
             b_to_gb(b) {
+                if (b < 0) {
+                    return '... GB'
+                }
                 return Math.round(b / 1024 / 1024 / 1024) + ' GB'
             }
         },
