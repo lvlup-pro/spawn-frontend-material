@@ -128,11 +128,9 @@ export default new Vuex.Store({
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'help/ticket/' + args.id + '/message')
                 .then(function (res) {
-                    if (res.data.error !== false || typeof res.data.messages[0] !== 'undefined') {
-                        //http://stackoverflow.com/a/784547/1351857
-                        //res.data.message = res.data.message.replace(/(?:\r\n|\r|\n)/g, '<br>'); //FIXME iterate all msg
-                        commit('setTicketMessages', res.data)
-                    }
+                    //http://stackoverflow.com/a/784547/1351857
+                    //res.data.message = res.data.message.replace(/(?:\r\n|\r|\n)/g, '<br>'); //FIXME iterate all msg
+                    commit('setTicketMessages', res.data)
                 }).catch(function (error) {
                     dispatch('handleError', {'name': 'ticketMessages', 'error': error})
                 })
