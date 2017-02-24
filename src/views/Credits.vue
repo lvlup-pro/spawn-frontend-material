@@ -29,10 +29,10 @@
 <script>
     export default {
         mounted () {
-            this.$emit('view', this.meta())
             this.$emit('redirectLang', 'credits')
             this.$vuetify.load()
             this.$store.commit('setToolbarTitle', 'header.credits')
+            this.$emit('view', this.meta())
         },
         preFetch (store) {
             store.commit('setMeta', this.methods.meta())

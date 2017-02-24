@@ -135,8 +135,8 @@
         },
         mounted () {
             moment.locale(this.$lang)
-            this.$emit('view', this.meta())
             this.$store.commit('setToolbarTitle', 'header.ticket_init')
+            this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
                     this.$vuetify.toast.create(this.$t('auth.no'), "right")

@@ -183,7 +183,8 @@
         },
         methods: {
             view (meta) {
-                this.$store.commit('setTitle', meta.title)
+                this.changeLang(this.$route.params.lg)
+                this.$store.commit('setTitle', this.getToolbarTitle())
                 this.$store.commit('setDescription', meta.description)
                 this.$store.commit('setKeywords', meta.keywords)
             },
@@ -236,7 +237,6 @@
         },
         mounted () {
             this.$store.dispatch('boot')
-            this.changeLang(this.$route.params.lg)
             this.$store.dispatch('walletInfo')
         }
     }

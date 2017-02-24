@@ -14,10 +14,10 @@
 <script>
     export default {
         mounted () {
-            this.$emit('view', this.meta())
             this.$emit('redirectLang', 'home')
             this.$vuetify.load()
             this.$store.commit('setToolbarTitle', 'header.home')
+            this.$emit('view', this.meta())
             this.$store.dispatch('checkSession')
         },
         preFetch (store) {
