@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-alpha.10 (TBA)
+
+### Features
+
++ Real-time network and disk usage [#68](https://github.com/lvlup-pro/spawn-frontend-material/issues/68)
+
 ## 3.0.0-alpha.9 (23.02.2017)
 
 ### Features

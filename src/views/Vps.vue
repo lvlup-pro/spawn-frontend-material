@@ -26,54 +26,72 @@
             <v-row>
                 <v-col xs12 lg4>
                     <h4>{{$t('vps.state')}}</h4>
-                    <v-chip v-if="on" label class="green white--text">On</v-chip>
-                    <v-chip v-if="off" label class="red white--text">Off</v-chip>
+                    <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
+                    <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
                     <div class="mb-4"></div>
                 </v-col>
             </v-row>
-            <v-row v-if="on">
-                <v-col xs12 lg4>
-                    <h4>{{$t('vps.resources')}}</h4>
-                </v-col>
-            </v-row>
-            <v-row v-if="on">
-                <v-col md6 xs12="xs12">
-                    <h5>{{vps.cpu}}% {{$t('vps.cpu')}}</h5>
-                    <div class="display-1"></div>
-                    <progress-linear-color v-model="vps.cpu"></progress-linear-color>
-                </v-col>
-                <v-col md6 xs12="xs12">
-                    <h5>{{ram}}% {{$t('vps.ram')}}</h5>
-                    <progress-linear-color v-model="ram"></progress-linear-color>
-                </v-col>
-            </v-row>
-            <v-row v-if="on">
-                <v-col md6 xs12="xs12">
-                    <h5>{{$t('vps.network')}}</h5>
-                    <v-chip v-if="on" label outline class="green green--text">
-                        <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                        {{vps.net_in_b | b_to_kb}} KB/s
-                    </v-chip>
-                    <v-chip v-if="on" label outline class="red red--text">
-                        <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                        {{vps.net_out_b | b_to_kb}} KB/s
-                    </v-chip>
-                </v-col>
-            </v-row>
-            <div class="mb-4"></div>
-            <v-row v-if="on && vps.virt == 'kvm'">
-                <v-col md6 xs12="xs12">
-                    <h5>{{$t('vps.disk')}}</h5>
-                    <v-chip v-if="on" label outline class="green green--text">
-                        <i class="fa fa-fw fa-lg fa-upload"></i>
-                        {{vps.disk_read_b | b_to_kb}} KB/s
-                    </v-chip>
-                    <v-chip v-if="on" label outline class="red red--text">
-                        <i class="fa fa-fw fa-lg fa-download"></i>
-                        {{vps.disk_write_b | b_to_kb}} KB/s
-                    </v-chip>
-                </v-col>
-            </v-row>
+            <div v-if="on">
+                <v-row>
+                    <v-col xs12 lg4>
+                        <h4>{{$t('vps.resources')}}</h4>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col md6 xs12="xs12">
+                        <h5>{{vps.cpu}}% {{$t('vps.cpu')}}</h5>
+                        <div class="display-1"></div>
+                        <progress-linear-color v-model="vps.cpu"></progress-linear-color>
+                    </v-col>
+                    <v-col md6 xs12="xs12">
+                        <h5>{{ram}}% {{$t('vps.ram')}}</h5>
+                        <progress-linear-color v-model="ram"></progress-linear-color>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col md6 xs12="xs12">
+                        <h5>{{$t('vps.network')}}</h5>
+                        <v-chip label outline class="green green--text">
+                            <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                            {{vps.net_in_b | b_to_gb}}
+                        </v-chip>
+                        <v-chip label outline class="red red--text">
+                            <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                            {{vps.net_out_b | b_to_gb}}
+                        </v-chip>
+                        <v-chip label outline class="green green--text">
+                            <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                            {{vps.net_in_bps | b_to_kb}}/s
+                        </v-chip>
+                        <v-chip label outline class="red red--text">
+                            <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                            {{vps.net_out_bps | b_to_kb}}/s
+                        </v-chip>
+                    </v-col>
+                </v-row>
+                <div class="mb-4"></div>
+                <v-row v-if="vps.virt == 'kvm'">
+                    <v-col md6 xs12="xs12">
+                        <h5>{{$t('vps.disk')}}</h5>
+                        <v-chip label outline class="green green--text">
+                            <i class="fa fa-fw fa-lg fa-upload"></i>
+                            {{vps.disk_read_b | b_to_gb}}
+                        </v-chip>
+                        <v-chip label outline class="red red--text">
+                            <i class="fa fa-fw fa-lg fa-download"></i>
+                            {{vps.disk_write_b | b_to_gb}}
+                        </v-chip>
+                        <v-chip label outline class="green green--text">
+                            <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                            {{vps.disk_read_bps | b_to_kb}}/s
+                        </v-chip>
+                        <v-chip label outline class="red red--text">
+                            <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                            {{vps.disk_write_bps | b_to_kb}}/s
+                        </v-chip>
+                    </v-col>
+                </v-row>
+            </div>
             <!--
              TODO
              - KVM & OpenVZ use vps.uptime_s - show and calculate for minutes, hours and days
@@ -85,6 +103,10 @@
 <style>
     #vps-stats .progress-linear {
         position: relative
+    }
+
+    span.chip i {
+        padding-right: 6px;
     }
 </style>
 <script>
@@ -109,7 +131,7 @@
                     this.$store.dispatch('vpsInfo', {
                         'id': this.$route.params.id
                     }).then(() => {
-                        this.interval = setInterval(this.stats, 3500)
+                        this.interval = setInterval(this.stats, 1000)
                         this.$store.commit('setLoaded')
                         //FIXME set by API not user input
                         this.$store.commit('setToolbarTitle', 'header.vps')
@@ -153,7 +175,16 @@
                 return timestamp.format("H:mm L")
             },
             b_to_kb(b) {
-                return Math.round(b / 1024);
+                if (b < 0) {
+                    return '... KB'
+                }
+                return Math.round(b / 1024) + ' KB'
+            },
+            b_to_gb(b) {
+                if (b < 0) {
+                    return '... GB'
+                }
+                return Math.round(b / 1024 / 1024 / 1024) + ' GB'
             }
         },
         preFetch (store) {
