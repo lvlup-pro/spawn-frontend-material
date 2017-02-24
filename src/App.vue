@@ -184,7 +184,6 @@
         methods: {
             view (meta) {
                 this.changeLang(this.$route.params.lg)
-                this.$store.commit('setTitle', this.getToolbarTitle())
                 this.$store.commit('setDescription', meta.description)
                 this.$store.commit('setKeywords', meta.keywords)
             },
@@ -197,6 +196,7 @@
                 localStorage.setItem('lang', lang);
                 this.$store.commit('setLanguage', lang);
                 this.$router.replace({'params': {'lg': lang}});
+                this.$store.commit('setTitle', this.getToolbarTitle())
             },
             redirectLang(url) {
                 if (typeof this.$route.params.lg === 'undefined') {
