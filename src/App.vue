@@ -21,7 +21,7 @@
                     <v-divider light/>
                     <v-list-sub-header>{{$t('sidebar.account')}}</v-list-sub-header>
                     <div v-if="!account.email">
-                        <v-list-item>
+                        <!--<v-list-item>
                             <v-list-tile router :href="'/' + language + '/register'">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-plus-circle"></i>
@@ -135,6 +135,14 @@
             <v-content>
                 <v-container fluid>
                     <div class="mt-3"></div>
+                    <v-row v-if="networkError">
+                        <v-col lg1></v-col>
+                        <v-col lg10>
+                            <v-alert warning>
+                                Network error detected <v-btn v-on:click.native="logOut" success>{{$t('sidebar.logout')}}</v-btn>
+                            </v-alert>
+                        </v-col>
+                    </v-row>
                     <transition mode="out-in">
                         <router-view v-on:view="view" v-on:redirectLang="redirectLang"></router-view>
                     </transition>
@@ -148,6 +156,9 @@
     import Vue from 'vue'
     export default {
         computed: {
+            networkError() {
+                return this.$store.state.networkError
+            },
             loading() {
                 return this.$store.state.loading
             },
@@ -226,6 +237,7 @@
         mounted () {
             this.$store.dispatch('boot')
             this.changeLang(this.$route.params.lg)
+            this.$store.dispatch('walletInfo')
         }
     }
 </script>

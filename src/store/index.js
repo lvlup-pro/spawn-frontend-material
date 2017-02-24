@@ -45,12 +45,13 @@ export default new Vuex.Store({
             commit('setWallet', [{balance_pretty: ""}])
             commit('setServices', [])
             commit('setToken', null)
+            commit('setNetworkError', false)
             state.errorOnReq = true;
         },
-        handleError({}, args) {
+        handleError({dispatch, state, commit}, args) {
             console.log(args.error.message + ' in ' + args.name + '()!');
             if (args.error.message === 'Network Error') {
-                this.networkError = true
+                commit('setNetworkError', true)
                 //Network Error
             } else {
                 //Other Error
@@ -75,7 +76,6 @@ export default new Vuex.Store({
                         return true
                     }
                 })
-                dispatch('walletInfo')
             }
         },
         accountLogin ({commit, dispatch, state}, args) {
@@ -203,6 +203,9 @@ export default new Vuex.Store({
         },
         setToken (state, newToken) {
             state.token = newToken;
+        },
+        setNetworkError (state, newErrorState) {
+            state.networkError = newErrorState;
         },
         setReCaptchaSiteKey (state, newKey) {
             state.reCaptchaSiteKey = newKey;

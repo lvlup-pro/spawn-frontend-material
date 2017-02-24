@@ -113,6 +113,7 @@
                         var auth = this.$t('auth.success');
                         this.$vuetify.toast.create(auth, "right")
                         this.$router.push('/'+this.$route.params.lg+'/service')
+                        this.$store.dispatch('walletInfo')
                     } else {
                         var auth = this.$t('auth.fail');
                         this.$vuetify.toast.create(auth, "right")
