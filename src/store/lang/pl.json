@@ -116,5 +116,6 @@
         "changelog": "Lista zmian"
     },
     "loading": "Ładowanie",
-    "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
+    "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS",
+    "network_error": "Wykryto błąd sieci!"
 }
