@@ -41,7 +41,11 @@
         "no": "Zaloguj się",
         "already": "Zalogowano już wcześniej",
         "success": "Zalogowano poprawnie",
-        "fail": "Logowanie nieudane"
+        "fail": "Logowanie nieudane",
+        "register": {
+            "success": "Pomyślnie zarejestrowano",
+            "fail": "Rejestracja nieudana"
+        }
     },
     "user": {
         "id": "ID",
