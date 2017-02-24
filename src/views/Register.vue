@@ -65,12 +65,7 @@
             }
         },
         mounted () {
-            //setTimeout(function(that){ //
-            //FIXME hack to prevent using not existing grecaptcha when full page load occurs
-                grecaptcha.render('captcha-register', {
-                    'sitekey' : this.$store.state.reCaptchaSiteKey
-                })
-            //}, 500)
+            this.checkCaptcha()
             this.$emit('redirectLang', 'register')
             this.$store.commit('setToolbarTitle', 'header.register')
             this.$emit('view', this.meta())
@@ -92,6 +87,15 @@
                     title: 'Register',
                     description: 'Example register description',
                     keywords: 'vuetify, register'
+                }
+            },
+            checkCaptcha() {
+                if (window.grecaptcha !== undefined) {
+                    grecaptcha.render('captcha-register', {
+                        'sitekey' : this.reCaptchaSiteKey
+                    })
+                } else {
+                    setTimeout(this.checkCaptcha, 10)
                 }
             }
         }
