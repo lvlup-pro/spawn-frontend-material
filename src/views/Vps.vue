@@ -39,12 +39,12 @@
                 </v-row>
                 <v-row>
                     <v-col md6 xs12="xs12">
-                        <h5>{{vps.cpu}}% {{$t('vps.cpu')}}</h5>
+                        <h5>{{$t('vps.cpu')}}: {{vps.cpu}}% </h5>
                         <div class="display-1"></div>
                         <progress-linear-color v-model="vps.cpu"></progress-linear-color>
                     </v-col>
                     <v-col md6 xs12="xs12">
-                        <h5>{{ram}}% {{$t('vps.ram')}}</h5>
+                        <h5>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h5>
                         <progress-linear-color v-model="ram"></progress-linear-color>
                     </v-col>
                 </v-row>
