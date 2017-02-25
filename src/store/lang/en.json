@@ -11,7 +11,8 @@
         "home": "Home",
         "services": "Services",
         "help": "Help",
-        "lang": "Language"
+        "lang": "Language",
+        "selectlang": "Select language"
     },
     "header": {
         "home": "Home",

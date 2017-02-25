@@ -110,26 +110,38 @@
                     </v-list-item>
 
                     <v-list-sub-header>{{$t('sidebar.lang')}}</v-list-sub-header>
-                    <v-list-item v-if="language == 'en'" v-on:click="changeLang('pl')">
-                        <v-list-tile>
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-globe"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title>English (EN)</v-list-tile-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <v-list-item v-if="language == 'pl'" v-on:click="changeLang('en')">
-                        <v-list-tile>
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-globe"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title>Polski (PL)</v-list-tile-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
+                    <v-list-group>
+                        <v-list-item slot="item">
+                            <v-list-tile>
+                                <v-list-tile-action>
+                                    <v-icon>keyboard_arrow_down</v-icon>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>{{$t('sidebar.selectlang')}}</v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item v-if="language != 'en'" v-on:click="changeLang('en')">
+                            <v-list-tile>
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-globe"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>English (EN)</v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item v-if="language != 'pl'" v-on:click="changeLang('pl')">
+                            <v-list-tile>
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-globe"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>Polski (PL)</v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                    </v-list-group>
                 </v-list>
             </v-sidebar>
             <v-content>

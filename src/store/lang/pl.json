@@ -11,7 +11,8 @@
         "home": "Nowości",
         "services": "Usługi",
         "help": "Pomoc",
-        "lang": "Język"
+        "lang": "Język",
+        "selectlang": "Wybierz język"
     },
     "header": {
         "home": "Nowości",
