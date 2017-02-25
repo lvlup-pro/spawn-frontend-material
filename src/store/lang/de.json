@@ -1,0 +1,126 @@
+{
+    "sidebar": {
+        "panel": "Kundenbereich",
+        "account": "Konto",
+        "register": "Anmeldung",
+        "login": "Einloggen",
+        "logout": "Abmeldung",
+        "profile": "{email}",
+        "payments": "Zahlungen ({balance})",
+        "menu": "Menu",
+        "home": "Zuhause",
+        "services": "Dienstleistungen",
+        "help": "Beihilfe",
+        "lang": "Sprache"
+    },
+    "header": {
+        "home": "Zuhause",
+        "credits": "Zahlungen",
+        "login": "Einloggen",
+        "register": "Anmeldung",
+        "services": "Dienstleistungen",
+        "ticket_init": "Anwendung",
+        "ticket": "Anwendung #{id}",
+        "tickets": "Anwendungen",
+        "vps_init": "VPS",
+        "vps": "VPS #{id}",
+        "payments": "Zahlungen",
+        "profile": "Konto"
+    },
+    "table": {
+        "id": "ID",
+        "name": "Name",
+        "service": "Service",
+        "subject": "Thema",
+        "amount": "Quote",
+        "status": "Status",
+        "created_at": "Erstellt",
+        "payed_to": "Ende der Dienstleistungen"
+    },
+    "auth": {
+        "no": "Bitte melden Sie sich an",
+        "already": "Sie sind derzeit angemeldet",
+        "success": "Unterzeichnet richtig",
+        "fail": "Ist ein Fehler aufgetreten bei der Anmeldung",
+        "invalidsession": "Bitte melden Sie sich an",
+        "register": {
+            "success": "Korrekt registriert",
+            "fail": "Ist ein Fehler aufgetreten bei der Registrierung"
+        }
+    },
+    "user": {
+        "id": "ID",
+        "username": "Benutzername",
+        "email": "E-mail",
+        "password": "Passwort",
+        "repeatpassword": "Passwort wiederholen",
+        "fullname": "Ihr Name",
+        "placeholder": {
+            "username": "j.doe",
+            "email": "john.doe@example.com",
+            "password": "********",
+            "fullname": "John Doe"
+        },
+        "login": {
+            "header": "Ich habe ein Konto mit lvlup.pro",
+            "button": "Einloggen"
+        },
+        "register": {
+            "header": "Ich habe kein Konto mit lvlup.pro",
+            "button": "Anmeldung"
+        }
+    },
+    "ticket": {
+        "status": {
+            "waiting": {
+                "long": "Wir freuen uns auf Ihre Antwort",
+                "medium": "Wir freuen uns auf den Kunden",
+                "short": "Erwartung"
+            },
+            "working": {
+                "long": "Der Unterstützung arbeitet an einer Antwort",
+                "medium": "Der Unterstützung arbeitet",
+                "short": "Verarbeitung"
+            },
+            "closed": {
+                "long": "Der Unterstützung arbeitet bereits auf Anfrage",
+                "medium": "Anwendung geschlossen",
+                "short": "Geschlossen"
+            },
+            "open": {
+                "long": "Klicken Sie für mehr",
+                "short": "Offen"
+            }
+        },
+        "subject": "Antwort",
+        "response_time": "Sehr geehrter Kunde, so kann die Antwort bis zu 48 Stunden! Bitte haben Sie Geduld",
+        "client": "Kunde",
+        "staff": "lvlup.pro Unterstützung",
+        "textarea": "Schreibe eine Nachricht an Unterstützung",
+        "send": "Senden",
+        "msg_too_long": "Die Nachricht ist zu lang",
+        "msg_too_short": "Die Nachricht ist zu kurzt",
+        "msg_duplicate": "Diese Nachricht wurde bereits gesendet"
+    },
+    "vps": {
+        "control": "Steuern",
+        "resources": "Ressourcen",
+        "network": "Netzwerk",
+        "disk": "Scheibe",
+        "turn_on": "Anmachen",
+        "turn_off": "Abschalten",
+        "state": "Bundesland",
+        "cpu": "CPU",
+        "ram": "RAM",
+        "on": "Auf",
+        "off": "Aus"
+    },
+    "credits": {
+        "contributors": "Mitwirkende",
+        "poweredby": "Unterstützt von",
+        "changelog": "Änderungsprotokoll"
+    },
+    "loading": "Laden",
+    "panel_preview": "Diese Vorschau-Version des Kunden-Panels zeigt nur VPS-Server",
+    "network_error": "Netzwerkfehler erkannt!"
+}
