@@ -42,7 +42,11 @@
         "already": "Logged in already",
         "success": "Auth success",
         "fail": "Login failed",
-        "invalidsession": "Session has expired, log in again"
+        "invalidsession": "Session has expired, log in again",
+        "register": {
+            "success": "Registration successful",
+            "fail": "Registration failed"
+        }
     },
     "user": {
         "id": "ID",
