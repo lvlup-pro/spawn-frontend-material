@@ -11,7 +11,6 @@ export default new Vuex.Store({
         token: null,
         reCaptchaSiteKey: "",
         loading: false,
-        errorOnReq: false, //TODO check if useful
         networkError: false,
         account: {
             username: ""
@@ -32,7 +31,8 @@ export default new Vuex.Store({
         toolbarTitleArgs: {},
         version: "",
         language: "",
-        meta: {}
+        meta: {},
+        logout: false
     },
     actions: {
         boot ({dispatch, state, commit}) {
@@ -46,13 +46,18 @@ export default new Vuex.Store({
             commit('setServices', [])
             commit('setToken', null)
             commit('setNetworkError', false)
-            state.errorOnReq = true;
+            commit('setLogout', true)
         },
         handleError({dispatch, state, commit}, args) {
-            console.log(args.error.message + ' in ' + args.name + '()!');
-            if (args.error.message === 'Network Error') {
+            let msg = args.error.message, fn = args.name;
+            console.log(msg + ' in ' + fn + '()!');
+            if (msg === 'Network Error') {
                 commit('setNetworkError', true)
-                //Network Error
+            } else if (
+                fn !== 'accountLogin' &&
+                msg === 'Request failed with status code 401' || msg === 'Request failed with status code 403'
+            ) {
+                dispatch('logOut')
             } else {
                 //Other Error
             }
@@ -61,8 +66,8 @@ export default new Vuex.Store({
         checkSession ({dispatch, state}) {
             state.apiUrl = storeConfig.apiUrl
 
-            //recent problem with request, force login
-            if (state.errorOnReq) {
+            //logout, force login
+            if (state.logout) {
                 return true
             }
             //no token, force login
@@ -76,6 +81,7 @@ export default new Vuex.Store({
                         return true
                     }
                 })
+                dispatch('walletInfo')
             }
         },
         accountLogin ({commit, dispatch, state}, args) {
@@ -83,8 +89,6 @@ export default new Vuex.Store({
                 .then(function (res) {
                     if (typeof res.data.token !== 'undefined') {
                         localStorage.setItem("token", res.data.token);
-                        state.errorOnReq = false;
-                        //dispatch('accountInfo').dispatch('walletInfo')
                         return true;
                     }
                 }).catch(function (error) {
@@ -280,6 +284,9 @@ export default new Vuex.Store({
         },
         setLoaded (state) {
             state.loading = false;
+        },
+        setLogout(state, newLogout) {
+            state.logout = newLogout;
         },
         setTitle (state, newTitle) {
             document.title = newTitle;

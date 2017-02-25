@@ -41,7 +41,8 @@
         "no": "Log in first",
         "already": "Logged in already",
         "success": "Auth success",
-        "fail": "Login failed"
+        "fail": "Login failed",
+        "invalidsession": "Session has expired, log in again"
     },
     "user": {
         "id": "ID",
@@ -116,5 +117,6 @@
         "changelog": "Changelog"
     },
     "loading": "Loading",
-    "panel_preview": "This preview version of customer panel shows only VPS servers"
+    "panel_preview": "This preview version of customer panel shows only VPS servers",
+    "network_error": "Network error detected!"
 }

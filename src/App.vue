@@ -139,7 +139,7 @@
                         <v-col lg1></v-col>
                         <v-col lg10>
                             <v-alert warning>
-                                Network error detected <v-btn v-on:click.native="logOut" success>{{$t('sidebar.logout')}}</v-btn>
+                                {{$t('network_error')}} <v-btn v-on:click.native="logOut" class="white--text" success>{{$t('sidebar.logout')}}</v-btn>
                             </v-alert>
                         </v-col>
                     </v-row>
@@ -173,12 +173,24 @@
             },
             language() {
                 return this.$store.state.language
+            },
+            logout() {
+                return this.$store.state.logout
             }
         },
         data () {
             return {
                 lg: '',
                 nav: null
+            }
+        },
+        watch: {
+            'logout': function(newValue, oldValue) {
+                if (newValue) {
+                    this.$store.commit('setLogout', false)
+                    this.$vuetify.toast.create(this.$t('auth.invalidsession'), 'right')
+                    this.$router.push('/' + this.language + '/login')
+                }
             }
         },
         methods: {
@@ -237,7 +249,6 @@
         },
         mounted () {
             this.$store.dispatch('boot')
-            this.$store.dispatch('walletInfo')
         }
     }
 </script>
