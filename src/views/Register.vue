@@ -7,7 +7,7 @@
                     <v-card class="mp-5">
                         <v-card-text>
                             <h5>{{ $t('user.register.header') }}</h5>
-                            <form v-on:submit.prevent="onSubmit">
+                            <form v-on:submit.prevent="">
                                 <v-text-input
                                     :label="$t('user.fullname')"
                                     :placeholder="$t('user.placeholder.fullname')"
@@ -36,7 +36,7 @@
                                     v-model="repeatpassword"
                                 ></v-text-input>
                                 <div id="captcha-register"></div>
-                                <v-btn flat="flat" dark="dark" success block type="submit">
+                                <v-btn flat="flat" dark="dark" success block type="submit" v-on:click.native="register()">
                                     <v-icon left>vpn_key</v-icon>
                                     {{$t('user.register.button')}}
                                 </v-btn>
@@ -56,7 +56,8 @@
                 username: "",
                 email: "",
                 password: "",
-                repeatpassword: ""
+                repeatpassword: "",
+                captcha: ""
             }
         },
         computed: {
@@ -65,12 +66,7 @@
             }
         },
         mounted () {
-            //setTimeout(function(that){ //
-            //FIXME hack to prevent using not existing grecaptcha when full page load occurs
-                grecaptcha.render('captcha-register', {
-                    'sitekey' : this.$store.state.reCaptchaSiteKey
-                })
-            //}, 500)
+            this.checkCaptcha()
             this.$emit('redirectLang', 'register')
             this.$store.commit('setToolbarTitle', 'header.register')
             this.$emit('view', this.meta())
@@ -93,6 +89,35 @@
                     description: 'Example register description',
                     keywords: 'vuetify, register'
                 }
+            },
+            checkCaptcha() {
+                if (window.grecaptcha !== undefined) {
+                    grecaptcha.render('captcha-register', {
+                        'sitekey' : this.reCaptchaSiteKey,
+                        'callback' : this.captchaCallback
+                    })
+                } else {
+                    setTimeout(this.checkCaptcha, 10)
+                }
+            },
+            captchaCallback(response) {
+                this.captcha = response
+            },
+            register() {
+                this.$store.dispatch('accountRegister', {
+                    fullname: this.fullname,
+                    username: this.username,
+                    password: this.password,
+                    email: this.email,
+                    captcha_response: this.captcha
+                }).then((res) => {
+                    if (res) {
+                        this.$vuetify.toast.create(this.$t('auth.register.success'), 'right')
+                    } else {
+                        this.$vuetify.toast.create(this.$t('auth.register.fail'), 'right')
+                    }
+                    this.$store.commit('setLoaded')
+                })
             }
         }
     }

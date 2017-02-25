@@ -95,6 +95,14 @@ export default new Vuex.Store({
                     dispatch('handleError', {'name': 'accountLogin', 'error': error});
                 })
         },
+        accountRegister({state, dispatch}, args) {
+            return axios.post(state.apiUrl + 'auth/register', args)
+                .then(function (res) {
+                    return true
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'accountRegister', 'error': error})
+                })
+        },
         accountInfo ({commit, dispatch, state}) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'me')
@@ -104,7 +112,7 @@ export default new Vuex.Store({
                         return true
                     }
                 }).catch(function (error) {
-                    dispatch('handleError', 'accountInfo', error)
+                    dispatch('handleError', {'name': 'accountInfo', 'error': error})
                 })
         },
         walletInfo ({commit, dispatch, state}) {

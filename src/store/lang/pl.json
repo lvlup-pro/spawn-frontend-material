@@ -42,7 +42,11 @@
         "already": "Zalogowano już wcześniej",
         "success": "Zalogowano poprawnie",
         "fail": "Logowanie nieudane",
-        "invalidsession": "Sesja wygasła, zaloguj się ponownie"
+        "invalidsession": "Sesja wygasła, zaloguj się ponownie",
+        "register": {
+            "success": "Pomyślnie zarejestrowano",
+            "fail": "Rejestracja nieudana"
+        }
     },
     "user": {
         "id": "ID",
