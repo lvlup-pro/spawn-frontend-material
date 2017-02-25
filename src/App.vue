@@ -141,6 +141,16 @@
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
+                        <v-list-item v-if="language != 'de'" v-on:click="changeLang('de')">
+                            <v-list-tile>
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-globe"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>Deutsch (DE)</v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
                     </v-list-group>
                 </v-list>
             </v-sidebar>
