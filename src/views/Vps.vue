@@ -65,19 +65,19 @@
                         <h5>{{$t('vps.network')}}</h5>
                         <v-chip label outline class="green green--text">
                             <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                            {{vps.net_in_b | b_to_gb}}
+                            {{vps.net_in_b | prettyBytes}}
                         </v-chip>
                         <v-chip label outline class="red red--text">
                             <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                            {{vps.net_out_b | b_to_gb}}
+                            {{vps.net_out_b | prettyBytes}}
                         </v-chip>
                         <v-chip label outline class="green green--text">
                             <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                            {{vps.net_in_bps | b_to_kb}}/s
+                            {{vps.net_in_bps | prettyBytes}}/s
                         </v-chip>
                         <v-chip label outline class="red red--text">
                             <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                            {{vps.net_out_bps | b_to_kb}}/s
+                            {{vps.net_out_bps | prettyBytes}}/s
                         </v-chip>
                     </v-col>
                 </v-row>
@@ -87,26 +87,26 @@
                         <h5>{{$t('vps.disk')}}</h5>
                         <v-chip label outline class="green green--text">
                             <i class="fa fa-fw fa-lg fa-upload"></i>
-                            {{vps.disk_read_b | b_to_gb}}
+                            {{vps.disk_read_b | prettyBytes}}
                         </v-chip>
                         <v-chip label outline class="red red--text">
                             <i class="fa fa-fw fa-lg fa-download"></i>
-                            {{vps.disk_write_b | b_to_gb}}
+                            {{vps.disk_write_b | prettyBytes}}
                         </v-chip>
                         <v-chip label outline class="green green--text">
                             <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                            {{vps.disk_read_bps | b_to_kb}}/s
+                            {{vps.disk_read_bps | prettyBytes}}/s
                         </v-chip>
                         <v-chip label outline class="red red--text">
                             <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                            {{vps.disk_write_bps | b_to_kb}}/s
+                            {{vps.disk_write_bps | prettyBytes}}/s
                         </v-chip>
                     </v-col>
                 </v-row>
+                <div class="mb-4"></div>
             </div>
             <!--
              TODO
-             - KVM & OpenVZ use vps.uptime_s - show and calculate for minutes, hours and days
              - OpenVZ use vps.nproc vps.max_swap_mb vps.swap_mb
              -->
         </v-container>
@@ -193,17 +193,17 @@
                 //DD.MM.YYYY or "L"
                 return timestamp.format("H:mm L")
             },
-            b_to_kb(b) {
-                if (b < 0) {
-                    return '... KB'
+            prettyBytes(bytes) {
+                if (typeof bytes === 'undefined' || bytes < 0) {
+                    return '... B'
                 }
-                return Math.round(b / 1024) + ' KB'
-            },
-            b_to_gb(b) {
-                if (b < 0) {
-                    return '... GB'
+                let i = 0;
+                var units = ['B', 'KB', 'MB', 'GB', 'TB'];
+                while (bytes > 1024) {
+                    bytes /= 1024;
+                    i++;
                 }
-                return Math.round(b / 1024 / 1024 / 1024) + ' GB'
+                return bytes.toFixed(2) + ' ' + units[i];
             },
             mb_to_gb(mb) {
                 if (mb < 0) {
