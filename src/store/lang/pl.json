@@ -73,7 +73,7 @@
     "ticket": {
         "status": {
             "waiting": {
-                "long": "Czekamy na Toją odpowiedź",
+                "long": "Czekamy na Twoją odpowiedź",
                 "medium": "Oczekiwanie na klienta",
                 "short": "Oczekiwanie"
             },
