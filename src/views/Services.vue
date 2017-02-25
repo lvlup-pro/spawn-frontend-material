@@ -27,7 +27,6 @@
                                     <th>{{$t('table.status')}}</th>
                                     <th>{{$t('table.ip')}}</th>
                                     <th>{{$t('table.payed_to')}}</th>
-                                    <th>{{$t('table.created_at')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -50,7 +49,6 @@
                                         </td>
                                         <td v-on:click="goToVps(item.id)">{{item.ip}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.payed_to | prettyDate}}</td>
-                                        <td v-on:click="goToVps(item.id)">{{item.created_at | prettyDate}}</td>
                                     </tr>
                                 </template>
                                 </tbody>
@@ -128,6 +126,8 @@
         },
         filters: {
             prettyDate (unixtimestamp) {
+                var timestamp = moment.unix(unixtimestamp);
+                return timestamp.format("DD.MM.YY") + " - " + timestamp.from()
                 return moment.unix(unixtimestamp).format("DD.MM.YYYY")
             }
         },
