@@ -3,6 +3,7 @@
         <v-container>
             <v-row>
                 <v-col xs12 class="markdown-body">
+                    <h1>LVL UP Spawn {{version}}</h1>
                     <h2>
                         <a href="https://github.com/lvlup-pro/spawn-frontend-material/graphs/contributors">{{$t('credits.contributors')}}</a>:
                     </h2>
@@ -36,6 +37,11 @@
         },
         preFetch (store) {
             store.commit('setMeta', this.methods.meta())
+        },
+        computed: {
+            version() {
+                return this.$store.state.version
+            }
         },
         methods: {
             meta() {
