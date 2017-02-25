@@ -47,6 +47,13 @@
                         <h5>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h5>
                         <progress-linear-color v-model="ram"></progress-linear-color>
                     </v-col>
+                    <v-col md6 xs12="xs12" v-if="vps.virt == 'openvz'">
+                        <h5>{{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h5>
+                        <progress-linear-color v-model="disk"></progress-linear-color>
+                    </v-col>
+                    <v-col md6 xs12="xs12" v-else>
+                        <h5>{{$t('vps.disk')}}: {{vps.max_disk_mb | mb_to_gb}}</h5>
+                    </v-col>
                 </v-row>
                 <v-row>
                     <v-col md6 xs12="xs12">
@@ -165,6 +172,9 @@
             },
             ram () {
                 return Math.round((this.$store.state.vps.mem_mb / this.$store.state.vps.max_mem_mb) * 100)
+            },
+            disk() {
+                return Math.round((this.$store.state.vps.disk_mb / this.$store.state.vps.max_disk_mb) * 100)
             }
         },
         watch: {},
@@ -185,6 +195,12 @@
                     return '... GB'
                 }
                 return Math.round(b / 1024 / 1024 / 1024) + ' GB'
+            },
+            mb_to_gb(mb) {
+                if (mb < 0) {
+                    return '... GB'
+                }
+                return (mb / 1024.0).toFixed(2) + ' GB'
             }
         },
         preFetch (store) {
