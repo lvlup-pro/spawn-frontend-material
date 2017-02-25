@@ -135,7 +135,6 @@
             prettyDate (unixtimestamp) {
                 var timestamp = moment.unix(unixtimestamp);
                 return timestamp.format("DD.MM.YY") + " - " + timestamp.from()
-                return moment.unix(unixtimestamp).format("DD.MM.YYYY")
             }
         },
         preFetch (store) {

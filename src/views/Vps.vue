@@ -25,9 +25,14 @@
             </v-row>
             <v-row>
                 <v-col xs12 lg4>
-                    <h4>{{$t('vps.state')}}</h4>
-                    <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
-                    <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
+                    <h4>{{$t('vps.info')}}</h4>
+                    <h5>
+                        {{$t('vps.state')}}:
+                        <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
+                        <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
+                    </h5>
+                    <h5>{{$t('vps.virtualization')}}: {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}</h5>
+                    <h5>{{$t('vps.uptime')}}: {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}</h5>
                     <div class="mb-4"></div>
                 </v-col>
             </v-row>
