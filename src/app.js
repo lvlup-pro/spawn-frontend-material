@@ -12,8 +12,9 @@ Vue.use(Vuetify)
 Vue.use(Components)
 
 Vue.use(VueI18n)
-Vue.locale('pl', require('./store/lang/pl.json'))
 Vue.locale('en', require('./store/lang/en.json'))
+Vue.locale('pl', require('./store/lang/pl.json'))
+Vue.locale('de', require('./store/lang/de.json'))
 
 const app = new Vue(Vue.util.extend({
     router,
