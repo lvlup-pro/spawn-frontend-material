@@ -73,54 +73,54 @@
     "ticket": {
         "status": {
             "waiting": {
-                "long": "Awaiting your response",
-                "medium": "Waiting for client",
-                "short": "Waiting"
+                "long": "Wir freuen uns auf Ihre Antwort",
+                "medium": "Wir freuen uns auf den Kunden",
+                "short": "Erwartung"
             },
             "working": {
-                "long": "Staff is working on response",
-                "medium": "Staff is working",
-                "short": "Processing"
+                "long": "Der Unterstützung arbeitet an einer Antwort",
+                "medium": "Der Unterstützung arbeitet",
+                "short": "Verarbeitung"
             },
             "closed": {
-                "long": "Staff is not working on this case anymore",
-                "medium": "Case closed",
-                "short": "Closed"
+                "long": "Der Unterstützung arbeitet bereits auf Anfrage",
+                "medium": "Anwendung geschlossen",
+                "short": "Geschlossen"
             },
             "open": {
-                "long": "Click ticket to find out more",
-                "short": "Open"
+                "long": "Klicken Sie für mehr",
+                "short": "Offen"
             }
         },
-        "subject": "Subject",
-        "response_time": "Dear customer, reply to your messages may take up to 48h",
-        "client": "You",
-        "staff": "lvlup.pro Staff",
-        "textarea": "Write your message to staff",
-        "send": "Send",
-        "msg_too_long": "Message is too long",
-        "msg_too_short": "Message is too short",
-        "msg_duplicate": "Message already sent (duplicate)"
+        "subject": "Antwort",
+        "response_time": "Sehr geehrter Kunde, so kann die Antwort bis zu 48 Stunden! Bitte haben Sie Geduld",
+        "client": "Kunde",
+        "staff": "lvlup.pro Unterstützung",
+        "textarea": "Schreibe eine Nachricht an Unterstützung",
+        "send": "Senden",
+        "msg_too_long": "Die Nachricht ist zu lang",
+        "msg_too_short": "Die Nachricht ist zu kurzt",
+        "msg_duplicate": "Diese Nachricht wurde bereits gesendet"
     },
     "vps": {
-        "control": "Control",
-        "resources": "Resources",
-        "network": "Network",
-        "disk": "Disk",
-        "turn_on": "Turn on",
-        "turn_off": "Turn off",
-        "state": "State",
+        "control": "Steuern",
+        "resources": "Ressourcen",
+        "network": "Netzwerk",
+        "disk": "Scheibe",
+        "turn_on": "Anmachen",
+        "turn_off": "Abschalten",
+        "state": "Bundesland",
         "cpu": "CPU",
         "ram": "RAM",
-        "on": "On",
-        "off": "Off"
+        "on": "Auf",
+        "off": "Aus"
     },
     "credits": {
-        "contributors": "Contributors",
-        "poweredby": "Powered by",
-        "changelog": "Changelog"
+        "contributors": "Mitwirkende",
+        "poweredby": "Unterstützt von",
+        "changelog": "Änderungsprotokoll"
     },
-    "loading": "Loading",
-    "panel_preview": "This preview version of customer panel shows only VPS servers",
-    "network_error": "Network error detected!"
+    "loading": "Laden",
+    "panel_preview": "Diese Vorschau-Version des Kunden-Panels zeigt nur VPS-Server",
+    "network_error": "Netzwerkfehler erkannt!"
 }
