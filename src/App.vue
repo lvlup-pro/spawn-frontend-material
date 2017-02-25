@@ -114,7 +114,7 @@
                         <v-list-item slot="item">
                             <v-list-tile>
                                 <v-list-tile-action>
-                                    <v-icon>keyboard_arrow_down</v-icon>
+                                    <i class="fa fa-fw fa-2x fa-chevron-down"></i>
                                 </v-list-tile-action>
                                 <v-list-tile-content>
                                     <v-list-tile-title>{{$t('sidebar.selectlang')}}</v-list-tile-title>
@@ -362,5 +362,13 @@
 
     #credits-link {
         text-decoration: none;
+    }
+
+    .list--group .list__tile {
+        padding-left: 32px;
+    }
+
+    aside.sidebar {
+        height: initial !important;
     }
 </style>
