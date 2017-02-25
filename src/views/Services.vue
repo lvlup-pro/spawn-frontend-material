@@ -117,9 +117,7 @@
         },
         filters: {
             prettyDate (unixtimestamp) {
-                var timestamp = moment.unix(unixtimestamp);
-                //DD.MM.YYYY or "L"
-                return timestamp.format("L") + " - " + timestamp.from()
+                return moment.unix(unixtimestamp).format("DD.MM.YYYY")
             }
         },
         preFetch (store) {
