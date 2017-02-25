@@ -73,7 +73,7 @@
     "ticket": {
         "status": {
             "waiting": {
-                "long": "Czekamy na Twoją odpowiedź",
+                "long": "Czekamy na Toją odpowiedź",
                 "medium": "Oczekiwanie na klienta",
                 "short": "Oczekiwanie"
             },
@@ -98,9 +98,9 @@
         "staff": "Obsługa lvlup.pro",
         "textarea": "Napisz swoją wiadomość do obsługi",
         "send": "Wyślij",
-        "msg_too_long": "Twoja wiadomość jest za długa",
-        "msg_too_short": "Twoja wiadomość jest za krótka",
-        "msg_duplicate": "Twoja wiadomość została już wysłana (duplikat)"
+        "msg_too_long": "Wiadomość jest za długa",
+        "msg_too_short": "Wiadomość jest za krótka",
+        "msg_duplicate": "Wiadomość już wysłana (duplikat)"
     },
     "vps": {
         "control": "Kontrola",
