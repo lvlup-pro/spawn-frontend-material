@@ -29,6 +29,7 @@
     },
     "table": {
         "id": "ID",
+        "ip": "IP",
         "name": "Name",
         "service": "Service",
         "subject": "Subject",

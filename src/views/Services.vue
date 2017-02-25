@@ -24,6 +24,7 @@
                                     <th>{{$t('table.service')}}</th>
                                     <th>{{$t('table.id')}}</th>
                                     <th>{{$t('table.name')}}</th>
+                                    <th>{{$t('table.ip')}}</th>
                                     <th>{{$t('table.payed_to')}}</th>
                                     <th>{{$t('table.created_at')}}</th>
                                 </tr>
@@ -38,6 +39,7 @@
                                         <td v-on:click="goToVps(item.id)">VPS</td>
                                         <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.name}}</td>
+                                        <td v-on:click="goToVps(item.id)">{{item.ip}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.payed_to | prettyDate}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.created_at | prettyDate}}</td>
                                     </tr>
