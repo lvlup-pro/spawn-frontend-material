@@ -380,5 +380,6 @@
 
     aside.sidebar {
         height: initial !important;
+        min-height: 100vh;
     }
 </style>
