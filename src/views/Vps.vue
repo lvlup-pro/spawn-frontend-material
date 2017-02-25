@@ -3,7 +3,7 @@
         <v-container id="vps-stats" v-if="!loading">
             <v-row>
                 <v-col xs12 lg4>
-                    <h4>{{$t('vps.control')}}</h4>
+                    <h5>{{$t('vps.control')}}</h5>
                     <v-btn v-if="off" success
                            v-bind:loading="changingStatus"
                            v-on:click.native="changingStatus = true"
@@ -20,49 +20,50 @@
                     >
                         {{$t('vps.turn_off')}}
                     </v-btn>
-                    <div class="mb-2"></div>
                 </v-col>
             </v-row>
+            <div class="mb-4"></div>
             <v-row>
                 <v-col xs12 lg4>
-                    <h4>{{$t('vps.info')}}</h4>
-                    <h5>
+                    <h5>{{$t('vps.info')}}</h5>
+                    <h6>
                         {{$t('vps.state')}}:
                         <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
                         <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
-                    </h5>
-                    <h5>{{$t('vps.virtualization')}}: {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}</h5>
-                    <h5>{{$t('vps.uptime')}}: {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}</h5>
+                    </h6>
+                    <h6>{{$t('vps.virtualization')}}: {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}</h6>
+                    <h6>{{$t('vps.uptime')}}: {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}</h6>
                     <div class="mb-4"></div>
                 </v-col>
             </v-row>
             <div v-if="on">
                 <v-row>
                     <v-col xs12 lg4>
-                        <h4>{{$t('vps.resources')}}</h4>
+                        <h5>{{$t('vps.resources')}}</h5>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col md6 xs12="xs12">
-                        <h5>{{$t('vps.cpu')}}: {{vps.cpu}}% </h5>
+                        <h6>{{$t('vps.cpu')}}: {{vps.cpu}}% </h6>
                         <div class="display-1"></div>
                         <progress-linear-color v-model="vps.cpu"></progress-linear-color>
                     </v-col>
                     <v-col md6 xs12="xs12">
-                        <h5>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h5>
+                        <h6>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h6>
                         <progress-linear-color v-model="ram"></progress-linear-color>
                     </v-col>
                     <v-col md6 xs12="xs12" v-if="vps.virt == 'openvz'">
-                        <h5>{{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h5>
+                        <h6>{{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h6>
                         <progress-linear-color v-model="disk"></progress-linear-color>
                     </v-col>
                     <v-col md6 xs12="xs12" v-else>
-                        <h5>{{$t('vps.disk')}}: {{vps.max_disk_mb | mb_to_gb}}</h5>
+                        <h6>{{$t('vps.disk')}}: {{vps.max_disk_mb | mb_to_gb}}</h6>
                     </v-col>
                 </v-row>
+                <div class="mb-2"></div>
                 <v-row>
                     <v-col md6 xs12="xs12">
-                        <h5>{{$t('vps.network')}}</h5>
+                        <h6>{{$t('vps.network')}}</h6>
                         <v-chip label outline class="green green--text">
                             <i class="fa fa-fw fa-lg fa-cloud-download"></i>
                             {{vps.net_in_b | prettyBytes}}
@@ -81,10 +82,10 @@
                         </v-chip>
                     </v-col>
                 </v-row>
-                <div class="mb-4"></div>
+                <div class="mb-2"></div>
                 <v-row v-if="vps.virt == 'kvm'">
                     <v-col md6 xs12="xs12">
-                        <h5>{{$t('vps.disk')}}</h5>
+                        <h6>{{$t('vps.disk')}}</h6>
                         <v-chip label outline class="green green--text">
                             <i class="fa fa-fw fa-lg fa-upload"></i>
                             {{vps.disk_read_b | prettyBytes}}
@@ -123,6 +124,11 @@
 
     .no-margin-button {
         margin-left: 0px;
+        margin-top: -0.5rem;
+    }
+
+    h6 {
+        font-size: 18px;
     }
 </style>
 <script>
