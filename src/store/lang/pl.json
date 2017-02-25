@@ -114,7 +114,8 @@
         "cpu": "CPU",
         "ram": "RAM",
         "on": "Włączony",
-        "off": "Wyłączony"
+        "off": "Wyłączony",
+        "locked": "Zablokowany"
     },
     "credits": {
         "contributors": "Autorzy",
