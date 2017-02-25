@@ -1,0 +1,126 @@
+{
+    "sidebar": {
+        "panel": "Kundenbereich",
+        "account": "Konto",
+        "register": "Anmeldung",
+        "login": "Einloggen",
+        "logout": "Abmeldung",
+        "profile": "{email}",
+        "payments": "Zahlungen ({balance})",
+        "menu": "Menu",
+        "home": "Zuhause",
+        "services": "Dienstleistungen",
+        "help": "Beihilfe",
+        "lang": "Sprache"
+    },
+    "header": {
+        "home": "Zuhause",
+        "credits": "Zahlungen",
+        "login": "Einloggen",
+        "register": "Anmeldung",
+        "services": "Dienstleistungen",
+        "ticket_init": "Anwendung",
+        "ticket": "Anwendung #{id}",
+        "tickets": "Anwendungen",
+        "vps_init": "VPS",
+        "vps": "VPS #{id}",
+        "payments": "Zahlungen",
+        "profile": "Konto"
+    },
+    "table": {
+        "id": "ID",
+        "name": "Name",
+        "service": "Service",
+        "subject": "Thema",
+        "amount": "Quote",
+        "status": "Status",
+        "created_at": "Erstellt",
+        "payed_to": "Ende der Dienstleistungen"
+    },
+    "auth": {
+        "no": "Bitte melden Sie sich an",
+        "already": "Sie sind derzeit angemeldet",
+        "success": "Unterzeichnet richtig",
+        "fail": "Ist ein Fehler aufgetreten bei der Anmeldung",
+        "invalidsession": "Bitte melden Sie sich an",
+        "register": {
+            "success": "Korrekt registriert",
+            "fail": "Ist ein Fehler aufgetreten bei der Registrierung"
+        }
+    },
+    "user": {
+        "id": "ID",
+        "username": "Benutzername",
+        "email": "E-mail",
+        "password": "Passwort",
+        "repeatpassword": "Passwort wiederholen",
+        "fullname": "Ihr Name",
+        "placeholder": {
+            "username": "j.doe",
+            "email": "john.doe@example.com",
+            "password": "********",
+            "fullname": "John Doe"
+        },
+        "login": {
+            "header": "Ich habe ein Konto mit lvlup.pro",
+            "button": "Einloggen"
+        },
+        "register": {
+            "header": "Ich habe kein Konto mit lvlup.pro",
+            "button": "Anmeldung"
+        }
+    },
+    "ticket": {
+        "status": {
+            "waiting": {
+                "long": "Awaiting your response",
+                "medium": "Waiting for client",
+                "short": "Waiting"
+            },
+            "working": {
+                "long": "Staff is working on response",
+                "medium": "Staff is working",
+                "short": "Processing"
+            },
+            "closed": {
+                "long": "Staff is not working on this case anymore",
+                "medium": "Case closed",
+                "short": "Closed"
+            },
+            "open": {
+                "long": "Click ticket to find out more",
+                "short": "Open"
+            }
+        },
+        "subject": "Subject",
+        "response_time": "Dear customer, reply to your messages may take up to 48h",
+        "client": "You",
+        "staff": "lvlup.pro Staff",
+        "textarea": "Write your message to staff",
+        "send": "Send",
+        "msg_too_long": "Message is too long",
+        "msg_too_short": "Message is too short",
+        "msg_duplicate": "Message already sent (duplicate)"
+    },
+    "vps": {
+        "control": "Control",
+        "resources": "Resources",
+        "network": "Network",
+        "disk": "Disk",
+        "turn_on": "Turn on",
+        "turn_off": "Turn off",
+        "state": "State",
+        "cpu": "CPU",
+        "ram": "RAM",
+        "on": "On",
+        "off": "Off"
+    },
+    "credits": {
+        "contributors": "Contributors",
+        "poweredby": "Powered by",
+        "changelog": "Changelog"
+    },
+    "loading": "Loading",
+    "panel_preview": "This preview version of customer panel shows only VPS servers",
+    "network_error": "Network error detected!"
+}
