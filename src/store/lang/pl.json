@@ -35,8 +35,8 @@
         "subject": "Temat",
         "amount": "Kwota",
         "status": "Status",
-        "created_at": "Utworzono",
-        "payed_to": "Koniec ważności usługi"
+        "created_at": "Utworzony",
+        "payed_to": "Wygasa"
     },
     "auth": {
         "no": "Zaloguj się",

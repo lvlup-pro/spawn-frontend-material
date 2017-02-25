@@ -36,7 +36,7 @@
         "amount": "Amount",
         "status": "Status",
         "created_at": "Created",
-        "payed_to": "Valid for"
+        "payed_to": "Expires"
     },
     "auth": {
         "no": "Log in first",
