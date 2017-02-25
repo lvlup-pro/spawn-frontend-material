@@ -34,9 +34,9 @@
                                         <td>
                                             #{{item.id}}
                                         </td>
-                                        <td v-if="item.amount > 0" class="green--text">{{item.amount}}</td>
-                                        <td v-if="item.amount == 0">{{item.amount}}</td>
-                                        <td v-if="item.amount < 0" class="red--text">{{item.amount}}</td>
+                                        <td v-if="item.amount > 0" class="green--text">{{item.amount}} PLN</td>
+                                        <td v-if="item.amount == 0">{{item.amount}} PLN</td>
+                                        <td v-if="item.amount < 0" class="red--text">{{item.amount}} PLN</td>
                                         <td>{{item.created_at | prettyDateFrom}}</td>
                                     </tr>
                                 </template>
