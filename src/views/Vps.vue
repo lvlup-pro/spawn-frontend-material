@@ -8,7 +8,7 @@
                            v-bind:loading="changingStatus"
                            v-on:click.native="changingStatus = true"
                            v-bind:disabled="changingStatus"
-                           class="white--text"
+                           class="white--text no-margin-button"
                     >
                         {{$t('vps.turn_on')}}
                     </v-btn>
@@ -16,7 +16,7 @@
                            v-bind:loading="changingStatus"
                            v-on:click.native="changingStatus = true"
                            v-bind:disabled="changingStatus"
-                           class="white--text"
+                           class="white--text no-margin-button"
                     >
                         {{$t('vps.turn_off')}}
                     </v-btn>
@@ -107,6 +107,10 @@
 
     span.chip i {
         padding-right: 6px;
+    }
+
+    .no-margin-button {
+        margin-left: 0px;
     }
 </style>
 <script>

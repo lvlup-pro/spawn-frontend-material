@@ -1,4 +1,5 @@
-# spawn-frontend-material
+# LVL UP Spawn v3 - frontend
+> Material edition
 
 [![Build Status](https://travis-ci.org/lvlup-pro/spawn-frontend-material.svg?branch=master)](https://travis-ci.org/lvlup-pro/spawn-frontend-material)
 [![Code Climate](https://codeclimate.com/github/lvlup-pro/spawn-frontend-material/badges/gpa.svg)](https://codeclimate.com/github/lvlup-pro/spawn-frontend-material)
