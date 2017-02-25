@@ -1,14 +1,18 @@
 # Changelog
 
-## 3.0.0-alpha.10 (TBA)
+## 3.0.0-alpha.10 (25.02.2017)
 
 ### Features
 
-+ Real-time network and disk usage [#68](https://github.com/lvlup-pro/spawn-frontend-material/issues/68)
++ Real-time network and disk usage [#68](https://github.com/lvlup-pro/spawn-frontend-material/issues/68) [#72](https://github.com/lvlup-pro/spawn-frontend-material/pull/72)
++ Draft of registration page [#67](https://github.com/lvlup-pro/spawn-frontend-material/pull/67) [#74](https://github.com/lvlup-pro/spawn-frontend-material/pull/74)
++ Sync of page and toolbar titles [#71](https://github.com/lvlup-pro/spawn-frontend-material/pull/71)
++ Webpack v2.2.1
 
 ### Fixes
 
 + Force logout after 401 or 403 error [#69](https://github.com/lvlup-pro/spawn-frontend-material/issues/69)
++ Prevent message leak between tickets, fix new lines in messages [#70](https://github.com/lvlup-pro/spawn-frontend-material/pull/70)
 
 ## 3.0.0-alpha.9 (23.02.2017)
 
