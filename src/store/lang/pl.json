@@ -30,13 +30,14 @@
     },
     "table": {
         "id": "ID",
+        "ip": "IP",
         "name": "Nazwa",
         "service": "Usługa",
         "subject": "Temat",
         "amount": "Kwota",
         "status": "Status",
-        "created_at": "Utworzono",
-        "payed_to": "Koniec ważności usługi"
+        "created_at": "Utworzony",
+        "payed_to": "Wygasa"
     },
     "auth": {
         "no": "Zaloguj się",
@@ -110,11 +111,16 @@
         "disk": "Dysk",
         "turn_on": "Włącz",
         "turn_off": "Wyłącz",
+        "info": "Informacje",
+        "virtualization": "Wirtualizacja",
+        "uptime": "Czas pracy",
+        "days": "dni",
         "state": "Stan",
         "cpu": "CPU",
         "ram": "RAM",
         "on": "Włączony",
-        "off": "Wyłączony"
+        "off": "Wyłączony",
+        "locked": "Zablokowany"
     },
     "credits": {
         "contributors": "Autorzy",

@@ -25,9 +25,14 @@
             </v-row>
             <v-row>
                 <v-col xs12 lg4>
-                    <h4>{{$t('vps.state')}}</h4>
-                    <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
-                    <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
+                    <h4>{{$t('vps.info')}}</h4>
+                    <h5>
+                        {{$t('vps.state')}}:
+                        <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
+                        <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
+                    </h5>
+                    <h5>{{$t('vps.virtualization')}}: {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}</h5>
+                    <h5>{{$t('vps.uptime')}}: {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}</h5>
                     <div class="mb-4"></div>
                 </v-col>
             </v-row>
@@ -39,13 +44,20 @@
                 </v-row>
                 <v-row>
                     <v-col md6 xs12="xs12">
-                        <h5>{{vps.cpu}}% {{$t('vps.cpu')}}</h5>
+                        <h5>{{$t('vps.cpu')}}: {{vps.cpu}}% </h5>
                         <div class="display-1"></div>
                         <progress-linear-color v-model="vps.cpu"></progress-linear-color>
                     </v-col>
                     <v-col md6 xs12="xs12">
-                        <h5>{{ram}}% {{$t('vps.ram')}}</h5>
+                        <h5>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h5>
                         <progress-linear-color v-model="ram"></progress-linear-color>
+                    </v-col>
+                    <v-col md6 xs12="xs12" v-if="vps.virt == 'openvz'">
+                        <h5>{{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h5>
+                        <progress-linear-color v-model="disk"></progress-linear-color>
+                    </v-col>
+                    <v-col md6 xs12="xs12" v-else>
+                        <h5>{{$t('vps.disk')}}: {{vps.max_disk_mb | mb_to_gb}}</h5>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -169,6 +181,9 @@
             },
             ram () {
                 return Math.round((this.$store.state.vps.mem_mb / this.$store.state.vps.max_mem_mb) * 100)
+            },
+            disk() {
+                return Math.round((this.$store.state.vps.disk_mb / this.$store.state.vps.max_disk_mb) * 100)
             }
         },
         watch: {},
@@ -189,6 +204,12 @@
                     return '... GB'
                 }
                 return Math.round(b / 1024 / 1024 / 1024) + ' GB'
+            },
+            mb_to_gb(mb) {
+                if (mb < 0) {
+                    return '... GB'
+                }
+                return (mb / 1024.0).toFixed(2) + ' GB'
             }
         },
         preFetch (store) {

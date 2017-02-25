@@ -30,13 +30,14 @@
     },
     "table": {
         "id": "ID",
+        "ip": "IP",
         "name": "Name",
         "service": "Service",
         "subject": "Subject",
         "amount": "Amount",
         "status": "Status",
         "created_at": "Created",
-        "payed_to": "Valid for"
+        "payed_to": "Expires"
     },
     "auth": {
         "no": "Log in first",
@@ -110,11 +111,16 @@
         "disk": "Disk",
         "turn_on": "Turn on",
         "turn_off": "Turn off",
+        "info": "Informations",
         "state": "State",
+        "virtualization": "Virtualization",
+        "uptime": "Uptime",
+        "days": "days",
         "cpu": "CPU",
         "ram": "RAM",
         "on": "On",
-        "off": "Off"
+        "off": "Off",
+        "locked": "Locked"
     },
     "credits": {
         "contributors": "Contributors",

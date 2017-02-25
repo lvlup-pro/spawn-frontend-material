@@ -24,8 +24,9 @@
                                     <th>{{$t('table.service')}}</th>
                                     <th>{{$t('table.id')}}</th>
                                     <th>{{$t('table.name')}}</th>
+                                    <th>{{$t('table.status')}}</th>
+                                    <th>{{$t('table.ip')}}</th>
                                     <th>{{$t('table.payed_to')}}</th>
-                                    <th>{{$t('table.created_at')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -35,11 +36,26 @@
                                             <v-checkbox v-bind:id="'checkbox' + index" filled
                                                         class="text-xs-center"></v-checkbox>
                                         </td>
-                                        <td v-on:click="goToVps(item.id)">VPS</td>
+                                        <td v-on:click="goToVps(item.id)">
+                                            <span v-if="item.virt === 0">VPS OpenVZ</span>
+                                            <span v-else-if="item.virt === 2">VPS KVM</span>
+                                            <span v-else>VPS</span>
+                                        </td>
                                         <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.name}}</td>
+                                        <td v-on:click="goToVps(item.id)">
+                                            <span v-if="item.active === 0">
+                                                <i class="fa fa-circle red--text"></i> {{$t('vps.locked')}}
+                                            </span>
+                                            <span v-else-if="item.running === 1">
+                                                <i class="fa fa-circle green--text"></i> {{$t('vps.on')}}
+                                            </span>
+                                            <span v-else>
+                                                <i class="fa fa-circle red--text"></i> {{$t('vps.off')}}
+                                            </span>
+                                        </td>
+                                        <td v-on:click="goToVps(item.id)">{{item.ip}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.payed_to | prettyDate}}</td>
-                                        <td v-on:click="goToVps(item.id)">{{item.created_at | prettyDate}}</td>
                                     </tr>
                                 </template>
                                 </tbody>
@@ -118,8 +134,7 @@
         filters: {
             prettyDate (unixtimestamp) {
                 var timestamp = moment.unix(unixtimestamp);
-                //DD.MM.YYYY or "L"
-                return timestamp.format("L") + " - " + timestamp.from()
+                return timestamp.format("DD.MM.YY") + " - " + timestamp.from()
             }
         },
         preFetch (store) {
