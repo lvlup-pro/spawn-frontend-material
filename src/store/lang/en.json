@@ -107,8 +107,11 @@
     "vps": {
         "control": "Control",
         "resources": "Resources",
-        "network": "Network",
+        "network_all": "Network (from start)",
+        "network_rt": "Network (real-time)",
         "disk": "Disk",
+        "disk_all": "Disk (from start)",
+        "disk_rt": "Disk (real-time)",
         "turn_on": "Turn on",
         "turn_off": "Turn off",
         "info": "Informations",
