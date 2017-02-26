@@ -107,10 +107,10 @@
     "vps": {
         "control": "Kontrola",
         "resources": "Zasoby",
-        "network_all": "Sieć (od początku)",
+        "network_all": "Sieć (od startu)",
         "network_rt": "Sieć (obecnie)",
         "disk": "Dysk",
-        "disk_all": "Dysk (od początku)",
+        "disk_all": "Dysk (od startu)",
         "disk_rt": "Dysk (obecnie)",
         "turn_on": "Włącz",
         "info": "Informacje",

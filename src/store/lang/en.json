@@ -107,10 +107,10 @@
     "vps": {
         "control": "Control",
         "resources": "Resources",
-        "network_all": "Network (from start)",
+        "network_all": "Network (since boot)",
         "network_rt": "Network (real-time)",
         "disk": "Disk",
-        "disk_all": "Disk (from start)",
+        "disk_all": "Disk (since boot)",
         "disk_rt": "Disk (real-time)",
         "turn_on": "Turn on",
         "info": "Informations",
@@ -124,7 +124,7 @@
         "off": "Off",
         "locked": "Locked",
         "disable": {
-            "header": "Are you sure want to disable VPS #{id}?",
+            "header": "Are you sure want to turn off VPS #{id}?",
             "description": "Hard stop, may cause unsaved data loss like pulling power plug from PC!",
             "cancel": "Cancel",
             "submit": "Turn off"
