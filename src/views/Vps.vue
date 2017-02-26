@@ -133,7 +133,7 @@
         position: relative
     }
 
-    span.chip {
+    span.chip--outline {
         margin-bottom: 12px;
     }
 
