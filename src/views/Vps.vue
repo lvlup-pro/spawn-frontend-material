@@ -6,7 +6,7 @@
                     <h5>{{$t('vps.control')}}</h5>
                     <v-btn v-if="off" success
                            v-bind:loading="changingStatus"
-                           v-on:click.native="changingStatus = true"
+                           v-on:click.native="enable"
                            v-bind:disabled="changingStatus"
                            class="white--text no-margin-button"
                     >
@@ -14,7 +14,7 @@
                     </v-btn>
                     <v-btn v-if="on" error
                            v-bind:loading="changingStatus"
-                           v-on:click.native="changingStatus = true"
+                           v-on:click.native="disable"
                            v-bind:disabled="changingStatus"
                            class="white--text no-margin-button"
                     >
@@ -28,8 +28,12 @@
                     <h5>{{$t('vps.info')}}</h5>
                     <h6>
                         {{$t('vps.state')}}:
-                        <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
-                        <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
+                        <v-chip v-if="on" label class="green white--text">
+                            {{$t('vps.on')}}
+                        </v-chip>
+                        <v-chip v-if="off" label class="red white--text">
+                            {{$t('vps.off')}}
+                        </v-chip>
                     </h6>
                     <h6>{{$t('vps.virtualization')}}: {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}</h6>
                     <h6>{{$t('vps.uptime')}}: {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}</h6>
@@ -231,6 +235,18 @@
             },
             stats() {
                 this.$store.dispatch('vpsInfo', {
+                    'id': this.$route.params.id
+                })
+            },
+            enable() {
+                this.changingStatus = true
+                this.$store.dispatch('vpsOn', {
+                    'id': this.$route.params.id
+                })
+            },
+            disable() {
+                this.changingStatus = true
+                this.$store.dispatch('vpsOff', {
                     'id': this.$route.params.id
                 })
             }
