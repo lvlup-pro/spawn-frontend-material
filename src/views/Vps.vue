@@ -17,28 +17,35 @@
                         {{$t('vps.virtualization')}}:
                         {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}
                     </v-card-row>
-                    <v-card-row>
+                    <v-card-row v-if="on">
                         <i class="fa fa-fw fa-2x fa-clock-o"></i>
                         {{$t('vps.uptime')}}:
                         {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}
                     </v-card-row>
                 </v-card-text>
                 <v-card-row actions style="justify-content: flex-start">
-                    <v-btn v-if="off" success
-                           v-bind:loading="changingStatus"
-                           v-on:click.native="changingStatus = true"
-                           v-bind:disabled="changingStatus"
-                           class="white--text no-margin-button"
-                    >
+                    <v-modal v-if="on" v-model="disableModal">
+                        <v-btn slot="activator" error
+                            v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                            class="white--text no-margin-button">
+                            {{$t('vps.disable.submit')}}
+                        </v-btn>
+                        <v-card>
+                          <v-card-text>
+                            <h2 class="title">{{$t('vps.disable.header', {id: $route.params.id})}}</h2>
+                          </v-card-text>
+                          <v-card-text class="subheading">{{$t('vps.disable.description')}}</v-card-text>
+                          <v-card-row actions>
+                            <v-spacer></v-spacer>
+                            <v-btn flat v-on:click.native="disableModal = false" class="primary--text">{{$t('vps.disable.cancel')}}</v-btn>
+                            <v-btn flat v-on:click.native="disable" class="primary--text">{{$t('vps.disable.submit')}}</v-btn>
+                          </v-card-row>
+                        </v-card>
+                    </v-modal>
+                    <v-btn v-if="off" success v-on:click.native="enable"
+                        v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                        class="white--text no-margin-button">
                         {{$t('vps.turn_on')}}
-                    </v-btn>
-                    <v-btn v-if="on" error
-                           v-bind:loading="changingStatus"
-                           v-on:click.native="changingStatus = true"
-                           v-bind:disabled="changingStatus"
-                           class="white--text no-margin-button"
-                    >
-                        {{$t('vps.turn_off')}}
                     </v-btn>
                 </v-card-row>
             </v-card>
@@ -150,7 +157,8 @@
         data () {
             return {
                 interval: null,
-                changingStatus: false
+                changingStatus: false,
+                disableModal: false
             }
         },
         mounted () {
@@ -244,6 +252,19 @@
             },
             stats() {
                 this.$store.dispatch('vpsInfo', {
+                    'id': this.$route.params.id
+                })
+            },
+            enable() {
+                this.changingStatus = true
+                this.$store.dispatch('vpsOn', {
+                    'id': this.$route.params.id
+                })
+            },
+            disable() {
+                this.changingStatus = true
+                this.disableModal = false
+                this.$store.dispatch('vpsOff', {
                     'id': this.$route.params.id
                 })
             }
