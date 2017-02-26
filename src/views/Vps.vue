@@ -36,7 +36,7 @@
                         </v-chip>
                     </h6>
                     <h6>{{$t('vps.virtualization')}}: {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}</h6>
-                    <h6>{{$t('vps.uptime')}}: {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}</h6>
+                    <h6 v-if="on">{{$t('vps.uptime')}}: {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}</h6>
                     <div class="mb-4"></div>
                 </v-col>
             </v-row>
