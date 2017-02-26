@@ -216,6 +216,24 @@ export default new Vuex.Store({
                     dispatch('handleError', {'name': 'vpsInfo', 'error': error})
                 })
         },
+        vpsOn ({commit, dispatch, state}, args) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
+            return axios.post(state.apiUrl + 'vps/' + args.id + '/on')
+                .then(function (res) {
+                    console.log(res)
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'vpsOn', 'error': error})
+                })
+        },
+        vpsOff ({commit, dispatch, state}, args) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
+            return axios.post(state.apiUrl + 'vps/' + args.id + '/off')
+                .then(function (res) {
+                    console.log(res)
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'vpsOff', 'error': error})
+                })
+        },
         profileInfo ({commit, dispatch, state}, args) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.get(state.apiUrl + 'me')

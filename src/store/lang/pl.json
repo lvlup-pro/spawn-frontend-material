@@ -110,7 +110,6 @@
         "network": "Sieć",
         "disk": "Dysk",
         "turn_on": "Włącz",
-        "turn_off": "Wyłącz",
         "info": "Informacje",
         "virtualization": "Wirtualizacja",
         "uptime": "Czas pracy",
@@ -120,7 +119,13 @@
         "ram": "RAM",
         "on": "Włączony",
         "off": "Wyłączony",
-        "locked": "Zablokowany"
+        "locked": "Zablokowany",
+        "disable": {
+            "header": "Czy na pewno chcesz wyłączyć VPSa #{id}?",
+            "description": "Twarde zatrzymanie może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",
+            "cancel": "Anuluj",
+            "submit": "Wyłącz"
+        }
     },
     "credits": {
         "contributors": "Autorzy",
