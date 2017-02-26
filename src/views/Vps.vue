@@ -209,7 +209,7 @@
                     bytes /= 1024;
                     i++;
                 }
-                return bytes.toFixed(2) + ' ' + units[i];
+                return bytes.toFixed(i === 0 ? 0 : 2) + ' ' + units[i];
             },
             mb_to_gb(mb) {
                 if (mb < 0) {
