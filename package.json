@@ -3,7 +3,7 @@
   "description": "Frontend for lvlup.pro customer panel",
   "author": "Michał Frąckiewicz <hello@systemz.pl> (http://systemz.pl)",
   "license": "MIT",
-  "version": "3.0.0-alpha.10",
+  "version": "3.0.0-alpha.11",
   "repository": {
     "type": "git",
     "url": "https://github.com/lvlup-pro/spawn-frontend-material.git"
@@ -41,7 +41,7 @@
     "html-minifier": "~3.2.2",
     "html-webpack-plugin": "~2.24.1",
     "moment": "~2.17.1",
-    "node-sass": "~4.0.0",
+    "node-sass": "~4.5.0",
     "pug": "~2.0.0-beta3",
     "raven-js": "~3.11.0",
     "rimraf": "~2.5.4",
