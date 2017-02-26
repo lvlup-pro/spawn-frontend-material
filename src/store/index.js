@@ -203,6 +203,13 @@ export default new Vuex.Store({
                                     res.data.disk_read_bps = diskReadChange / s;
                                     res.data.disk_write_bps = diskWriteChange / s;
                                 }
+                            } else {
+                                res.data.net_in_bps = state.vps.net_int_bps;
+                                res.data.net_out_bps = state.vps.net_out_bps;
+                                if (state.vps.virt == 'kvm') {
+                                    res.data.disk_read_bps = state.vps.disk_read_bps;
+                                    res.data.disk_write_bps = state.vps.disk_write_bps;
+                                }
                             }
                         } else {
                             res.data.net_in_bps = -1;
