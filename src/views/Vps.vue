@@ -70,7 +70,7 @@
                                 <i class="fa fa-fw fa-lg fa-cloud-download"></i>
                                 {{vps.net_in_b | prettyBytes}}
                             </v-chip>
-                            <v-chip label outline class="red red--text">
+                            <v-chip label outline class="blue blue--text">
                                 <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
                                 {{vps.net_out_b | prettyBytes}}
                             </v-chip>
@@ -78,7 +78,7 @@
                                 <i class="fa fa-fw fa-lg fa-cloud-download"></i>
                                 {{vps.net_in_bps | prettyBytes}}/s
                             </v-chip>
-                            <v-chip label outline class="red red--text">
+                            <v-chip label outline class="blue blue--text">
                                 <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
                                 {{vps.net_out_bps | prettyBytes}}/s
                             </v-chip>
@@ -92,7 +92,7 @@
                                 <i class="fa fa-fw fa-lg fa-upload"></i>
                                 {{vps.disk_read_b | prettyBytes}}
                             </v-chip>
-                            <v-chip label outline class="red red--text">
+                            <v-chip label outline class="blue blue--text">
                                 <i class="fa fa-fw fa-lg fa-download"></i>
                                 {{vps.disk_write_b | prettyBytes}}
                             </v-chip>
@@ -100,7 +100,7 @@
                                 <i class="fa fa-fw fa-lg fa-cloud-download"></i>
                                 {{vps.disk_read_bps | prettyBytes}}/s
                             </v-chip>
-                            <v-chip label outline class="red red--text">
+                            <v-chip label outline class="blue blue--text">
                                 <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
                                 {{vps.disk_write_bps | prettyBytes}}/s
                             </v-chip>
