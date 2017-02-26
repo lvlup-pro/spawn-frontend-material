@@ -4,21 +4,28 @@
             <v-row>
                 <v-col xs12 lg4>
                     <h5>{{$t('vps.control')}}</h5>
-                    <v-btn v-if="off" success
-                           v-bind:loading="changingStatus"
-                           v-on:click.native="enable"
-                           v-bind:disabled="changingStatus"
-                           class="white--text no-margin-button"
-                    >
+                    <v-modal v-if="on" v-model="disableModal">
+                        <v-btn slot="activator" error
+                            v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                            class="white--text no-margin-button">
+                            {{$t('vps.disable.submit')}}
+                        </v-btn>
+                        <v-card>
+                          <v-card-text>
+                            <h2 class="title">{{$t('vps.disable.header', {id: $route.params.id})}}</h2>
+                          </v-card-text>
+                          <v-card-text class="subheading">{{$t('vps.disable.description')}}</v-card-text>
+                          <v-card-row actions>
+                            <v-spacer></v-spacer>
+                            <v-btn flat v-on:click.native="disableModal = false" class="primary--text">{{$t('vps.disable.cancel')}}</v-btn>
+                            <v-btn flat v-on:click.native="disable" class="primary--text">{{$t('vps.disable.submit')}}</v-btn>
+                          </v-card-row>
+                        </v-card>
+                    </v-modal>
+                    <v-btn v-if="off" success v-on:click.native="enable"
+                        v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                        class="white--text no-margin-button">
                         {{$t('vps.turn_on')}}
-                    </v-btn>
-                    <v-btn v-if="on" error
-                           v-bind:loading="changingStatus"
-                           v-on:click.native="disable"
-                           v-bind:disabled="changingStatus"
-                           class="white--text no-margin-button"
-                    >
-                        {{$t('vps.turn_off')}}
                     </v-btn>
                 </v-col>
             </v-row>
@@ -141,7 +148,8 @@
         data () {
             return {
                 interval: null,
-                changingStatus: false
+                changingStatus: false,
+                disableModal: false
             }
         },
         mounted () {
@@ -246,6 +254,7 @@
             },
             disable() {
                 this.changingStatus = true
+                this.disableModal = false
                 this.$store.dispatch('vpsOff', {
                     'id': this.$route.params.id
                 })
