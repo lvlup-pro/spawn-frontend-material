@@ -7,6 +7,7 @@
 + Show IP, status (on/off/locked) and virtualization in services table [#81](https://github.com/lvlup-pro/spawn-frontend-material/pull/81)
 + Show uptime, virtualization, used and max RAM, used and max disk space in VPS view [#81](https://github.com/lvlup-pro/spawn-frontend-material/pull/81) [#83](https://github.com/lvlup-pro/spawn-frontend-material/pull/83)
 + German language [#77](https://github.com/lvlup-pro/spawn-frontend-material/pull/77) [#78](https://github.com/lvlup-pro/spawn-frontend-material/pull/78) [#79](https://github.com/lvlup-pro/spawn-frontend-material/pull/79)
++ Redesign VPS view and organise it with cards
 
 ### Fixes
 
