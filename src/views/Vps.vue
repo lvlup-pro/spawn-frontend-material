@@ -1,9 +1,29 @@
 <template>
     <div>
         <v-container id="vps-stats" v-if="!loading">
-            <v-row>
-                <v-col xs12 lg4>
-                    <h5>{{$t('vps.control')}}</h5>
+            <v-card>
+                <v-card-row class="green darken-1">
+                    <v-card-title class="white--text">{{$t('vps.control')}}</v-card-title>
+                </v-card-row>
+                <v-card-text>
+                    <v-card-row>
+                        <i class="fa fa-fw fa-2x fa-info-circle"></i>
+                        {{$t('vps.state')}}:&nbsp;
+                        <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
+                        <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
+                    </v-card-row>
+                    <v-card-row>
+                        <i class="fa fa-fw fa-2x fa-server"></i>
+                        {{$t('vps.virtualization')}}:
+                        {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}
+                    </v-card-row>
+                    <v-card-row v-if="on">
+                        <i class="fa fa-fw fa-2x fa-clock-o"></i>
+                        {{$t('vps.uptime')}}:
+                        {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}
+                    </v-card-row>
+                </v-card-text>
+                <v-card-row actions style="justify-content: flex-start">
                     <v-modal v-if="on" v-model="disableModal">
                         <v-btn slot="activator" error
                             v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
@@ -27,96 +47,80 @@
                         class="white--text no-margin-button">
                         {{$t('vps.turn_on')}}
                     </v-btn>
-                </v-col>
-            </v-row>
+                </v-card-row>
+            </v-card>
             <div class="mb-4"></div>
-            <v-row>
-                <v-col xs12 lg4>
-                    <h5>{{$t('vps.info')}}</h5>
-                    <h6>
-                        {{$t('vps.state')}}:
-                        <v-chip v-if="on" label class="green white--text">
-                            {{$t('vps.on')}}
-                        </v-chip>
-                        <v-chip v-if="off" label class="red white--text">
-                            {{$t('vps.off')}}
-                        </v-chip>
-                    </h6>
-                    <h6>{{$t('vps.virtualization')}}: {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}</h6>
-                    <h6 v-if="on">{{$t('vps.uptime')}}: {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}</h6>
-                    <div class="mb-4"></div>
-                </v-col>
-            </v-row>
-            <div v-if="on">
-                <v-row>
-                    <v-col xs12 lg4>
-                        <h5>{{$t('vps.resources')}}</h5>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col md6 xs12="xs12">
-                        <h6>{{$t('vps.cpu')}}: {{vps.cpu}}% </h6>
-                        <div class="display-1"></div>
-                        <progress-linear-color v-model="vps.cpu"></progress-linear-color>
-                    </v-col>
-                    <v-col md6 xs12="xs12">
-                        <h6>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h6>
-                        <progress-linear-color v-model="ram"></progress-linear-color>
-                    </v-col>
-                    <v-col md6 xs12="xs12" v-if="vps.virt == 'openvz'">
-                        <h6>{{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h6>
-                        <progress-linear-color v-model="disk"></progress-linear-color>
-                    </v-col>
-                    <v-col md6 xs12="xs12" v-else>
-                        <h6>{{$t('vps.disk')}}: {{vps.max_disk_mb | mb_to_gb}}</h6>
-                    </v-col>
-                </v-row>
-                <div class="mb-2"></div>
-                <v-row>
-                    <v-col md6 xs12="xs12">
-                        <h6>{{$t('vps.network')}}</h6>
-                        <v-chip label outline class="green green--text">
-                            <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                            {{vps.net_in_b | prettyBytes}}
-                        </v-chip>
-                        <v-chip label outline class="red red--text">
-                            <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                            {{vps.net_out_b | prettyBytes}}
-                        </v-chip>
-                        <v-chip label outline class="green green--text">
-                            <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                            {{vps.net_in_bps | prettyBytes}}/s
-                        </v-chip>
-                        <v-chip label outline class="red red--text">
-                            <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                            {{vps.net_out_bps | prettyBytes}}/s
-                        </v-chip>
-                    </v-col>
-                </v-row>
-                <div class="mb-2"></div>
-                <v-row v-if="vps.virt == 'kvm'">
-                    <v-col md6 xs12="xs12">
-                        <h6>{{$t('vps.disk')}}</h6>
-                        <v-chip label outline class="green green--text">
-                            <i class="fa fa-fw fa-lg fa-upload"></i>
-                            {{vps.disk_read_b | prettyBytes}}
-                        </v-chip>
-                        <v-chip label outline class="red red--text">
-                            <i class="fa fa-fw fa-lg fa-download"></i>
-                            {{vps.disk_write_b | prettyBytes}}
-                        </v-chip>
-                        <v-chip label outline class="green green--text">
-                            <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                            {{vps.disk_read_bps | prettyBytes}}/s
-                        </v-chip>
-                        <v-chip label outline class="red red--text">
-                            <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                            {{vps.disk_write_bps | prettyBytes}}/s
-                        </v-chip>
-                    </v-col>
-                </v-row>
-                <div class="mb-4"></div>
-            </div>
+            <v-card v-if="on">
+                <v-card-row class="green darken-1">
+                    <v-card-title class="white--text">{{$t('vps.resources')}}</v-card-title>
+                </v-card-row>
+                <v-card-text>
+                    <v-row>
+                        <v-col md6 xs12>
+                            <h6>{{$t('vps.cpu')}}: {{vps.cpu}}% </h6>
+                            <div class="display-1"></div>
+                            <progress-linear-color v-model="vps.cpu"></progress-linear-color>
+                        </v-col>
+                        <v-col md6 xs12>
+                            <h6>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h6>
+                            <progress-linear-color v-model="ram"></progress-linear-color>
+                        </v-col>
+                        <v-col md6 xs12 v-if="vps.virt == 'openvz'">
+                            <h6>{{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h6>
+                            <progress-linear-color v-model="disk"></progress-linear-color>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col md6 xs12>
+                            <h6>{{$t('vps.network_rt')}}:</h6>
+                            <v-chip label outline class="green green--text">
+                                <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                                {{vps.net_in_bps | prettyBytes}}/s
+                            </v-chip>
+                            <v-chip label outline class="blue blue--text">
+                                <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                                {{vps.net_out_bps | prettyBytes}}/s
+                            </v-chip>
+                        </v-col>
+                        <v-col md6 xs12>
+                            <h6>{{$t('vps.network_all')}}:</h6>
+                            <v-chip label outline class="green green--text">
+                                <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                                {{vps.net_in_b | prettyBytes}}
+                            </v-chip>
+                            <v-chip label outline class="blue blue--text">
+                                <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                                {{vps.net_out_b | prettyBytes}}
+                            </v-chip>
+                        </v-col>
+                    </v-row>
+                    <v-row v-if="vps.virt == 'kvm'">
+                        <v-col md6 xs12>
+                            <h6>{{$t('vps.disk_rt')}}:</h6>
+                            <v-chip label outline class="green green--text">
+                                <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                                {{vps.disk_read_bps | prettyBytes}}/s
+                            </v-chip>
+                            <v-chip label outline class="blue blue--text">
+                                <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                                {{vps.disk_write_bps | prettyBytes}}/s
+                            </v-chip>
+                        </v-col>
+                        <v-col md6 xs12>
+                            <h6>{{$t('vps.disk_all')}}:</h6>
+                            <v-chip label outline class="green green--text">
+                                <i class="fa fa-fw fa-lg fa-upload"></i>
+                                {{vps.disk_read_b | prettyBytes}}
+                            </v-chip>
+                            <v-chip label outline class="blue blue--text">
+                                <i class="fa fa-fw fa-lg fa-download"></i>
+                                {{vps.disk_write_b | prettyBytes}}
+                            </v-chip>
+                        </v-col>
+                    </v-row>
+                </v-card-text>
+            </v-card>
+            <div class="mb-4"></div>
             <!--
              TODO
              - OpenVZ use vps.nproc vps.max_swap_mb vps.swap_mb
@@ -129,7 +133,11 @@
         position: relative
     }
 
-    span.chip i {
+    span.chip--outline {
+        margin-bottom: 12px;
+    }
+
+    span.chip i, div.card__row i {
         padding-right: 6px;
     }
 
@@ -140,6 +148,7 @@
 
     h6 {
         font-size: 18px;
+        margin-bottom: 0.5rem;
     }
 </style>
 <script>
@@ -221,7 +230,7 @@
                     bytes /= 1024;
                     i++;
                 }
-                return bytes.toFixed(2) + ' ' + units[i];
+                return bytes.toFixed(i === 0 ? 0 : 2) + ' ' + units[i];
             },
             mb_to_gb(mb) {
                 if (mb < 0) {

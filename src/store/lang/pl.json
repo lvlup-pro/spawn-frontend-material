@@ -107,8 +107,11 @@
     "vps": {
         "control": "Kontrola",
         "resources": "Zasoby",
-        "network": "Sieć",
+        "network_all": "Sieć (od początku)",
+        "network_rt": "Sieć (obecnie)",
         "disk": "Dysk",
+        "disk_all": "Dysk (od początku)",
+        "disk_rt": "Dysk (obecnie)",
         "turn_on": "Włącz",
         "info": "Informacje",
         "virtualization": "Wirtualizacja",
