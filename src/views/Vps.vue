@@ -1,9 +1,29 @@
 <template>
     <div>
         <v-container id="vps-stats" v-if="!loading">
-            <v-row>
-                <v-col xs12 lg4>
-                    <h5>{{$t('vps.control')}}</h5>
+            <v-card>
+                <v-card-row class="green darken-1">
+                    <v-card-title class="white--text">{{$t('vps.control')}}</v-card-title>
+                </v-card-row>
+                <v-card-text>
+                    <v-card-row>
+                        <i class="fa fa-fw fa-2x fa-info-circle"></i>
+                        {{$t('vps.state')}}:&nbsp;
+                        <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
+                        <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
+                    </v-card-row>
+                    <v-card-row>
+                        <i class="fa fa-fw fa-2x fa-server"></i>
+                        {{$t('vps.virtualization')}}:
+                        {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}
+                    </v-card-row>
+                    <v-card-row>
+                        <i class="fa fa-fw fa-2x fa-clock-o"></i>
+                        {{$t('vps.uptime')}}:
+                        {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}
+                    </v-card-row>
+                </v-card-text>
+                <v-card-row actions style="justify-content: flex-start">
                     <v-btn v-if="off" success
                            v-bind:loading="changingStatus"
                            v-on:click.native="changingStatus = true"
@@ -20,22 +40,8 @@
                     >
                         {{$t('vps.turn_off')}}
                     </v-btn>
-                </v-col>
-            </v-row>
-            <div class="mb-4"></div>
-            <v-row>
-                <v-col xs12 lg4>
-                    <h5>{{$t('vps.info')}}</h5>
-                    <h6>
-                        {{$t('vps.state')}}:
-                        <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
-                        <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
-                    </h6>
-                    <h6>{{$t('vps.virtualization')}}: {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}</h6>
-                    <h6>{{$t('vps.uptime')}}: {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}</h6>
-                    <div class="mb-4"></div>
-                </v-col>
-            </v-row>
+                </v-card-row>
+            </v-card>
             <div v-if="on">
                 <v-row>
                     <v-col xs12 lg4>
@@ -118,7 +124,7 @@
         position: relative
     }
 
-    span.chip i {
+    span.chip i, div.card__row i {
         padding-right: 6px;
     }
 
