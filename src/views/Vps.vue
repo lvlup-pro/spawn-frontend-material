@@ -63,7 +63,6 @@
                             <progress-linear-color v-model="disk"></progress-linear-color>
                         </v-col>
                     </v-row>
-                    <div class="mb-4"></div>
                     <v-row>
                         <v-col md6 xs12>
                             <h6>{{$t('vps.network_rt')}}:</h6>
@@ -88,7 +87,6 @@
                             </v-chip>
                         </v-col>
                     </v-row>
-                    <div class="mb-4"></div>
                     <v-row v-if="vps.virt == 'kvm'">
                         <v-col md6 xs12>
                             <h6>{{$t('vps.disk_rt')}}:</h6>
@@ -115,6 +113,7 @@
                     </v-row>
                 </v-card-text>
             </v-card>
+            <div class="mb-4"></div>
             <!--
              TODO
              - OpenVZ use vps.nproc vps.max_swap_mb vps.swap_mb
@@ -125,6 +124,10 @@
 <style>
     #vps-stats .progress-linear {
         position: relative
+    }
+
+    span.chip {
+        margin-bottom: 12px;
     }
 
     span.chip i, div.card__row i {
@@ -138,6 +141,7 @@
 
     h6 {
         font-size: 18px;
+        margin-bottom: 0.5rem;
     }
 </style>
 <script>
