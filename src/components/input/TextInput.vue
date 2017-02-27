@@ -3,6 +3,7 @@
         <v-text-input
             v-validate="rules"
             :class="{'custom-text-input': true, 'validation-error': errors.has(name) }"
+            :type="type"
             :label="label"
             :placeholder="placeholder"
             :name="name"
@@ -51,6 +52,10 @@
             placeholder: {
                 type: [String],
                 default: ""
+            },
+            type: {
+                type: [String],
+                default: "text"
             }
         },
         computed: {
