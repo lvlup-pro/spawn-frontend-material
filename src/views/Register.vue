@@ -7,7 +7,7 @@
                     <v-card class="mp-5">
                         <v-card-text>
                             <h5>{{ $t('user.register.header') }}</h5>
-                            <form v-on:submit.prevent="register">
+                            <form v-on:submit.prevent="register" novalidate>
                                 <text-input
                                     :label="$t('user.fullname')"
                                     :placeholder="$t('user.placeholder.fullname')"
