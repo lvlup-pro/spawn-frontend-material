@@ -128,6 +128,12 @@
             "description": "Twarde zatrzymanie może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",
             "cancel": "Anuluj",
             "submit": "Wyłącz"
+        },
+        "reboot": {
+            "header": "Czy na pewno chcesz zrestartować VPSa #{id}?",
+            "description": "Twardy restart może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",
+            "cancel": "Anuluj",
+            "submit": "Restartuj"
         }
     },
     "credits": {
