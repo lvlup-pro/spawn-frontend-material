@@ -22,6 +22,14 @@
                         {{$t('vps.uptime')}}:
                         {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}
                     </v-card-row>
+                    <v-card-row v-if="vps.ip">
+                        <i class="fa fa-fw fa-2x fa-globe"></i>
+                        {{$t('vps.ips')}}:&nbsp;
+                        <b>{{vps.ip.main}}</b>
+                        <span v-for="(item, index) in vps.ip.additional">
+                        	, {{item}}
+                        </span>
+                    </v-card-row>
                 </v-card-text>
                 <v-card-row actions style="justify-content: flex-start">
                     <v-modal v-if="on" v-model="disableModal">
@@ -171,9 +179,7 @@
                     this.$router.push('/login')
                 } else {
                     this.$store.commit('setLoading')
-                    this.$store.dispatch('vpsInfo', {
-                        'id': this.$route.params.id
-                    }).then(() => {
+                    this.stats().then(() => {
                         this.interval = setInterval(this.stats, 1000)
                         this.$store.commit('setLoaded')
                         //FIXME set by API not user input
@@ -181,6 +187,7 @@
                         this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
                         this.$emit('view', this.meta())
                     })
+                    this.ips()
                 }
             })
         },
@@ -251,20 +258,25 @@
                 }
             },
             stats() {
-                this.$store.dispatch('vpsInfo', {
+                return this.$store.dispatch('vpsInfo', {
+                    'id': this.$route.params.id
+                })
+            },
+            ips() {
+                return this.$store.dispatch('vpsIps', {
                     'id': this.$route.params.id
                 })
             },
             enable() {
                 this.changingStatus = true
-                this.$store.dispatch('vpsOn', {
+                return this.$store.dispatch('vpsOn', {
                     'id': this.$route.params.id
                 })
             },
             disable() {
                 this.changingStatus = true
                 this.disableModal = false
-                this.$store.dispatch('vpsOff', {
+                return this.$store.dispatch('vpsOff', {
                     'id': this.$route.params.id
                 })
             }
