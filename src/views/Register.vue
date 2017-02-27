@@ -7,7 +7,7 @@
                     <v-card class="mp-5">
                         <v-card-text>
                             <h5>{{ $t('user.register.header') }}</h5>
-                            <form v-on:submit.prevent="">
+                            <form v-on:submit.prevent="register">
                                 <text-input
                                     :label="$t('user.fullname')"
                                     :placeholder="$t('user.placeholder.fullname')"
@@ -18,7 +18,7 @@
                                     :placeholder="$t('user.placeholder.username')"
                                     name="username" v-model="username"
                                 ></text-input>
-                                <text-input email="true"
+                                <text-input email type="email"
                                     :label="$t('user.email')"
                                     :placeholder="$t('user.placeholder.email')"
                                     name="email" v-model="email"
@@ -36,7 +36,7 @@
                                 <div id="captcha-container">
                                     <div id="captcha-register"></div>
                                 </div>
-                                <v-btn class="aligned" flat="flat" dark="dark" success block type="submit" v-on:click.native="register()">
+                                <v-btn class="aligned" flat="flat" dark="dark" success block type="submit">
                                     <v-icon left>vpn_key</v-icon>
                                     {{$t('user.register.button')}}
                                 </v-btn>
@@ -123,21 +123,31 @@
             captchaCallback(response) {
                 this.captcha = response
             },
-            register() {
-                this.$store.dispatch('accountRegister', {
-                    fullname: this.fullname,
-                    username: this.username,
-                    password: this.password,
-                    email: this.email,
-                    captcha_response: this.captcha
-                }).then((res) => {
-                    if (res) {
-                        this.$vuetify.toast.create(this.$t('auth.register.success'), 'right')
-                    } else {
-                        this.$vuetify.toast.create(this.$t('auth.register.fail'), 'right')
-                    }
-                    this.$store.commit('setLoaded')
+            validate(component) {
+                let noerrors = true
+                component.$validator.validateAll()
+                component.$children.forEach(child => {
+                    noerrors = this.validate(child) && noerrors
                 })
+                return noerrors && !component.errors.any()
+            },
+            register() {
+                if(this.validate(this)) {
+                    this.$store.dispatch('accountRegister', {
+                        fullname: this.fullname,
+                        username: this.username,
+                        password: this.password,
+                        email: this.email,
+                        captcha_response: this.captcha
+                    }).then((res) => {
+                        if (res) {
+                            this.$vuetify.toast.create(this.$t('auth.register.success'), 'right')
+                        } else {
+                            this.$vuetify.toast.create(this.$t('auth.register.fail'), 'right')
+                        }
+                        this.$store.commit('setLoaded')
+                    })
+                }
             }
         }
     }
