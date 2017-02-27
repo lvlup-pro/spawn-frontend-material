@@ -8,33 +8,31 @@
                         <v-card-text>
                             <h5>{{ $t('user.register.header') }}</h5>
                             <form v-on:submit.prevent="">
-                                <v-text-input
+                                <text-input
                                     :label="$t('user.fullname')"
                                     :placeholder="$t('user.placeholder.fullname')"
-                                    v-model="fullname"
-                                ></v-text-input>
-                                <v-text-input
+                                    name="fullname" v-model="fullname"
+                                ></text-input>
+                                <text-input
                                     :label="$t('user.username')"
                                     :placeholder="$t('user.placeholder.username')"
-                                    v-model="username"
-                                ></v-text-input>
-                                <v-text-input
+                                    name="username" v-model="username"
+                                ></text-input>
+                                <text-input email="true"
                                     :label="$t('user.email')"
                                     :placeholder="$t('user.placeholder.email')"
-                                    v-model="email"
-                                ></v-text-input>
-                                <v-text-input
+                                    name="email" v-model="email"
+                                ></text-input>
+                                <text-input type="password"
                                     :label="$t('user.password')"
-                                    type="password"
                                     :placeholder="$t('user.placeholder.password')"
-                                    v-model="password"
-                                ></v-text-input>
-                                <v-text-input
+                                    name="password" v-model="password"
+                                ></text-input>
+                                <text-input type="password"
                                     :label="$t('user.repeatpassword')"
-                                    type="password"
                                     :placeholder="$t('user.placeholder.password')"
-                                    v-model="repeatpassword"
-                                ></v-text-input>
+                                    name="repeatpassword" v-model="repeatpassword"
+                                ></text-input>
                                 <div id="captcha-container">
                                     <div id="captcha-register"></div>
                                 </div>
