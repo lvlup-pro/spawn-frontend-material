@@ -7,7 +7,7 @@
         <!-- 71 - 85% yellow-->
         <v-progress-linear v-if="value > blue && value <= yellow" v-model="value" warning></v-progress-linear>
         <!-- 86 - 100% red-->
-        <v-progress-linear v-if="value > yellow && value <= red" v-model="value" error></v-progress-linear>
+        <v-progress-linear v-if="value > yellow" v-model="value" error></v-progress-linear>
     </div>
 </template>
 <script>
