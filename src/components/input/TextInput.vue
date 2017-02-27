@@ -2,6 +2,7 @@
     <div>
         <v-text-input
             v-validate="rules"
+            v-model="value"
             :class="{'custom-text-input': true, 'validation-error': errors.has(name) }"
             :type="type"
             :label="label"
@@ -51,16 +52,26 @@
             },
             placeholder: {
                 type: [String],
-                default: ""
+                default: ''
             },
             type: {
                 type: [String],
-                default: "text"
+                default: 'text'
+            }
+        },
+        data: function () {
+            return {
+                value: ''
             }
         },
         computed: {
             rules() {
                 return { rules: { required: this.required, email: this.email } }
+            }
+        },
+        watch: {
+            'value': function(newValue, oldValue) {
+                this.$emit('input', newValue)
             }
         }
     }
