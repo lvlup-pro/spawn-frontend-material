@@ -115,6 +115,7 @@
         "turn_on": "Turn on",
         "info": "Informations",
         "state": "State",
+        "ips": "IP addresses",
         "virtualization": "Virtualization",
         "uptime": "Uptime",
         "days": "days",

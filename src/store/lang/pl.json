@@ -118,6 +118,7 @@
         "uptime": "Czas pracy",
         "days": "dni",
         "state": "Stan",
+        "ips": "Adresy IP",
         "cpu": "CPU",
         "ram": "RAM",
         "on": "Włączony",

@@ -217,6 +217,7 @@ export default new Vuex.Store({
                             res.data.disk_read_bps = -1;
                             res.data.disk_write_bps = -1;
                         }
+                        res.data.ip = state.vps.ip
                         commit('setVps', res.data)
                     }
                 }).catch(function (error) {
@@ -227,7 +228,7 @@ export default new Vuex.Store({
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.post(state.apiUrl + 'vps/' + args.id + '/on')
                 .then(function (res) {
-                    console.log(res)
+                    return true
                 }).catch(function (error) {
                     dispatch('handleError', {'name': 'vpsOn', 'error': error})
                 })
@@ -236,7 +237,16 @@ export default new Vuex.Store({
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.post(state.apiUrl + 'vps/' + args.id + '/off')
                 .then(function (res) {
-                    console.log(res)
+                    return true
+                }).catch(function (error) {
+                    dispatch('handleError', {'name': 'vpsOff', 'error': error})
+                })
+        },
+        vpsIps({commit, dispatch, state}, args) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
+            return axios.get(state.apiUrl + 'vps/' + args.id + '/ip')
+                .then(function (res) {
+                    commit('setVpsIps', res.data)
                 }).catch(function (error) {
                     dispatch('handleError', {'name': 'vpsOff', 'error': error})
                 })
@@ -280,6 +290,11 @@ export default new Vuex.Store({
         },
         setVps (state, newVps) {
             state.vps = newVps;
+        },
+        setVpsIps(state, newIps) {
+            state.vps.ip = {}
+            state.vps.ip.main = newIps.main
+            state.vps.ip.additional = newIps.additional
         },
         setProfile (state, newProfile) {
             state.profile = newProfile
