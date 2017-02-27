@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuetify from 'vuetify'
+import VeeValidate from 'vee-validate';
 import store from './store/index'
 import router from './router/index'
 import {sync} from 'vuex-router-sync'
@@ -9,6 +10,7 @@ import Components from './components-loader'
 sync(store, router)
 
 Vue.use(Vuetify)
+Vue.use(VeeValidate)
 Vue.use(Components)
 
 Vue.use(VueI18n)
