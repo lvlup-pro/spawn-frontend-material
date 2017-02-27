@@ -54,6 +54,10 @@
     #captcha-register {
         transform-origin: left top;
     }
+
+    #captcha-register > div {
+        margin: auto;
+    }
 </style>
 <script>
     export default {
