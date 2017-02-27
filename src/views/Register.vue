@@ -7,38 +7,37 @@
                     <v-card class="mp-5">
                         <v-card-text>
                             <h5>{{ $t('user.register.header') }}</h5>
-                            <form v-on:submit.prevent="">
-                                <v-text-input
+                            <form v-on:submit.prevent="register" novalidate>
+                                <text-input
                                     :label="$t('user.fullname')"
                                     :placeholder="$t('user.placeholder.fullname')"
-                                    v-model="fullname"
-                                ></v-text-input>
-                                <v-text-input
+                                    name="fullname" v-model="fullname"
+                                ></text-input>
+                                <text-input
                                     :label="$t('user.username')"
                                     :placeholder="$t('user.placeholder.username')"
-                                    v-model="username"
-                                ></v-text-input>
-                                <v-text-input
+                                    name="username" v-model="username"
+                                ></text-input>
+                                <text-input type="email"
                                     :label="$t('user.email')"
                                     :placeholder="$t('user.placeholder.email')"
-                                    v-model="email"
-                                ></v-text-input>
-                                <v-text-input
+                                    name="email" v-model="email"
+                                ></text-input>
+                                <text-input type="password"
                                     :label="$t('user.password')"
-                                    type="password"
                                     :placeholder="$t('user.placeholder.password')"
-                                    v-model="password"
-                                ></v-text-input>
-                                <v-text-input
+                                    name="password" v-model="password"
+                                ></text-input>
+                                <text-input type="password"
+                                    :validationmessage="$t('validation.repeatpassword')" :validation="validatePassword"
                                     :label="$t('user.repeatpassword')"
-                                    type="password"
                                     :placeholder="$t('user.placeholder.password')"
-                                    v-model="repeatpassword"
-                                ></v-text-input>
+                                    name="repeatpassword" v-model="repeatpassword"
+                                ></text-input>
                                 <div id="captcha-container">
                                     <div id="captcha-register"></div>
                                 </div>
-                                <v-btn class="aligned" flat="flat" dark="dark" success block type="submit" v-on:click.native="register()">
+                                <v-btn class="aligned" flat="flat" dark="dark" success block type="submit">
                                     <v-icon left>vpn_key</v-icon>
                                     {{$t('user.register.button')}}
                                 </v-btn>
@@ -125,21 +124,36 @@
             captchaCallback(response) {
                 this.captcha = response
             },
-            register() {
-                this.$store.dispatch('accountRegister', {
-                    fullname: this.fullname,
-                    username: this.username,
-                    password: this.password,
-                    email: this.email,
-                    captcha_response: this.captcha
-                }).then((res) => {
-                    if (res) {
-                        this.$vuetify.toast.create(this.$t('auth.register.success'), 'right')
-                    } else {
-                        this.$vuetify.toast.create(this.$t('auth.register.fail'), 'right')
-                    }
-                    this.$store.commit('setLoaded')
+            validate(component) {
+                let noerrors = true
+                component.$validator.validateAll()
+                component.$children.forEach(child => {
+                    noerrors = this.validate(child) && noerrors
                 })
+                return noerrors && !component.errors.any()
+            },
+            validatePassword() {
+                return {
+                    valid: this.password === this.repeatpassword
+                }
+            },
+            register() {
+                if(this.validate(this)) {
+                    this.$store.dispatch('accountRegister', {
+                        fullname: this.fullname,
+                        username: this.username,
+                        password: this.password,
+                        email: this.email,
+                        captcha_response: this.captcha
+                    }).then((res) => {
+                        if (res) {
+                            this.$vuetify.toast.create(this.$t('auth.register.success'), 'right')
+                        } else {
+                            this.$vuetify.toast.create(this.$t('auth.register.fail'), 'right')
+                        }
+                        this.$store.commit('setLoaded')
+                    })
+                }
             }
         }
     }

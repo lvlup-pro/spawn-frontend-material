@@ -39,6 +39,11 @@
         "created_at": "Created",
         "payed_to": "Expires"
     },
+    "validation": {
+        "required": "This field is required.",
+        "email": "Enter correct e-mail address.",
+        "repeatpassword": "Passwords doesn't match."
+    },
     "auth": {
         "no": "Log in first",
         "already": "Logged in already",

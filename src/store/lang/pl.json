@@ -39,6 +39,11 @@
         "created_at": "Utworzony",
         "payed_to": "Wygasa"
     },
+    "validation": {
+        "required": "To pole jest wymagane.",
+        "email": "Wpisz poprawny adres e-mail.",
+        "repeatpassword": "Hasła nie zgadzają się."
+    },
     "auth": {
         "no": "Zaloguj się",
         "already": "Zalogowano już wcześniej",

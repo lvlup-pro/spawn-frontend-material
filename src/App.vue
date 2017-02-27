@@ -228,6 +228,7 @@
             },
             changeLang(lang) {
                 localStorage.setItem('lang', lang);
+                this.$validator.setLocale(lang);
                 this.$store.commit('setLanguage', lang);
                 this.$router.replace({'params': {'lg': lang}});
                 this.$store.commit('setTitle', this.getToolbarTitle())
