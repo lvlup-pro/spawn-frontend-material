@@ -90,21 +90,16 @@
                 }
             })
 
-            //https://codepen.io/dloewen/pen/jbgeZj/
-            function scaleCaptcha(elementWidth) {
-                var reCaptchaWidth = 304;
-                var containerWidth = $('#captcha-container').width();
+            function scaleCaptcha() {
+                let reCaptchaWidth = 304
+                let containerWidth = document.getElementById('captcha-container').clientWidth
                 if(reCaptchaWidth > containerWidth) {
-                    var captchaScale = containerWidth / reCaptchaWidth;
-                    $('#captcha-register').css({
-                        'transform':'scale('+captchaScale+')'
-                    });
+                    let captchaScale = containerWidth / reCaptchaWidth
+                    document.getElementById('captcha-register').style.transform = 'scale(' + captchaScale + ')'
                 }
             }
-            $(function() {
-                scaleCaptcha();
-                $(window).resize(scaleCaptcha);
-            });
+            scaleCaptcha()
+            window.addEventListener('resize', scaleCaptcha)
         },
         preFetch (store) {
             store.commit('setMeta', this.methods.meta())
