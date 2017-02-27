@@ -3,8 +3,8 @@
         <v-text-input
             v-validate="rules"
             :class="{'custom-text-input': true, 'validation-error': errors.has(name) }"
-            :label="$t('user.fullname')"
-            :placeholder="$t('user.placeholder.fullname')"
+            :label="label"
+            :placeholder="placeholder"
             :name="name"
         ></v-text-input>
         <span class="validation-error" v-show="errors.has(name)">{{ errors.first(name) }}</span>
@@ -41,6 +41,14 @@
                 default: false
             },
             name: {
+                type: [String],
+                required: true
+            },
+            label: {
+                type: [String],
+                required: true
+            },
+            placeholder: {
                 type: [String],
                 default: ""
             }
