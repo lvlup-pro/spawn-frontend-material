@@ -5,6 +5,7 @@
 ### Features
 
 + Show main and additional IPs on VPS page [#94](https://github.com/lvlup-pro/spawn-frontend-material/pull/94)
++ Libs update
 
 ## 3.0.0-alpha.11 (26.02.2017)
 
