@@ -7,28 +7,24 @@
                     <v-card class="mp-5">
                         <v-card-text>
                             <h5>{{ $t('user.login.header') }}</h5>
-                            <form v-on:submit.prevent="onSubmit">
-                                <v-text-input
-                                        :label="$t('user.username')"
-                                        :placeholder="$t('user.placeholder.username')"
-                                        v-model="username"
-                                ></v-text-input>
-                                <v-text-input
-                                        :label="$t('user.password')"
-                                        type="password"
-                                        :placeholder="$t('user.placeholder.password')"
-                                        v-model="password"
-                                ></v-text-input>
+                            <form v-on:submit.prevent="login">
+                                <text-input
+                                    :label="$t('user.username')"
+                                    :placeholder="$t('user.placeholder.username')"
+                                     name="username" v-model="username"
+                                ></text-input>
+                                <text-input
+                                    :label="$t('user.password')"
+                                    :placeholder="$t('user.placeholder.password')"
+                                    name="password" type="password" v-model="password"
+                                ></text-input>
                                 <!--<v-select-->
                                 <!--v-bind:options="options"-->
                                 <!--label="Remember me for..."-->
                                 <!--v-model="remember"-->
                                 <!--&gt;</v-select>-->
                                 <v-btn class="aligned" flat="flat" dark="dark" success block type="submit"
-                                       v-on:click.native="login(username,password)"
-                                       v-bind:loading="loading"
-                                       v-bind:disabled="loading"
-                                >
+                                    v-bind:loading="loading" v-bind:disabled="loading">
                                     <v-icon left>vpn_key</v-icon>
                                     {{$t('user.login.button')}}
                                 </v-btn>
@@ -103,23 +99,33 @@
                     keywords: 'vuetify, login'
                 }
             },
-            login(username, password) {
-                this.$store.commit('setLoading')
-                this.$store.dispatch('accountLogin', {
-                    username: username,
-                    password: password
-                }).then((res) => {
-                    if (res) {
-                        var auth = this.$t('auth.success');
-                        this.$vuetify.toast.create(auth, "right")
-                        this.$router.push('/'+this.$route.params.lg+'/service')
-                        this.$store.dispatch('walletInfo')
-                    } else {
-                        var auth = this.$t('auth.fail');
-                        this.$vuetify.toast.create(auth, "right")
-                    }
-                    this.$store.commit('setLoaded')
+            validate(component) {
+                let noerrors = true
+                component.$validator.validateAll()
+                component.$children.forEach(child => {
+                    noerrors = this.validate(child) && noerrors
                 })
+                return noerrors && !component.errors.any()
+            },
+            login() {
+                if(this.validate(this)) {
+                    this.$store.commit('setLoading')
+                    this.$store.dispatch('accountLogin', {
+                        username: this.username,
+                        password: this.password
+                    }).then((res) => {
+                        if (res) {
+                            var auth = this.$t('auth.success');
+                            this.$vuetify.toast.create(auth, "right")
+                            this.$router.push('/'+this.$route.params.lg+'/service')
+                            this.$store.dispatch('walletInfo')
+                        } else {
+                            var auth = this.$t('auth.fail');
+                            this.$vuetify.toast.create(auth, "right")
+                        }
+                        this.$store.commit('setLoaded')
+                    })
+                }
             }
         }
     }
