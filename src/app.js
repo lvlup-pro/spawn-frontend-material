@@ -10,13 +10,39 @@ import Components from './components-loader'
 sync(store, router)
 
 Vue.use(Vuetify)
-Vue.use(VeeValidate)
 Vue.use(Components)
 
+let en = require('./store/lang/en.json'),
+    pl = require('./store/lang/pl.json'),
+    de = require('./store/lang/de.json');
+
 Vue.use(VueI18n)
-Vue.locale('en', require('./store/lang/en.json'))
-Vue.locale('pl', require('./store/lang/pl.json'))
-Vue.locale('de', require('./store/lang/de.json'))
+Vue.locale('en', en)
+Vue.locale('pl', pl)
+Vue.locale('de', de)
+
+function toLambdas(obj) {
+    let newObj = {}
+    for (let key in obj) {
+        newObj[key] = () => obj[key]
+    }
+    return newObj
+}
+
+Vue.use(VeeValidate, {
+    locale: 'en',
+    dictionary: {
+        pl: {
+            messages: toLambdas(pl.validation)
+        },
+        en: {
+            messages: toLambdas(en.validation)
+        },
+        de: {
+            messages: toLambdas(en.validation)
+        }
+    }
+})
 
 const app = new Vue(Vue.util.extend({
     router,

@@ -29,7 +29,7 @@
                                     name="password" v-model="password"
                                 ></text-input>
                                 <text-input type="password"
-                                    validationmessage="Password doesn't match" :validation="validatePassword"
+                                    :validationmessage="$t('validation.repeatpassword')" :validation="validatePassword"
                                     :label="$t('user.repeatpassword')"
                                     :placeholder="$t('user.placeholder.password')"
                                     name="repeatpassword" v-model="repeatpassword"
