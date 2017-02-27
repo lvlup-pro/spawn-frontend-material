@@ -71,7 +71,11 @@
 </template>
 <style>
     tr {
-        cursor: pointer
+        cursor: pointer;
+    }
+
+    span.chip.red[data-tooltip][data-tooltip-location='bottom']:before {
+        left: 75%;
     }
 </style>
 <script>
