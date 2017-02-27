@@ -35,7 +35,9 @@
                                     :placeholder="$t('user.placeholder.password')"
                                     v-model="repeatpassword"
                                 ></v-text-input>
-                                <div id="captcha-register"></div>
+                                <div id="captcha-container">
+                                    <div id="captcha-register"></div>
+                                </div>
                                 <v-btn class="aligned" flat="flat" dark="dark" success block type="submit" v-on:click.native="register()">
                                     <v-icon left>vpn_key</v-icon>
                                     {{$t('user.register.button')}}
@@ -48,6 +50,11 @@
         </v-container>
     </div>
 </template>
+<style>
+    #captcha-register {
+        transform-origin: left top;
+    }
+</style>
 <script>
     export default {
         data () {
@@ -78,6 +85,22 @@
                     this.$router.push('/'+this.$route.params.lg+'/service')
                 }
             })
+
+            //https://codepen.io/dloewen/pen/jbgeZj/
+            function scaleCaptcha(elementWidth) {
+                var reCaptchaWidth = 304;
+                var containerWidth = $('#captcha-container').width();
+                if(reCaptchaWidth > containerWidth) {
+                    var captchaScale = containerWidth / reCaptchaWidth;
+                    $('#captcha-register').css({
+                        'transform':'scale('+captchaScale+')'
+                    });
+                }
+            }
+            $(function() {
+                scaleCaptcha();
+                $(window).resize(scaleCaptcha);
+            });
         },
         preFetch (store) {
             store.commit('setMeta', this.methods.meta())

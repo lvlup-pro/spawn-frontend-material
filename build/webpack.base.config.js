@@ -69,6 +69,9 @@ const config = {
           //http://stackoverflow.com/questions/34499450/react-webpack-where-to-configure-rest-endpoints
           'process.env.API': JSON.stringify(process.env.API || 'https://demoapi.lvlup.pro/v3/'),
           'process.env.RECAPTCHA_SITE_KEY': JSON.stringify(process.env.RECAPTCHA_SITE_KEY || '6LdEuRYUAAAAAIGPS1gPHss_Aafu91EqLsgC-Cg9'),
+      }),
+      new webpack.ProvidePlugin({
+          $ : "jquery",
       })
   ],
   performance: false
