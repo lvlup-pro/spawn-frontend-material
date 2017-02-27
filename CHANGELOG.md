@@ -4,6 +4,7 @@
 
 ### Features
 
++ Login and register form validation before submit
 + Show main and additional IPs on VPS page [#94](https://github.com/lvlup-pro/spawn-frontend-material/pull/94)
 + Libs update
 
