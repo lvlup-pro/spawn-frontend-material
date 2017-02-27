@@ -29,6 +29,7 @@
                                     name="password" v-model="password"
                                 ></text-input>
                                 <text-input type="password"
+                                    validationmessage="Password doesn't match" :validation="validatePassword"
                                     :label="$t('user.repeatpassword')"
                                     :placeholder="$t('user.placeholder.password')"
                                     name="repeatpassword" v-model="repeatpassword"
@@ -130,6 +131,11 @@
                     noerrors = this.validate(child) && noerrors
                 })
                 return noerrors && !component.errors.any()
+            },
+            validatePassword() {
+                return {
+                    valid: this.password === this.repeatpassword
+                }
             },
             register() {
                 if(this.validate(this)) {

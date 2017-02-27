@@ -57,6 +57,25 @@
             type: {
                 type: [String],
                 default: 'text'
+            },
+            validation: {
+                type: [Function],
+                default: null
+            },
+            validationmessage: {
+                type: [String],
+                default: ''
+            }
+        },
+        created() {
+            let self = this
+            if (this.validation != null) {
+                this.$validator.extend('custom', {
+                    getMessage: function() { return self.validationmessage },
+                    validate: (value) => new Promise(resolve => {
+                        resolve(this.validation())
+                    })
+                })
             }
         },
         data: function () {
@@ -66,7 +85,11 @@
         },
         computed: {
             rules() {
-                return { rules: { required: this.required, email: this.email } }
+                if (this.validation == null) {
+                    return { rules: { required: this.required, email: this.email } }
+                } else {
+                    return { rules: { required: this.required, email: this.email, custom: this.validation } }
+                }
             }
         },
         watch: {
