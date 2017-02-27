@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0-alpha.12 (TBA)
+## 3.0.0-alpha.12 (27.02.2017)
 
 ### Features
 
