@@ -35,7 +35,7 @@
                     <v-modal v-if="on" v-model="disableModal">
                         <v-btn slot="activator" error
                             v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
-                            class="white--text no-margin-button">
+                            class="white--text">
                             {{$t('vps.disable.submit')}}
                         </v-btn>
                         <v-card>
@@ -50,9 +50,27 @@
                           </v-card-row>
                         </v-card>
                     </v-modal>
+                    <v-modal v-if="on" v-model="rebootModal">
+                        <v-btn slot="activator" warning
+                            v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                            class="white--text">
+                            {{$t('vps.reboot.submit')}}
+                        </v-btn>
+                        <v-card>
+                          <v-card-text>
+                            <h2 class="title">{{$t('vps.reboot.header', {id: $route.params.id})}}</h2>
+                          </v-card-text>
+                          <v-card-text class="subheading">{{$t('vps.reboot.description')}}</v-card-text>
+                          <v-card-row actions>
+                            <v-spacer></v-spacer>
+                            <v-btn flat v-on:click.native="rebootModal = false" class="primary--text">{{$t('vps.reboot.cancel')}}</v-btn>
+                            <v-btn flat v-on:click.native="reboot" class="primary--text">{{$t('vps.reboot.submit')}}</v-btn>
+                          </v-card-row>
+                        </v-card>
+                    </v-modal>
                     <v-btn v-if="off" success v-on:click.native="enable"
                         v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
-                        class="white--text no-margin-button">
+                        class="white--text">
                         {{$t('vps.turn_on')}}
                     </v-btn>
                 </v-card-row>
@@ -149,9 +167,8 @@
         padding-right: 6px;
     }
 
-    .no-margin-button {
-        margin-left: 0px;
-        margin-top: -0.5rem;
+    .card__row--actions .btn {
+        margin-right: 8px;
     }
 
     h6 {
@@ -166,7 +183,9 @@
             return {
                 interval: null,
                 changingStatus: false,
-                disableModal: false
+                disableModal: false,
+                rebootModal: false,
+                rebooting: false
             }
         },
         mounted () {
@@ -196,14 +215,10 @@
         },
         computed: {
             on () {
-                if (this.$store.state.vps.status == "running") {
-                    return true;
-                }
+                return this.$store.state.vps.status == "running";
             },
             off () {
-                if (this.$store.state.vps.status == "stopped") {
-                    return true;
-                }
+                return this.$store.state.vps.status == "stopped";
             },
             loading () {
                 return this.$store.state.loading
@@ -220,7 +235,14 @@
                 return Math.round((this.$store.state.vps.disk_mb / this.$store.state.vps.max_disk_mb) * 100)
             }
         },
-        watch: {},
+        watch: {
+            'off': function(newValue, oldValue) {
+                if (newValue === true && oldValue === false && this.rebooting) {
+                    this.enable()
+                    this.rebooting = false
+                }
+            }
+        },
         filters: {
             prettyDate (unixtimestamp) {
                 var timestamp = moment.unix(unixtimestamp);
@@ -279,6 +301,11 @@
                 return this.$store.dispatch('vpsOff', {
                     'id': this.$route.params.id
                 })
+            },
+            reboot() {
+                this.rebootModal = false
+                this.rebooting = true
+                this.disable()
             }
         }
     }

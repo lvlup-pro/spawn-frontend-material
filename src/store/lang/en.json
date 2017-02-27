@@ -129,6 +129,12 @@
             "description": "Hard stop, may cause unsaved data loss like pulling power plug from PC!",
             "cancel": "Cancel",
             "submit": "Turn off"
+        },
+        "reboot": {
+            "header": "Are you sure want to reboot VPS #{id}?",
+            "description": "Hard reboot, may cause unsaved data loss like pulling power plug from PC!",
+            "cancel": "Cancel",
+            "submit": "Reboot"
         }
     },
     "credits": {
