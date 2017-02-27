@@ -7,6 +7,10 @@
 + Show main and additional IPs on VPS page [#94](https://github.com/lvlup-pro/spawn-frontend-material/pull/94)
 + Libs update
 
+### Fixes
+
++ Align content on registration page [#93](https://github.com/lvlup-pro/spawn-frontend-material/pull/93)
+
 ## 3.0.0-alpha.11 (26.02.2017)
 
 ### Features
