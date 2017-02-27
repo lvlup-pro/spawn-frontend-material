@@ -18,7 +18,7 @@
                                     :placeholder="$t('user.placeholder.username')"
                                     name="username" v-model="username"
                                 ></text-input>
-                                <text-input email type="email"
+                                <text-input type="email"
                                     :label="$t('user.email')"
                                     :placeholder="$t('user.placeholder.email')"
                                     name="email" v-model="email"

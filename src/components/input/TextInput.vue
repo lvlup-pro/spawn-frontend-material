@@ -38,10 +38,6 @@
                 type: [Boolean],
                 default: true
             },
-            email: {
-                type: [Boolean],
-                default: false
-            },
             name: {
                 type: [String],
                 required: true
@@ -90,6 +86,9 @@
                 } else {
                     return { rules: { required: this.required, email: this.email, custom: this.validation } }
                 }
+            },
+            email() {
+                return this.type === 'email'
             }
         },
         watch: {
