@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-alpha.12 (TBA)
+
+### Features
+
++ Show main and additional IPs on VPS page [#94](https://github.com/lvlup-pro/spawn-frontend-material/pull/94)
+
 ## 3.0.0-alpha.11 (26.02.2017)
 
 ### Features
