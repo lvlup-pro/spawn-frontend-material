@@ -4,13 +4,15 @@
 
 ### Features
 
-+ Login and register form validation before submit
++ Login and register form validation before submit [#97](https://github.com/lvlup-pro/spawn-frontend-material/pull/97)
 + Show main and additional IPs on VPS page [#94](https://github.com/lvlup-pro/spawn-frontend-material/pull/94)
 + Libs update
 
 ### Fixes
 
 + Align content on registration page [#93](https://github.com/lvlup-pro/spawn-frontend-material/pull/93)
++ Fix displaying more than 100% in VPS stats [#98](https://github.com/lvlup-pro/spawn-frontend-material/pull/98)
++ Fix displaying tooltip in ticket page [#99](https://github.com/lvlup-pro/spawn-frontend-material/pull/99)
 
 ## 3.0.0-alpha.11 (26.02.2017)
 
