@@ -382,4 +382,9 @@
         height: initial !important;
         min-height: 100vh;
     }
+
+    button.btn.aligned {
+        margin-left: 0;
+        margin-right: 0;
+    }
 </style>

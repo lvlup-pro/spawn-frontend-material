@@ -24,7 +24,7 @@
                                 <!--label="Remember me for..."-->
                                 <!--v-model="remember"-->
                                 <!--&gt;</v-select>-->
-                                <v-btn flat="flat" dark="dark" success block type="submit"
+                                <v-btn class="aligned" flat="flat" dark="dark" success block type="submit"
                                        v-on:click.native="login(username,password)"
                                        v-bind:loading="loading"
                                        v-bind:disabled="loading"
