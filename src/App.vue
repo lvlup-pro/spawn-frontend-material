@@ -60,7 +60,7 @@
                                 </v-list-tile-action>
                                 <v-list-tile-content>
                                     <v-list-tile-title
-                                            v-text="format($t('sidebar.profile'), { 'nick': account.username, 'email': account.email })"/>
+                                            v-text="$t('sidebar.profile', { 'nick': account.username, 'email': account.email })"/>
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
@@ -71,7 +71,7 @@
                                 </v-list-tile-action>
                                 <v-list-tile-content>
                                     <v-list-tile-title
-                                            v-text="format($t('sidebar.payments'), { 'balance': wallet.balance_pretty })"/>
+                                            v-text="$t('sidebar.payments', { 'balance': wallet.balance_pretty })"/>
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
@@ -249,18 +249,10 @@
                 }
             },
             getToolbarTitle() {
-                let title = this.$t(this.$store.state.toolbarTitle);
-                let args = this.$store.state.toolbarTitleArgs;
-                return this.format(title, args);
-            },
-            format(string, args) {
-                for (let key in args) {
-                    let find = '{' + key + '}';
-                    while (string.indexOf(find) !== -1) {
-                        string = string.replace(find, args[key]);
-                    }
-                }
-                return string;
+                return this.$t(
+                    this.$store.state.toolbarTitle,
+                    this.$store.state.toolbarTitleArgs
+                );
             }
         },
         beforeMount() {
