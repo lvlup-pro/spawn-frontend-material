@@ -6,32 +6,55 @@
                     <v-card-title class="white--text">{{$t('vps.control')}}</v-card-title>
                 </v-card-row>
                 <v-card-text>
-                    <v-card-row>
-                        <i class="fa fa-fw fa-2x fa-info-circle"></i>
-                        {{$t('vps.state')}}:&nbsp;
-                        <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
-                        <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
-                    </v-card-row>
-                    <v-card-row>
-                        <i class="fa fa-fw fa-2x fa-server"></i>
-                        {{$t('vps.virtualization')}}:
-                        {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}
-                    </v-card-row>
-                    <v-card-row v-if="on">
-                        <i class="fa fa-fw fa-2x fa-clock-o"></i>
-                        {{$t('vps.uptime')}}:
-                        {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}
-                    </v-card-row>
-                    <v-card-row v-if="vps.ip">
-                        <i class="fa fa-fw fa-2x fa-globe"></i>
-                        {{$t('vps.ips')}}:&nbsp;
-                        <b>{{vps.ip.main}}</b>
-                        <span v-for="(item, index) in vps.ip.additional">
-                        	, {{item}}
-                        </span>
-                    </v-card-row>
+                    <v-row>
+                        <v-col md6 xs12>
+                            <v-card-row>
+                                <i class="fa fa-fw fa-2x fa-info-circle"></i>
+                                <b>{{$t('vps.state')}}:&nbsp;</b>
+                                <v-chip v-if="locked" label class="red white--text">{{$t('vps.locked')}}</v-chip>
+                                <v-chip v-else-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
+                                <v-chip v-else label class="red white--text">{{$t('vps.off')}}</v-chip>
+                            </v-card-row>
+                            <v-card-row>
+                                <i class="fa fa-fw fa-2x fa-server"></i>
+                                <b>{{$t('vps.virtualization')}}:&nbsp;</b>
+                                {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}
+                            </v-card-row>
+                            <v-card-row v-if="vps.ip">
+                                <i class="fa fa-fw fa-2x fa-globe"></i>
+                                <b>{{$t('vps.ips')}}:&nbsp;</b>
+                                <u v-if="vps.ip.additional.length > 0">{{vps.ip.main}}</u>
+                                <span v-else>{{vps.ip.main}}</span>
+                                <span v-for="(item, index) in vps.ip.additional">
+                                	, {{item}}
+                                </span>
+                            </v-card-row>
+                        </v-col>
+                        <v-col md6 xs12>
+                            <v-card-row v-if="on">
+                                <i class="fa fa-fw fa-2x fa-clock-o"></i>
+                                <b>{{$t('vps.uptime')}}:&nbsp;</b>
+                                {{upfrom | prettyDate}}
+                            </v-card-row>
+                            <v-card-row>
+                                <i class="fa fa-fw fa-2x fa-calendar-plus-o"></i>
+                                <b>{{$t('vps.createdat')}}:&nbsp;</b>
+                                {{vps.created_at | prettyDate}}
+                            </v-card-row>
+                            <v-card-row v-if="locked">
+                                <i class="fa fa-fw fa-2x fa-calendar-times-o"></i>
+                                <b>{{$t('vps.lockedfrom')}}:&nbsp;</b>
+                                {{vps.payed_to | prettyDate}}
+                            </v-card-row>
+                            <v-card-row v-else>
+                                <i class="fa fa-fw fa-2x fa-calendar-check-o"></i>
+                                <b>{{$t('vps.activeto')}}:&nbsp;</b>
+                                {{vps.payed_to | prettyDate}}
+                            </v-card-row>
+                        </v-col>
+                    </v-row>
                 </v-card-text>
-                <v-card-row actions style="justify-content: flex-start">
+                <v-card-row v-if="!locked" actions style="justify-content: flex-start">
                     <v-modal v-if="on" v-model="disableModal">
                         <v-btn slot="activator" error
                             v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
@@ -215,10 +238,13 @@
         },
         computed: {
             on () {
-                return this.$store.state.vps.status == "running";
+                return this.vps.status === 'running'
             },
             off () {
-                return this.$store.state.vps.status == "stopped";
+                return this.vps.status === 'stopped'
+            },
+            locked() {
+                return !this.vps.active
             },
             loading () {
                 return this.$store.state.loading
@@ -229,25 +255,33 @@
                 return this.$store.state.vps
             },
             ram () {
-                return Math.round((this.$store.state.vps.mem_mb / this.$store.state.vps.max_mem_mb) * 100)
+                return Math.round((this.vps.mem_mb / this.vps.max_mem_mb) * 100)
             },
             disk() {
-                return Math.round((this.$store.state.vps.disk_mb / this.$store.state.vps.max_disk_mb) * 100)
+                return Math.round((this.vps.disk_mb / this.vps.max_disk_mb) * 100)
+            },
+            language() {
+                return this.$store.state.language
+            },
+            upfrom() {
+                return new Date().getTime() / 1000 - this.vps.uptime_s
             }
         },
         watch: {
-            'off': function(newValue, oldValue) {
+            off(newValue, oldValue) {
                 if (newValue === true && oldValue === false && this.rebooting) {
                     this.enable()
                     this.rebooting = false
                 }
+            },
+            language(val, old) {
+                moment.locale(val)
             }
         },
         filters: {
             prettyDate (unixtimestamp) {
                 var timestamp = moment.unix(unixtimestamp);
-                //DD.MM.YYYY or "L"
-                return timestamp.format("H:mm L")
+                return timestamp.format("DD.MM.YYYY") + " - " + timestamp.from()
             },
             prettyBytes(bytes) {
                 if (typeof bytes === 'undefined' || bytes < 0) {
