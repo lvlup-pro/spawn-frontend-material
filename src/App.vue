@@ -380,8 +380,16 @@
     }
 
     aside.sidebar {
-        height: initial !important;
-        min-height: 100vh;
+        padding-bottom: 0;
+    }
+
+    aside.sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    aside.sidebar::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 3px;
     }
 
     button.btn.aligned {
