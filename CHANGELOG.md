@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0-beta.1 (TBA)
+## 3.0.0-beta.1 (01.03.2017)
 
 ### Features
 

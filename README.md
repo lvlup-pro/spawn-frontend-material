@@ -1,4 +1,4 @@
-# LVL UP Spawn v3 - frontend
+# LVL UP Spawn v3 - frontend (beta)
 > Material edition
 
 [![Build Status](https://travis-ci.org/lvlup-pro/spawn-frontend-material.svg?branch=master)](https://travis-ci.org/lvlup-pro/spawn-frontend-material)
@@ -6,11 +6,11 @@
 [![Dependencies](https://david-dm.org/lvlup-pro/spawn-frontend-material/status.svg)](https://david-dm.org/lvlup-pro/spawn-frontend-material)
 [![DependenciesDev](https://david-dm.org/lvlup-pro/spawn-frontend-material/dev-status.svg)](https://david-dm.org/lvlup-pro/spawn-frontend-material?type=dev)
 
-Frontend for https://lvlup.pro hosting customer panel
+Frontend for https://lvlup.pro hosting customer panel available @ https://my.lvlup.pro 
 
-## How to see current release
+## How to play with current release
  
-To see current version just go to https://demomy.lvlup.pro
+To see sandbox of current version just go to https://demomy.lvlup.pro
 
 You can use credentials generated at this link https://demoapi.lvlup.pro/v3/auth/register
 
