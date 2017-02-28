@@ -1,4 +1,4 @@
-import Components from './components/_index'
+import Components from './components/index'
 
 //load components
 //source: https://github.com/vuetifyjs/vuetify/blob/master/src/index.js
