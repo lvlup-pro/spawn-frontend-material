@@ -380,8 +380,7 @@
     }
 
     aside.sidebar {
-        height: initial !important;
-        min-height: 100vh;
+        padding-bottom: 0;
     }
 
     button.btn.aligned {
