@@ -37,6 +37,7 @@
                                 <div id="captcha-container">
                                     <div id="captcha-register"></div>
                                 </div>
+                                <span id="captcha-error" v-show="captchaError">{{$t('validation.required')}}</span>
                                 <v-btn class="aligned" flat="flat" dark="dark" success block type="submit">
                                     <v-icon left>vpn_key</v-icon>
                                     {{$t('user.register.button')}}
@@ -52,10 +53,21 @@
 <style>
     #captcha-register {
         transform-origin: left top;
+        margin-bottom: 2rem;
     }
 
     #captcha-register > div {
         margin: auto;
+    }
+
+    #captcha-error {
+        width: 100%;
+        text-align: center;
+        color: red;
+        font-size: 0.8rem;
+        position: absolute;
+        margin-top: -2rem;
+        padding-top: 2px;
     }
 </style>
 <script>
@@ -67,7 +79,8 @@
                 email: "",
                 password: "",
                 repeatpassword: "",
-                captcha: ""
+                captcha: null,
+                captchaError: false
             }
         },
         computed: {
@@ -123,6 +136,7 @@
             },
             captchaCallback(response) {
                 this.captcha = response
+                this.captchaError = false
             },
             validate(component) {
                 let noerrors = true
@@ -138,7 +152,8 @@
                 }
             },
             register() {
-                if(this.validate(this)) {
+                this.captchaError = (this.captcha === null)
+                if(this.validate(this) && !this.captchaError) {
                     this.$store.dispatch('accountRegister', {
                         fullname: this.fullname,
                         username: this.username,
