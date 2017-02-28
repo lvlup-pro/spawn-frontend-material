@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.0-beta.1 (TBA)
+
+### Features
+
++ Responsive tables [#106](https://github.com/lvlup-pro/spawn-frontend-material/pull/106)
++ Add Spanish language and flag icons [#107](https://github.com/lvlup-pro/spawn-frontend-material/pull/107)
+
 ## 3.0.0-alpha.13 (28.02.2017)
 
 ### Features
