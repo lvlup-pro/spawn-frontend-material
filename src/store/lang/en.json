@@ -42,7 +42,7 @@
     "validation": {
         "required": "This field is required.",
         "email": "Enter correct e-mail address.",
-        "repeatpassword": "Passwords doesn't match."
+        "repeatpassword": "Passwords don't match."
     },
     "auth": {
         "no": "Log in first",
@@ -69,11 +69,11 @@
             "fullname": "John Doe"
         },
         "login": {
-            "header": "I already have lvlup.pro account",
+            "header": "I already have a lvlup.pro account",
             "button": "Log in"
         },
         "register": {
-            "header": "I don't have lvlup.pro account yet",
+            "header": "I don't have a lvlup.pro account yet",
             "button": "Register"
         }
     },
@@ -85,8 +85,8 @@
                 "short": "Waiting"
             },
             "working": {
-                "long": "Staff is working on response",
-                "medium": "Staff is working",
+                "long": "Staff are working on a response",
+                "medium": "In Progress",
                 "short": "Processing"
             },
             "closed": {
@@ -100,10 +100,10 @@
             }
         },
         "subject": "Subject",
-        "response_time": "Dear customer, reply to your messages may take up to 48h",
+        "response_time": "Dear customer, a response to your query may take up to 48h to reach you",
         "client": "You",
         "staff": "lvlup.pro Staff",
-        "textarea": "Write your message to staff",
+        "textarea": "Enter the content of your message",
         "send": "Send",
         "msg_too_long": "Message is too long",
         "msg_too_short": "Message is too short",
@@ -118,7 +118,7 @@
         "disk_all": "Disk (since boot)",
         "disk_rt": "Disk (real-time)",
         "turn_on": "Turn on",
-        "info": "Informations",
+        "info": "Information",
         "state": "State",
         "ips": "IP addresses",
         "virtualization": "Virtualization",
@@ -135,13 +135,13 @@
         "locked": "Unpaid",
         "disable": {
             "header": "Are you sure want to turn off VPS #{id}?",
-            "description": "Hard stop, may cause unsaved data loss like pulling power plug from PC!",
+            "description": "Hard stop, may cause unsaved data loss (like pulling power plug from PC)!",
             "cancel": "Cancel",
             "submit": "Turn off"
         },
         "reboot": {
             "header": "Are you sure want to reboot VPS #{id}?",
-            "description": "Hard reboot, may cause unsaved data loss like pulling power plug from PC!",
+            "description": "Hard reboot, may cause unsaved data loss (like pulling power plug from PC)!",
             "cancel": "Cancel",
             "submit": "Reboot"
         }
@@ -152,6 +152,6 @@
         "changelog": "Changelog"
     },
     "loading": "Loading",
-    "panel_preview": "This preview version of customer panel shows only VPS servers",
+    "panel_preview": "This preview version of customer panel only shows VPS servers",
     "network_error": "Network error detected!"
 }
