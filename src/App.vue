@@ -300,6 +300,18 @@
         }
     }
 
+    @media screen and (max-width: 768px) {
+        ul.pagination a.pagination__item {
+            width: 24px;
+            height: 24px;
+            margin: 0.2rem;
+        }
+
+        ul.pagination a.pagination__navigation {
+            margin: 0.3rem;
+        }
+    }
+
     /* prevent dark background under sidebar */
     #app main {
         background: none;
