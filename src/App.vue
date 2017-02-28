@@ -124,7 +124,7 @@
                         <v-list-item v-if="language != 'en'" v-on:click="changeLang('en')">
                             <v-list-tile>
                                 <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-globe"></i>
+                                    <img src="/public/flags/EN.png">
                                 </v-list-tile-action>
                                 <v-list-tile-content>
                                     <v-list-tile-title>English (EN)</v-list-tile-title>
@@ -134,7 +134,7 @@
                         <v-list-item v-if="language != 'pl'" v-on:click="changeLang('pl')">
                             <v-list-tile>
                                 <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-globe"></i>
+                                    <img src="/public/flags/PL.png">
                                 </v-list-tile-action>
                                 <v-list-tile-content>
                                     <v-list-tile-title>Polski (PL)</v-list-tile-title>
@@ -144,7 +144,7 @@
                         <v-list-item v-if="language != 'de'" v-on:click="changeLang('de')">
                             <v-list-tile>
                                 <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-globe"></i>
+                                    <img src="/public/flags/DE.png">
                                 </v-list-tile-action>
                                 <v-list-tile-content>
                                     <v-list-tile-title>Deutsch (DE)</v-list-tile-title>
@@ -154,7 +154,7 @@
                         <v-list-item v-if="language != 'es'" v-on:click="changeLang('es')">
                             <v-list-tile>
                                 <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-globe"></i>
+                                    <img src="/public/flags/ES.png">
                                 </v-list-tile-action>
                                 <v-list-tile-content>
                                     <v-list-tile-title>Español (ES)</v-list-tile-title>
