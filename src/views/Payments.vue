@@ -34,10 +34,22 @@
                                         <td>
                                             #{{item.id}}
                                         </td>
-                                        <td v-if="item.amount > 0" class="green--text">{{item.amount}} PLN</td>
-                                        <td v-if="item.amount == 0">{{item.amount}} PLN</td>
-                                        <td v-if="item.amount < 0" class="red--text">{{item.amount}} PLN</td>
-                                        <td>{{item.created_at | prettyDateFrom}}</td>
+                                        <td v-if="item.amount > 0" class="green--text">
+                                            +{{item.amount}}
+                                            <span class="hidden-sm-and-down">PLN</span>
+                                        </td>
+                                        <td v-if="item.amount == 0">
+                                            {{item.amount}}
+                                            <span class="hidden-sm-and-down">PLN</span>
+                                        </td>
+                                        <td v-if="item.amount < 0" class="red--text">
+                                            {{item.amount}}
+                                            <span class="hidden-sm-and-down">PLN</span>
+                                        </td>
+                                        <td>
+                                            {{item.created_at | prettyDateFormat}}
+                                            <span class="hidden-sm-and-down"> - {{item.created_at | prettyDateFrom}}</span>
+                                        </td>
                                     </tr>
                                 </template>
                                 </tbody>
@@ -112,10 +124,11 @@ tr {cursor:default}
             }
         },
         filters: {
+            prettyDateFormat (unixtimestamp) {
+                return moment.unix(unixtimestamp).format("DD.MM.YYYY")
+            },
             prettyDateFrom (unixtimestamp) {
-                var timestamp = moment.unix(unixtimestamp);
-                //DD.MM.YYYY or "L"
-                return timestamp.format("L") + " - " + timestamp.from()
+                return moment.unix(unixtimestamp).from()
             }
         },
         preFetch (store) {

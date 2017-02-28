@@ -25,7 +25,7 @@
                                     <th>{{$t('table.id')}}</th>
                                     <th>{{$t('table.name')}}</th>
                                     <th>{{$t('table.status')}}</th>
-                                    <th>{{$t('table.ip')}}</th>
+                                    <th class="hidden-sm-and-down">{{$t('table.ip')}}</th>
                                     <th>{{$t('table.payed_to')}}</th>
                                 </tr>
                                 </thead>
@@ -37,13 +37,15 @@
                                                         class="text-xs-center"></v-checkbox>
                                         </td>
                                         <td v-on:click="goToVps(item.id)">
-                                            <span v-if="item.virt === 0">VPS OpenVZ</span>
-                                            <span v-else-if="item.virt === 2">VPS KVM</span>
-                                            <span v-else>VPS</span>
+                                            VPS
+                                            <span class="hidden-sm-and-down">
+                                                <span v-if="item.virt === 0">OpenVZ</span>
+                                                <span v-else-if="item.virt === 2">KVM</span>
+                                            </span>
                                         </td>
                                         <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.name}}</td>
-                                        <td v-on:click="goToVps(item.id)">
+                                        <td v-on:click="goToVps(item.id)" style="white-space: nowrap;">
                                             <span v-if="item.active === 1">
                                                 <i class="fa fa-circle green--text"></i> {{$t('vps.active')}}
                                             </span>
@@ -51,8 +53,11 @@
                                                 <i class="fa fa-circle red--text"></i> {{$t('vps.locked')}}
                                             </span>
                                         </td>
-                                        <td v-on:click="goToVps(item.id)">{{item.ip}}</td>
-                                        <td v-on:click="goToVps(item.id)">{{item.payed_to | prettyDate}}</td>
+                                        <td v-on:click="goToVps(item.id)" class="hidden-sm-and-down">{{item.ip}}</td>
+                                        <td v-on:click="goToVps(item.id)">
+                                            {{item.payed_to | prettyDateFormat}}
+                                            <span class="hidden-sm-and-down"> - {{item.payed_to | prettyDateFrom}}</span>
+                                        </td>
                                     </tr>
                                 </template>
                                 </tbody>
@@ -129,9 +134,11 @@
             }
         },
         filters: {
-            prettyDate (unixtimestamp) {
-                var timestamp = moment.unix(unixtimestamp);
-                return timestamp.format("DD.MM.YY") + " - " + timestamp.from()
+            prettyDateFormat (unixtimestamp) {
+                return moment.unix(unixtimestamp).format("DD.MM.YYYY")
+            },
+            prettyDateFrom (unixtimestamp) {
+                return moment.unix(unixtimestamp).from()
             }
         },
         preFetch (store) {
