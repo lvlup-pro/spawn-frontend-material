@@ -20,12 +20,14 @@ Vue.component('text-input', TextInput)
 //-------------------- i18n --------------------
 let en = require('./store/lang/en.json'),
     pl = require('./store/lang/pl.json'),
-    de = require('./store/lang/de.json');
+    de = require('./store/lang/de.json'),
+    es = require('./store/lang/es.json');
 
 Vue.use(VueI18n)
 Vue.locale('en', en)
 Vue.locale('pl', pl)
 Vue.locale('de', de)
+Vue.locale('es', es)
 
 function toLambdas(obj) {
     let newObj = {}
@@ -46,6 +48,9 @@ Vue.use(VeeValidate, {
         },
         de: {
             messages: toLambdas(en.validation)
+        },
+        es: {
+            messages: toLambdas(es.validation)
         }
     }
 })
