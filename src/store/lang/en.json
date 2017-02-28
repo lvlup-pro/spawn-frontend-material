@@ -128,7 +128,8 @@
         "ram": "RAM",
         "on": "On",
         "off": "Off",
-        "locked": "Locked",
+        "active": "Paid",
+        "locked": "Unpaid",
         "disable": {
             "header": "Are you sure want to turn off VPS #{id}?",
             "description": "Hard stop, may cause unsaved data loss like pulling power plug from PC!",
