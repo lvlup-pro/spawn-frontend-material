@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0-alpha.13 (TBA)
+## 3.0.0-alpha.13 (28.02.2017)
 
 ### Features
 
@@ -13,6 +13,7 @@
 + Sidebar scrolling fix and better look in webkit based browsers [#102](https://github.com/lvlup-pro/spawn-frontend-material/pull/102)
 + Simplifying code [#104](https://github.com/lvlup-pro/spawn-frontend-material/pull/104) 
 + Styling fix for register page [#103](https://github.com/lvlup-pro/spawn-frontend-material/pull/103)
++ More sophisticated English translation [#105](https://github.com/lvlup-pro/spawn-frontend-material/pull/105)
 
 ## 3.0.0-alpha.12 (27.02.2017)
 
