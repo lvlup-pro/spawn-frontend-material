@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.0.0-alpha.13 (TBA)
+
+### Features
+
++ More VPS info and detect disabled state (due to payment) [#101](https://github.com/lvlup-pro/spawn-frontend-material/pull/101)
+
+### Fixes
+
++ Invalid VPS status on services page [#95](https://github.com/lvlup-pro/spawn-frontend-material/issues/95)
++ Sidebar scrolling fix and better look in webkit based browsers [#102](https://github.com/lvlup-pro/spawn-frontend-material/pull/102)
++ Simplifying code [#104](https://github.com/lvlup-pro/spawn-frontend-material/pull/104) 
++ Styling fix for register page [#103](https://github.com/lvlup-pro/spawn-frontend-material/pull/103)
+
 ## 3.0.0-alpha.12 (27.02.2017)
 
 ### Features
