@@ -10,20 +10,21 @@
                         <v-col md6 xs12>
                             <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-info-circle"></i>
-                                {{$t('vps.state')}}:&nbsp;
+                                <b>{{$t('vps.state')}}:&nbsp;</b>
                                 <v-chip v-if="locked" label class="red white--text">{{$t('vps.locked')}}</v-chip>
                                 <v-chip v-else-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
                                 <v-chip v-else label class="red white--text">{{$t('vps.off')}}</v-chip>
                             </v-card-row>
                             <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-server"></i>
-                                {{$t('vps.virtualization')}}:
+                                <b>{{$t('vps.virtualization')}}:&nbsp;</b>
                                 {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}
                             </v-card-row>
                             <v-card-row v-if="vps.ip">
                                 <i class="fa fa-fw fa-2x fa-globe"></i>
-                                {{$t('vps.ips')}}:&nbsp;
-                                <b>{{vps.ip.main}}</b>
+                                <b>{{$t('vps.ips')}}:&nbsp;</b>
+                                <u v-if="vps.ip.additional.length > 0">{{vps.ip.main}}</u>
+                                <span v-else>{{vps.ip.main}}</span>
                                 <span v-for="(item, index) in vps.ip.additional">
                                 	, {{item}}
                                 </span>
@@ -32,20 +33,23 @@
                         <v-col md6 xs12>
                             <v-card-row v-if="on">
                                 <i class="fa fa-fw fa-2x fa-clock-o"></i>
-                                {{$t('vps.uptime')}}:
+                                <b>{{$t('vps.uptime')}}:&nbsp;</b>
                                 {{upfrom | prettyDate}}
                             </v-card-row>
                             <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-calendar-plus-o"></i>
-                                {{$t('vps.createdat')}}: {{vps.created_at | prettyDate}}
+                                <b>{{$t('vps.createdat')}}:&nbsp;</b>
+                                {{vps.created_at | prettyDate}}
                             </v-card-row>
                             <v-card-row v-if="locked">
                                 <i class="fa fa-fw fa-2x fa-calendar-times-o"></i>
-                                {{$t('vps.lockedfrom')}}: {{vps.payed_to | prettyDate}}
+                                <b>{{$t('vps.lockedfrom')}}:&nbsp;</b>
+                                {{vps.payed_to | prettyDate}}
                             </v-card-row>
                             <v-card-row v-else>
                                 <i class="fa fa-fw fa-2x fa-calendar-check-o"></i>
-                                {{$t('vps.activeto')}}: {{vps.payed_to | prettyDate}}
+                                <b>{{$t('vps.activeto')}}:&nbsp;</b>
+                                {{vps.payed_to | prettyDate}}
                             </v-card-row>
                         </v-col>
                     </v-row>
