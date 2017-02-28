@@ -44,14 +44,11 @@
                                         <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
                                         <td v-on:click="goToVps(item.id)">{{item.name}}</td>
                                         <td v-on:click="goToVps(item.id)">
-                                            <span v-if="item.active === 0">
-                                                <i class="fa fa-circle red--text"></i> {{$t('vps.locked')}}
-                                            </span>
-                                            <span v-else-if="item.running === 1">
-                                                <i class="fa fa-circle green--text"></i> {{$t('vps.on')}}
+                                            <span v-if="item.active === 1">
+                                                <i class="fa fa-circle green--text"></i> {{$t('vps.active')}}
                                             </span>
                                             <span v-else>
-                                                <i class="fa fa-circle red--text"></i> {{$t('vps.off')}}
+                                                <i class="fa fa-circle red--text"></i> {{$t('vps.locked')}}
                                             </span>
                                         </td>
                                         <td v-on:click="goToVps(item.id)">{{item.ip}}</td>

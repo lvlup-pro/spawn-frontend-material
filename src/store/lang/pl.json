@@ -128,7 +128,8 @@
         "ram": "RAM",
         "on": "Włączony",
         "off": "Wyłączony",
-        "locked": "Zablokowany",
+        "active": "Opłacony",
+        "locked": "Nieopłacony",
         "disable": {
             "header": "Czy na pewno chcesz wyłączyć VPSa #{id}?",
             "description": "Twarde zatrzymanie może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",
