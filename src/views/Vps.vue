@@ -31,6 +31,14 @@
                         	, {{item}}
                         </span>
                     </v-card-row>
+                    <v-card-row v-if="locked">
+                        <i class="fa fa-fw fa-2x fa-calendar-times-o"></i>
+                        {{$t('vps.lockedfrom')}}: {{vps.payed_to | prettyDate}}
+                    </v-card-row>
+                    <v-card-row v-else>
+                        <i class="fa fa-fw fa-2x fa-calendar-check-o"></i>
+                        {{$t('vps.activeto')}}: {{vps.payed_to | prettyDate}}
+                    </v-card-row>
                 </v-card-text>
                 <v-card-row v-if="!locked" actions style="justify-content: flex-start">
                     <v-modal v-if="on" v-model="disableModal">
@@ -237,21 +245,26 @@
             },
             disk() {
                 return Math.round((this.$store.state.vps.disk_mb / this.$store.state.vps.max_disk_mb) * 100)
+            },
+            language() {
+                return this.$store.state.language
             }
         },
         watch: {
-            'off': function(newValue, oldValue) {
+            off(newValue, oldValue) {
                 if (newValue === true && oldValue === false && this.rebooting) {
                     this.enable()
                     this.rebooting = false
                 }
+            },
+            language(val, old) {
+                moment.locale(val)
             }
         },
         filters: {
             prettyDate (unixtimestamp) {
                 var timestamp = moment.unix(unixtimestamp);
-                //DD.MM.YYYY or "L"
-                return timestamp.format("H:mm L")
+                return timestamp.format("DD.MM.YYYY") + " - " + timestamp.from()
             },
             prettyBytes(bytes) {
                 if (typeof bytes === 'undefined' || bytes < 0) {
