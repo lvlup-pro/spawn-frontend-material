@@ -32,7 +32,7 @@
                                             <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                         </td>
                                         <td v-on:click="goToTicket(ticket.id)">#{{ticket.id}}</td>
-                                        <td v-on:click="goToTicket(ticket.id)">
+                                        <td v-on:click="goToTicket(ticket.id)" style="white-space: nowrap;">
                                             <!--
                                             <span v-if="!ticket.closed_at && !ticket.staff_response_needed"
                                                 v-tooltip:bottom="{ html: $t('ticket.status.waiting.long') }">
@@ -56,7 +56,10 @@
                                             </span>
                                         </td>
                                         <td v-on:click="goToTicket(ticket.id)">{{ticket.subject}}</td>
-                                        <td v-on:click="goToTicket(ticket.id)">{{ticket.created_at | prettyDate}}</td>
+                                        <td v-on:click="goToTicket(ticket.id)">
+                                            {{ticket.created_at | prettyDateFormat}}
+                                            <span class="hidden-sm-and-down"> - {{ticket.created_at | prettyDateFrom}}</span>
+                                        </td>
                                     </tr>
                                 </template>
                                 </tbody>
@@ -137,10 +140,11 @@
             }
         },
         filters: {
-            prettyDate (unixtimestamp) {
-                var timestamp = moment.unix(unixtimestamp);
-                //DD.MM.YYYY or "L"
-                return timestamp.format("L") + " - " + timestamp.from()
+            prettyDateFormat (unixtimestamp) {
+                return moment.unix(unixtimestamp).format("DD.MM.YYYY")
+            },
+            prettyDateFrom (unixtimestamp) {
+                return moment.unix(unixtimestamp).from()
             }
         },
         preFetch (store) {
