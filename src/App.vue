@@ -151,6 +151,16 @@
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
+                        <v-list-item v-if="language != 'es'" v-on:click="changeLang('es')">
+                            <v-list-tile>
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-globe"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>Español (ES)</v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
                     </v-list-group>
                 </v-list>
             </v-sidebar>
