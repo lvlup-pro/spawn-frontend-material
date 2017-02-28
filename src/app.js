@@ -6,12 +6,18 @@ import store from './store/index'
 import router from './router/index'
 import {sync} from 'vuex-router-sync'
 import VueI18n from 'vue-i18n'
-import Components from './components-loader'
 sync(store, router)
 
 Vue.use(Vuetify)
-Vue.use(Components)
 
+//-------------------- components --------------------
+import ProgressLinearColor from './components/ProgressLinearColor.vue'
+import TextInput from './components/TextInput.vue'
+
+Vue.component('progress-linear-color', ProgressLinearColor)
+Vue.component('text-input', TextInput)
+
+//-------------------- i18n --------------------
 let en = require('./store/lang/en.json'),
     pl = require('./store/lang/pl.json'),
     de = require('./store/lang/de.json');
@@ -44,6 +50,7 @@ Vue.use(VeeValidate, {
     }
 })
 
+//-------------------- create app --------------------
 const app = new Vue(Vue.util.extend({
     router,
     store
