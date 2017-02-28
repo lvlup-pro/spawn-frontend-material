@@ -5,6 +5,7 @@
 ### Features
 
 + More VPS info and detect disabled state (due to payment) [#101](https://github.com/lvlup-pro/spawn-frontend-material/pull/101)
++ Color upper bar on few browsers (mostly mobile)
 
 ### Fixes
 
