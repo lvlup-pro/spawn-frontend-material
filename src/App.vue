@@ -383,6 +383,15 @@
         padding-bottom: 0;
     }
 
+    aside.sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    aside.sidebar::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 3px;
+    }
+
     button.btn.aligned {
         margin-left: 0;
         margin-right: 0;
