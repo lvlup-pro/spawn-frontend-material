@@ -18,11 +18,6 @@
                         {{$t('vps.virtualization')}}:
                         {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}
                     </v-card-row>
-                    <v-card-row v-if="on">
-                        <i class="fa fa-fw fa-2x fa-clock-o"></i>
-                        {{$t('vps.uptime')}}:
-                        {{Math.round(vps.uptime_s / 60 / 60 / 24)}} {{$t('vps.days')}}
-                    </v-card-row>
                     <v-card-row v-if="vps.ip">
                         <i class="fa fa-fw fa-2x fa-globe"></i>
                         {{$t('vps.ips')}}:&nbsp;
@@ -30,6 +25,11 @@
                         <span v-for="(item, index) in vps.ip.additional">
                         	, {{item}}
                         </span>
+                    </v-card-row>
+                    <v-card-row v-if="on">
+                        <i class="fa fa-fw fa-2x fa-clock-o"></i>
+                        {{$t('vps.uptime')}}:
+                        {{upfrom | prettyDate}}
                     </v-card-row>
                     <v-card-row>
                         <i class="fa fa-fw fa-2x fa-calendar-plus-o"></i>
@@ -228,13 +228,13 @@
         },
         computed: {
             on () {
-                return this.$store.state.vps.status === 'running'
+                return this.vps.status === 'running'
             },
             off () {
-                return this.$store.state.vps.status === 'stopped'
+                return this.vps.status === 'stopped'
             },
             locked() {
-                return !this.$store.state.vps.active
+                return !this.vps.active
             },
             loading () {
                 return this.$store.state.loading
@@ -245,13 +245,16 @@
                 return this.$store.state.vps
             },
             ram () {
-                return Math.round((this.$store.state.vps.mem_mb / this.$store.state.vps.max_mem_mb) * 100)
+                return Math.round((this.vps.mem_mb / this.vps.max_mem_mb) * 100)
             },
             disk() {
-                return Math.round((this.$store.state.vps.disk_mb / this.$store.state.vps.max_disk_mb) * 100)
+                return Math.round((this.vps.disk_mb / this.vps.max_disk_mb) * 100)
             },
             language() {
                 return this.$store.state.language
+            },
+            upfrom() {
+                return new Date().getTime() / 1000 - this.vps.uptime_s
             }
         },
         watch: {

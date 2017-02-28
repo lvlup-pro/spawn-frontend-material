@@ -122,7 +122,7 @@
         "state": "State",
         "ips": "IP addresses",
         "virtualization": "Virtualization",
-        "uptime": "Uptime",
+        "uptime": "Running from",
         "days": "days",
         "cpu": "CPU",
         "ram": "RAM",
