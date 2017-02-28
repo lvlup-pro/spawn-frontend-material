@@ -31,6 +31,10 @@
                         	, {{item}}
                         </span>
                     </v-card-row>
+                    <v-card-row>
+                        <i class="fa fa-fw fa-2x fa-calendar-plus-o"></i>
+                        {{$t('vps.createdat')}}: {{vps.created_at | prettyDate}}
+                    </v-card-row>
                     <v-card-row v-if="locked">
                         <i class="fa fa-fw fa-2x fa-calendar-times-o"></i>
                         {{$t('vps.lockedfrom')}}: {{vps.payed_to | prettyDate}}

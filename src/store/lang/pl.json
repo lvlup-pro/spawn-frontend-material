@@ -131,6 +131,7 @@
         "locked": "Zablokowany",
         "lockedfrom": "Nieopłacony od",
         "activeto": "Opłacony do",
+        "createdat": "Utworzony",
         "disable": {
             "header": "Czy na pewno chcesz wyłączyć VPSa #{id}?",
             "description": "Twarde zatrzymanie może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",
