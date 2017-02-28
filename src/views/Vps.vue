@@ -9,8 +9,9 @@
                     <v-card-row>
                         <i class="fa fa-fw fa-2x fa-info-circle"></i>
                         {{$t('vps.state')}}:&nbsp;
-                        <v-chip v-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
-                        <v-chip v-if="off" label class="red white--text">{{$t('vps.off')}}</v-chip>
+                        <v-chip v-if="locked" label class="red white--text">{{$t('vps.locked')}}</v-chip>
+                        <v-chip v-else-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
+                        <v-chip v-else label class="red white--text">{{$t('vps.off')}}</v-chip>
                     </v-card-row>
                     <v-card-row>
                         <i class="fa fa-fw fa-2x fa-server"></i>
@@ -31,7 +32,7 @@
                         </span>
                     </v-card-row>
                 </v-card-text>
-                <v-card-row actions style="justify-content: flex-start">
+                <v-card-row v-if="!locked" actions style="justify-content: flex-start">
                     <v-modal v-if="on" v-model="disableModal">
                         <v-btn slot="activator" error
                             v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
@@ -215,10 +216,13 @@
         },
         computed: {
             on () {
-                return this.$store.state.vps.status == "running";
+                return this.$store.state.vps.status === 'running'
             },
             off () {
-                return this.$store.state.vps.status == "stopped";
+                return this.$store.state.vps.status === 'stopped'
+            },
+            locked() {
+                return !this.$store.state.vps.active
             },
             loading () {
                 return this.$store.state.loading
