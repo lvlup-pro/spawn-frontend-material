@@ -46,7 +46,7 @@
                                         <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
                                         <td v-on:click="goToVps(item.id)">
                                             <span v-if="item.name === null" class="grey--text">
-                                                {{ $t('vps.unset') }}
+                                                {{ $t('vps.notset') }}
                                             </span>
                                             <span v-else>
                                                 {{ item.name }}

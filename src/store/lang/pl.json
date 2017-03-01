@@ -132,7 +132,7 @@
         "createdat": "Utworzony",
         "active": "Opłacony",
         "locked": "Nieopłacony",
-        "unset": "Nieustawiona",
+        "notset": "Nieustawiona",
         "disable": {
             "header": "Czy na pewno chcesz wyłączyć VPSa #{id}?",
             "description": "Twarde zatrzymanie może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",
