@@ -24,8 +24,8 @@
                                     <th>{{$t('table.service')}}</th>
                                     <th>{{$t('table.id')}}</th>
                                     <th>{{$t('table.name')}}</th>
-                                    <th>{{$t('table.status')}}</th>
                                     <th class="hidden-sm-and-down">{{$t('table.ip')}}</th>
+                                    <th>{{$t('table.status')}}</th>
                                     <th>{{$t('table.payed_to')}}</th>
                                 </tr>
                                 </thead>
@@ -44,7 +44,15 @@
                                             </span>
                                         </td>
                                         <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
-                                        <td v-on:click="goToVps(item.id)">{{item.name}}</td>
+                                        <td v-on:click="goToVps(item.id)">
+                                            <span v-if="item.name === null" class="grey--text">
+                                                {{ $t('vps.unset') }}
+                                            </span>
+                                            <span v-else>
+                                                {{ item.name }}
+                                            </span>
+                                        </td>
+                                        <td v-on:click="goToVps(item.id)" class="hidden-sm-and-down">{{item.ip}}</td>
                                         <td v-on:click="goToVps(item.id)" style="white-space: nowrap;">
                                             <span v-if="item.active === 1">
                                                 <i class="fa fa-circle green--text"></i> {{$t('vps.active')}}
@@ -53,7 +61,6 @@
                                                 <i class="fa fa-circle red--text"></i> {{$t('vps.locked')}}
                                             </span>
                                         </td>
-                                        <td v-on:click="goToVps(item.id)" class="hidden-sm-and-down">{{item.ip}}</td>
                                         <td v-on:click="goToVps(item.id)">
                                             {{item.payed_to | prettyDateFormat}}
                                             <span class="hidden-sm-and-down"> - {{item.payed_to | prettyDateFrom}}</span>
