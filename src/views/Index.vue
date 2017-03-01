@@ -16,6 +16,7 @@
         mounted () {
             this.$emit('redirectLang', 'home')
             this.$vuetify.load()
+            this.$store.commit('setBackLink', false)
             this.$store.commit('setToolbarTitle', 'header.home')
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession')

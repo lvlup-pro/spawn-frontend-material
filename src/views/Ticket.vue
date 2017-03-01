@@ -135,6 +135,7 @@
         },
         mounted () {
             moment.locale(this.$lang)
+            this.$store.commit('setBackLink', 'ticket')
             this.$store.commit('setToolbarTitle', 'header.ticket_init')
             this.$emit('view', this.meta())
             this.$store.commit('setTicketMessages', [])

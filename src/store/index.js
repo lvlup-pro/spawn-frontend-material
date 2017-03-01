@@ -32,7 +32,8 @@ export default new Vuex.Store({
         version: "",
         language: "",
         meta: {},
-        logout: false
+        logout: false,
+        backLink: false
     },
     actions: {
         boot ({dispatch, state, commit}) {
@@ -329,6 +330,9 @@ export default new Vuex.Store({
         },
         setLogout(state, newLogout) {
             state.logout = newLogout;
+        },
+        setBackLink(state, newBackLink) {
+            state.backLink = newBackLink;
         },
         setTitle (state, newTitle) {
             document.title = newTitle;
