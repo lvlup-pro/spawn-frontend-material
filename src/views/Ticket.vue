@@ -11,15 +11,15 @@
                     <div class="mb-4"></div>
                     <h4>
                         <v-chip v-if="!ticket.closed_at && !ticket.staff_response_needed" label
-                            class="blue white--text" v-tooltip:bottom="{ html: $t('ticket.status.waiting.long') }">
+                            class="blue white--text" v-tooltip:right="{ html: $t('ticket.status.waiting.long') }">
                             {{$t('ticket.status.waiting.medium')}}
                         </v-chip>
                         <v-chip v-if="!ticket.closed_at && ticket.staff_response_needed" label
-                            class="yellow" v-tooltip:bottom="{ html: $t('ticket.status.working.long') }">
+                            class="yellow" v-tooltip:right="{ html: $t('ticket.status.working.long') }">
                             {{$t('ticket.status.working.medium')}}
                         </v-chip>
                         <v-chip v-if="ticket.closed_at" label
-                            class="red white--text" v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
+                            class="red white--text" v-tooltip:right="{ html: $t('ticket.status.closed.long') }">
                             {{$t('ticket.status.closed.medium')}}
                         </v-chip>
                         {{$t('ticket.subject')}}: {{ticket.subject}}
