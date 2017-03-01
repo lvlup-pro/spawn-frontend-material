@@ -126,6 +126,7 @@
         "days": "days",
         "cpu": "CPU",
         "ram": "RAM",
+        "swap": "Swap",
         "on": "On",
         "off": "Off",
         "lockedfrom": "Unpaid from",

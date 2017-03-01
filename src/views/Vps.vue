@@ -118,6 +118,10 @@
                             <h6>{{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h6>
                             <progress-linear-color v-model="disk"></progress-linear-color>
                         </v-col>
+                        <v-col md6 xs12 v-if="vps.virt == 'openvz'">
+                            <h6>{{$t('vps.swap')}}: {{swap}}% ({{vps.swap_mb}} MB/{{vps.max_swap_mb}} MB)</h6>
+                            <progress-linear-color v-model="swap"></progress-linear-color>
+                        </v-col>
                     </v-row>
                     <v-row>
                         <v-col md6 xs12>
@@ -172,7 +176,7 @@
             <div class="mb-4"></div>
             <!--
              TODO
-             - OpenVZ use vps.nproc vps.max_swap_mb vps.swap_mb
+             - OpenVZ use vps.nproc
              -->
         </v-container>
     </div>
@@ -259,6 +263,9 @@
             },
             disk() {
                 return Math.round((this.vps.disk_mb / this.vps.max_disk_mb) * 100)
+            },
+            swap() {
+                return Math.round((this.vps.swap_mb / this.vps.max_swap_mb) * 100)
             },
             language() {
                 return this.$store.state.language

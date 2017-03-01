@@ -125,6 +125,7 @@
         "ips": "Adresy IP",
         "cpu": "CPU",
         "ram": "RAM",
+        "swap": "Swap",
         "on": "Włączony",
         "off": "Wyłączony",
         "lockedfrom": "Nieopłacony od",
