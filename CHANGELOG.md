@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.0-beta.2 (01.03.2017)
+
+### Features
+
++ Show swap usage for OpenVZ in VPS page [#110](https://github.com/lvlup-pro/spawn-frontend-material/pull/110)
++ Show not set for null name in services page [#109](https://github.com/lvlup-pro/spawn-frontend-material/pull/109)
+
 ## 3.0.0-beta.1 (01.03.2017)
 
 ### Features
