@@ -7,72 +7,82 @@
                 </v-col>
             </v-row>
 
-            <div class="mt-4"></div>
-            <div class="text-xs-center">
-                <v-pagination v-bind:length="totalPages" v-bind:disabled="loading" v-model="page"></v-pagination>
-            </div>
-            <div class="mt-4"></div>
+            <div v-if="!emptyList">
 
-            <v-row>
-                <v-col xs12>
-                    <v-card>
-                        <v-table-overflow>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th class="select"><i class="fa fa-check"></i></th>
-                                    <th>{{$t('table.service')}}</th>
-                                    <th>{{$t('table.id')}}</th>
-                                    <th>{{$t('table.name')}}</th>
-                                    <th class="hidden-sm-and-down">{{$t('table.ip')}}</th>
-                                    <th>{{$t('table.status')}}</th>
-                                    <th>{{$t('table.payed_to')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <template v-for="(item, index) in services.items">
+                <div class="mt-4"></div>
+                <div class="text-xs-center">
+                    <v-pagination v-bind:length="totalPages" v-bind:disabled="loading" v-model="page"></v-pagination>
+                </div>
+                <div class="mt-4"></div>
+
+                <v-row>
+                    <v-col xs12>
+                        <v-card>
+                            <v-table-overflow>
+                                <table>
+                                    <thead>
                                     <tr>
-                                        <td>
-                                            <v-checkbox v-bind:id="'checkbox' + index" filled
-                                                        class="text-xs-center"></v-checkbox>
-                                        </td>
-                                        <td v-on:click="goToVps(item.id)">
-                                            VPS
-                                            <span class="hidden-sm-and-down">
+                                        <th class="select"><i class="fa fa-check"></i></th>
+                                        <th>{{$t('table.service')}}</th>
+                                        <th>{{$t('table.id')}}</th>
+                                        <th>{{$t('table.name')}}</th>
+                                        <th class="hidden-sm-and-down">{{$t('table.ip')}}</th>
+                                        <th>{{$t('table.status')}}</th>
+                                        <th>{{$t('table.payed_to')}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template v-for="(item, index) in services.items">
+                                        <tr>
+                                            <td>
+                                                <v-checkbox v-bind:id="'checkbox' + index" filled
+                                                            class="text-xs-center"></v-checkbox>
+                                            </td>
+                                            <td v-on:click="goToVps(item.id)">
+                                                VPS
+                                                <span class="hidden-sm-and-down">
                                                 <span v-if="item.virt === 0">OpenVZ</span>
                                                 <span v-else-if="item.virt === 2">KVM</span>
                                             </span>
-                                        </td>
-                                        <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
-                                        <td v-on:click="goToVps(item.id)">
+                                            </td>
+                                            <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
+                                            <td v-on:click="goToVps(item.id)">
                                             <span v-if="item.name === null" class="grey--text">
                                                 {{ $t('vps.notset') }}
                                             </span>
-                                            <span v-else>
+                                                <span v-else>
                                                 {{ item.name }}
                                             </span>
-                                        </td>
-                                        <td v-on:click="goToVps(item.id)" class="hidden-sm-and-down">{{item.ip}}</td>
-                                        <td v-on:click="goToVps(item.id)" style="white-space: nowrap;">
+                                            </td>
+                                            <td v-on:click="goToVps(item.id)" class="hidden-sm-and-down">{{item.ip}}
+                                            </td>
+                                            <td v-on:click="goToVps(item.id)" style="white-space: nowrap;">
                                             <span v-if="item.active === 1">
                                                 <i class="fa fa-circle green--text"></i> {{$t('vps.active')}}
                                             </span>
-                                            <span v-else>
+                                                <span v-else>
                                                 <i class="fa fa-circle red--text"></i> {{$t('vps.locked')}}
                                             </span>
-                                        </td>
-                                        <td v-on:click="goToVps(item.id)">
-                                            {{item.payed_to | prettyDateFormat}}
-                                            <span class="hidden-sm-and-down"> - {{item.payed_to | prettyDateFrom}}</span>
-                                        </td>
-                                    </tr>
-                                </template>
-                                </tbody>
-                            </table>
-                        </v-table-overflow>
-                    </v-card>
-                </v-col>
-            </v-row>
+                                            </td>
+                                            <td v-on:click="goToVps(item.id)">
+                                                {{item.payed_to | prettyDateFormat}}
+                                                <span class="hidden-sm-and-down"> - {{item.payed_to | prettyDateFrom}}</span>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    </tbody>
+                                </table>
+                            </v-table-overflow>
+                        </v-card>
+                    </v-col>
+                </v-row>
+
+            </div>
+            <div v-else>
+                <v-alert info v-bind:value="true">
+                    {{$t('services.empty')}}
+                </v-alert>
+            </div>
 
         </v-container>
     </div>
@@ -96,7 +106,12 @@
                         'page': 1,
                         'limit': 10
                     }).then(() => {
-                        this.totalPages = this.$store.state.services.paging.total_pages
+                        if (this.$store.state.services.error !== true) {
+                            this.totalPages = this.$store.state.services.paging.total_pages
+                            this.emptyList = false
+                        } else {
+                            this.emptyList = true
+                        }
                         this.$store.commit('setLoaded')
                     })
                 }
@@ -119,7 +134,8 @@
         data () {
             return {
                 page: 1,
-                totalPages: 1
+                totalPages: 1,
+                emptyList: false
             }
         },
         watch: {

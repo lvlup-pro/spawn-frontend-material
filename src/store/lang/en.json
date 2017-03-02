@@ -109,6 +109,9 @@
         "msg_too_short": "Message is too short",
         "msg_duplicate": "Message already sent (duplicate)"
     },
+    "services": {
+        "empty": "No services"
+    },
     "vps": {
         "control": "Control",
         "resources": "Resources",

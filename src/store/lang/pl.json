@@ -109,6 +109,9 @@
         "msg_too_short": "Wiadomość jest za krótka",
         "msg_duplicate": "Wiadomość już wysłana (duplikat)"
     },
+    "services": {
+        "empty": "Brak usług"
+    },
     "vps": {
         "control": "Kontrola",
         "resources": "Zasoby",
