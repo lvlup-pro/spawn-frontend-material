@@ -57,7 +57,7 @@
                 <v-card-row v-if="!locked" actions style="justify-content: flex-start">
                     <v-modal v-if="on" v-model="disableModal">
                         <v-btn slot="activator" error
-                            v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                            :loading="changingStatus" :disabled="changingStatus"
                             class="white--text">
                             {{$t('vps.disable.submit')}}
                         </v-btn>
@@ -75,7 +75,7 @@
                     </v-modal>
                     <v-modal v-if="on" v-model="rebootModal">
                         <v-btn slot="activator" warning
-                            v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                            :loading="changingStatus" :disabled="changingStatus"
                             class="white--text">
                             {{$t('vps.reboot.submit')}}
                         </v-btn>
@@ -92,7 +92,7 @@
                         </v-card>
                     </v-modal>
                     <v-btn v-if="off" success v-on:click.native="enable"
-                        v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                        :loading="changingStatus" :disabled="changingStatus"
                         class="white--text">
                         {{$t('vps.turn_on')}}
                     </v-btn>
@@ -119,7 +119,8 @@
                     </v-row>
                 </v-card-text>
                 <v-card-row actions style="justify-content: flex-start">
-                    <v-btn success v-on:click.native="save" :disabled="!settingsChanged" class="white--text">
+                    <v-btn :loading="changingSettings" :disabled="!settingsChanged"
+                        success v-on:click.native="save" class="white--text">
                         {{$t('vps.save')}}
                     </v-btn>
                 </v-card-row>
@@ -236,6 +237,7 @@
             return {
                 interval: null,
                 changingStatus: false,
+                changingSettings: false,
                 disableModal: false,
                 rebootModal: false,
                 rebooting: false,
@@ -305,7 +307,7 @@
                 return this.vps.name === null ? "" : this.vps.name
             },
             settingsChanged() {
-                return this.newname !== this.name
+                return !this.changingSettings && this.newname !== this.name
             }
         },
         watch: {
@@ -383,9 +385,12 @@
                 this.disable()
             },
             save() {
+                this.changingSettings = true
                 this.$store.dispatch('vpsChangeInfo', {
                     'id': this.$route.params.id,
                     'name': this.newname === "" ? null : this.newname
+                }).then(() => {
+                    this.changingSettings = false
                 })
             }
         }

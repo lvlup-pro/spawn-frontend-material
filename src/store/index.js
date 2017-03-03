@@ -264,7 +264,7 @@ export default new Vuex.Store({
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
             return axios.put(state.apiUrl + 'vps/' + args.id, args)
                 .then(function (res) {
-
+                    state.vps.name = args.name
                 }).catch(function (error) {
                     dispatch('handleError', {'name': 'vpsChangeInfo', 'error': error})
                 })
