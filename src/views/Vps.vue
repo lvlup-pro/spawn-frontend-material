@@ -99,6 +99,22 @@
                 </v-card-row>
             </v-card>
             <div class="mb-4"></div>
+            <v-card v-if="!locked">
+                <v-card-row class="green darken-1">
+                    <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
+                </v-card-row>
+                <v-card-text>
+                    <v-card-row>
+
+                    </v-card-row>
+                </v-card-text>
+                <v-card-row actions style="justify-content: flex-start">
+                    <v-btn success v-on:click.native="save" :disabled="changingStatus" class="white--text">
+                        {{$t('vps.save')}}
+                    </v-btn>
+                </v-card-row>
+            </v-card>
+            <div class="mb-4"></div>
             <v-card v-if="on">
                 <v-card-row class="green darken-1">
                     <v-card-title class="white--text">{{$t('vps.resources')}}</v-card-title>
@@ -347,6 +363,9 @@
                 this.rebootModal = false
                 this.rebooting = true
                 this.disable()
+            },
+            save() {
+                
             }
         }
     }

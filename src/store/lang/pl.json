@@ -123,6 +123,7 @@
     },
     "vps": {
         "control": "Kontrola",
+        "settings": "Ustawienia",
         "resources": "Zasoby",
         "network_all": "Sieć (od startu)",
         "network_rt": "Sieć (obecnie)",
@@ -146,6 +147,7 @@
         "active": "Opłacony",
         "locked": "Nieopłacony",
         "notset": "Nieustawiona",
+        "save": "Zapisz",
         "disable": {
             "header": "Czy na pewno chcesz wyłączyć VPSa #{id}?",
             "description": "Twarde zatrzymanie może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",

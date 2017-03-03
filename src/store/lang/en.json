@@ -123,6 +123,7 @@
     },
     "vps": {
         "control": "Control",
+        "settings": "Settings",
         "resources": "Resources",
         "network_all": "Network (since boot)",
         "network_rt": "Network (real-time)",
@@ -147,6 +148,7 @@
         "active": "Paid",
         "locked": "Unpaid",
         "notset": "Not set",
+        "save": "Save",
         "disable": {
             "header": "Are you sure want to turn off VPS #{id}?",
             "description": "Hard stop, may cause unsaved data loss (like pulling power plug from PC)!",
