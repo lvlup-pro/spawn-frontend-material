@@ -12,7 +12,8 @@
         "services": "Services",
         "help": "Help",
         "lang": "Language",
-        "selectlang": "Select language"
+        "selectlang": "Select language",
+        "refresh": "Refresh"
     },
     "header": {
         "home": "Home",
@@ -43,6 +44,12 @@
         "required": "This field is required.",
         "email": "Enter correct e-mail address.",
         "repeatpassword": "Passwords don't match."
+    },
+    "error": {
+        "network" : "Network error detected!",
+        "invalidtoken": "Invalid authentication token!",
+        "ratelimit": "Rate limit exceeded!",
+        "unknown": "An unknown error occurred!"
     },
     "auth": {
         "no": "Log in first",
@@ -157,6 +164,5 @@
         "changelog": "Changelog"
     },
     "loading": "Loading",
-    "panel_preview": "This preview version of customer panel only shows VPS servers",
-    "network_error": "Network error detected!"
+    "panel_preview": "This preview version of customer panel only shows VPS servers"
 }

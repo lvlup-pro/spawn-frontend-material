@@ -167,12 +167,19 @@
             <v-content>
                 <v-container fluid>
                     <div class="mt-3"></div>
-                    <v-row v-if="networkError">
+                    <v-row v-if="error">
                         <v-col lg1></v-col>
                         <v-col lg10>
-                            <v-alert warning>
-                                {{$t('network_error')}} <v-btn v-on:click.native="logOut" class="white--text" success>{{$t('sidebar.logout')}}</v-btn>
+                            <v-alert warning :value="true">
+                                {{$t('error.' + error)}}
+                                <v-btn v-if="account.email" v-on:click.native="logOut" class="white--text" success>
+                                    {{$t('sidebar.logout')}}
+                                </v-btn>
+                                <v-btn v-on:click.native="refresh" class="white--text" success>
+                                    {{$t('sidebar.refresh')}}
+                                </v-btn>
                             </v-alert>
+                            <div class="mt-3"></div>
                         </v-col>
                     </v-row>
                     <transition mode="out-in">
@@ -188,8 +195,8 @@
     import Vue from 'vue'
     export default {
         computed: {
-            networkError() {
-                return this.$store.state.networkError
+            error() {
+                return this.$store.state.error
             },
             loading() {
                 return this.$store.state.loading
@@ -263,6 +270,9 @@
                     this.$store.state.toolbarTitle,
                     this.$store.state.toolbarTitleArgs
                 );
+            },
+            refresh() {
+                window.location.reload()
             }
         },
         beforeMount() {

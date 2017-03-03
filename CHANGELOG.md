@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.0-beta.4 (TBA)
+
+### Features
++ Better error handling: network errors, invalid token, rate limit exceeded and other ("unknown") errors [#7](https://github.com/lvlup-pro/spawn-frontend-material/issues/7)
+
+## 3.0.0-beta.3 (02.03.2017)
+
+### Fixes
+
++ Endless loading bar when no services on list [#113](https://github.com/lvlup-pro/spawn-frontend-material/issues/113)
+
 ## 3.0.0-beta.2 (01.03.2017)
 
 ### Features
@@ -25,7 +36,7 @@
 
 + Invalid VPS status on services page [#95](https://github.com/lvlup-pro/spawn-frontend-material/issues/95)
 + Sidebar scrolling fix and better look in webkit based browsers [#102](https://github.com/lvlup-pro/spawn-frontend-material/pull/102)
-+ Simplifying code [#104](https://github.com/lvlup-pro/spawn-frontend-material/pull/104) 
++ Simplifying code [#104](https://github.com/lvlup-pro/spawn-frontend-material/pull/104)
 + Styling fix for register page [#103](https://github.com/lvlup-pro/spawn-frontend-material/pull/103)
 + More sophisticated English translation [#105](https://github.com/lvlup-pro/spawn-frontend-material/pull/105)
 

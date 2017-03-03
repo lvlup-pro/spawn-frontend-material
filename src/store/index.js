@@ -11,7 +11,7 @@ export default new Vuex.Store({
         token: null,
         reCaptchaSiteKey: "",
         loading: false,
-        networkError: false,
+        error: false,
         account: {
             username: ""
         },
@@ -45,21 +45,30 @@ export default new Vuex.Store({
             commit('setWallet', [{balance_pretty: ""}])
             commit('setServices', [])
             commit('setToken', null)
-            commit('setNetworkError', false)
+            commit('setError', false)
             commit('setLogout', true)
         },
         handleError({dispatch, state, commit}, args) {
-            let msg = args.error.message, fn = args.name;
+            let error = args.error, msg = error.message, response = error.response, fn = args.name;
             console.log(msg + ' in ' + fn + '()!');
-            if (msg === 'Network Error') {
-                commit('setNetworkError', true)
-            } else if (
-                fn !== 'accountLogin' &&
-                msg === 'Request failed with status code 401' || msg === 'Request failed with status code 403'
-            ) {
-                dispatch('logOut')
+            if (typeof response !== 'undefined') {
+                switch (response.status) {
+                    case 401:
+                    case 403:
+                        if (fn !== 'accountLogin') {
+                            commit('setError', 'invalidtoken')
+                        }
+                        break
+                    case 429:
+                        commit('setError', 'ratelimit')
+                        break
+                    default:
+                        commit('setError', 'unknown')
+                        break
+                }
             } else {
-                //Other Error
+                //no response == network error
+                commit('setError', 'network')
             }
         },
         //return true if not authorized
@@ -270,8 +279,8 @@ export default new Vuex.Store({
         setToken (state, newToken) {
             state.token = newToken;
         },
-        setNetworkError (state, newErrorState) {
-            state.networkError = newErrorState;
+        setError (state, newErrorState) {
+            state.error = newErrorState;
         },
         setReCaptchaSiteKey (state, newKey) {
             state.reCaptchaSiteKey = newKey;

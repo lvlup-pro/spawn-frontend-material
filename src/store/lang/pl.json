@@ -12,7 +12,8 @@
         "services": "Usługi",
         "help": "Pomoc",
         "lang": "Język",
-        "selectlang": "Wybierz język"
+        "selectlang": "Wybierz język",
+        "refresh": "Odśwież"
     },
     "header": {
         "home": "Nowości",
@@ -43,6 +44,12 @@
         "required": "To pole jest wymagane.",
         "email": "Wpisz poprawny adres e-mail.",
         "repeatpassword": "Hasła nie zgadzają się."
+    },
+    "error": {
+        "network" : "Wykryto błąd sieci!",
+        "invalidtoken": "Token uwierzytelniający jest nieprawidłowy!",
+        "ratelimit": "Przekroczono limit zapytań!",
+        "unknown": "Wystąpił nieznany błąd!"
     },
     "auth": {
         "no": "Zaloguj się",
@@ -156,6 +163,5 @@
         "changelog": "Lista zmian"
     },
     "loading": "Ładowanie",
-    "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS",
-    "network_error": "Wykryto błąd sieci!"
+    "panel_preview": "Obecnie ta poglądowa wersja panelu wyświetla tylko serwery VPS"
 }
