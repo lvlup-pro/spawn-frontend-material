@@ -175,6 +175,9 @@
                                 <v-btn v-if="account.email" v-on:click.native="logOut" class="white--text" success>
                                     {{$t('sidebar.logout')}}
                                 </v-btn>
+                                <v-btn v-on:click.native="refresh" class="white--text" success>
+                                    {{$t('sidebar.refresh')}}
+                                </v-btn>
                             </v-alert>
                             <div class="mt-3"></div>
                         </v-col>
@@ -267,6 +270,9 @@
                     this.$store.state.toolbarTitle,
                     this.$store.state.toolbarTitleArgs
                 );
+            },
+            refresh() {
+                window.location.reload()
             }
         },
         beforeMount() {

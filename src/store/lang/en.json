@@ -12,7 +12,8 @@
         "services": "Services",
         "help": "Help",
         "lang": "Language",
-        "selectlang": "Select language"
+        "selectlang": "Select language",
+        "refresh": "Refresh"
     },
     "header": {
         "home": "Home",

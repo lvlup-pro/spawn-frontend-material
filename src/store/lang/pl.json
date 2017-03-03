@@ -12,7 +12,8 @@
         "services": "Usługi",
         "help": "Pomoc",
         "lang": "Język",
-        "selectlang": "Wybierz język"
+        "selectlang": "Wybierz język",
+        "refresh": "Odśwież"
     },
     "header": {
         "home": "Nowości",
