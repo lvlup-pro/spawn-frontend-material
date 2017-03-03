@@ -3,6 +3,7 @@
 ## 3.0.0-beta.4 (TBA)
 
 ### Features
++ An ability to change vps name [#114](https://github.com/lvlup-pro/spawn-frontend-material/issues/114)
 + Better error handling: network errors, invalid token, rate limit exceeded and other ("unknown") errors [#7](https://github.com/lvlup-pro/spawn-frontend-material/issues/7)
 
 ## 3.0.0-beta.3 (02.03.2017)
