@@ -70,7 +70,7 @@
                                         </tr>
                                         <tr v-if="services.error" >
                                             <td colspan="100%" class="red--text text--darken-3 empty">
-                                                {{ $t('services.empty') }}
+                                                {{ $t('table.empty.services') }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -84,10 +84,6 @@
     </div>
 </template>
 <style>
-td.empty {
-    text-align: center;
-    font-weight: bold;
-}
 </style>
 <script>
     import moment from 'moment'

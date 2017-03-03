@@ -25,8 +25,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <template v-for="(item, index) in pagination.items">
-                                    <tr>
+                                    <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
                                         <td>
                                             <v-checkbox v-bind:id="'checkbox' + index" filled
                                                         class="text-xs-center"></v-checkbox>
@@ -51,7 +50,11 @@
                                             <span class="hidden-sm-and-down"> - {{item.created_at | prettyDateFrom}}</span>
                                         </td>
                                     </tr>
-                                </template>
+                                    <tr v-if="pagination.error" >
+                                        <td colspan="100%" class="red--text text--darken-3 empty">
+                                            {{ $t('table.empty.payments') }}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </v-table-overflow>

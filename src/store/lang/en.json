@@ -37,7 +37,12 @@
         "amount": "Amount",
         "status": "Status",
         "created_at": "Created",
-        "payed_to": "Expires"
+        "payed_to": "Expires",
+        "empty": {
+            "services": "No services",
+            "payments": "No payments",
+            "tickets": "No tickets"
+        }
     },
     "validation": {
         "required": "This field is required.",
@@ -108,9 +113,6 @@
         "msg_too_long": "Message is too long",
         "msg_too_short": "Message is too short",
         "msg_duplicate": "Message already sent (duplicate)"
-    },
-    "services": {
-        "empty": "No services"
     },
     "vps": {
         "control": "Control",
