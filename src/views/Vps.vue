@@ -383,7 +383,10 @@
                 this.disable()
             },
             save() {
-
+                this.$store.dispatch('vpsChangeInfo', {
+                    'id': this.$route.params.id,
+                    'name': this.newname === "" ? null : this.newname
+                })
             }
         }
     }
