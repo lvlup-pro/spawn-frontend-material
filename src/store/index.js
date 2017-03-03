@@ -188,6 +188,10 @@ export default new Vuex.Store({
             return axios.get(state.apiUrl + args.url + '?page=' + args.page + '&limit=' + args.limit)
                 .then(function (res) {
                     if (typeof res.data !== 'undefined') {
+                        if (res.data.error) {
+                            res.data.paging = {}
+                            res.data.paging.total_pages = 1
+                        }
                         commit('setPagination', res.data)
                     }
                 }).catch(function (error) {
