@@ -7,7 +7,7 @@
                 </v-col>
             </v-row>
 
-            <div v-if="!emptyList">
+            <div>
 
                 <div class="mt-4"></div>
                 <div class="text-xs-center">
@@ -32,8 +32,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <template v-for="(item, index) in services.items">
-                                        <tr>
+                                        <tr v-if="!services.error" v-for="(item, index) in services.items">
                                             <td>
                                                 <v-checkbox v-bind:id="'checkbox' + index" filled
                                                             class="text-xs-center"></v-checkbox>
@@ -69,21 +68,18 @@
                                                 <span class="hidden-sm-and-down"> - {{item.payed_to | prettyDateFrom}}</span>
                                             </td>
                                         </tr>
-                                    </template>
+                                        <tr v-if="services.error" >
+                                            <td colspan="100%" class="red--text text--darken-3 empty">
+                                                {{ $t('table.empty.services') }}
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </v-table-overflow>
                         </v-card>
                     </v-col>
                 </v-row>
-
             </div>
-            <div v-else>
-                <v-alert info v-bind:value="true">
-                    {{$t('services.empty')}}
-                </v-alert>
-            </div>
-
         </v-container>
     </div>
 </template>
@@ -108,9 +104,6 @@
                     }).then(() => {
                         if (this.$store.state.services.error !== true) {
                             this.totalPages = this.$store.state.services.paging.total_pages
-                            this.emptyList = false
-                        } else {
-                            this.emptyList = true
                         }
                         this.$store.commit('setLoaded')
                     })
@@ -134,8 +127,7 @@
         data () {
             return {
                 page: 1,
-                totalPages: 1,
-                emptyList: false
+                totalPages: 1
             }
         },
         watch: {

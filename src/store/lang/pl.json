@@ -38,7 +38,12 @@
         "amount": "Kwota",
         "status": "Status",
         "created_at": "Utworzony",
-        "payed_to": "Wygasa"
+        "payed_to": "Wygasa",
+        "empty": {
+            "services": "Brak usług",
+            "payments": "Brak płatności",
+            "tickets": "Brak zgłoszeń"
+        }
     },
     "validation": {
         "required": "To pole jest wymagane.",
@@ -115,9 +120,6 @@
         "msg_too_long": "Wiadomość jest za długa",
         "msg_too_short": "Wiadomość jest za krótka",
         "msg_duplicate": "Wiadomość już wysłana (duplikat)"
-    },
-    "services": {
-        "empty": "Brak usług"
     },
     "vps": {
         "control": "Kontrola",

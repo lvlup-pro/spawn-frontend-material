@@ -26,8 +26,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <template v-for="(ticket, index) in pagination.items">
-                                    <tr>
+                                    <tr v-if="!pagination.error" v-for="(ticket, index) in pagination.items">
                                         <td>
                                             <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                         </td>
@@ -61,7 +60,11 @@
                                             <span class="hidden-sm-and-down"> - {{ticket.created_at | prettyDateFrom}}</span>
                                         </td>
                                     </tr>
-                                </template>
+                                    <tr v-if="pagination.error" >
+                                        <td colspan="100%" class="red--text text--darken-3 empty">
+                                            {{ $t('table.empty.tickets') }}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </v-table-overflow>

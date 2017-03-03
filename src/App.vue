@@ -420,4 +420,9 @@
         margin-left: 0;
         margin-right: 0;
     }
+
+    td.empty {
+        text-align: center;
+        font-weight: bold;
+    }
 </style>
