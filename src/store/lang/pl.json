@@ -148,6 +148,10 @@
         "locked": "Nieopłacony",
         "notset": "Nieustawiona",
         "save": "Zapisz",
+        "name": "Nazwa",
+        "placeholder": {
+            "name": "Mój VPS"
+        },
         "disable": {
             "header": "Czy na pewno chcesz wyłączyć VPSa #{id}?",
             "description": "Twarde zatrzymanie może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",

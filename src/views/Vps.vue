@@ -104,12 +104,22 @@
                     <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
                 </v-card-row>
                 <v-card-text>
-                    <v-card-row>
-
-                    </v-card-row>
+                    <v-row>
+                        <v-col md4 xs12>
+                            <v-card-row>
+                                <i class="fa fa-fw fa-2x fa-pencil" style="padding-bottom: 1rem;"></i>
+                                <v-text-input
+                                    v-model="newname"
+                                    :label="$t('vps.name')"
+                                    :placeholder="$t('vps.placeholder.name')">
+                                    {{vps.name}}
+                                </v-text-input>
+                            </v-card-row>
+                        </v-col>
+                    </v-row>
                 </v-card-text>
                 <v-card-row actions style="justify-content: flex-start">
-                    <v-btn success v-on:click.native="save" :disabled="changingStatus" class="white--text">
+                    <v-btn success v-on:click.native="save" :disabled="!settingsChanged" class="white--text">
                         {{$t('vps.save')}}
                     </v-btn>
                 </v-card-row>
@@ -228,7 +238,8 @@
                 changingStatus: false,
                 disableModal: false,
                 rebootModal: false,
-                rebooting: false
+                rebooting: false,
+                newname: ""
             }
         },
         mounted () {
@@ -242,12 +253,13 @@
                 } else {
                     this.$store.commit('setLoading')
                     this.stats().then(() => {
-                        this.interval = setInterval(this.stats, 1000)
                         this.$store.commit('setLoaded')
                         //FIXME set by API not user input
                         this.$store.commit('setToolbarTitle', 'header.vps')
                         this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
                         this.$emit('view', this.meta())
+                        this.newname = this.name
+                        this.interval = setInterval(this.stats, 1000)
                     })
                     this.ips()
                 }
@@ -288,6 +300,12 @@
             },
             upfrom() {
                 return new Date().getTime() / 1000 - this.vps.uptime_s
+            },
+            name() {
+                return this.vps.name === null ? "" : this.vps.name
+            },
+            settingsChanged() {
+                return this.newname !== this.name
             }
         },
         watch: {
@@ -365,7 +383,7 @@
                 this.disable()
             },
             save() {
-                
+
             }
         }
     }
