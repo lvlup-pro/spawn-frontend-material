@@ -57,7 +57,7 @@
                 <v-card-row v-if="!locked" actions style="justify-content: flex-start">
                     <v-modal v-if="on" v-model="disableModal">
                         <v-btn slot="activator" error
-                            v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                            :loading="changingStatus" :disabled="changingStatus"
                             class="white--text">
                             {{$t('vps.disable.submit')}}
                         </v-btn>
@@ -75,7 +75,7 @@
                     </v-modal>
                     <v-modal v-if="on" v-model="rebootModal">
                         <v-btn slot="activator" warning
-                            v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                            :loading="changingStatus" :disabled="changingStatus"
                             class="white--text">
                             {{$t('vps.reboot.submit')}}
                         </v-btn>
@@ -92,7 +92,7 @@
                         </v-card>
                     </v-modal>
                     <v-btn v-if="off" success v-on:click.native="enable"
-                        v-bind:loading="changingStatus" v-bind:disabled="changingStatus"
+                        :loading="changingStatus" :disabled="changingStatus"
                         class="white--text">
                         {{$t('vps.turn_on')}}
                     </v-btn>
@@ -174,6 +174,33 @@
                 </v-card-text>
             </v-card>
             <div class="mb-4"></div>
+            <v-card v-if="!locked">
+                <v-card-row class="green darken-1">
+                    <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
+                </v-card-row>
+                <v-card-text>
+                    <v-row>
+                        <v-col md4 xs12>
+                            <v-card-row>
+                                <i class="fa fa-fw fa-2x fa-pencil" style="padding-bottom: 1rem;"></i>
+                                <v-text-input
+                                    v-model="newname"
+                                    :label="$t('vps.name')"
+                                    :placeholder="$t('vps.placeholder.name')">
+                                    {{vps.name}}
+                                </v-text-input>
+                            </v-card-row>
+                        </v-col>
+                    </v-row>
+                </v-card-text>
+                <v-card-row actions style="justify-content: flex-start">
+                    <v-btn :loading="changingSettings" :disabled="!settingsChanged"
+                        success v-on:click.native="save" class="white--text">
+                        {{$t('vps.save')}}
+                    </v-btn>
+                </v-card-row>
+            </v-card>
+            <div class="mb-4"></div>
             <!--
              TODO
              - OpenVZ use vps.nproc
@@ -210,9 +237,11 @@
             return {
                 interval: null,
                 changingStatus: false,
+                changingSettings: false,
                 disableModal: false,
                 rebootModal: false,
-                rebooting: false
+                rebooting: false,
+                newname: ""
             }
         },
         mounted () {
@@ -226,12 +255,13 @@
                 } else {
                     this.$store.commit('setLoading')
                     this.stats().then(() => {
-                        this.interval = setInterval(this.stats, 1000)
                         this.$store.commit('setLoaded')
                         //FIXME set by API not user input
                         this.$store.commit('setToolbarTitle', 'header.vps')
                         this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
                         this.$emit('view', this.meta())
+                        this.newname = this.name
+                        this.interval = setInterval(this.stats, 1000)
                     })
                     this.ips()
                 }
@@ -272,6 +302,12 @@
             },
             upfrom() {
                 return new Date().getTime() / 1000 - this.vps.uptime_s
+            },
+            name() {
+                return this.vps.name === null ? "" : this.vps.name
+            },
+            settingsChanged() {
+                return !this.changingSettings && this.newname !== this.name
             }
         },
         watch: {
@@ -347,6 +383,15 @@
                 this.rebootModal = false
                 this.rebooting = true
                 this.disable()
+            },
+            save() {
+                this.changingSettings = true
+                this.$store.dispatch('vpsChangeInfo', {
+                    'id': this.$route.params.id,
+                    'name': this.newname === "" ? null : this.newname
+                }).then(() => {
+                    this.changingSettings = false
+                })
             }
         }
     }
