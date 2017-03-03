@@ -99,33 +99,6 @@
                 </v-card-row>
             </v-card>
             <div class="mb-4"></div>
-            <v-card v-if="!locked">
-                <v-card-row class="green darken-1">
-                    <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
-                </v-card-row>
-                <v-card-text>
-                    <v-row>
-                        <v-col md4 xs12>
-                            <v-card-row>
-                                <i class="fa fa-fw fa-2x fa-pencil" style="padding-bottom: 1rem;"></i>
-                                <v-text-input
-                                    v-model="newname"
-                                    :label="$t('vps.name')"
-                                    :placeholder="$t('vps.placeholder.name')">
-                                    {{vps.name}}
-                                </v-text-input>
-                            </v-card-row>
-                        </v-col>
-                    </v-row>
-                </v-card-text>
-                <v-card-row actions style="justify-content: flex-start">
-                    <v-btn :loading="changingSettings" :disabled="!settingsChanged"
-                        success v-on:click.native="save" class="white--text">
-                        {{$t('vps.save')}}
-                    </v-btn>
-                </v-card-row>
-            </v-card>
-            <div class="mb-4"></div>
             <v-card v-if="on">
                 <v-card-row class="green darken-1">
                     <v-card-title class="white--text">{{$t('vps.resources')}}</v-card-title>
@@ -199,6 +172,33 @@
                         </v-col>
                     </v-row>
                 </v-card-text>
+            </v-card>
+            <div class="mb-4"></div>
+            <v-card v-if="!locked">
+                <v-card-row class="green darken-1">
+                    <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
+                </v-card-row>
+                <v-card-text>
+                    <v-row>
+                        <v-col md4 xs12>
+                            <v-card-row>
+                                <i class="fa fa-fw fa-2x fa-pencil" style="padding-bottom: 1rem;"></i>
+                                <v-text-input
+                                    v-model="newname"
+                                    :label="$t('vps.name')"
+                                    :placeholder="$t('vps.placeholder.name')">
+                                    {{vps.name}}
+                                </v-text-input>
+                            </v-card-row>
+                        </v-col>
+                    </v-row>
+                </v-card-text>
+                <v-card-row actions style="justify-content: flex-start">
+                    <v-btn :loading="changingSettings" :disabled="!settingsChanged"
+                        success v-on:click.native="save" class="white--text">
+                        {{$t('vps.save')}}
+                    </v-btn>
+                </v-card-row>
             </v-card>
             <div class="mb-4"></div>
             <!--
