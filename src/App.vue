@@ -3,14 +3,14 @@
         <header>
             <v-progress-linear id="loadingBar" v-if="loading" v-bind:indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
-                <v-toolbar-side-icon @click.native.stop="nav = !nav" class="hidden-md-and-up white--text">
+                <v-toolbar-side-icon @click.native.stop="sidebar = !sidebar" class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
                 <v-toolbar-logo class="hidden-xs-and-down">{{getToolbarTitle()}}</v-toolbar-logo>
             </v-toolbar>
         </header>
         <main>
-            <v-sidebar fixed ripple router unshift v-model="nav">
+            <v-sidebar fixed ripple router unshift v-model="sidebar" v-on:click.native="sidebar = false">
                 <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
                 <p class="text-xs-center">
                     <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
@@ -220,7 +220,7 @@
         data () {
             return {
                 lg: '',
-                nav: null
+                sidebar: false
             }
         },
         watch: {
@@ -405,6 +405,12 @@
 
     aside.sidebar {
         padding-bottom: 0;
+    }
+
+    @media screen and (min-width: 992px) {
+        aside.sidebar--close {
+            transform: none;
+        }
     }
 
     aside.sidebar::-webkit-scrollbar {
