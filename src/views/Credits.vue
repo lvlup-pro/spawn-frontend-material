@@ -32,6 +32,7 @@
         mounted () {
             this.$emit('redirectLang', 'credits')
             this.$vuetify.load()
+            this.$store.commit('setBackLink', false)
             this.$store.commit('setToolbarTitle', 'header.credits')
             this.$emit('view', this.meta())
         },

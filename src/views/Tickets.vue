@@ -89,6 +89,7 @@
     export default {
         mounted () {
             moment.locale(this.$lang)
+            this.$store.commit('setBackLink', false)
             this.$store.commit('setToolbarTitle', 'header.tickets')
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {

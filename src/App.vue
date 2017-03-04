@@ -7,6 +7,10 @@
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
                 <v-toolbar-logo class="hidden-xs-and-down">{{getToolbarTitle()}}</v-toolbar-logo>
+                <v-spacer />
+                <v-btn icon dark v-if="backLink" v-on:click.native="$router.push('/' + language + '/' + backLink)">
+                    <v-icon>arrow_back</v-icon>
+                </v-btn>
             </v-toolbar>
         </header>
         <main>
@@ -215,6 +219,9 @@
             },
             logout() {
                 return this.$store.state.logout
+            },
+            backLink() {
+                return this.$store.state.backLink
             }
         },
         data () {

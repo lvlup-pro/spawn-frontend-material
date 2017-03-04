@@ -73,6 +73,7 @@ tr {cursor:default}
     export default {
         mounted () {
             moment.locale(this.$lang)
+            this.$store.commit('setBackLink', false)
             this.$store.commit('setToolbarTitle', 'header.payments')
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {

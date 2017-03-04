@@ -77,6 +77,7 @@
         },
         mounted () {
             this.$emit('redirectLang', 'login')
+            this.$store.commit('setBackLink', false)
             this.$store.commit('setToolbarTitle', 'header.login')
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
