@@ -10,7 +10,7 @@
             </v-toolbar>
         </header>
         <main>
-            <v-sidebar fixed ripple router unshift v-model="sidebar">
+            <v-sidebar fixed ripple router unshift v-model="sidebar" v-on:click.native="sidebar = false">
                 <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
                 <p class="text-xs-center">
                     <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
@@ -405,6 +405,12 @@
 
     aside.sidebar {
         padding-bottom: 0;
+    }
+
+    @media screen and (min-width: 992px) {
+        aside.sidebar--close {
+            transform: none;
+        }
     }
 
     aside.sidebar::-webkit-scrollbar {
