@@ -5,27 +5,27 @@ Vue.use(Vuex)
 import axios from 'axios'
 import storeConfig from './config.js'
 
-function request({dispatch, state}, method, name, url, args, callback) {
+function request({dispatch, state}, method, url, args, callback) {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
     return method(state.apiUrl + url, args)
         .then(function(response) {
             return callback(response)
         })
         .catch(function (error) {
-            dispatch('handleError', {'name': name, 'error': error})
+            dispatch('handleError', {'name': url, 'error': error})
         })
 }
 
-function get({dispatch, state}, name, url, args, callback) {
-    return request({dispatch, state}, axios.get, name, url, args, callback)
+function get({dispatch, state}, url, args, callback) {
+    return request({dispatch, state}, axios.get, url, args, callback)
 }
 
-function post({dispatch, state}, name, url, args, callback) {
-    return request({dispatch, state}, axios.post, name, url, args, callback)
+function post({dispatch, state}, url, args, callback) {
+    return request({dispatch, state}, axios.post, url, args, callback)
 }
 
-function put({dispatch, state}, name, url, args, callback) {
-    return request({dispatch, state}, axios.put, name, url, args, callback)
+function put({dispatch, state}, url, args, callback) {
+    return request({dispatch, state}, axios.put, url, args, callback)
 }
 
 export default new Vuex.Store({
@@ -73,7 +73,7 @@ export default new Vuex.Store({
         },
         handleError({dispatch, state, commit}, args) {
             let error = args.error, msg = error.message, response = error.response, fn = args.name;
-            console.log(msg + ' in ' + fn + '()!');
+            console.log(msg + ' while calling ' + fn);
             if (typeof response !== 'undefined') {
                 switch (response.status) {
                     case 401:
@@ -117,7 +117,7 @@ export default new Vuex.Store({
             }
         },
         accountLogin ({commit, dispatch, state}, args) {
-            return post({dispatch, state}, 'accountLogin', 'auth/login', args, function (res) {
+            return post({dispatch, state}, 'auth/login', args, function (res) {
                 if (typeof res.data.token !== 'undefined') {
                     localStorage.setItem('token', res.data.token);
                     return true;
@@ -125,12 +125,12 @@ export default new Vuex.Store({
             })
         },
         accountRegister({state, dispatch}, args) {
-            return post({dispatch, state}, 'accountRegister', 'auth/register', args, function (res) {
+            return post({dispatch, state}, 'auth/register', args, function (res) {
                 return true
             })
         },
         accountInfo ({commit, dispatch, state}) {
-            return get({dispatch, state}, 'accountInfo', 'me', {}, function (res) {
+            return get({dispatch, state}, 'me', {}, function (res) {
                 if (typeof res.data.username !== 'undefined') {
                     commit('setAccount', res.data)
                     return true
@@ -138,14 +138,14 @@ export default new Vuex.Store({
             })
         },
         walletInfo ({commit, dispatch, state}) {
-            return get({dispatch, state}, 'walletInfo', 'me/balance', {}, function (res) {
+            return get({dispatch, state}, 'me/balance', {}, function (res) {
                 if (typeof res.data[0].balance !== 'undefined') {
                     commit('setWallet', res.data)
                 }
             })
         },
         ticketInfo ({commit, dispatch, state}, args) {
-            return get({dispatch, state}, 'ticketInfo', 'help/ticket/' + args.id, {}, function (res) {
+            return get({dispatch, state}, 'help/ticket/' + args.id, {}, function (res) {
                 if (typeof res.data.id !== 'undefined') {
                     //http://stackoverflow.com/a/784547/1351857
                     res.data.message = res.data.message.replace(/(?:\r\n|\r|\n)/g, '<br>');
@@ -154,7 +154,7 @@ export default new Vuex.Store({
             })
         },
         ticketMessages ({commit, dispatch, state}, args) {
-            return get({dispatch, state}, 'walletInfo', 'help/ticket/' + args.id + '/message', {}, function (res) {
+            return get({dispatch, state}, 'help/ticket/' + args.id + '/message', {}, function (res) {
                 for (let i = 0; i < res.data.messages.length; i++) {
                     res.data.messages[i].message = res.data.messages[i].message.replace(/(?:\r\n|\r|\n)/g, '<br>')
                 }
@@ -162,7 +162,7 @@ export default new Vuex.Store({
             })
         },
         ticketAddMessage ({commit, dispatch, state}, args) {
-            return post({dispatch, state}, 'ticketAddMessage', 'help/ticket/' + args.id + '/message', args, function (res) {
+            return post({dispatch, state}, 'help/ticket/' + args.id + '/message', args, function (res) {
                 if (typeof res.data.error !== false) {
                     //commit('setTicketMessages', res.data)
                     return true
@@ -170,14 +170,14 @@ export default new Vuex.Store({
             })
         },
         servicesList ({commit, dispatch, state}, args) {
-            return get({dispatch, state}, 'servicesList', 'vps?page=' + args.page + '&limit=' + args.limit, {}, function (res) {
+            return get({dispatch, state}, 'vps?page=' + args.page + '&limit=' + args.limit, {}, function (res) {
                 if (typeof res.data !== 'undefined') {
                     commit('setServices', res.data)
                 }
             })
         },
         paginationList ({commit, dispatch, state}, args) {
-            return get({dispatch, state}, 'paginationList', args.url + '?page=' + args.page + '&limit=' + args.limit, {}, function (res) {
+            return get({dispatch, state}, args.url + '?page=' + args.page + '&limit=' + args.limit, {}, function (res) {
                 if (typeof res.data !== 'undefined') {
                     if (res.data.error) {
                         res.data.paging = {}
@@ -188,7 +188,7 @@ export default new Vuex.Store({
             })
         },
         vpsInfo ({commit, dispatch, state}, args) {
-            return get({dispatch, state}, 'vpsInfo', 'vps/' + args.id, {}, function (res) {
+            return get({dispatch, state}, 'vps/' + args.id, {}, function (res) {
                 if (typeof res.data.status !== 'undefined') {
                     if (typeof state.vps.status !== 'undefined' && state.vps.status === 'running') {
                         let s = res.data.uptime_s - state.vps.uptime_s;
@@ -223,27 +223,27 @@ export default new Vuex.Store({
             })
         },
         vpsOn ({commit, dispatch, state}, args) {
-            return post({dispatch, state}, 'vpsOn', 'vps/' + args.id + '/on', {}, function (res) {
+            return post({dispatch, state}, 'vps/' + args.id + '/on', {}, function (res) {
                 return true
             })
         },
         vpsOff ({commit, dispatch, state}, args) {
-            return post({dispatch, state}, 'vpsOff', 'vps/' + args.id + '/off', {}, function (res) {
+            return post({dispatch, state}, 'vps/' + args.id + '/off', {}, function (res) {
                 return true
             })
         },
         vpsIps({commit, dispatch, state}, args) {
-            return get({dispatch, state}, 'vpsIps', 'vps/' + args.id + '/ip', {}, function (res) {
+            return get({dispatch, state}, 'vps/' + args.id + '/ip', {}, function (res) {
                 commit('setVpsIps', res.data)
             })
         },
         vpsChangeInfo({commit, dispatch, state}, args) {
-            return put({dispatch, state}, 'vpsChangeInfo', 'vps/' + args.id, args, function (res) {
+            return put({dispatch, state}, 'vps/' + args.id, args, function (res) {
                 state.vps.name = args.name
             })
         },
         profileInfo ({commit, dispatch, state}, args) {
-            return get({dispatch, state}, 'profileInfo', 'me', {}, function (res) {
+            return get({dispatch, state}, 'me', {}, function (res) {
                 if (typeof res.data.id !== 'undefined') {
                     commit('setProfile', res.data)
                 }
