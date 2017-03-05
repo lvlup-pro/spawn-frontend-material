@@ -246,7 +246,7 @@
             },
             changeLang(lang) {
                 localStorage.setItem('lang', lang);
-                moment.lang(lang)
+                moment.locale(lang)
                 this.$validator.setLocale(lang);
                 this.$store.commit('setLanguage', lang);
                 this.$router.replace({'params': {'lg': lang}});
