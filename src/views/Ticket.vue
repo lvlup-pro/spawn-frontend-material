@@ -36,7 +36,7 @@
                             <v-btn flat class="white--text">
                                 <v-icon class="white--text">event</v-icon>
                                 <div class="mr-1"></div>
-                                {{ticket.created_at | prettyDate}}
+                                {{ticket.created_at | prettyDateTime}}
                             </v-btn>
                         </v-card-row>
                         <v-card-text>
@@ -60,7 +60,7 @@
                                 <v-btn flat class="white--text">
                                     <v-icon class="white--text">event</v-icon>
                                     <div class="mr-1"></div>
-                                    {{tmsg.created_at | prettyDate}}
+                                    {{tmsg.created_at | prettyDateTime}}
                                 </v-btn>
                             </v-card-row>
 
@@ -74,7 +74,7 @@
                                 <v-btn flat class="white--text">
                                     <v-icon class="white--text">event</v-icon>
                                     <div class="mr-1"></div>
-                                    {{tmsg.created_at | prettyDate}}
+                                    {{tmsg.created_at | prettyDateTime}}
                                 </v-btn>
                             </v-card-row>
 
