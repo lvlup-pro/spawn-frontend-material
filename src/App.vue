@@ -193,6 +193,7 @@
 
 <script>
     import Vue from 'vue'
+    import moment from 'moment'
     export default {
         computed: {
             error() {
@@ -245,6 +246,7 @@
             },
             changeLang(lang) {
                 localStorage.setItem('lang', lang);
+                moment.lang(lang)
                 this.$validator.setLocale(lang);
                 this.$store.commit('setLanguage', lang);
                 this.$router.replace({'params': {'lg': lang}});

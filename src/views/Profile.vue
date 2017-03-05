@@ -47,13 +47,11 @@
 <style>
 </style>
 <script>
-    import moment from 'moment'
     export default {
         data () {
             return {}
         },
         mounted () {
-            moment.locale(this.$lang)
             this.$store.commit('setToolbarTitle', 'header.profile')
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
@@ -71,12 +69,6 @@
             },
             profile () {
                 return this.$store.state.profile
-            }
-        },
-        filters: {
-            prettyDate (unixtimestamp) {
-                var timestamp = moment.unix(unixtimestamp);
-                return timestamp.format("HH:mm DD.MM.YYYY")
             }
         },
         preFetch (store) {

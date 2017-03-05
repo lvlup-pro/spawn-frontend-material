@@ -34,22 +34,22 @@
                             <v-card-row v-if="on">
                                 <i class="fa fa-fw fa-2x fa-clock-o"></i>
                                 <b>{{$t('vps.uptime')}}:&nbsp;</b>
-                                {{upfrom | prettyDate}}
+                                {{upfrom | prettyDateFormat}} - {{upfrom | prettyDateFrom}}
                             </v-card-row>
                             <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-calendar-plus-o"></i>
                                 <b>{{$t('vps.createdat')}}:&nbsp;</b>
-                                {{vps.created_at | prettyDate}}
+                                {{vps.created_at | prettyDateFormat}} - {{vps.created_at | prettyDateFrom}}
                             </v-card-row>
                             <v-card-row v-if="locked">
                                 <i class="fa fa-fw fa-2x fa-calendar-times-o"></i>
                                 <b>{{$t('vps.lockedfrom')}}:&nbsp;</b>
-                                {{vps.payed_to | prettyDate}}
+                                {{vps.payed_to | prettyDateFormat}} - {{vps.payed_to | prettyDateFrom}}
                             </v-card-row>
                             <v-card-row v-else>
                                 <i class="fa fa-fw fa-2x fa-calendar-check-o"></i>
                                 <b>{{$t('vps.activeto')}}:&nbsp;</b>
-                                {{vps.payed_to | prettyDate}}
+                                {{vps.payed_to | prettyDateFormat}} - {{vps.payed_to | prettyDateFrom}}
                             </v-card-row>
                         </v-col>
                     </v-row>
@@ -231,7 +231,6 @@
     }
 </style>
 <script>
-    import moment from 'moment'
     export default {
         data () {
             return {
@@ -245,7 +244,6 @@
             }
         },
         mounted () {
-            moment.locale(this.$lang)
             this.$store.commit('setToolbarTitle', 'header.vps_init')
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
@@ -316,16 +314,9 @@
                     this.enable()
                     this.rebooting = false
                 }
-            },
-            language(val, old) {
-                moment.locale(val)
             }
         },
         filters: {
-            prettyDate (unixtimestamp) {
-                var timestamp = moment.unix(unixtimestamp);
-                return timestamp.format("DD.MM.YYYY") + " - " + timestamp.from()
-            },
             prettyBytes(bytes) {
                 if (typeof bytes === 'undefined' || bytes < 0) {
                     return '... B'

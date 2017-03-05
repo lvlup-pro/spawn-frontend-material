@@ -1,11 +1,15 @@
 import Vue from 'vue'
-import App from './App.vue'
 import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate';
+import VueI18n from 'vue-i18n'
+
+import moment from 'moment'
+
+import App from './App.vue'
 import store from './store/index'
 import router from './router/index'
+
 import {sync} from 'vuex-router-sync'
-import VueI18n from 'vue-i18n'
 sync(store, router)
 
 Vue.use(Vuetify)
@@ -16,6 +20,17 @@ import TextInput from './components/TextInput.vue'
 
 Vue.component('progress-linear-color', ProgressLinearColor)
 Vue.component('text-input', TextInput)
+
+//-------------------- filters --------------------
+Vue.filter('prettyDateFormat', function (uts) {
+    return moment.unix(uts).format("DD.MM.YYYY")
+})
+Vue.filter('prettyDateFrom', function (uts) {
+    return moment.unix(utsp).from()
+})
+Vue.filter('prettyDateTime', function (uts) {
+    return moment.unix(uts).format("HH:mm DD.MM.YYYY")
+})
 
 //-------------------- i18n --------------------
 let en = require('./store/lang/en.json'),
