@@ -26,7 +26,7 @@ Vue.filter('prettyDateFormat', function (uts) {
     return moment.unix(uts).format("DD.MM.YYYY")
 })
 Vue.filter('prettyDateFrom', function (uts) {
-    return moment.unix(utsp).from()
+    return moment.unix(uts).from()
 })
 Vue.filter('prettyDateTime', function (uts) {
     return moment.unix(uts).format("HH:mm DD.MM.YYYY")
