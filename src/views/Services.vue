@@ -86,10 +86,8 @@
 <style>
 </style>
 <script>
-    import moment from 'moment'
     export default {
         mounted () {
-            moment.locale(this.$lang)
             this.$store.commit('setToolbarTitle', 'header.services')
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
@@ -143,17 +141,6 @@
                 } else {
                     //this.page = old; //FIXME find another way of blocking update when loading
                 }
-            },
-            language(val, old) {
-                moment.locale(val)
-            }
-        },
-        filters: {
-            prettyDateFormat (unixtimestamp) {
-                return moment.unix(unixtimestamp).format("DD.MM.YYYY")
-            },
-            prettyDateFrom (unixtimestamp) {
-                return moment.unix(unixtimestamp).from()
             }
         },
         preFetch (store) {

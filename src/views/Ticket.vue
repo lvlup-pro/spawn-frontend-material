@@ -36,7 +36,7 @@
                             <v-btn flat class="white--text">
                                 <v-icon class="white--text">event</v-icon>
                                 <div class="mr-1"></div>
-                                {{ticket.created_at | prettyDate}}
+                                {{ticket.created_at | prettyDateTime}}
                             </v-btn>
                         </v-card-row>
                         <v-card-text>
@@ -60,7 +60,7 @@
                                 <v-btn flat class="white--text">
                                     <v-icon class="white--text">event</v-icon>
                                     <div class="mr-1"></div>
-                                    {{tmsg.created_at | prettyDate}}
+                                    {{tmsg.created_at | prettyDateTime}}
                                 </v-btn>
                             </v-card-row>
 
@@ -74,7 +74,7 @@
                                 <v-btn flat class="white--text">
                                     <v-icon class="white--text">event</v-icon>
                                     <div class="mr-1"></div>
-                                    {{tmsg.created_at | prettyDate}}
+                                    {{tmsg.created_at | prettyDateTime}}
                                 </v-btn>
                             </v-card-row>
 
@@ -126,7 +126,6 @@
     }
 </style>
 <script>
-    import moment from 'moment'
     export default {
         data () {
             return {
@@ -134,7 +133,6 @@
             }
         },
         mounted () {
-            moment.locale(this.$lang)
             this.$store.commit('setToolbarTitle', 'header.ticket_init')
             this.$emit('view', this.meta())
             this.$store.commit('setTicketMessages', [])
@@ -159,12 +157,6 @@
             },
             ticketMessages () {
                 return this.$store.state.ticketMessages
-            }
-        },
-        filters: {
-            prettyDate (unixtimestamp) {
-                var timestamp = moment.unix(unixtimestamp);
-                return timestamp.format("HH:mm DD.MM.YYYY")
             }
         },
         preFetch (store) {
@@ -202,10 +194,9 @@
                 //check if duplicate of previous message, precaution to prevent nervous users spamming to backend
                 //or just some network problem just occurred
                 //skip if no messages so far to prevent crash on message submit
-                if (this.$store.state.ticketMessages.error === false) {
-                    var messages = this.$store.state.ticketMessages.messages
-                    var len = messages.length
-                    var lastMsg = messages[len - 1].message
+                var messages = this.$store.state.ticketMessages.messages
+                if (messages.length > 0) {
+                    var lastMsg = messages[messages.length - 1].message
                     if (msg == lastMsg) {
                         this.$vuetify.toast.create(this.$t("ticket.msg_duplicate"), "right")
                         //show user that message was probably send earlier when some Internet connection errors occurred
