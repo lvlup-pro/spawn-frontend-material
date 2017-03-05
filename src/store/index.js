@@ -5,6 +5,29 @@ Vue.use(Vuex)
 import axios from 'axios'
 import storeConfig from './config.js'
 
+function request({dispatch, state}, method, name, url, args, callback) {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+    return method(state.apiUrl + url, args)
+        .then(function(response) {
+            return callback(response)
+        })
+        .catch(function (error) {
+            dispatch('handleError', {'name': name, 'error': error})
+        })
+}
+
+function get({dispatch, state}, name, url, args, callback) {
+    return request({dispatch, state}, axios.get, name, url, args, callback)
+}
+
+function post({dispatch, state}, name, url, args, callback) {
+    return request({dispatch, state}, axios.post, name, url, args, callback)
+}
+
+function put({dispatch, state}, name, url, args, callback) {
+    return request({dispatch, state}, axios.put, name, url, args, callback)
+}
+
 export default new Vuex.Store({
     state: {
         apiUrl: "",
@@ -94,195 +117,137 @@ export default new Vuex.Store({
             }
         },
         accountLogin ({commit, dispatch, state}, args) {
-            return axios.post(state.apiUrl + 'auth/login', args)
-                .then(function (res) {
-                    if (typeof res.data.token !== 'undefined') {
-                        localStorage.setItem("token", res.data.token);
-                        return true;
-                    }
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'accountLogin', 'error': error});
-                })
+            return post({dispatch, state}, 'accountLogin', 'auth/login', args, function (res) {
+                if (typeof res.data.token !== 'undefined') {
+                    localStorage.setItem('token', res.data.token);
+                    return true;
+                }
+            })
         },
         accountRegister({state, dispatch}, args) {
-            return axios.post(state.apiUrl + 'auth/register', args)
-                .then(function (res) {
-                    return true
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'accountRegister', 'error': error})
-                })
+            return post({dispatch, state}, 'accountRegister', 'auth/register', args, function (res) {
+                return true
+            })
         },
         accountInfo ({commit, dispatch, state}) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'me')
-                .then(function (res) {
-                    if (typeof res.data.username !== 'undefined') {
-                        commit('setAccount', res.data)
-                        return true
-                    }
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'accountInfo', 'error': error})
-                })
+            return get({dispatch, state}, 'accountInfo', 'me', {}, function (res) {
+                if (typeof res.data.username !== 'undefined') {
+                    commit('setAccount', res.data)
+                    return true
+                }
+            })
         },
         walletInfo ({commit, dispatch, state}) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'me/balance')
-                .then(function (res) {
-                    if (typeof res.data[0].balance !== 'undefined') {
-                        commit('setWallet', res.data)
-                    }
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'walletInfo', 'error': error})
-                })
+            return get({dispatch, state}, 'walletInfo', 'me/balance', {}, function (res) {
+                if (typeof res.data[0].balance !== 'undefined') {
+                    commit('setWallet', res.data)
+                }
+            })
         },
         ticketInfo ({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'help/ticket/' + args.id)
-                .then(function (res) {
-                    if (typeof res.data.id !== 'undefined') {
-                        //http://stackoverflow.com/a/784547/1351857
-                        res.data.message = res.data.message.replace(/(?:\r\n|\r|\n)/g, '<br>');
-                        commit('setTicket', res.data)
-                    }
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'ticketInfo', 'error': error})
-                })
+            return get({dispatch, state}, 'ticketInfo', 'help/ticket/' + args.id, {}, function (res) {
+                if (typeof res.data.id !== 'undefined') {
+                    //http://stackoverflow.com/a/784547/1351857
+                    res.data.message = res.data.message.replace(/(?:\r\n|\r|\n)/g, '<br>');
+                    commit('setTicket', res.data)
+                }
+            })
         },
         ticketMessages ({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'help/ticket/' + args.id + '/message')
-                .then(function (res) {
-                    for (let i = 0; i < res.data.messages.length; i++) {
-                        res.data.messages[i].message = res.data.messages[i].message.replace(/(?:\r\n|\r|\n)/g, '<br>')
-                    }
-                    commit('setTicketMessages', res.data)
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'ticketMessages', 'error': error})
-                })
+            return get({dispatch, state}, 'walletInfo', 'help/ticket/' + args.id + '/message', {}, function (res) {
+                for (let i = 0; i < res.data.messages.length; i++) {
+                    res.data.messages[i].message = res.data.messages[i].message.replace(/(?:\r\n|\r|\n)/g, '<br>')
+                }
+                commit('setTicketMessages', res.data)
+            })
         },
         ticketAddMessage ({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.post(state.apiUrl + 'help/ticket/' + args.id + '/message', args)
-                .then(function (res) {
-                    if (typeof res.data.error !== false) {
-                        //commit('setTicketMessages', res.data)
-                        return true
-                    }
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'ticketAddMessage', 'error': error})
-                })
+            return post({dispatch, state}, 'ticketAddMessage', 'help/ticket/' + args.id + '/message', args, function (res) {
+                if (typeof res.data.error !== false) {
+                    //commit('setTicketMessages', res.data)
+                    return true
+                }
+            })
         },
         servicesList ({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'vps?page=' + args.page + '&limit=' + args.limit)
-                .then(function (res) {
-                    if (typeof res.data !== 'undefined') {
-                        commit('setServices', res.data)
-                    }
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'servicesList', 'error': error})
-                })
+            return get({dispatch, state}, 'servicesList', 'vps?page=' + args.page + '&limit=' + args.limit, {}, function (res) {
+                if (typeof res.data !== 'undefined') {
+                    commit('setServices', res.data)
+                }
+            })
         },
         paginationList ({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + args.url + '?page=' + args.page + '&limit=' + args.limit)
-                .then(function (res) {
-                    if (typeof res.data !== 'undefined') {
-                        if (res.data.error) {
-                            res.data.paging = {}
-                            res.data.paging.total_pages = 1
-                        }
-                        commit('setPagination', res.data)
+            return get({dispatch, state}, 'paginationList', args.url + '?page=' + args.page + '&limit=' + args.limit, {}, function (res) {
+                if (typeof res.data !== 'undefined') {
+                    if (res.data.error) {
+                        res.data.paging = {}
+                        res.data.paging.total_pages = 1
                     }
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'paginationList', 'error': error})
-                })
+                    commit('setPagination', res.data)
+                }
+            })
         },
         vpsInfo ({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'vps/' + args.id)
-                .then(function (res) {
-                    if (typeof res.data.status !== 'undefined') {
-                        if (typeof state.vps.status !== 'undefined' && state.vps.status === 'running') {
-                            let s = res.data.uptime_s - state.vps.uptime_s;
-                            if (s > 0) {
-                                let netInChange = res.data.net_in_b - state.vps.net_in_b;
-                                let netOutChange = res.data.net_out_b - state.vps.net_out_b;
-                                res.data.net_in_bps = netInChange / s;
-                                res.data.net_out_bps = netOutChange / s;
-                                if (state.vps.virt == 'kvm') {
-                                    let diskReadChange = res.data.disk_read_b - state.vps.disk_read_b;
-                                    let diskWriteChange = res.data.disk_write_b - state.vps.disk_write_b;
-                                    res.data.disk_read_bps = diskReadChange / s;
-                                    res.data.disk_write_bps = diskWriteChange / s;
-                                }
-                            } else {
-                                res.data.net_in_bps = state.vps.net_int_bps;
-                                res.data.net_out_bps = state.vps.net_out_bps;
-                                if (state.vps.virt == 'kvm') {
-                                    res.data.disk_read_bps = state.vps.disk_read_bps;
-                                    res.data.disk_write_bps = state.vps.disk_write_bps;
-                                }
+            return get({dispatch, state}, 'vpsInfo', 'vps/' + args.id, {}, function (res) {
+                if (typeof res.data.status !== 'undefined') {
+                    if (typeof state.vps.status !== 'undefined' && state.vps.status === 'running') {
+                        let s = res.data.uptime_s - state.vps.uptime_s;
+                        if (s > 0) {
+                            let netInChange = res.data.net_in_b - state.vps.net_in_b;
+                            let netOutChange = res.data.net_out_b - state.vps.net_out_b;
+                            res.data.net_in_bps = netInChange / s;
+                            res.data.net_out_bps = netOutChange / s;
+                            if (state.vps.virt == 'kvm') {
+                                let diskReadChange = res.data.disk_read_b - state.vps.disk_read_b;
+                                let diskWriteChange = res.data.disk_write_b - state.vps.disk_write_b;
+                                res.data.disk_read_bps = diskReadChange / s;
+                                res.data.disk_write_bps = diskWriteChange / s;
                             }
                         } else {
-                            res.data.net_in_bps = -1;
-                            res.data.net_out_bps = -1;
-                            res.data.disk_read_bps = -1;
-                            res.data.disk_write_bps = -1;
+                            res.data.net_in_bps = state.vps.net_int_bps;
+                            res.data.net_out_bps = state.vps.net_out_bps;
+                            if (state.vps.virt == 'kvm') {
+                                res.data.disk_read_bps = state.vps.disk_read_bps;
+                                res.data.disk_write_bps = state.vps.disk_write_bps;
+                            }
                         }
-                        res.data.ip = state.vps.ip
-                        commit('setVps', res.data)
+                    } else {
+                        res.data.net_in_bps = -1;
+                        res.data.net_out_bps = -1;
+                        res.data.disk_read_bps = -1;
+                        res.data.disk_write_bps = -1;
                     }
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'vpsInfo', 'error': error})
-                })
+                    res.data.ip = state.vps.ip
+                    commit('setVps', res.data)
+                }
+            })
         },
         vpsOn ({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.post(state.apiUrl + 'vps/' + args.id + '/on')
-                .then(function (res) {
-                    return true
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'vpsOn', 'error': error})
-                })
+            return post({dispatch, state}, 'vpsOn', 'vps/' + args.id + '/on', {}, function (res) {
+                return true
+            })
         },
         vpsOff ({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.post(state.apiUrl + 'vps/' + args.id + '/off')
-                .then(function (res) {
-                    return true
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'vpsOff', 'error': error})
-                })
+            return post({dispatch, state}, 'vpsOff', 'vps/' + args.id + '/off', {}, function (res) {
+                return true
+            })
         },
         vpsIps({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'vps/' + args.id + '/ip')
-                .then(function (res) {
-                    commit('setVpsIps', res.data)
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'vpsOff', 'error': error})
-                })
+            return get({dispatch, state}, 'vpsIps', 'vps/' + args.id + '/ip', {}, function (res) {
+                commit('setVpsIps', res.data)
+            })
         },
         vpsChangeInfo({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.put(state.apiUrl + 'vps/' + args.id, args)
-                .then(function (res) {
-                    state.vps.name = args.name
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'vpsChangeInfo', 'error': error})
-                })
+            return put({dispatch, state}, 'vpsChangeInfo', 'vps/' + args.id, args, function (res) {
+                state.vps.name = args.name
+            })
         },
         profileInfo ({commit, dispatch, state}, args) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
-            return axios.get(state.apiUrl + 'me')
-                .then(function (res) {
-                    if (typeof res.data.id !== 'undefined') {
-                        commit('setProfile', res.data)
-                    }
-                }).catch(function (error) {
-                    dispatch('handleError', {'name': 'profileInfo', 'error': error})
-                })
+            return get({dispatch, state}, 'profileInfo', 'me', {}, function (res) {
+                if (typeof res.data.id !== 'undefined') {
+                    commit('setProfile', res.data)
+                }
+            })
         }
     },
     mutations: {
