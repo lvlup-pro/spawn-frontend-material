@@ -1,10 +1,11 @@
 # Changelog
 
-## 3.0.0-beta.5 (TBA)
+## 3.0.0-beta.5 (05.03.2017)
 
 ### Features
 
 + Click on sidebar hides it on mobile devices [#40](https://github.com/lvlup-pro/spawn-frontend-material/issues/40)
++ More DRY code [#120](https://github.com/lvlup-pro/spawn-frontend-material/pull/120)
 
 ## 3.0.0-beta.4 (03.03.2017)
 
