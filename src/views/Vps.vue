@@ -217,7 +217,7 @@
                                     <v-list-tile-sub-title>IP główne</v-list-tile-sub-title>
                                   </v-list-tile-content>
                                   <v-list-tile-action>
-                                    <v-btn icon ripple>
+                                    <v-btn icon ripple v-on:click.native="goToIp(vps.ip.main)">
                                       <v-icon class="black--text">settings</v-icon>
                                     </v-btn>
                                   </v-list-tile-action>
@@ -230,7 +230,7 @@
                                     <v-list-tile-sub-title>IP dodatkowe</v-list-tile-sub-title>
                                   </v-list-tile-content>
                                   <v-list-tile-action>
-                                    <v-btn icon ripple>
+                                    <v-btn icon ripple v-on:click.native="goToIp(item)">
                                       <v-icon class="black--text">settings</v-icon>
                                     </v-btn>
                                   </v-list-tile-action>
@@ -294,7 +294,7 @@
         mounted () {
             this.$store.commit('setToolbarTitle', 'header.vps')
             //FIXME set by API not user input
-            this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
+            this.$store.commit('setToolbarTitleArgs', this.$route.params)
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
@@ -430,6 +430,9 @@
                 }).then(() => {
                     this.changingSettings = false
                 })
+            },
+            goToIp(ip) {
+                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.$route.params.id + '/ip/' + ip)
             }
         }
     }

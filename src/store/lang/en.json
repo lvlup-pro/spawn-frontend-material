@@ -25,6 +25,7 @@
         "ticket": "Ticket #{id}",
         "tickets": "Tickets",
         "vps": "VPS #{id}",
+        "vpsip": "VPS #{id} - {ip}",
         "payments": "Payments",
         "profile": "Profile"
     },
