@@ -34,7 +34,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in vpsip.rules">
+                            <tr v-if="!vpsip.rules.error" v-for="(item, index) in vpsip.rules">
                                 <td>
                                     <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                 </td>
@@ -55,6 +55,11 @@
                                         <i class="fa fa-circle green--text"></i>
                                         {{$t('vpsip.rule.created')}}
                                     </span>
+                                </td>
+                            </tr>
+                            <tr v-if="vpsip.rules.error">
+                                <td colspan="100%" class="red--text text--darken-3 empty">
+                                    {{ $t('table.empty.rules') }}
                                 </td>
                             </tr>
                         </tbody>

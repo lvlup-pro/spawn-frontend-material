@@ -44,7 +44,8 @@
         "empty": {
             "services": "No services",
             "payments": "No payments",
-            "tickets": "No tickets"
+            "tickets": "No tickets",
+            "rules": "No filtering rules"
         }
     },
     "validation": {
