@@ -246,13 +246,12 @@ export default new Vuex.Store({
         },
         vpsIpGameStatus({commit, dispatch, state}, args) {
             return get({dispatch, state}, 'vps/{id}/ip/{ip}/game', args, function (res) {
-                res.data.ip = args.ip
                 commit('setVpsIpGameStatus', res.data)
             })
         },
-        vpsIpGameList({commit, dispatch, state}, args) {
+        vpsIpGameRules({commit, dispatch, state}, args) {
             return get({dispatch, state}, 'vps/{id}/ip/{ip}/game/rule', args, function (res) {
-                commit('setVpsIpGameList', res.data)
+                commit('setVpsIpGameRules', res.data)
             })
         },
         vpsChangeInfo({commit, dispatch, state}, args) {
@@ -300,14 +299,12 @@ export default new Vuex.Store({
             state.vps.ip = {}
             state.vps.ip.main = newIps.main
             state.vps.ip.additional = newIps.additional
-            state.vps.ip.status = {}
         },
         setVpsIpGameStatus(state, newStatus) {
-            console.log(newStatus)
-            state.vps.ip.status[newStatus.ip] = newStatus
+            state.vpsip.status = newStatus
         },
-        setVpsIpGameList(state, newList) {
-            state.vpsip.list = newList
+        setVpsIpGameRules(state, newRules) {
+            state.vpsip.rules = newRules
         },
         setProfile (state, newProfile) {
             state.profile = newProfile

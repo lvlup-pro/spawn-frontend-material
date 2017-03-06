@@ -152,13 +152,6 @@
         "notset": "Not set",
         "save": "Save",
         "name": "Name",
-        "firewall": {
-            "label": "UDP filtering",
-            "enabled": "Enabled",
-            "enabling": "Enabling...",
-            "disabled": "Disabled",
-            "disabling": "Disabling..."
-        },
         "placeholder": {
             "name": "My VPS"
         },
@@ -173,6 +166,21 @@
             "description": "Hard reboot, may cause unsaved data loss (like pulling power plug from PC)!",
             "cancel": "Cancel",
             "submit": "Reboot"
+        }
+    },
+    "vpsip": {
+        "header": "UDP filtering",
+        "status": {
+            "label": "Filtering",
+            "enabled": "Enabled",
+            "enabling": "Enabling",
+            "disabled": "Disabled",
+            "disabling": "Disabling"
+        },
+        "rule": {
+            "created": "Created",
+            "creating": "Creating",
+            "deleting": "Deleting"
         }
     },
     "credits": {

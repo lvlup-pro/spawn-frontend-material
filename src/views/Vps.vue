@@ -207,7 +207,7 @@
                     <div class="mb-4"></div>
                     <v-card v-if="!locked && vps.virt === 'kvm' && vps.ip">
                         <v-card-row class="green darken-1">
-                            <v-card-title class="white--text">{{$t('vps.firewall.label')}}</v-card-title>
+                            <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
                         </v-card-row>
                         <v-list two-line>
                             <v-list-item>

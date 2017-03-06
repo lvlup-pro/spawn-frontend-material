@@ -2,8 +2,28 @@
     <div>
         <v-container>
             <v-card>
-                <v-table-overflow>
-                    <table v-if="loadedRules">
+                <v-card-row class="green darken-1">
+                    <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
+                </v-card-row>
+                <v-card-text v-if="loadedStatus">
+                    <v-card-row>
+                        <b>{{$t('vpsip.status.label')}}:&nbsp;</b>
+                        <v-chip v-if="vpsip.status.enable_pending" label class="yellow">
+                            {{$t('vpsip.status.enabling')}}
+                        </v-chip>
+                        <v-chip v-else-if="vpsip.status.disable_pending" label class="yellow">
+                            {{$t('vpsip.status.disabling')}}
+                        </v-chip>
+                        <v-chip v-else-if="vpsip.status.enabled" label class="green white--text">
+                            {{$t('vpsip.status.enabled')}}
+                        </v-chip>
+                        <v-chip v-else label class="red white--text">
+                            {{$t('vpsip.status.disabled')}}
+                        </v-chip>
+                    </v-card-row>
+                </v-card-text>
+                <v-table-overflow v-if="loadedRules">
+                    <table>
                         <thead>
                         <tr>
                             <th class="select"><i class="fa fa-check"></i></th>
@@ -14,7 +34,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in vpsip.list">
+                            <tr v-for="(item, index) in vpsip.rules">
                                 <td>
                                     <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                 </td>
@@ -50,7 +70,8 @@
     export default {
         data () {
             return {
-                loadedRules: false
+                loadedRules: false,
+                loadedStatus: false
             }
         },
         mounted () {
@@ -63,9 +84,13 @@
                     this.$router.push('/login')
                 } else {
                     this.$store.commit('setLoading')
-                    this.list().then(() => {
+                    this.status().then(() => {
+                        this.loadedStatus = true
+                        this.setLoaded()
+                    })
+                    this.rules().then(() => {
                         this.loadedRules = true
-                        this.$store.commit('setLoaded')
+                        this.setLoaded()
                     })
                 }
             })
@@ -86,8 +111,16 @@
                     keywords: 'vuetify, vps, ip'
                 }
             },
-            list() {
-                return this.$store.dispatch('vpsIpGameList', this.$route.params)
+            rules() {
+                return this.$store.dispatch('vpsIpGameRules', this.$route.params)
+            },
+            status() {
+                return this.$store.dispatch('vpsIpGameStatus', this.$route.params)
+            },
+            setLoaded() {
+                if (this.loadedRules && this.loadedStatus) {
+                    this.$store.commit('setLoaded')
+                }
             }
         }
     }

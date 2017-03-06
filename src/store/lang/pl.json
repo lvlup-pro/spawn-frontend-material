@@ -151,13 +151,6 @@
         "notset": "Nieustawiona",
         "save": "Zapisz",
         "name": "Nazwa",
-        "firewall": {
-            "label": "Filtrowanie UDP",
-            "enabled": "Włączone",
-            "enabling": "Włączanie...",
-            "disabled": "Wyłączone",
-            "disabling": "Wyłączanie..."
-        },
         "placeholder": {
             "name": "Mój VPS"
         },
@@ -175,10 +168,18 @@
         }
     },
     "vpsip": {
+        "header": "Filtrowanie UDP",
+        "status": {
+            "label": "Filtrowanie",
+            "enabled": "Włączone",
+            "enabling": "Włączanie",
+            "disabled": "Wyłączone",
+            "disabling": "Wyłączanie"
+        },
         "rule": {
             "created": "Utworzono",
-            "creating": "Tworzenie...",
-            "deleting": "Usuwanie..."
+            "creating": "Tworzenie",
+            "deleting": "Usuwanie"
         }
     },
     "credits": {
