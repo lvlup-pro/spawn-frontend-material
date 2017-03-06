@@ -39,6 +39,8 @@
         "status": "Status",
         "created_at": "Utworzony",
         "payed_to": "Wygasa",
+        "ports": "Porty",
+        "protocol": "Protokół",
         "empty": {
             "services": "Brak usług",
             "payments": "Brak płatności",

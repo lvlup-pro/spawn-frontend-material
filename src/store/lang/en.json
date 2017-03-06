@@ -39,6 +39,8 @@
         "status": "Status",
         "created_at": "Created",
         "payed_to": "Expires",
+        "ports": "Ports",
+        "protocol": "Protocol",
         "empty": {
             "services": "No services",
             "payments": "No payments",
