@@ -138,7 +138,7 @@
             setLoaded() {
                 if (this.loadedRules && this.loadedStatus) {
                     this.$store.commit('setLoaded')
-                    setInterval(this.refresh, 5000)
+                    this.interval = setInterval(this.refresh, 5000)
                 }
             }
         }
