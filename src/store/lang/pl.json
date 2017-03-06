@@ -24,7 +24,6 @@
         "ticket_init": "Zgłoszenie",
         "ticket": "Zgłoszenie #{id}",
         "tickets": "Zgłoszenia",
-        "vps_init": "VPS",
         "vps": "VPS #{id}",
         "payments": "Płatności",
         "profile": "Profil"

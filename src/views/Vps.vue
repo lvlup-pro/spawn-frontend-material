@@ -177,14 +177,14 @@
                     </v-row>
                 </v-card-text>
             </v-card>
-            <div class="mb-4"></div>
-            <v-card v-if="!locked">
-                <v-card-row class="green darken-1">
-                    <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
-                </v-card-row>
-                <v-card-text>
-                    <v-row>
-                        <v-col md4 xs12>
+            <v-row>
+                <v-col md6 xs12>
+                    <div class="mb-4"></div>
+                    <v-card v-if="!locked">
+                        <v-card-row class="green darken-1">
+                            <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
+                        </v-card-row>
+                        <v-card-text>
                             <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-pencil" style="padding-bottom: 1rem;"></i>
                                 <v-text-input
@@ -194,42 +194,52 @@
                                     {{vps.name}}
                                 </v-text-input>
                             </v-card-row>
-                        </v-col>
-                    </v-row>
-                </v-card-text>
-                <v-card-row actions style="justify-content: flex-start">
-                    <v-btn :loading="changingSettings" :disabled="!settingsChanged"
-                        success v-on:click.native="save" class="white--text">
-                        {{$t('vps.save')}}
-                    </v-btn>
-                </v-card-row>
-            </v-card>
-            <div class="mb-4"></div>
-            <v-card v-if="!locked && vps.virt === 'kvm' && vps.ip">
-                <v-card-row class="green darken-1">
-                    <v-card-title class="white--text">{{$t('vps.firewall.label')}}</v-card-title>
-                </v-card-row>
-                <v-card-text>
-                    <v-card-row v-for="(item, index) in [vps.ip.main].concat(vps.ip.additional)">
-                        <span v-if="vps.ip.status[item]">
-                            <i class="fa fa-fw fa-2x fa-filter"></i>
-                            <b>{{item}}</b>:
-                            <v-chip v-if="vps.ip.status[item].enable_pending" label class="yellow">
-                                {{$t('vps.firewall.enabling')}}
-                            </v-chip>
-                            <v-chip v-else-if="vps.ip.status[item].disable_pending" label class="yellow">
-                                {{$t('vps.firewall.disabling')}}
-                            </v-chip>
-                            <v-chip v-else-if="vps.ip.status[item].enabled" label class="green white--text">
-                                {{$t('vps.firewall.enabled')}}
-                            </v-chip>
-                            <v-chip v-else label class="red white--text">
-                                {{$t('vps.firewall.disabled')}}
-                            </v-chip>
-                        </span>
-                    </v-card-row>
-                </v-card-text>
-            </v-card>
+                        </v-card-text>
+                        <v-card-row actions style="justify-content: flex-start">
+                            <v-btn :loading="changingSettings" :disabled="!settingsChanged"
+                                success v-on:click.native="save" class="white--text">
+                                {{$t('vps.save')}}
+                            </v-btn>
+                        </v-card-row>
+                    </v-card>
+                </v-col>
+                <v-col md6 xs12>
+                    <div class="mb-4"></div>
+                    <v-card v-if="!locked && vps.virt === 'kvm' && vps.ip">
+                        <v-card-row class="green darken-1">
+                            <v-card-title class="white--text">{{$t('vps.firewall.label')}}</v-card-title>
+                        </v-card-row>
+                        <v-list two-line>
+                            <v-list-item>
+                                <v-list-tile>
+                                  <v-list-tile-content>
+                                    <v-list-tile-title>{{vps.ip.main}}</v-list-tile-title>
+                                    <v-list-tile-sub-title>IP główne</v-list-tile-sub-title>
+                                  </v-list-tile-content>
+                                  <v-list-tile-action>
+                                    <v-btn icon ripple>
+                                      <v-icon class="black--text">settings</v-icon>
+                                    </v-btn>
+                                  </v-list-tile-action>
+                                </v-list-tile>
+                            </v-list-item>
+                            <v-list-item v-for="(item, index) in vps.ip.additional">
+                                <v-list-tile>
+                                  <v-list-tile-content>
+                                    <v-list-tile-title>{{item}}</v-list-tile-title>
+                                    <v-list-tile-sub-title>IP dodatkowe</v-list-tile-sub-title>
+                                  </v-list-tile-content>
+                                  <v-list-tile-action>
+                                    <v-btn icon ripple>
+                                      <v-icon class="black--text">settings</v-icon>
+                                    </v-btn>
+                                  </v-list-tile-action>
+                                </v-list-tile>
+                            </v-list-item>
+                        </v-list>
+                    </v-card>
+                </v-col>
+            </v-row>
             <div class="mb-4"></div>
             <!--
              TODO
@@ -274,7 +284,9 @@
             }
         },
         mounted () {
-            this.$store.commit('setToolbarTitle', 'header.vps_init')
+            this.$store.commit('setToolbarTitle', 'header.vps')
+            //FIXME set by API not user input
+            this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
@@ -284,19 +296,11 @@
                     this.$store.commit('setLoading')
                     this.stats().then(() => {
                         this.$store.commit('setLoaded')
-                        //FIXME set by API not user input
-                        this.$store.commit('setToolbarTitle', 'header.vps')
-                        this.$store.commit('setToolbarTitleArgs', {'id': this.$route.params.id})
                         this.$emit('view', this.meta())
                         this.newname = this.name
                         this.interval = setInterval(this.stats, 1000)
-                    }).then(() => {
-                        this.ips().then(() => {
-                            if (this.vps.virt === 'kvm') {
-                                this.ipsStatus()
-                            }
-                        })
                     })
+                    this.ips()
                 }
             })
         },
@@ -390,16 +394,6 @@
             ips() {
                 return this.$store.dispatch('vpsIps', {
                     'id': this.$route.params.id
-                })
-            },
-            ipsStatus() {
-                let self = this
-                let ips = [this.vps.ip.main].concat(this.vps.ip.additional)
-                ips.forEach(function(ip) {
-                    self.$store.dispatch('vpsIpGameStatus', {
-                        'id': self.$route.params.id,
-                        'ip': ip
-                    })
                 })
             },
             enable() {

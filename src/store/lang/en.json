@@ -24,7 +24,6 @@
         "ticket_init": "Ticket",
         "ticket": "Ticket #{id}",
         "tickets": "Tickets",
-        "vps_init": "VPS",
         "vps": "VPS #{id}",
         "payments": "Payments",
         "profile": "Profile"
