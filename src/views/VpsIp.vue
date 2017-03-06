@@ -8,13 +8,13 @@
                 <v-card-text v-if="loadedStatus">
                     <v-card-row>
                         <b>{{$t('vpsip.status.label')}}:&nbsp;</b>
-                        <v-chip v-if="vpsip.status.enable_pending" label class="yellow">
+                        <v-chip v-if="status.enable_pending" label class="yellow">
                             {{$t('vpsip.status.enabling')}}
                         </v-chip>
-                        <v-chip v-else-if="vpsip.status.disable_pending" label class="yellow">
+                        <v-chip v-else-if="status.disable_pending" label class="yellow">
                             {{$t('vpsip.status.disabling')}}
                         </v-chip>
-                        <v-chip v-else-if="vpsip.status.enabled" label class="green white--text">
+                        <v-chip v-else-if="status.enabled" label class="green white--text">
                             {{$t('vpsip.status.enabled')}}
                         </v-chip>
                         <v-chip v-else label class="red white--text">
@@ -34,7 +34,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in vpsip.rules">
+                            <tr v-if="!rules.error" v-for="(item, index) in rules">
                                 <td>
                                     <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                 </td>
@@ -57,9 +57,24 @@
                                     </span>
                                 </td>
                             </tr>
+                            <tr v-if="rules.error">
+                                <td colspan="100%" class="red--text text--darken-3 empty">
+                                    {{ $t('table.empty.rules') }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </v-table-overflow>
+                <v-card-row actions style="justify-content: flex-start" v-if="loadedStatus">
+                    <v-btn success v-if="(!status.enabled || status.enable_pending) && !status.disable_pending" v-on:click.native="enable"
+                        :loading="changingStatus" :disabled="changingStatus">
+                        {{$t('vpsip.enable')}}
+                    </v-btn>
+                    <v-btn error v-if="(status.enabled || status.disable_pending) && !status.enable_pending" v-on:click.native="disable"
+                        :loading="changingStatus" :disabled="changingStatus">
+                        {{$t('vpsip.disable')}}
+                    </v-btn>
+                </v-card-row>
             </v-card>
         </v-container>
     </div>
@@ -85,11 +100,11 @@
                     this.$router.push('/login')
                 } else {
                     this.$store.commit('setLoading')
-                    this.status().then(() => {
+                    this.fetchStatus().then(() => {
                         this.loadedStatus = true
                         this.setLoaded()
                     })
-                    this.rules().then(() => {
+                    this.fetchRules().then(() => {
                         this.loadedRules = true
                         this.setLoaded()
                     })
@@ -103,8 +118,14 @@
             clearInterval(this.interval)
         },
         computed: {
-            vpsip () {
-                return this.$store.state.vpsip
+            status () {
+                return this.$store.state.vpsipstatus
+            },
+            rules () {
+                return this.$store.state.vpsiprules
+            },
+            changingStatus() {
+                return this.status.enable_pending || this.status.disable_pending
             }
         },
         methods: {
@@ -115,24 +136,24 @@
                     keywords: 'vuetify, vps, ip'
                 }
             },
-            rules() {
+            fetchRules() {
                 return this.$store.dispatch('vpsIpGameRules', this.$route.params)
             },
-            status() {
+            fetchStatus() {
                 return this.$store.dispatch('vpsIpGameStatus', this.$route.params)
             },
             refresh() {
-                let status = this.vpsip.status, rules = this.vpsip.rules, rulesPending = false
-                rules.forEach(function(rule) {
+                let rulesPending = false
+                this.rules.forEach(function(rule) {
                     if (rule.create_pending || rule.delete_pending) {
                         rulesPending = true
                     }
                 })
                 if (rulesPending) {
-                    this.rules()
+                    this.fetchRules()
                 }
-                if (status.enable_pending || status.disable_pending) {
-                    this.status()
+                if (this.changingStatus) {
+                    this.fetchStatus()
                 }
             },
             setLoaded() {
@@ -140,6 +161,12 @@
                     this.$store.commit('setLoaded')
                     this.interval = setInterval(this.refresh, 5000)
                 }
+            },
+            enable() {
+                return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, { enabled: true }))
+            },
+            disable() {
+                return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, { enabled: false }))
             }
         }
     }
