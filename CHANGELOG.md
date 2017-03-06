@@ -2,7 +2,7 @@
 
 ## 3.0.0-beta.5 (06.03.2017)
 
-+ VPS IP page for KVM showing game firewall status and rules [#121](https://github.com/lvlup-pro/spawn-frontend-material/issues/120), [#122](https://github.com/lvlup-pro/spawn-frontend-material/issues/121) => [#125](https://github.com/lvlup-pro/spawn-frontend-material/pull/125)
++ VPS IP page for KVM showing game firewall status and rules [#121](https://github.com/lvlup-pro/spawn-frontend-material/issues/120), [#122](https://github.com/lvlup-pro/spawn-frontend-material/issues/121) → [#125](https://github.com/lvlup-pro/spawn-frontend-material/pull/125)
 
 ## 3.0.0-beta.5 (05.03.2017)
 
@@ -15,8 +15,8 @@
 
 ### Features
 
-+ An ability to change VPS name [#114](https://github.com/lvlup-pro/spawn-frontend-material/issues/114) => [#118](https://github.com/lvlup-pro/spawn-frontend-material/pull/118)
-+ Better error handling: network errors, invalid token, rate limit exceeded and other ("unknown") errors [#7](https://github.com/lvlup-pro/spawn-frontend-material/issues/7) => [#58](https://github.com/lvlup-pro/spawn-frontend-material/pull/58)
++ An ability to change VPS name [#114](https://github.com/lvlup-pro/spawn-frontend-material/issues/114) → [#118](https://github.com/lvlup-pro/spawn-frontend-material/pull/118)
++ Better error handling: network errors, invalid token, rate limit exceeded and other ("unknown") errors [#7](https://github.com/lvlup-pro/spawn-frontend-material/issues/7) → [#58](https://github.com/lvlup-pro/spawn-frontend-material/pull/58)
 
 ## 3.0.0-beta.3 (02.03.2017)
 
@@ -47,7 +47,7 @@
 
 ### Fixes
 
-+ Invalid VPS status on services page [#95](https://github.com/lvlup-pro/spawn-frontend-material/issues/95) => [#100](https://github.com/lvlup-pro/spawn-frontend-material/pull/100)
++ Invalid VPS status on services page [#95](https://github.com/lvlup-pro/spawn-frontend-material/issues/95) → [#100](https://github.com/lvlup-pro/spawn-frontend-material/pull/100)
 + Sidebar scrolling fix and better look in webkit based browsers [#102](https://github.com/lvlup-pro/spawn-frontend-material/pull/102)
 + Simplifying code [#104](https://github.com/lvlup-pro/spawn-frontend-material/pull/104)
 + Styling fix for register page [#103](https://github.com/lvlup-pro/spawn-frontend-material/pull/103)
@@ -72,9 +72,9 @@
 ### Features
 
 + Redesign VPS view and organise it with cards [#87](https://github.com/lvlup-pro/spawn-frontend-material/pull/87)
-+ Working turn on/turn off button with modal preventing accidentally turning off [#80](https://github.com/lvlup-pro/spawn-frontend-material/issues/80) => [#86](https://github.com/lvlup-pro/spawn-frontend-material/pull/86)
++ Working turn on/turn off button with modal preventing accidentally turning off [#80](https://github.com/lvlup-pro/spawn-frontend-material/issues/80) → [#86](https://github.com/lvlup-pro/spawn-frontend-material/pull/86)
 + Show IP, status (on/off/locked) and virtualization in services table [#81](https://github.com/lvlup-pro/spawn-frontend-material/pull/81)
-+ Show uptime, virtualization, used and max RAM, used and max disk space in VPS view [#81](https://github.com/lvlup-pro/spawn-frontend-material/pull/81) =>  [#83](https://github.com/lvlup-pro/spawn-frontend-material/pull/83)
++ Show uptime, virtualization, used and max RAM, used and max disk space in VPS view [#81](https://github.com/lvlup-pro/spawn-frontend-material/pull/81) →  [#83](https://github.com/lvlup-pro/spawn-frontend-material/pull/83)
 + German language [#77](https://github.com/lvlup-pro/spawn-frontend-material/pull/77), [#78](https://github.com/lvlup-pro/spawn-frontend-material/pull/78), [#79](https://github.com/lvlup-pro/spawn-frontend-material/pull/79)
 
 ### Fixes
@@ -100,7 +100,7 @@
 
 ### Features
 
-+ Credits page [#5](https://github.com/lvlup-pro/spawn-frontend-material/issues/5) => [#66](https://github.com/lvlup-pro/spawn-frontend-material/pull/66)
++ Credits page [#5](https://github.com/lvlup-pro/spawn-frontend-material/issues/5) → [#66](https://github.com/lvlup-pro/spawn-frontend-material/pull/66)
 + Logout button on sidebar [#65](https://github.com/lvlup-pro/spawn-frontend-material/pull/65)
 + More VPS info
 + Linear progress with color component
@@ -116,7 +116,7 @@
 ### Features
 
 + Centralized i18n files [#64](https://github.com/lvlup-pro/spawn-frontend-material/pull/64)
-+ Working title and meta tags [#27](https://github.com/lvlup-pro/spawn-frontend-material/issues/27) => [#63](https://github.com/lvlup-pro/spawn-frontend-material/pull/63)
++ Working title and meta tags [#27](https://github.com/lvlup-pro/spawn-frontend-material/issues/27) → [#63](https://github.com/lvlup-pro/spawn-frontend-material/pull/63)
 + Small select column in tables [#62](https://github.com/lvlup-pro/spawn-frontend-material/pull/62)
 + Hash prefix for IDs [#61](https://github.com/lvlup-pro/spawn-frontend-material/pull/61)
 + Ticket status in ticket list page [#60](https://github.com/lvlup-pro/spawn-frontend-material/pull/60)
@@ -142,7 +142,7 @@
 
 ### Fixes
 
-+ Strange scrollbars [#51](https://github.com/lvlup-pro/spawn-frontend-material/issues/51) => [#53](https://github.com/lvlup-pro/spawn-frontend-material/pull/53)
++ Strange scrollbars [#51](https://github.com/lvlup-pro/spawn-frontend-material/issues/51) → [#53](https://github.com/lvlup-pro/spawn-frontend-material/pull/53)
 + Wrong language for date description on tables [#42](https://github.com/lvlup-pro/spawn-frontend-material/issues/42)
 
 ## 3.0.0-alpha.6 (15.02.2017)
@@ -168,7 +168,7 @@
 
 ### Fixes
 
-+ Static toolbar i18n titles [#39](https://github.com/lvlup-pro/spawn-frontend-material/issues/39) => [#39](https://github.com/lvlup-pro/spawn-frontend-material/pull/48)
++ Static toolbar i18n titles [#39](https://github.com/lvlup-pro/spawn-frontend-material/issues/39) → [#39](https://github.com/lvlup-pro/spawn-frontend-material/pull/48)
 + Date count description [#41](https://github.com/lvlup-pro/spawn-frontend-material/issues/41)
 + Better date format for ticket [#47](https://github.com/lvlup-pro/spawn-frontend-material/pull/47)
 + More stable code for sidebar [#45](https://github.com/lvlup-pro/spawn-frontend-material/pull/45)
@@ -177,21 +177,21 @@
 
 ### Features
 
-+ Updated to Vuetify 0.8.8 [#14](https://github.com/lvlup-pro/spawn-frontend-material/issues/14) => [#30](https://github.com/lvlup-pro/spawn-frontend-material/pull/30)
++ Updated to Vuetify 0.8.8 [#14](https://github.com/lvlup-pro/spawn-frontend-material/issues/14) → [#30](https://github.com/lvlup-pro/spawn-frontend-material/pull/30)
 + Don't hide content on pagination loading [#4](https://github.com/lvlup-pro/spawn-frontend-material/issues/4)
 
 ### Fixes
 
 + Crash on login and logout [#26](https://github.com/lvlup-pro/spawn-frontend-material/issues/26)
-+ Smaller title font on toolbar [#12](https://github.com/lvlup-pro/spawn-frontend-material/issues/12) => [#31](https://github.com/lvlup-pro/spawn-frontend-material/pull/31)
++ Smaller title font on toolbar [#12](https://github.com/lvlup-pro/spawn-frontend-material/issues/12) → [#31](https://github.com/lvlup-pro/spawn-frontend-material/pull/31)
 + Session detect on Home page [#36](https://github.com/lvlup-pro/spawn-frontend-material/issues/36)
 
 ## 3.0.0-alpha.3 (12.02.2017)
 
 + Send messages in ticket page
 + Better i18n [#19](https://github.com/lvlup-pro/spawn-frontend-material/pull/19)
-+ Fix for logout icon too close to text [#1](https://github.com/lvlup-pro/spawn-frontend-material/issues/1) => [#17](https://github.com/lvlup-pro/spawn-frontend-material/pull/17)
-+ Frontend version is loading from package.json [#13](https://github.com/lvlup-pro/spawn-frontend-material/issues/13) => [#16](https://github.com/lvlup-pro/spawn-frontend-material/pull/16)
++ Fix for logout icon too close to text [#1](https://github.com/lvlup-pro/spawn-frontend-material/issues/1) → [#17](https://github.com/lvlup-pro/spawn-frontend-material/pull/17)
++ Frontend version is loading from package.json [#13](https://github.com/lvlup-pro/spawn-frontend-material/issues/13) → [#16](https://github.com/lvlup-pro/spawn-frontend-material/pull/16)
 
 ## 3.0.0-alpha.2 (11.02.2017)
 
