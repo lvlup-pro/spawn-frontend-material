@@ -66,10 +66,12 @@
                     </table>
                 </v-table-overflow>
                 <v-card-row actions style="justify-content: flex-start" v-if="loadedStatus">
-                    <v-btn success v-if="!status.enabled" v-on:click.native="enable">
+                    <v-btn success v-if="(!status.enabled || status.enable_pending) && !status.disable_pending" v-on:click.native="enable"
+                        :loading="changingStatus" :disabled="changingStatus">
                         {{$t('vpsip.enable')}}
                     </v-btn>
-                    <v-btn error v-if="!status.disabled" v-on:click.native="disable">
+                    <v-btn error v-if="(status.enabled || status.disable_pending) && !status.enable_pending" v-on:click.native="disable"
+                        :loading="changingStatus" :disabled="changingStatus">
                         {{$t('vpsip.disable')}}
                     </v-btn>
                 </v-card-row>
@@ -121,6 +123,9 @@
             },
             rules () {
                 return this.$store.state.vpsiprules
+            },
+            changingStatus() {
+                return this.status.enable_pending || this.status.disable_pending
             }
         },
         methods: {
@@ -138,8 +143,8 @@
                 return this.$store.dispatch('vpsIpGameStatus', this.$route.params)
             },
             refresh() {
-                let status = this.status, rules = this.rules, rulesPending = false
-                rules.forEach(function(rule) {
+                let rulesPending = false
+                this.rules.forEach(function(rule) {
                     if (rule.create_pending || rule.delete_pending) {
                         rulesPending = true
                     }
@@ -147,7 +152,7 @@
                 if (rulesPending) {
                     this.fetchRules()
                 }
-                if (status.enable_pending || status.disable_pending) {
+                if (this.changingStatus) {
                     this.fetchStatus()
                 }
             },
