@@ -24,8 +24,8 @@
         "ticket_init": "Zgłoszenie",
         "ticket": "Zgłoszenie #{id}",
         "tickets": "Zgłoszenia",
-        "vps_init": "VPS",
         "vps": "VPS #{id}",
+        "vpsip": "VPS #{id} - {ip}",
         "payments": "Płatności",
         "profile": "Profil"
     },
@@ -39,6 +39,8 @@
         "status": "Status",
         "created_at": "Utworzony",
         "payed_to": "Wygasa",
+        "ports": "Porty",
+        "protocol": "Protokół",
         "empty": {
             "services": "Brak usług",
             "payments": "Brak płatności",
@@ -163,6 +165,21 @@
             "description": "Twardy restart może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",
             "cancel": "Anuluj",
             "submit": "Restartuj"
+        }
+    },
+    "vpsip": {
+        "header": "Filtrowanie UDP",
+        "status": {
+            "label": "Filtrowanie",
+            "enabled": "Włączone",
+            "enabling": "Włączanie",
+            "disabled": "Wyłączone",
+            "disabling": "Wyłączanie"
+        },
+        "rule": {
+            "created": "Utworzono",
+            "creating": "Tworzenie",
+            "deleting": "Usuwanie"
         }
     },
     "credits": {
