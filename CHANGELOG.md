@@ -3,6 +3,7 @@
 ## 3.0.0-beta.5 (06.03.2017)
 
 + VPS IP page for KVM showing game firewall status and rules [#120](https://github.com/lvlup-pro/spawn-frontend-material/issues/120), [#121](https://github.com/lvlup-pro/spawn-frontend-material/issues/121)
++ Buttons for enable or disable game firewall [#127](https://github.com/lvlup-pro/spawn-frontend-material/issues/127)
 
 ## 3.0.0-beta.5 (05.03.2017)
 
