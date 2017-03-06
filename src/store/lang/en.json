@@ -171,6 +171,8 @@
     },
     "vpsip": {
         "header": "UDP filtering",
+        "enable": "Enable",
+        "disable": "Disable",
         "status": {
             "label": "Filtering",
             "enabled": "Enabled",

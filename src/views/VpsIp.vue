@@ -65,6 +65,14 @@
                         </tbody>
                     </table>
                 </v-table-overflow>
+                <v-card-row actions style="justify-content: flex-start" v-if="loadedStatus">
+                    <v-btn success v-if="!vpsip.status.enabled" v-on:click.native="enable">
+                        {{$t('vpsip.enable')}}
+                    </v-btn>
+                    <v-btn error v-if="!vpsip.status.disabled" v-on:click.native="disable">
+                        {{$t('vpsip.disable')}}
+                    </v-btn>
+                </v-card-row>
             </v-card>
         </v-container>
     </div>
@@ -145,6 +153,12 @@
                     this.$store.commit('setLoaded')
                     this.interval = setInterval(this.refresh, 5000)
                 }
+            },
+            enable() {
+                return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, { enabled: true }))
+            },
+            disable() {
+                return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, { enabled: false }))
             }
         }
     }
