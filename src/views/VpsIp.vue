@@ -3,7 +3,7 @@
         <v-container>
             <v-card>
                 <v-table-overflow>
-                    <table>
+                    <table v-if="loadedRules">
                         <thead>
                         <tr>
                             <th class="select"><i class="fa fa-check"></i></th>
@@ -14,14 +14,28 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr v-for="(item, index) in vpsip.list">
                                 <td>
                                     <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                 </td>
-                                <td>#ID</td>
-                                <td>protocol</td>
-                                <td>1-65535</td>
-                                <td>status</td>
+                                <td>#{{item.id}}</td>
+                                <td>{{item.protocol}}</td>
+                                <td v-if="item.port_range.from === item.port_range.to">{{item.port_range.from}}</td>
+                                <td v-else>{{item.port_range.from}} - {{item.port_range.to}}</td>
+                                <td>
+                                    <span v-if="item.create_pending">
+                                        <i class="fa fa-circle yellow--text"></i>
+                                        {{$t('vpsip.rule.creating')}}
+                                    </span>
+                                    <span v-else-if="item.delete_pending">
+                                        <i class="fa fa-circle red--text"></i>
+                                        {{$t('vpsip.rule.deleting')}}
+                                    </span>
+                                    <span v-else>
+                                        <i class="fa fa-circle green--text"></i>
+                                        {{$t('vpsip.rule.created')}}
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -35,7 +49,9 @@
 <script>
     export default {
         data () {
-            return {}
+            return {
+                loadedRules: false
+            }
         },
         mounted () {
             this.$store.commit('setToolbarTitle', 'header.vpsip')
@@ -46,12 +62,21 @@
                     this.$vuetify.toast.create(this.$t('auth.no'), 'right')
                     this.$router.push('/login')
                 } else {
-
+                    this.$store.commit('setLoading')
+                    this.list().then(() => {
+                        this.loadedRules = true
+                        this.$store.commit('setLoaded')
+                    })
                 }
             })
         },
         preFetch (store) {
             store.commit('setMeta', this.methods.meta())
+        },
+        computed: {
+            vpsip () {
+                return this.$store.state.vpsip
+            }
         },
         methods: {
             meta() {
@@ -60,6 +85,9 @@
                     description: 'Example VPS IP description',
                     keywords: 'vuetify, vps, ip'
                 }
+            },
+            list() {
+                return this.$store.dispatch('vpsIpGameList', this.$route.params)
             }
         }
     }

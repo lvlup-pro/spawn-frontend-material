@@ -51,6 +51,7 @@ export default new Vuex.Store({
         ],
         ticket: {},
         vps: {},
+        vpsip: {},
         profile: {},
         ticketMessages: {},
         services: {'paging': {'total_pages': 1}},
@@ -249,6 +250,11 @@ export default new Vuex.Store({
                 commit('setVpsIpGameStatus', res.data)
             })
         },
+        vpsIpGameList({commit, dispatch, state}, args) {
+            return get({dispatch, state}, 'vps/{id}/ip/{ip}/game/rule', args, function (res) {
+                commit('setVpsIpGameList', res.data)
+            })
+        },
         vpsChangeInfo({commit, dispatch, state}, args) {
             return put({dispatch, state}, 'vps/{id}', args, function (res) {
                 state.vps.name = args.name
@@ -299,6 +305,9 @@ export default new Vuex.Store({
         setVpsIpGameStatus(state, newStatus) {
             console.log(newStatus)
             state.vps.ip.status[newStatus.ip] = newStatus
+        },
+        setVpsIpGameList(state, newList) {
+            state.vpsip.list = newList
         },
         setProfile (state, newProfile) {
             state.profile = newProfile
