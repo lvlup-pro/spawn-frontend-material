@@ -150,6 +150,13 @@
         "notset": "Not set",
         "save": "Save",
         "name": "Name",
+        "firewall": {
+            "label": "UDP filtering",
+            "enabled": "Enabled",
+            "enabling": "Enabling...",
+            "disabled": "Disabled",
+            "disabling": "Disabling..."
+        },
         "placeholder": {
             "name": "My VPS"
         },

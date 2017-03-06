@@ -149,6 +149,13 @@
         "notset": "Nieustawiona",
         "save": "Zapisz",
         "name": "Nazwa",
+        "firewall": {
+            "label": "Filtrowanie UDP",
+            "enabled": "Włączone",
+            "enabling": "Włączanie...",
+            "disabled": "Wyłączone",
+            "disabling": "Wyłączanie..."
+        },
         "placeholder": {
             "name": "Mój VPS"
         },

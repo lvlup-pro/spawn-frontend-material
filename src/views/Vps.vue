@@ -205,6 +205,32 @@
                 </v-card-row>
             </v-card>
             <div class="mb-4"></div>
+            <v-card v-if="!locked && vps.virt === 'kvm' && vps.ip">
+                <v-card-row class="green darken-1">
+                    <v-card-title class="white--text">{{$t('vps.firewall.label')}}</v-card-title>
+                </v-card-row>
+                <v-card-text>
+                    <v-card-row v-for="(item, index) in [vps.ip.main].concat(vps.ip.additional)">
+                        <span v-if="vps.ip.status[item]">
+                            <i class="fa fa-fw fa-2x fa-filter"></i>
+                            <b>{{item}}</b>:
+                            <v-chip v-if="vps.ip.status[item].enable_pending" label class="yellow">
+                                {{$t('vps.firewall.enabling')}}
+                            </v-chip>
+                            <v-chip v-else-if="vps.ip.status[item].disable_pending" label class="yellow">
+                                {{$t('vps.firewall.disabling')}}
+                            </v-chip>
+                            <v-chip v-else-if="vps.ip.status[item].enabled" label class="green white--text">
+                                {{$t('vps.firewall.enabled')}}
+                            </v-chip>
+                            <v-chip v-else label class="red white--text">
+                                {{$t('vps.firewall.disabled')}}
+                            </v-chip>
+                        </span>
+                    </v-card-row>
+                </v-card-text>
+            </v-card>
+            <div class="mb-4"></div>
             <!--
              TODO
              - OpenVZ use vps.nproc
@@ -264,8 +290,13 @@
                         this.$emit('view', this.meta())
                         this.newname = this.name
                         this.interval = setInterval(this.stats, 1000)
+                    }).then(() => {
+                        this.ips().then(() => {
+                            if (this.vps.virt === 'kvm') {
+                                this.ipsStatus()
+                            }
+                        })
                     })
-                    this.ips()
                 }
             })
         },
@@ -359,6 +390,16 @@
             ips() {
                 return this.$store.dispatch('vpsIps', {
                     'id': this.$route.params.id
+                })
+            },
+            ipsStatus() {
+                let self = this
+                let ips = [this.vps.ip.main].concat(this.vps.ip.additional)
+                ips.forEach(function(ip) {
+                    self.$store.dispatch('vpsIpGameStatus', {
+                        'id': self.$route.params.id,
+                        'ip': ip
+                    })
                 })
             },
             enable() {
