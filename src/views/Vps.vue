@@ -269,6 +269,14 @@
         font-size: 18px;
         margin-bottom: 0.5rem;
     }
+
+    ul.list {
+        padding: 0;
+    }
+
+    div.list__tile__sub-title {
+        color: #6e6e6e;
+    }
 </style>
 <script>
     export default {
