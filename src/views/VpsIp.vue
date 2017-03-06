@@ -71,7 +71,8 @@
         data () {
             return {
                 loadedRules: false,
-                loadedStatus: false
+                loadedStatus: false,
+                interval: null
             }
         },
         mounted () {
@@ -98,6 +99,9 @@
         preFetch (store) {
             store.commit('setMeta', this.methods.meta())
         },
+        destroyed () {
+            clearInterval(this.interval)
+        },
         computed: {
             vpsip () {
                 return this.$store.state.vpsip
@@ -117,9 +121,24 @@
             status() {
                 return this.$store.dispatch('vpsIpGameStatus', this.$route.params)
             },
+            refresh() {
+                let status = this.vpsip.status, rules = this.vpsip.rules, rulesPending = false
+                rules.forEach(function(rule) {
+                    if (rule.create_pending || rule.delete_pending) {
+                        rulesPending = true
+                    }
+                })
+                if (rulesPending) {
+                    this.rules()
+                }
+                if (status.enable_pending || status.disable_pending) {
+                    this.status()
+                }
+            },
             setLoaded() {
                 if (this.loadedRules && this.loadedStatus) {
                     this.$store.commit('setLoaded')
+                    setInterval(this.refresh, 5000)
                 }
             }
         }
