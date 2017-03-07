@@ -6,7 +6,7 @@
                 <v-toolbar-side-icon @click.native.stop="sidebar = !sidebar" class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
-                <v-toolbar-logo class="hidden-xs-and-down">{{getToolbarTitle()}}</v-toolbar-logo>
+                <v-toolbar-logo v-html="getToolbarTitle()"></v-toolbar-logo>
             </v-toolbar>
         </header>
         <main>
@@ -268,10 +268,20 @@
                 }
             },
             getToolbarTitle() {
-                return this.$t(
+                let title = this.$t(
                     this.$store.state.toolbarTitle,
                     this.$store.state.toolbarTitleArgs
                 );
+
+                let hideSmStart = '[hide-sm]', hideSmEnd = '[/hide-sm]'
+                while (title.indexOf(hideSmStart) > -1) {
+                    title = title.replace(hideSmStart, '<span class="hidden-sm-and-down">')
+                }
+                while (title.indexOf(hideSmEnd) > -1) {
+                    title = title.replace(hideSmEnd, '</span>')
+                }
+
+                return title
             },
             refresh() {
                 window.location.reload()
