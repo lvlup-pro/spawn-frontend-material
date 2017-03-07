@@ -214,7 +214,7 @@
                                 <v-list-tile>
                                   <v-list-tile-content>
                                     <v-list-tile-title>{{vps.ip.main}}</v-list-tile-title>
-                                    <v-list-tile-sub-title>IP główne</v-list-tile-sub-title>
+                                    <v-list-tile-sub-title>{{$t('vps.ipmain')}}</v-list-tile-sub-title>
                                   </v-list-tile-content>
                                   <v-list-tile-action>
                                     <v-btn icon ripple v-on:click.native="goToIp(vps.ip.main)">
@@ -227,7 +227,7 @@
                                 <v-list-tile>
                                   <v-list-tile-content>
                                     <v-list-tile-title>{{item}}</v-list-tile-title>
-                                    <v-list-tile-sub-title>IP dodatkowe</v-list-tile-sub-title>
+                                    <v-list-tile-sub-title>{{$t('vps.padditional')}}</v-list-tile-sub-title>
                                   </v-list-tile-content>
                                   <v-list-tile-action>
                                     <v-btn icon ripple v-on:click.native="goToIp(item)">

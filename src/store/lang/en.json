@@ -137,6 +137,8 @@
         "info": "Information",
         "state": "State",
         "ips": "IP addresses",
+        "ipmain": "Main IP",
+        "ipadditional": "Additional IP",
         "virtualization": "Virtualization",
         "uptime": "Running from",
         "days": "days",

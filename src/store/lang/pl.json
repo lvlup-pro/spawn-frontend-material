@@ -139,6 +139,8 @@
         "uptime": "Działa od",
         "state": "Stan",
         "ips": "Adresy IP",
+        "ipmain": "IP główne",
+        "ipadditional": "IP dodatkowe",
         "cpu": "CPU",
         "ram": "RAM",
         "swap": "Swap",
