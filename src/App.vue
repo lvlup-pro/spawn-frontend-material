@@ -6,7 +6,7 @@
                 <v-toolbar-side-icon @click.native.stop="sidebar = !sidebar" class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
-                <v-toolbar-logo class="hidden-xs-and-down">{{getToolbarTitle()}}</v-toolbar-logo>
+                <v-toolbar-logo v-html="getToolbarTitle()"></v-toolbar-logo>
             </v-toolbar>
         </header>
         <main>
@@ -245,12 +245,12 @@
                 })
             },
             changeLang(lang) {
-                localStorage.setItem('lang', lang);
+                localStorage.setItem('lang', lang)
                 moment.locale(lang)
-                this.$validator.setLocale(lang);
-                this.$store.commit('setLanguage', lang);
-                this.$router.replace({'params': {'lg': lang}});
-                this.$store.commit('setTitle', this.getToolbarTitle())
+                this.$validator.setLocale(lang)
+                this.$store.commit('setLanguage', lang)
+                this.$router.replace({'params': {'lg': lang}})
+                this.getToolbarTitle(true)
             },
             redirectLang(url) {
                 if (typeof this.$route.params.lg === 'undefined') {
@@ -259,7 +259,7 @@
                         lang = window.navigator.languages ? window.navigator.languages[0] : null
                         lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage || 'en';
                         if (lang.indexOf('-') !== -1)
-                            lang = lang.split('-')[0];
+                            lang = lang.split('-')[0]
                         if (lang.indexOf('_') !== -1)
                             lang = lang.split('_')[0]
                         localStorage.setItem('lang', lang)
@@ -267,14 +267,30 @@
                     this.$router.push('/' + lang + '/' + url)
                 }
             },
-            getToolbarTitle() {
-                return this.$t(
+            getToolbarTitle(setTitle) {
+                let title = this.$t(
                     this.$store.state.toolbarTitle,
                     this.$store.state.toolbarTitleArgs
-                );
+                )
+                let hideSmStart = '[hide-sm]', hideSmEnd = '[/hide-sm]'
+
+                if (setTitle) {
+                    let docTitle = this.replaceAll(this.replaceAll(title, hideSmStart, ''), hideSmEnd, '')
+                    this.$store.commit('setTitle', docTitle)
+                }
+
+                title = this.replaceAll(title, hideSmStart, '<span class="hidden-sm-and-down">')
+                title = this.replaceAll(title, hideSmEnd, '</span>')
+                return title
             },
             refresh() {
                 window.location.reload()
+            },
+            replaceAll(string, oldString, newString) {
+                while (string.indexOf(oldString) > -1) {
+                    string = string.replace(oldString, newString)
+                }
+                return string
             }
         },
         beforeMount() {
