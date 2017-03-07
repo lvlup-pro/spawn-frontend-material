@@ -151,7 +151,7 @@
         "activeto": "Paid to",
         "createdat": "Created",
         "active": "Paid",
-        "locked": "Unpaid",
+        "locked": "Locked",
         "notset": "Not set",
         "save": "Save",
         "name": "Name",
