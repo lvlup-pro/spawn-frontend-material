@@ -55,7 +55,6 @@
     },
     "error": {
         "network" : "Wykryto błąd sieci!",
-        "invalidtoken": "Token uwierzytelniający jest nieprawidłowy!",
         "ratelimit": "Przekroczono limit zapytań!",
         "unknown": "Wystąpił nieznany błąd!"
     },
