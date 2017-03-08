@@ -67,7 +67,7 @@
                         </v-btn>
                         <v-card>
                           <v-card-text>
-                            <h2 class="title">{{$t('vps.disable.header', {id: $route.params.id})}}</h2>
+                            <h2 class="title">{{$t('vps.disable.header', {id: id, name: wrappedName})}}</h2>
                           </v-card-text>
                           <v-card-text class="subheading">{{$t('vps.disable.description')}}</v-card-text>
                           <v-card-row actions>
@@ -85,7 +85,7 @@
                         </v-btn>
                         <v-card>
                           <v-card-text>
-                            <h2 class="title">{{$t('vps.reboot.header', {id: $route.params.id})}}</h2>
+                            <h2 class="title">{{$t('vps.reboot.header', {id: id, name: wrappedName})}}</h2>
                           </v-card-text>
                           <v-card-text class="subheading">{{$t('vps.reboot.description')}}</v-card-text>
                           <v-card-row actions>
@@ -357,6 +357,9 @@
             name() {
                 return this.vps.name === null ? '' : this.vps.name
             },
+            wrappedName() {
+                return this.name === '' ? '' : ' (' + this.name + ')'
+            },
             settingsChanged() {
                 return !this.changingSettings && this.newname !== this.name
             }
@@ -406,7 +409,7 @@
                 }).then(() => {
                     this.$store.commit('setToolbarTitleArgs', {
                         id: this.id,
-                        name: this.name === '' ? '' : '(' + this.name + ')'
+                        name: this.wrappedName
                     })
                 })
             },

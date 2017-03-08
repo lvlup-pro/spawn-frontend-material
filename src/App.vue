@@ -288,11 +288,10 @@
 
                 if (setTitle) {
                     let docTitle = this.removeAll(title, [hideSmStart, hideSmEnd])
-                    docTitle = this.replaceAll(docTitle, '&nbsp;', ' ')
                     this.$store.commit('setTitle', docTitle)
                 }
 
-                title = this.replaceAll(title, hideSmStart, '<span class="hidden-sm-and-down">')
+                title = this.replaceAll(title, hideSmStart, '<span class="hidden-sm-and-down" style="white-space: pre;">')
                 title = this.replaceAll(title, hideSmEnd, '</span>')
                 return title
             },

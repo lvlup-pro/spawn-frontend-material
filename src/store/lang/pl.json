@@ -24,7 +24,7 @@
         "ticket_init": "Zgłoszenie",
         "ticket": "Zgłoszenie #{id}",
         "tickets": "Zgłoszenia",
-        "vps": "VPS #{id}[hide-sm]&nbsp;{name}[/hide-sm]",
+        "vps": "VPS #{id}[hide-sm]{name}[/hide-sm]",
         "vpsip": "[hide-sm]VPS #{id} - [/hide-sm]{ip}",
         "payments": "Płatności",
         "profile": "Profil"
@@ -158,13 +158,13 @@
             "name": "Mój VPS"
         },
         "disable": {
-            "header": "Czy na pewno chcesz wyłączyć VPSa #{id}?",
+            "header": "Czy na pewno chcesz wyłączyć VPSa #{id}{name}?",
             "description": "Twarde zatrzymanie może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",
             "cancel": "Anuluj",
             "submit": "Wyłącz"
         },
         "reboot": {
-            "header": "Czy na pewno chcesz zrestartować VPSa #{id}?",
+            "header": "Czy na pewno chcesz zrestartować VPSa #{id}{name}?",
             "description": "Twardy restart może spowodować utratę niezapisanych danych podobnie jak wyciągnięcie wtyczki z komputera!",
             "cancel": "Anuluj",
             "submit": "Restartuj"
