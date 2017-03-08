@@ -11,7 +11,8 @@
                             <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-info-circle"></i>
                                 <b>{{$t('vps.state')}}:&nbsp;</b>
-                                <v-chip v-if="locked" label class="red white--text">{{$t('vps.locked')}}</v-chip>
+                                <v-chip v-if="locked && vps.abuse" label class="red white--text">{{$t('vps.locked')}}</v-chip>
+                                <v-chip v-else-if="locked" label class="red white--text">{{$t('vps.unpaid')}}</v-chip>
                                 <v-chip v-else-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
                                 <v-chip v-else label class="red white--text">{{$t('vps.off')}}</v-chip>
                             </v-card-row>
