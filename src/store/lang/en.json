@@ -55,7 +55,6 @@
     },
     "error": {
         "network" : "Network error detected!",
-        "invalidtoken": "Invalid authentication token!",
         "ratelimit": "Rate limit exceeded!",
         "unknown": "An unknown error occurred!"
     },

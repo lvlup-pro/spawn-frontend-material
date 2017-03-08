@@ -87,7 +87,7 @@ export default new Vuex.Store({
                     case 401:
                     case 403:
                         if (url !== 'auth/login') {
-                            commit('setError', 'invalidtoken')
+                            commit('setLogout', true)
                         }
                         break
                     case 429:
