@@ -45,12 +45,10 @@
                                                 v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
                                                 <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
                                             !-->
-                                            <span v-if="!ticket.closed"
-                                                  v-tooltip:bottom="{ html: $t('ticket.status.open.long') }">
+                                            <span v-if="!ticket.closed">
                                                 <i class="fa fa-circle green--text"></i> {{$t('ticket.status.open.short')}}
                                             </span>
-                                            <span v-if="ticket.closed"
-                                                v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
+                                            <span v-if="ticket.closed">
                                                 <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
                                             </span>
                                         </td>
