@@ -294,7 +294,10 @@
         mounted () {
             this.$store.commit('setToolbarTitle', 'header.vps')
             //FIXME set by API not user input
-            this.$store.commit('setToolbarTitleArgs', this.$route.params)
+            this.$store.commit('setToolbarTitleArgs', {
+                id: this.id,
+                name: ''
+            })
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
@@ -316,6 +319,9 @@
             clearInterval(this.interval)
         },
         computed: {
+            id () {
+                return this.$route.params.id
+            },
             on () {
                 return this.vps.status === 'running'
             },
@@ -349,7 +355,7 @@
                 return new Date().getTime() / 1000 - this.vps.uptime_s
             },
             name() {
-                return this.vps.name === null ? "" : this.vps.name
+                return this.vps.name === null ? '' : this.vps.name
             },
             settingsChanged() {
                 return !this.changingSettings && this.newname !== this.name
@@ -396,25 +402,30 @@
             },
             stats() {
                 return this.$store.dispatch('vpsInfo', {
-                    'id': this.$route.params.id
+                    'id': this.id
+                }).then(() => {
+                    this.$store.commit('setToolbarTitleArgs', {
+                        id: this.id,
+                        name: this.name === '' ? '' : '(' + this.name + ')'
+                    })
                 })
             },
             ips() {
                 return this.$store.dispatch('vpsIps', {
-                    'id': this.$route.params.id
+                    'id': this.id
                 })
             },
             enable() {
                 this.changingStatus = true
                 return this.$store.dispatch('vpsOn', {
-                    'id': this.$route.params.id
+                    'id': this.id
                 })
             },
             disable() {
                 this.changingStatus = true
                 this.disableModal = false
                 return this.$store.dispatch('vpsOff', {
-                    'id': this.$route.params.id
+                    'id': this.id
                 })
             },
             reboot() {
@@ -425,14 +436,14 @@
             save() {
                 this.changingSettings = true
                 this.$store.dispatch('vpsChangeInfo', {
-                    'id': this.$route.params.id,
+                    'id': this.id,
                     'name': this.newname === "" ? null : this.newname
                 }).then(() => {
                     this.changingSettings = false
                 })
             },
             goToIp(ip) {
-                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.$route.params.id + '/ip/' + ip)
+                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip)
             }
         }
     }
