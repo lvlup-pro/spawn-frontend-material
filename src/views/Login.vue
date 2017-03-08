@@ -2,8 +2,8 @@
     <div>
         <v-container>
             <v-row class="mt-5">
-                <v-col lg3></v-col>
-                <v-col xs12 md6 lg6>
+                <v-col md3></v-col>
+                <v-col xs12 md6>
                     <v-card class="mp-5">
                         <v-card-text>
                             <h5>{{ $t('user.login.header') }}</h5>
