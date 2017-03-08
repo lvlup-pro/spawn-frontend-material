@@ -68,7 +68,7 @@
                         </v-btn>
                         <v-card>
                           <v-card-text>
-                            <h2 class="title">{{$t('vps.disable.header', {id: $route.params.id})}}</h2>
+                            <h2 class="title">{{$t('vps.disable.header', {id: id, name: wrappedName})}}</h2>
                           </v-card-text>
                           <v-card-text class="subheading">{{$t('vps.disable.description')}}</v-card-text>
                           <v-card-row actions>
@@ -86,7 +86,7 @@
                         </v-btn>
                         <v-card>
                           <v-card-text>
-                            <h2 class="title">{{$t('vps.reboot.header', {id: $route.params.id})}}</h2>
+                            <h2 class="title">{{$t('vps.reboot.header', {id: id, name: wrappedName})}}</h2>
                           </v-card-text>
                           <v-card-text class="subheading">{{$t('vps.reboot.description')}}</v-card-text>
                           <v-card-row actions>
@@ -295,7 +295,10 @@
         mounted () {
             this.$store.commit('setToolbarTitle', 'header.vps')
             //FIXME set by API not user input
-            this.$store.commit('setToolbarTitleArgs', this.$route.params)
+            this.$store.commit('setToolbarTitleArgs', {
+                id: this.id,
+                name: ''
+            })
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
@@ -317,6 +320,9 @@
             clearInterval(this.interval)
         },
         computed: {
+            id () {
+                return this.$route.params.id
+            },
             on () {
                 return this.vps.status === 'running'
             },
@@ -350,7 +356,10 @@
                 return new Date().getTime() / 1000 - this.vps.uptime_s
             },
             name() {
-                return this.vps.name === null ? "" : this.vps.name
+                return this.vps.name === null ? '' : this.vps.name
+            },
+            wrappedName() {
+                return this.name === '' ? '' : ' (' + this.name + ')'
             },
             settingsChanged() {
                 return !this.changingSettings && this.newname !== this.name
@@ -397,25 +406,30 @@
             },
             stats() {
                 return this.$store.dispatch('vpsInfo', {
-                    'id': this.$route.params.id
+                    'id': this.id
+                }).then(() => {
+                    this.$store.commit('setToolbarTitleArgs', {
+                        id: this.id,
+                        name: this.wrappedName
+                    })
                 })
             },
             ips() {
                 return this.$store.dispatch('vpsIps', {
-                    'id': this.$route.params.id
+                    'id': this.id
                 })
             },
             enable() {
                 this.changingStatus = true
                 return this.$store.dispatch('vpsOn', {
-                    'id': this.$route.params.id
+                    'id': this.id
                 })
             },
             disable() {
                 this.changingStatus = true
                 this.disableModal = false
                 return this.$store.dispatch('vpsOff', {
-                    'id': this.$route.params.id
+                    'id': this.id
                 })
             },
             reboot() {
@@ -426,14 +440,14 @@
             save() {
                 this.changingSettings = true
                 this.$store.dispatch('vpsChangeInfo', {
-                    'id': this.$route.params.id,
+                    'id': this.id,
                     'name': this.newname === "" ? null : this.newname
                 }).then(() => {
                     this.changingSettings = false
                 })
             },
             goToIp(ip) {
-                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.$route.params.id + '/ip/' + ip)
+                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip)
             }
         }
     }

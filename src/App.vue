@@ -216,6 +216,12 @@
             },
             logout() {
                 return this.$store.state.logout
+            },
+            toolbarTitle() {
+                return this.$store.state.toolbarTitle
+            },
+            toolbarTitleArgs() {
+                return this.$store.state.toolbarTitleArgs
             }
         },
         data () {
@@ -225,12 +231,18 @@
             }
         },
         watch: {
-            'logout': function(newValue, oldValue) {
+            logout: function(newValue, oldValue) {
                 if (newValue) {
                     this.$store.commit('setLogout', false)
                     this.$vuetify.toast.create(this.$t('auth.invalidsession'), 'right')
                     this.$router.push('/' + this.language + '/login')
                 }
+            },
+            toolbarTitle: function(newValue, oldValue) {
+                this.getToolbarTitle(true)
+            },
+            toolbarTitleArgs: function(newValue, oldValue) {
+                this.getToolbarTitle(true)
             }
         },
         methods: {
@@ -275,11 +287,11 @@
                 let hideSmStart = '[hide-sm]', hideSmEnd = '[/hide-sm]'
 
                 if (setTitle) {
-                    let docTitle = this.replaceAll(this.replaceAll(title, hideSmStart, ''), hideSmEnd, '')
+                    let docTitle = this.removeAll(title, [hideSmStart, hideSmEnd])
                     this.$store.commit('setTitle', docTitle)
                 }
 
-                title = this.replaceAll(title, hideSmStart, '<span class="hidden-sm-and-down">')
+                title = this.replaceAll(title, hideSmStart, '<span class="hidden-sm-and-down" style="white-space: pre;">')
                 title = this.replaceAll(title, hideSmEnd, '</span>')
                 return title
             },
@@ -290,6 +302,13 @@
                 while (string.indexOf(oldString) > -1) {
                     string = string.replace(oldString, newString)
                 }
+                return string
+            },
+            removeAll(string, toRemove) {
+                let self = this
+                toRemove.forEach(function (element) {
+                    string = self.replaceAll(string, element, '')
+                })
                 return string
             }
         },
