@@ -1,6 +1,14 @@
 # Changelog
 
+## 3.0.0-beta.7 (09.03.2017)
+
+### Fixes
+
++ Many UI bugfixes [#130](https://github.com/lvlup-pro/spawn-frontend-material/pull/130) [#132](https://github.com/lvlup-pro/spawn-frontend-material/pull/132) [#133](https://github.com/lvlup-pro/spawn-frontend-material/pull/133) [#134](https://github.com/lvlup-pro/spawn-frontend-material/pull/134) [#135](https://github.com/lvlup-pro/spawn-frontend-material/pull/135)
+
 ## 3.0.0-beta.6 (06.03.2017)
+
+### Features
 
 + VPS IP page for KVM showing game firewall status and rules [#121](https://github.com/lvlup-pro/spawn-frontend-material/issues/121), [#122](https://github.com/lvlup-pro/spawn-frontend-material/issues/122), [#126](https://github.com/lvlup-pro/spawn-frontend-material/issues/126)
 + Buttons for enable or disable game firewall [#127](https://github.com/lvlup-pro/spawn-frontend-material/issues/127)
