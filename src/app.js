@@ -7,7 +7,7 @@ import moment from 'moment'
 
 import App from './App.vue'
 import store from './store/index'
-import router from './router/index'
+import router from './init/router'
 
 import {sync} from 'vuex-router-sync'
 sync(store, router)
