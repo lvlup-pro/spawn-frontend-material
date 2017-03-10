@@ -44,16 +44,6 @@
                     </div>
                     <div v-else>
                         <v-list-item>
-                            <v-list-tile v-on:click.native="logOut">
-                                <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-sign-out"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t('sidebar.logout')"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                        <v-list-item>
                             <v-list-tile router :href="'/' + language + '/profile'">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-user"></i>
@@ -88,26 +78,38 @@
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list-item>
-                    <v-list-item v-if="account.email">
-                        <v-list-tile router :href="'/' + language + '/service'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-server"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('sidebar.services')"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <v-list-item v-if="account.email">
-                        <v-list-tile router :href="'/' + language + '/ticket'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-question-circle"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('sidebar.help')"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
+                    <div v-if="account.email">
+                        <v-list-item>
+                            <v-list-tile router :href="'/' + language + '/service'">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-server"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.services')"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-tile router :href="'/' + language + '/ticket'">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-question-circle"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.help')"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-tile v-on:click.native="logOut">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-sign-out"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.logout')"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                    </div>
 
                     <v-list-sub-header>{{$t('sidebar.lang')}}</v-list-sub-header>
                     <v-list-group>
