@@ -468,4 +468,12 @@
         text-align: center;
         font-weight: bold;
     }
+
+    aside.sidebar div.list__tile__action {
+        flex: 1 0 40px;
+    }
+
+    i.fa-2x {
+        font-size: 1.5em;
+    }
 </style>
