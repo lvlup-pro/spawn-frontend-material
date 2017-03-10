@@ -256,6 +256,8 @@
 
     span.chip--outline {
         margin-bottom: 12px;
+        text-align: right;
+        width: 130px;
     }
 
     span.chip i, div.card__row i {
