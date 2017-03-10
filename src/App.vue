@@ -57,13 +57,22 @@
                             </v-list-tile>
                         </v-list-item>
                         <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/payment'">
+                            <v-list-tile>
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-money"></i>
                                 </v-list-tile-action>
                                 <v-list-tile-content>
-                                    <v-list-tile-title
-                                            v-text="$t('sidebar.payments', { 'balance': wallet.balance_pretty })"/>
+                                    <v-list-tile-title v-text="$t('sidebar.payments', { 'balance': wallet.balance_pretty })" />
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-tile router :href="'/' + language + '/payment'">
+                                <v-list-tile-action>
+                                    <i class="fa fa-fw fa-2x fa-history"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t('sidebar.paymenthistory')" />
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
