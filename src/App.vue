@@ -11,7 +11,9 @@
         </header>
         <main>
             <v-sidebar fixed ripple router unshift v-model="sidebar" v-on:click.native="sidebar = false">
-                <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png"/>
+                <router-link :to="'/' + language + '/home'">
+                    <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
+                </router-link>
                 <p class="text-xs-center">
                     <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
                         {{$t('sidebar.panel')}} {{version}}
