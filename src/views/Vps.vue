@@ -2,7 +2,7 @@
     <div>
         <v-container id="vps-stats" v-if="!loading">
             <v-card>
-                <v-card-row class="green darken-1">
+                <v-card-row class="grey darken-3">
                     <v-card-title class="white--text">{{$t('vps.control')}}</v-card-title>
                 </v-card-row>
                 <v-card-text>
@@ -105,7 +105,7 @@
             </v-card>
             <div class="mb-4"></div>
             <v-card v-if="on">
-                <v-card-row class="green darken-1">
+                <v-card-row class="grey darken-3">
                     <v-card-title class="white--text">{{$t('vps.resources')}}</v-card-title>
                 </v-card-row>
                 <v-card-text>
@@ -182,7 +182,7 @@
                 <v-col md6 xs12>
                     <div class="mb-4"></div>
                     <v-card v-if="!locked">
-                        <v-card-row class="green darken-1">
+                        <v-card-row class="grey darken-3">
                             <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
                         </v-card-row>
                         <v-card-text>
@@ -207,7 +207,7 @@
                 <v-col md6 xs12>
                     <div class="mb-4"></div>
                     <v-card v-if="!locked && vps.virt === 'kvm' && vps.ip">
-                        <v-card-row class="green darken-1">
+                        <v-card-row class="grey darken-3">
                             <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
                         </v-card-row>
                         <v-list two-line>
@@ -256,6 +256,8 @@
 
     span.chip--outline {
         margin-bottom: 12px;
+        text-align: right;
+        width: 130px;
     }
 
     span.chip i, div.card__row i {
