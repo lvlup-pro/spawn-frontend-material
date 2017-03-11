@@ -192,9 +192,18 @@
         "add": {
             "cancel": "Cancel",
             "submit": "Add",
-            "header": "Add filtering rule"
+            "header": "Add filtering rule",
+            "portfrom": {
+                "label": "Port range start",
+                "placeholder": "1"
+            },
+            "portto": {
+                "label": "Port range end",
+                "placeholder": "65535"
+            },
+            "protocol": "Protocol"
         },
-        "protocol": "Protocol"
+        "otherprotocol": "Other protocol"
     },
     "credits": {
         "contributors": "Contributors",

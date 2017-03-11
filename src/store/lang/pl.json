@@ -201,7 +201,8 @@
                 "placeholder": "65535"
             },
             "protocol": "Protokół"
-        }
+        },
+        "otherprotocol": "Inny protokół"
     },
     "credits": {
         "contributors": "Autorzy",

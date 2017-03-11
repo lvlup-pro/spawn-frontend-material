@@ -119,6 +119,9 @@
     </div>
 </template>
 <style>
+select option[disabled] {
+    display: none;
+}
 </style>
 <script>
     export default {
@@ -192,6 +195,14 @@
                     array.push({ text: this.protocols[key], value: key })
                 }
                 return array
+            },
+            language() {
+                return this.$store.state.language
+            }
+        },
+        watch: {
+            language: function(newValue, oldValue) {
+                this.protocols['other'] = this.$t('vpsip.otherprotocol')
             }
         },
         methods: {
