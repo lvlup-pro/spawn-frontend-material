@@ -39,7 +39,7 @@
                                     <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                 </td>
                                 <td>#{{item.id}}</td>
-                                <td>{{item.protocol}}</td>
+                                <td>{{protocols[item.protocol]}}</td>
                                 <td v-if="item.port_range.from === item.port_range.to">{{item.port_range.from}}</td>
                                 <td v-else>{{item.port_range.from}} - {{item.port_range.to}}</td>
                                 <td>
