@@ -52,7 +52,8 @@
     "validation": {
         "required": "This field is required.",
         "email": "Enter correct e-mail address.",
-        "repeatpassword": "Passwords don't match."
+        "repeatpassword": "Passwords don't match.",
+        "port": "Port must be integer in range of 1-65535."
     },
     "error": {
         "network" : "Network error detected!",
@@ -187,7 +188,23 @@
             "created": "Created",
             "creating": "Creating",
             "deleting": "Deleting"
-        }
+        },
+        "add": {
+            "cancel": "Cancel",
+            "submit": "Add",
+            "header": "Add filtering rule",
+            "portfrom": {
+                "label": "Port range start",
+                "placeholder": "1"
+            },
+            "portto": {
+                "label": "Port range end",
+                "placeholder": "65535"
+            },
+            "protocol": "Protocol"
+        },
+        "delete": "Delete",
+        "otherprotocol": "Other protocol"
     },
     "credits": {
         "contributors": "Contributors",

@@ -36,10 +36,14 @@
                         <tbody>
                             <tr v-if="!rules.error" v-for="(item, index) in rules">
                                 <td>
-                                    <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
+                                    <div class="input-group text-xs-center">
+                                        <input :id="'checkbox' + item.id" type="checkbox" class="filled"
+                                            :value="item.id" v-model="checked">
+                                        <label :for="'checkbox' + item.id"></label>
+                                    </div>
                                 </td>
                                 <td>#{{item.id}}</td>
-                                <td>{{item.protocol}}</td>
+                                <td>{{protocols[item.protocol]}}</td>
                                 <td v-if="item.port_range.from === item.port_range.to">{{item.port_range.from}}</td>
                                 <td v-else>{{item.port_range.from}} - {{item.port_range.to}}</td>
                                 <td>
@@ -74,12 +78,57 @@
                         :loading="changingStatus" :disabled="changingStatus">
                         {{$t('vpsip.disable')}}
                     </v-btn>
+                    <v-modal v-model="addModal">
+                        <v-btn slot="activator" success class="white--text">
+                            {{$t('vpsip.add.submit')}}
+                        </v-btn>
+                        <v-card>
+                            <v-card-text>
+                                <h2 class="title">{{$t('vpsip.add.header')}}</h2>
+                            </v-card-text>
+                            <v-card-text>
+                                <text-input
+                                    :validationmessage="$t('validation.port')" :validation="validatePortFrom"
+                                    :label="$t('vpsip.add.portfrom.label')"
+                                    :placeholder="$t('vpsip.add.portfrom.placeholder')"
+                                    name="portfrom" type="number" v-model="portFrom"
+                                ></text-input>
+                                <text-input
+                                    :validationmessage="$t('validation.port')" :validation="validatePortTo"
+                                    :label="$t('vpsip.add.portto.label')"
+                                    :placeholder="$t('vpsip.add.portto.placeholder')"
+                                    name="portto" type="number" v-model="portTo"
+                                ></text-input>
+                                <v-select
+                                    :options="selectProtocols"
+                                    :label="$t('vpsip.add.protocol')"
+                                    v-model="protocol"
+                                ></v-select>
+                            </v-card-text>
+                            <v-card-row actions>
+                                <v-spacer></v-spacer>
+                                <v-btn flat v-on:click.native="addModal = false" class="primary--text">
+                                    {{$t('vpsip.add.cancel')}}
+                                </v-btn>
+                                <v-btn flat v-on:click.native="addRule" class="primary--text"
+                                    :loading="addingRule" :disabled="addingRule">
+                                    {{$t('vpsip.add.submit')}}
+                                </v-btn>
+                            </v-card-row>
+                        </v-card>
+                    </v-modal>
+                    <v-btn error v-on:click.native="deleteRules" :disabled='checked.length === 0'>
+                        {{$t('vpsip.delete')}}
+                    </v-btn>
                 </v-card-row>
             </v-card>
         </v-container>
     </div>
 </template>
 <style>
+select option[disabled] {
+    display: none;
+}
 </style>
 <script>
     export default {
@@ -87,7 +136,28 @@
             return {
                 loadedRules: false,
                 loadedStatus: false,
-                interval: null
+                interval: null,
+                addModal: false,
+                addingRule: false,
+                portFrom: 0,
+                portTo: 0,
+                protocol: 'other',
+                protocols: {
+                    'arkSurvivalEvolved': 'ARK: Survival Evolved',
+                    'arma': 'Arma',
+                    'gtaMultiTheftAutoSanAndreas': 'Multi Theft Auto: San Andreas',
+                    'gtaSanAndreasMultiplayerMod': 'Grand Theft Auto: San Andreas',
+                    'hl2Source': 'HL2/Source',
+                    'minecraftPocketEdition': 'Minecraft: Pocket Edition',
+                    'minecraftQuery': 'Minecraft Query',
+                    'mumble': 'Mumble',
+                    'rust': 'Rust',
+                    'teamspeak2': 'TeamSpeak 2',
+                    'teamspeak3': 'TeamSpeak 3',
+                    'trackmaniaShootmania': 'Trackmania/Shootmania',
+                    'other': 'Other'
+                },
+                checked: []
             }
         },
         mounted () {
@@ -126,6 +196,21 @@
             },
             changingStatus() {
                 return this.status.enable_pending || this.status.disable_pending
+            },
+            selectProtocols() {
+                let array = []
+                for (let key in this.protocols) {
+                    array.push({ text: this.protocols[key], value: key })
+                }
+                return array
+            },
+            language() {
+                return this.$store.state.language
+            }
+        },
+        watch: {
+            language: function(newValue, oldValue) {
+                this.protocols['other'] = this.$t('vpsip.otherprotocol')
             }
         },
         methods: {
@@ -143,14 +228,16 @@
                 return this.$store.dispatch('vpsIpGameStatus', this.$route.params)
             },
             refresh() {
-                let rulesPending = false
-                this.rules.forEach(function(rule) {
-                    if (rule.create_pending || rule.delete_pending) {
-                        rulesPending = true
+                if (!this.rules.error) {
+                    let rulesPending = false
+                    this.rules.forEach(function(rule) {
+                        if (rule.create_pending || rule.delete_pending) {
+                            rulesPending = true
+                        }
+                    })
+                    if (rulesPending) {
+                        this.fetchRules()
                     }
-                })
-                if (rulesPending) {
-                    this.fetchRules()
                 }
                 if (this.changingStatus) {
                     this.fetchStatus()
@@ -167,6 +254,62 @@
             },
             disable() {
                 return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, { enabled: false }))
+            },
+            validate(component) {
+                let noerrors = true
+                component.$validator.validateAll()
+                component.$children.forEach(child => {
+                    noerrors = this.validate(child) && noerrors
+                })
+                return noerrors && !component.errors.any()
+            },
+            clearValidation(component) {
+                component.errors.clear()
+                component.$children.forEach(child => {
+                    this.clearValidation(child)
+                })
+            },
+            validatePort(port) {
+                return {
+                    valid: Number.isInteger(port) && port > 0 && port < 65536
+                }
+            },
+            validatePortFrom() {
+                return this.validatePort(this.portFrom)
+            },
+            validatePortTo() {
+                return this.validatePort(this.portTo)
+            },
+            addRule() {
+                if(this.validate(this)) {
+                    let portFrom = this.portFrom, portTo = this.portTo
+                    if (portFrom > portTo) {
+                        let tmp = portFrom
+                        portFrom = portTo
+                        portTo = tmp
+                    }
+                    this.addingRule = true
+                    this.$store.dispatch('vpsIpGameRuleAdd', Object.assign(this.$route.params,
+                        { protocol: this.protocol, port_from: portFrom, port_to: portTo })).then(() => {
+                            this.addingRule = false
+                            this.addModal = false
+                            this.portFrom = ''
+                            this.portTo = ''
+                            this.protocol = 'other'
+                        }).then(() => {
+                            setTimeout(() => {
+                                this.errors.clear()
+                                this.clearValidation(this)
+                            }, 1);
+                        })
+                }
+            },
+            deleteRules() {
+                let self = this
+                this.checked.forEach(function(id) {
+                    self.$store.dispatch('vpsIpGameRuleDelete', Object.assign(self.$route.params, { rule_id: id }))
+                })
+                this.checked = []
             }
         }
     }

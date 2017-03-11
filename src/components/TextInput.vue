@@ -2,7 +2,7 @@
     <div>
         <v-text-input
             v-validate="rules"
-            v-model="value"
+            v-model="internalValue"
             :class="{'custom-text-input': true, 'validation-error': errors.has(name) }"
             :type="type"
             :label="label"
@@ -34,6 +34,9 @@
     export default {
         name: 'text-input',
         props: {
+            value: {
+                default: ''
+            },
             required: {
                 type: [Boolean],
                 default: true
@@ -66,17 +69,17 @@
         created() {
             let self = this
             if (this.validation != null) {
-                this.$validator.extend('custom', {
+                this.$validator.extend(this.name, {
                     getMessage: function() { return self.validationmessage },
                     validate: (value) => new Promise(resolve => {
-                        resolve(this.validation())
+                        resolve(self.validation())
                     })
                 })
             }
         },
         data: function () {
             return {
-                value: ''
+                internalValue: ''
             }
         },
         computed: {
@@ -84,7 +87,9 @@
                 if (this.validation == null) {
                     return { rules: { required: this.required, email: this.email } }
                 } else {
-                    return { rules: { required: this.required, email: this.email, custom: this.validation } }
+                    let rules = { required: this.required, email: this.email }
+                    rules[this.name] = this.validation
+                    return { rules: rules }
                 }
             },
             email() {
@@ -92,8 +97,11 @@
             }
         },
         watch: {
-            'value': function(newValue, oldValue) {
+            internalValue: function(newValue, oldValue) {
                 this.$emit('input', newValue)
+            },
+            value: function(newValue, oldValue) {
+                this.internalValue = newValue
             }
         }
     }
