@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.0-beta.8 (11.03.2017)
+
+### Features
+
++ Add/remove game firewall whitelist rules [#141](https://github.com/lvlup-pro/spawn-frontend-material/issues/141)
++ More functional style for sidebar menu [#140](https://github.com/lvlup-pro/spawn-frontend-material/pull/140)
++ Smaller icons on sidebar and VPS page [#138](https://github.com/lvlup-pro/spawn-frontend-material/pull/138)
++ VPS metrics are now width fixed [#139](https://github.com/lvlup-pro/spawn-frontend-material/pull/139)
+
 ## 3.0.0-beta.7 (09.03.2017)
 
 ### Fixes
