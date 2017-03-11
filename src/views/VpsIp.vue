@@ -157,7 +157,7 @@ select option[disabled] {
                     'trackmaniaShootmania': 'Trackmania/Shootmania',
                     'other': 'Other'
                 },
-                test: null
+                checked: []
             }
         },
         mounted () {
@@ -228,14 +228,16 @@ select option[disabled] {
                 return this.$store.dispatch('vpsIpGameStatus', this.$route.params)
             },
             refresh() {
-                let rulesPending = false
-                this.rules.forEach(function(rule) {
-                    if (rule.create_pending || rule.delete_pending) {
-                        rulesPending = true
+                if (!this.rules.error) {
+                    let rulesPending = false
+                    this.rules.forEach(function(rule) {
+                        if (rule.create_pending || rule.delete_pending) {
+                            rulesPending = true
+                        }
+                    })
+                    if (rulesPending) {
+                        this.fetchRules()
                     }
-                })
-                if (rulesPending) {
-                    this.fetchRules()
                 }
                 if (this.changingStatus) {
                     this.fetchStatus()
@@ -303,6 +305,11 @@ select option[disabled] {
                 }
             },
             deleteRules() {
+                let self = this
+                this.checked.forEach(function(id) {
+                    self.$store.dispatch('vpsIpGameRuleDelete', Object.assign(self.$route.params, { rule_id: id }))
+                })
+                this.checked = []
             }
         }
     }
