@@ -37,7 +37,8 @@
                             <tr v-if="!rules.error" v-for="(item, index) in rules">
                                 <td>
                                     <div class="input-group text-xs-center">
-                                        <input :id="'checkbox' + item.id" type="checkbox" class="filled" v-model="checked[item.id]">
+                                        <input :id="'checkbox' + item.id" type="checkbox" class="filled"
+                                            :value="item.id" v-model="checked">
                                         <label :for="'checkbox' + item.id"></label>
                                     </div>
                                 </td>
@@ -116,7 +117,7 @@
                             </v-card-row>
                         </v-card>
                     </v-modal>
-                    <v-btn error v-on:click.native="deleteRules">
+                    <v-btn error v-on:click.native="deleteRules" :disabled='checked.length === 0'>
                         {{$t('vpsip.delete')}}
                     </v-btn>
                 </v-card-row>
@@ -156,7 +157,6 @@ select option[disabled] {
                     'trackmaniaShootmania': 'Trackmania/Shootmania',
                     'other': 'Other'
                 },
-                checked: {},
                 test: null
             }
         },
@@ -303,12 +303,6 @@ select option[disabled] {
                 }
             },
             deleteRules() {
-                for (let key in this.checked) {
-                    if (this.checked[key]) {
-                        this.$store.dispatch('vpsIpGameRuleDelete', Object.assign(this.$route.params, { rule_id: key }))
-                    }
-                }
-                this.checked = {}
             }
         }
     }
