@@ -202,6 +202,7 @@
             },
             "protocol": "Protokół"
         },
+        "delete": "Usuń",
         "otherprotocol": "Inny protokół"
     },
     "credits": {

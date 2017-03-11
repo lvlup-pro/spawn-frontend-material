@@ -34,6 +34,10 @@ function put({dispatch, state}, url, args, callback) {
     return request({dispatch, state}, axios.put, url, args, callback)
 }
 
+function del({dispatch, state}, url, args, callback) {
+    return request({dispatch, state}, axios.delete, url, args, callback)
+}
+
 export default new Vuex.Store({
     state: {
         apiUrl: '',
@@ -262,6 +266,11 @@ export default new Vuex.Store({
         },
         vpsIpGameRuleAdd({commit, dispatch, state}, args) {
             return post({dispatch, state}, 'vps/{id}/ip/{ip}/game/rule', args, function (res) {
+                dispatch('vpsIpGameRules', args)
+            })
+        },
+        vpsIpGameRuleDelete({commit, dispatch, state}, args) {
+            return del({dispatch, state}, 'vps/{id}/ip/{ip}/game/rule/{rule_id}', args, function (res) {
                 dispatch('vpsIpGameRules', args)
             })
         },

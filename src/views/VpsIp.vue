@@ -36,7 +36,10 @@
                         <tbody>
                             <tr v-if="!rules.error" v-for="(item, index) in rules">
                                 <td>
-                                    <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
+                                    <div class="input-group text-xs-center">
+                                        <input :id="'checkbox' + item.id" type="checkbox" class="filled" v-model="checked[item.id]">
+                                        <label :for="'checkbox' + item.id"></label>
+                                    </div>
                                 </td>
                                 <td>#{{item.id}}</td>
                                 <td>{{protocols[item.protocol]}}</td>
@@ -113,6 +116,9 @@
                             </v-card-row>
                         </v-card>
                     </v-modal>
+                    <v-btn error v-on:click.native="deleteRules">
+                        {{$t('vpsip.delete')}}
+                    </v-btn>
                 </v-card-row>
             </v-card>
         </v-container>
@@ -149,7 +155,9 @@ select option[disabled] {
                     'teamspeak3': 'TeamSpeak 3',
                     'trackmaniaShootmania': 'Trackmania/Shootmania',
                     'other': 'Other'
-                }
+                },
+                checked: {},
+                test: null
             }
         },
         mounted () {
@@ -293,6 +301,14 @@ select option[disabled] {
                             }, 1);
                         })
                 }
+            },
+            deleteRules() {
+                for (let key in this.checked) {
+                    if (this.checked[key]) {
+                        this.$store.dispatch('vpsIpGameRuleDelete', Object.assign(this.$route.params, { rule_id: key }))
+                    }
+                }
+                this.checked = {}
             }
         }
     }

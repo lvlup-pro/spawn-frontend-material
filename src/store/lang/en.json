@@ -203,6 +203,7 @@
             },
             "protocol": "Protocol"
         },
+        "delete": "Delete",
         "otherprotocol": "Other protocol"
     },
     "credits": {
