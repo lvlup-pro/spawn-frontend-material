@@ -52,7 +52,8 @@
     "validation": {
         "required": "This field is required.",
         "email": "Enter correct e-mail address.",
-        "repeatpassword": "Passwords don't match."
+        "repeatpassword": "Passwords don't match.",
+        "port": "Port must be integer in range of 1-65535."
     },
     "error": {
         "network" : "Network error detected!",
@@ -187,7 +188,13 @@
             "created": "Created",
             "creating": "Creating",
             "deleting": "Deleting"
-        }
+        },
+        "add": {
+            "cancel": "Cancel",
+            "submit": "Add",
+            "header": "Add filtering rule"
+        },
+        "protocol": "Protocol"
     },
     "credits": {
         "contributors": "Contributors",

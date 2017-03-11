@@ -74,6 +74,40 @@
                         :loading="changingStatus" :disabled="changingStatus">
                         {{$t('vpsip.disable')}}
                     </v-btn>
+                    <v-modal v-model="addModal">
+                        <v-btn slot="activator" success class="white--text">
+                            {{$t('vpsip.add.submit')}}
+                        </v-btn>
+                        <v-card>
+                            <v-card-text>
+                                <h2 class="title">{{$t('vpsip.add.header')}}</h2>
+                            </v-card-text>
+                            <v-card-text>
+                                <text-input
+                                    :validationmessage="$t('validation.port')" :validation="validatePortFrom"
+                                    :label="$t('vpsip.add.portfrom.label')"
+                                    :placeholder="$t('vpsip.add.portfrom.placeholder')"
+                                    name="portfrom" type="number" v-model="portFrom"
+                                ></text-input>
+                                <text-input
+                                    :validationmessage="$t('validation.port')" :validation="validatePortTo"
+                                    :label="$t('vpsip.add.portto.label')"
+                                    :placeholder="$t('vpsip.add.portto.placeholder')"
+                                    name="portto" type="number" v-model="portTo"
+                                ></text-input>
+                                <v-select
+                                    :options="selectProtocols"
+                                    :label="$t('vpsip.add.protocol')"
+                                    v-model="protocol"
+                                ></v-select>
+                            </v-card-text>
+                            <v-card-row actions>
+                                <v-spacer></v-spacer>
+                                <v-btn flat v-on:click.native="addModal = false" class="primary--text">{{$t('vpsip.add.cancel')}}</v-btn>
+                                <v-btn flat v-on:click.native="" class="primary--text">{{$t('vpsip.add.submit')}}</v-btn>
+                            </v-card-row>
+                        </v-card>
+                    </v-modal>
                 </v-card-row>
             </v-card>
         </v-container>
@@ -87,7 +121,26 @@
             return {
                 loadedRules: false,
                 loadedStatus: false,
-                interval: null
+                interval: null,
+                addModal: false,
+                portFrom: 0,
+                portTo: 0,
+                protocol: 'other',
+                protocols: {
+                    'arkSurvivalEvolved': 'ARK: Survival Evolved',
+                    'arma': 'Arma',
+                    'gtaMultiTheftAutoSanAndreas': 'Multi Theft Auto: San Andreas',
+                    'gtaSanAndreasMultiplayerMod': 'Grand Theft Auto: San Andreas',
+                    'hl2Source': 'HL2/Source',
+                    'minecraftPocketEdition': 'Minecraft: Pocket Edition',
+                    'minecraftQuery': 'Minecraft Query',
+                    'mumble': 'Mumble',
+                    'rust': 'Rust',
+                    'teamspeak2': 'TeamSpeak 2',
+                    'teamspeak3': 'TeamSpeak 3',
+                    'trackmaniaShootmania': 'Trackmania/Shootmania',
+                    'other': 'Other'
+                }
             }
         },
         mounted () {
@@ -126,6 +179,13 @@
             },
             changingStatus() {
                 return this.status.enable_pending || this.status.disable_pending
+            },
+            selectProtocols() {
+                let array = []
+                for (let key in this.protocols) {
+                    array.push({ text: this.protocols[key], value: key })
+                }
+                return array
             }
         },
         methods: {
@@ -167,6 +227,17 @@
             },
             disable() {
                 return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, { enabled: false }))
+            },
+            validatePort(port) {
+                return {
+                    valid: Number.isInteger(port) && port > 0 && port < 65536
+                }
+            },
+            validatePortFrom() {
+                return this.validatePort(this.portFrom)
+            },
+            validatePortTo() {
+                return this.validatePort(this.portTo)
             }
         }
     }

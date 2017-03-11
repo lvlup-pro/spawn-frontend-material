@@ -52,7 +52,8 @@
     "validation": {
         "required": "To pole jest wymagane.",
         "email": "Wpisz poprawny adres e-mail.",
-        "repeatpassword": "Hasła nie zgadzają się."
+        "repeatpassword": "Hasła nie zgadzają się.",
+        "port": "Port musi być liczbą całkowitą w zakresie 1-65535."
     },
     "error": {
         "network" : "Wykryto błąd sieci!",
@@ -186,6 +187,20 @@
             "created": "Utworzono",
             "creating": "Tworzenie",
             "deleting": "Usuwanie"
+        },
+        "add": {
+            "cancel": "Anuluj",
+            "submit": "Dodaj",
+            "header": "Dodaj regułę filtrowania",
+            "portfrom": {
+                "label": "Początek zakresu portów",
+                "placeholder": "1"
+            },
+            "portto": {
+                "label": "Koniec zakresu portów",
+                "placeholder": "65535"
+            },
+            "protocol": "Protokół"
         }
     },
     "credits": {
