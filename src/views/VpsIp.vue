@@ -104,7 +104,7 @@
                             <v-card-row actions>
                                 <v-spacer></v-spacer>
                                 <v-btn flat v-on:click.native="addModal = false" class="primary--text">{{$t('vpsip.add.cancel')}}</v-btn>
-                                <v-btn flat v-on:click.native="" class="primary--text">{{$t('vpsip.add.submit')}}</v-btn>
+                                <v-btn flat v-on:click.native="addRule" class="primary--text">{{$t('vpsip.add.submit')}}</v-btn>
                             </v-card-row>
                         </v-card>
                     </v-modal>
@@ -228,6 +228,14 @@
             disable() {
                 return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, { enabled: false }))
             },
+            validate(component) {
+                let noerrors = true
+                component.$validator.validateAll()
+                component.$children.forEach(child => {
+                    noerrors = this.validate(child) && noerrors
+                })
+                return noerrors && !component.errors.any()
+            },
             validatePort(port) {
                 return {
                     valid: Number.isInteger(port) && port > 0 && port < 65536
@@ -238,6 +246,20 @@
             },
             validatePortTo() {
                 return this.validatePort(this.portTo)
+            },
+            addRule() {
+                if(this.validate(this)) {
+                    let portFrom = this.portFrom, portTo = this.portTo
+                    if (portFrom > portTo) {
+                        let tmp = portFrom
+                        portFrom = portTo
+                        portTo = tmp
+                    }
+                    this.$store.dispatch('vpsIpGameRuleAdd', Object.assign(this.$route.params,
+                        { protocol: this.protocol, port_from: portFrom, port_to: portTo })).then(() => {
+                            this.addModal = false
+                        })
+                }
             }
         }
     }

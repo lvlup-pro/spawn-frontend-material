@@ -260,6 +260,11 @@ export default new Vuex.Store({
                 dispatch('vpsIpGameStatus', args)
             })
         },
+        vpsIpGameRuleAdd({commit, dispatch, state}, args) {
+            return post({dispatch, state}, 'vps/{id}/ip/{ip}/game/rule', args, function (res) {
+                dispatch('vpsIpGameRules', args)
+            })
+        },
         vpsChangeInfo({commit, dispatch, state}, args) {
             return put({dispatch, state}, 'vps/{id}', args, function (res) {
                 state.vps.name = args.name
