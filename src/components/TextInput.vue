@@ -66,10 +66,10 @@
         created() {
             let self = this
             if (this.validation != null) {
-                this.$validator.extend('custom', {
+                this.$validator.extend(this.name, {
                     getMessage: function() { return self.validationmessage },
                     validate: (value) => new Promise(resolve => {
-                        resolve(this.validation())
+                        resolve(self.validation())
                     })
                 })
             }
@@ -84,7 +84,9 @@
                 if (this.validation == null) {
                     return { rules: { required: this.required, email: this.email } }
                 } else {
-                    return { rules: { required: this.required, email: this.email, custom: this.validation } }
+                    let rules = { required: this.required, email: this.email }
+                    rules[this.name] = this.validation
+                    return { rules: rules }
                 }
             },
             email() {
