@@ -103,8 +103,13 @@
                             </v-card-text>
                             <v-card-row actions>
                                 <v-spacer></v-spacer>
-                                <v-btn flat v-on:click.native="addModal = false" class="primary--text">{{$t('vpsip.add.cancel')}}</v-btn>
-                                <v-btn flat v-on:click.native="addRule" class="primary--text">{{$t('vpsip.add.submit')}}</v-btn>
+                                <v-btn flat v-on:click.native="addModal = false" class="primary--text">
+                                    {{$t('vpsip.add.cancel')}}
+                                </v-btn>
+                                <v-btn flat v-on:click.native="addRule" class="primary--text"
+                                    :loading="addingRule" :disabled="addingRule">
+                                    {{$t('vpsip.add.submit')}}
+                                </v-btn>
                             </v-card-row>
                         </v-card>
                     </v-modal>
@@ -123,6 +128,7 @@
                 loadedStatus: false,
                 interval: null,
                 addModal: false,
+                addingRule: false,
                 portFrom: 0,
                 portTo: 0,
                 protocol: 'other',
@@ -236,6 +242,12 @@
                 })
                 return noerrors && !component.errors.any()
             },
+            clearValidation(component) {
+                component.errors.clear()
+                component.$children.forEach(child => {
+                    this.clearValidation(child)
+                })
+            },
             validatePort(port) {
                 return {
                     valid: Number.isInteger(port) && port > 0 && port < 65536
@@ -255,9 +267,19 @@
                         portFrom = portTo
                         portTo = tmp
                     }
+                    this.addingRule = true
                     this.$store.dispatch('vpsIpGameRuleAdd', Object.assign(this.$route.params,
                         { protocol: this.protocol, port_from: portFrom, port_to: portTo })).then(() => {
+                            this.addingRule = false
                             this.addModal = false
+                            this.portFrom = ''
+                            this.portTo = ''
+                            this.protocol = 'other'
+                        }).then(() => {
+                            setTimeout(() => {
+                                this.errors.clear()
+                                this.clearValidation(this)
+                            }, 1);
                         })
                 }
             }

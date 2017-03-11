@@ -2,7 +2,7 @@
     <div>
         <v-text-input
             v-validate="rules"
-            v-model="value"
+            v-model="internalValue"
             :class="{'custom-text-input': true, 'validation-error': errors.has(name) }"
             :type="type"
             :label="label"
@@ -34,6 +34,9 @@
     export default {
         name: 'text-input',
         props: {
+            value: {
+                default: ''
+            },
             required: {
                 type: [Boolean],
                 default: true
@@ -76,7 +79,7 @@
         },
         data: function () {
             return {
-                value: ''
+                internalValue: ''
             }
         },
         computed: {
@@ -94,8 +97,11 @@
             }
         },
         watch: {
-            'value': function(newValue, oldValue) {
+            internalValue: function(newValue, oldValue) {
                 this.$emit('input', newValue)
+            },
+            value: function(newValue, oldValue) {
+                this.internalValue = newValue
             }
         }
     }
