@@ -39,11 +39,6 @@
                                 <span class="hidden-sm-and-down">- {{upfrom | prettyDateFrom}}</span>
                             </v-card-row>
                             <v-card-row>
-                                <i class="fa fa-fw fa-2x fa-shield"></i>
-                                <b>{{$t('vps.ddos')}}: </b>
-                                <span id="ddos-link" class="hidden-sm-and-down" v-on:click="goToDdos(vps.ip.main)"> {{$t('vps.ddos_check')}}</span>
-                            </v-card-row>
-                            <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-calendar-plus-o"></i>
                                 <b>{{$t('vps.createdat')}}:&nbsp;</b>
                                 {{vps.created_at | prettyDateFormat}}
@@ -211,35 +206,28 @@
                 </v-col>
                 <v-col md6 xs12>
                     <div class="mb-4"></div>
-                    <v-card v-if="!locked && vps.virt === 'kvm' && vps.ip">
+                    <v-card v-if="!locked && vps.ip">
                         <v-card-row class="grey darken-3">
-                            <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
+                            <v-card-title class="white--text">{{$t('vps.ips')}}</v-card-title>
                         </v-card-row>
                         <v-list two-line>
-                            <v-list-item>
+                            <v-list-item v-for="item in [vps.ip.main].concat(vps.ip.additional)">
                                 <v-list-tile>
-                                  <v-list-tile-content>
-                                    <v-list-tile-title>{{vps.ip.main}}</v-list-tile-title>
-                                    <v-list-tile-sub-title>{{$t('vps.ipmain')}}</v-list-tile-sub-title>
-                                  </v-list-tile-content>
-                                  <v-list-tile-action>
-                                    <v-btn icon ripple v-on:click.native="goToIp(vps.ip.main)">
-                                      <v-icon class="black--text">settings</v-icon>
-                                    </v-btn>
-                                  </v-list-tile-action>
-                                </v-list-tile>
-                            </v-list-item>
-                            <v-list-item v-for="(item, index) in vps.ip.additional">
-                                <v-list-tile>
-                                  <v-list-tile-content>
-                                    <v-list-tile-title>{{item}}</v-list-tile-title>
-                                    <v-list-tile-sub-title>{{$t('vps.padditional')}}</v-list-tile-sub-title>
-                                  </v-list-tile-content>
-                                  <v-list-tile-action>
-                                    <v-btn icon ripple v-on:click.native="goToIp(item)">
-                                      <v-icon class="black--text">settings</v-icon>
-                                    </v-btn>
-                                  </v-list-tile-action>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>{{item}}</v-list-tile-title>
+                                        <v-list-tile-sub-title v-if="item === vps.ip.main" v-text="$t('vps.ipmain')" />
+                                        <v-list-tile-sub-title v-else v-text="$t('vps.ipadditional')" />
+                                    </v-list-tile-content>
+                                    <v-list-tile-action>
+                                        <v-btn icon ripple v-on:click.native="goToDdos(item)">
+                                            <v-icon class="black--text">warning</v-icon>
+                                        </v-btn>
+                                    </v-list-tile-action>
+                                    <v-list-tile-action v-if="vps.virt === 'kvm'">
+                                        <v-btn icon ripple v-on:click.native="goToIp(item)">
+                                            <v-icon class="black--text">settings</v-icon>
+                                        </v-btn>
+                                    </v-list-tile-action>
                                 </v-list-tile>
                             </v-list-item>
                         </v-list>
@@ -458,7 +446,7 @@
                 })
             },
             goToIp(ip) {
-                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip)
+                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip + '/settings')
             },
             goToDdos(ip) {
                 this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip + '/ddos')
