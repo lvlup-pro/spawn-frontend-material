@@ -2,7 +2,7 @@
     <div>
         <v-container>
             <v-card>
-                <v-card-row class="green darken-1">
+                <v-card-row class="grey darken-3">
                     <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
                 </v-card-row>
                 <v-card-text v-if="loadedStatus">
