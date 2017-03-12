@@ -206,9 +206,9 @@
                 </v-col>
                 <v-col md6 xs12>
                     <div class="mb-4"></div>
-                    <v-card v-if="!locked && vps.virt === 'kvm' && vps.ip">
+                    <v-card v-if="!locked && vps.ip">
                         <v-card-row class="grey darken-3">
-                            <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
+                            <v-card-title class="white--text">{{$t('vps.ips')}}</v-card-title>
                         </v-card-row>
                         <v-list two-line>
                             <v-list-item v-for="item in [vps.ip.main].concat(vps.ip.additional)">
@@ -223,7 +223,7 @@
                                             <v-icon class="black--text">warning</v-icon>
                                         </v-btn>
                                     </v-list-tile-action>
-                                    <v-list-tile-action>
+                                    <v-list-tile-action v-if="vps.virt === 'kvm'">
                                         <v-btn icon ripple v-on:click.native="goToIp(item)">
                                             <v-icon class="black--text">settings</v-icon>
                                         </v-btn>
