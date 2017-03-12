@@ -28,7 +28,8 @@
         "vps": "VPS #{id}[hide-sm]{name}[/hide-sm]",
         "vpsip": "[hide-sm]VPS #{id} - [/hide-sm]{ip}",
         "payments": "Płatności",
-        "profile": "Profil"
+        "profile": "Profil",
+        "ddos": "Ataki DDoS"
     },
     "table": {
         "id": "ID",
@@ -42,11 +43,14 @@
         "payed_to": "Wygasa",
         "ports": "Porty",
         "protocol": "Protokół",
+        "start": "Start",
+        "end": "Koniec",
         "empty": {
             "services": "Brak usług",
             "payments": "Brak płatności",
             "tickets": "Brak zgłoszeń",
-            "rules": "Brak reguł filtrowania"
+            "rules": "Brak reguł filtrowania",
+            "ddos": "Nie odnotowano żadnych ataków typu DDoS"
         }
     },
     "validation": {

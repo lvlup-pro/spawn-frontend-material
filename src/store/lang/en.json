@@ -28,7 +28,8 @@
         "vps": "VPS #{id}[hide-sm]{name}[/hide-sm]",
         "vpsip": "[hide-sm]VPS #{id} - [/hide-sm]{ip}",
         "payments": "Payments",
-        "profile": "Profile"
+        "profile": "Profile",
+        "ddos": "DDoS attacks"
     },
     "table": {
         "id": "ID",
@@ -42,11 +43,14 @@
         "payed_to": "Expires",
         "ports": "Ports",
         "protocol": "Protocol",
+        "start": "Start",
+        "end": "End",
         "empty": {
             "services": "No services",
             "payments": "No payments",
             "tickets": "No tickets",
-            "rules": "No filtering rules"
+            "rules": "No filtering rules",
+            "ddos": "No DDoS attacks detected"
         }
     },
     "validation": {
