@@ -161,6 +161,8 @@
         "notset": "Not set",
         "save": "Save",
         "name": "Name",
+        "ddos": "DDoS attacks",
+        "ddos_check": "Check",
         "placeholder": {
             "name": "My VPS"
         },

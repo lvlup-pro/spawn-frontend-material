@@ -39,6 +39,11 @@
                                 <span class="hidden-sm-and-down">- {{upfrom | prettyDateFrom}}</span>
                             </v-card-row>
                             <v-card-row>
+                                <i class="fa fa-fw fa-2x fa-shield"></i>
+                                <b>{{$t('vps.ddos')}}: </b>
+                                <span id="ddos-link" class="hidden-sm-and-down" v-on:click="goToDdos(vps.ip.main)"> {{$t('vps.ddos_check')}}</span>
+                            </v-card-row>
+                            <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-calendar-plus-o"></i>
                                 <b>{{$t('vps.createdat')}}:&nbsp;</b>
                                 {{vps.created_at | prettyDateFormat}}
@@ -280,6 +285,10 @@
     div.list__tile__sub-title {
         color: #6e6e6e;
     }
+
+    #ddos-link {
+        cursor: pointer;
+    }
 </style>
 <script>
     export default {
@@ -450,6 +459,9 @@
             },
             goToIp(ip) {
                 this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip)
+            },
+            goToDdos(ip) {
+                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip + '/ddos')
             }
         }
     }

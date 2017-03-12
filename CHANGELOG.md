@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-beta.9 (12.03.2017)
+
+### Features
+
++ DDoS attacks list [#136](https://github.com/lvlup-pro/spawn-frontend-material/issues/136)
+
 ## 3.0.0-beta.8 (11.03.2017)
 
 ### Features

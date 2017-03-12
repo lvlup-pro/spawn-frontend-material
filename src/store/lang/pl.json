@@ -160,6 +160,8 @@
         "notset": "Nieustawiona",
         "save": "Zapisz",
         "name": "Nazwa",
+        "ddos": "Ataki DDoS",
+        "ddos_check": "Sprawdź",
         "placeholder": {
             "name": "Mój VPS"
         },
