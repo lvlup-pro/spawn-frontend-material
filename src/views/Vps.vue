@@ -458,7 +458,7 @@
                 })
             },
             goToIp(ip) {
-                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip)
+                this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip + '/settings')
             },
             goToDdos(ip) {
                 this.$router.push('/' + this.$route.params.lg + '/service/vps/' + this.id + '/ip/' + ip + '/ddos')
