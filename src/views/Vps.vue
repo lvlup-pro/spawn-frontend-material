@@ -211,29 +211,12 @@
                             <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
                         </v-card-row>
                         <v-list two-line>
-                            <v-list-item>
-                                <v-list-tile>
-                                    <v-list-tile-content>
-                                        <v-list-tile-title>{{vps.ip.main}}</v-list-tile-title>
-                                        <v-list-tile-sub-title>{{$t('vps.ipmain')}}</v-list-tile-sub-title>
-                                    </v-list-tile-content>
-                                    <v-list-tile-action>
-                                        <v-btn icon ripple v-on:click.native="goToDdos(vps.ip.main)">
-                                            <v-icon class="black--text">warning</v-icon>
-                                        </v-btn>
-                                    </v-list-tile-action>
-                                    <v-list-tile-action>
-                                        <v-btn icon ripple v-on:click.native="goToIp(vps.ip.main)">
-                                            <v-icon class="black--text">settings</v-icon>
-                                        </v-btn>
-                                    </v-list-tile-action>
-                                </v-list-tile>
-                            </v-list-item>
-                            <v-list-item v-for="(item, index) in vps.ip.additional">
+                            <v-list-item v-for="item in [vps.ip.main].concat(vps.ip.additional)">
                                 <v-list-tile>
                                     <v-list-tile-content>
                                         <v-list-tile-title>{{item}}</v-list-tile-title>
-                                        <v-list-tile-sub-title>{{$t('vps.padditional')}}</v-list-tile-sub-title>
+                                        <v-list-tile-sub-title v-if="item === vps.ip.main" v-text="$t('vps.ipmain')" />
+                                        <v-list-tile-sub-title v-else v-text="$t('vps.ipadditional')" />
                                     </v-list-tile-content>
                                     <v-list-tile-action>
                                         <v-btn icon ripple v-on:click.native="goToDdos(item)">
