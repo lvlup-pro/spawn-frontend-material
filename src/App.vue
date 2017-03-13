@@ -24,7 +24,7 @@
                     <template v-for="item in sidebarItems">
                         <v-list-sub-header v-if="item.header" v-text="$t(item.header)" />
                         <v-list-item v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
-                            <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link">
+                            <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link" v-on:click.native="sidebar = false">
                                 <v-list-tile-action>
                                     <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                                 </v-list-tile-action>
@@ -32,7 +32,7 @@
                                     <v-list-tile-title v-text="$t(item.title, item.args)"/>
                                 </v-list-tile-content>
                             </v-list-tile>
-                            <v-list-tile v-else v-on:click.native="if (item.method) { item.method() }">
+                            <v-list-tile v-else v-on:click.native="sidebar = false; if (item.method) { item.method() }">
                                 <v-list-tile-action>
                                     <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                                 </v-list-tile-action>
