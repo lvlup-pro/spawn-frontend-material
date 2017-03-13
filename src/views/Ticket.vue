@@ -172,9 +172,7 @@
             },
             loadTicket() {
                 this.$store.commit('setLoading')
-                this.$store.dispatch('ticketInfo', {
-                    'id': this.$route.params.id
-                }).then(() => {
+                this.$store.dispatch('ticketInfo', this.$route.params).then(() => {
                     //after ticket loaded, load messages in this ticket
                     this.$store.commit('setLoaded')
                     this.loadMessages()

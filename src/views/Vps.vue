@@ -404,32 +404,22 @@
                 }
             },
             stats() {
-                return this.$store.dispatch('vpsInfo', {
-                    'id': this.id
-                }).then(() => {
-                    this.$store.commit('setToolbarTitleArgs', {
-                        id: this.id,
-                        name: this.wrappedName
-                    })
+                return this.$store.dispatch('vpsInfo', this.$route.params).then(() => {
+                    this.$store.commit('setToolbarTitleArgs',
+                        Object.assign(this.$route.params, { name: this.wrappedName }))
                 })
             },
             ips() {
-                return this.$store.dispatch('vpsIps', {
-                    'id': this.id
-                })
+                return this.$store.dispatch('vpsIps', this.$route.params)
             },
             enable() {
                 this.changingStatus = true
-                return this.$store.dispatch('vpsOn', {
-                    'id': this.id
-                })
+                return this.$store.dispatch('vpsOn', this.$route.params)
             },
             disable() {
                 this.changingStatus = true
                 this.disableModal = false
-                return this.$store.dispatch('vpsOff', {
-                    'id': this.id
-                })
+                return this.$store.dispatch('vpsOff', this.$route.params)
             },
             reboot() {
                 this.rebootModal = false
