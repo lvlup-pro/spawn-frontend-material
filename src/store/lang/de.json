@@ -6,7 +6,7 @@
         "login": "Einloggen",
         "logout": "Abmeldung",
         "profile": "{email}",
-        "payments": "Zahlungen ({balance})",
+        "payments": "Zahlungen ({balance_pretty})",
         "menu": "Menu",
         "home": "Zuhause",
         "services": "Dienstleistungen",
