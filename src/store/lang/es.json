@@ -6,7 +6,7 @@
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "profile": "{email}",
-    "payments": "Pagos ({balance})",
+    "payments": "Pagos ({balance_pretty})",
     "menu": "Menú",
     "home": "Casa",
     "services": "Servicios",

@@ -6,7 +6,7 @@
         "login": "Zaloguj się",
         "logout": "Wyloguj się",
         "profile": "{email}",
-        "payments": "Płatności ({balance})",
+        "payments": "Płatności ({balance_pretty})",
         "paymenthistory": "Historia płatności",
         "menu": "Menu",
         "home": "Nowości",

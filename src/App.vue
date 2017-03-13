@@ -10,7 +10,7 @@
             </v-toolbar>
         </header>
         <main>
-            <v-sidebar fixed ripple router unshift v-model="sidebar" v-on:click.native="sidebar = false">
+            <v-sidebar fixed ripple router unshift v-model="sidebar">
                 <router-link :to="'/' + language + '/home'">
                     <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
                 </router-link>
@@ -21,107 +21,27 @@
                 </p>
                 <v-list dense>
                     <v-divider light/>
-                    <v-list-sub-header>{{$t('sidebar.account')}}</v-list-sub-header>
-                    <div v-if="!account.email">
-                        <!--<v-list-item>
-                            <v-list-tile router :href="'/' + language + '/register'">
+                    <template v-for="item in sidebarItems">
+                        <v-list-sub-header v-if="item.header" v-text="$t(item.header)" />
+                        <v-list-item v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
+                            <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link">
                                 <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-plus-circle"></i>
+                                    <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                                 </v-list-tile-action>
                                 <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t('sidebar.register')"/>
+                                    <v-list-tile-title v-text="$t(item.title, item.args)"/>
                                 </v-list-tile-content>
                             </v-list-tile>
-                        </v-list-item>-->
-                        <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/login'">
+                            <v-list-tile v-else v-on:click.native="if (item.method) { item.method() }">
                                 <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-sign-in"></i>
+                                    <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                                 </v-list-tile-action>
                                 <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t('sidebar.login')"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                    </div>
-                    <div v-else>
-                        <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/profile'">
-                                <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-user"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title
-                                            v-text="$t('sidebar.profile', { 'nick': account.username, 'email': account.email })"/>
+                                    <v-list-tile-title v-text="$t(item.title, item.args)"/>
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
-                        <v-list-item>
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-money"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t('sidebar.payments', { 'balance': wallet.balance_pretty })" />
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                        <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/payment'">
-                                <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-history"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t('sidebar.paymenthistory')" />
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                    </div>
-
-                    <v-list-sub-header>{{$t('sidebar.menu')}}</v-list-sub-header>
-                    <v-list-item>
-                        <v-list-tile router :href="'/' + language + '/home'">
-                            <v-list-tile-action>
-                                <i class="fa fa-fw fa-2x fa-home"></i>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title v-text="$t('sidebar.home')"/>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list-item>
-                    <div v-if="account.email">
-                        <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/service'">
-                                <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-server"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t('sidebar.services')"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                        <v-list-item>
-                            <v-list-tile router :href="'/' + language + '/ticket'">
-                                <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-question-circle"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t('sidebar.help')"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                        <v-list-item>
-                            <v-list-tile v-on:click.native="logOut">
-                                <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-sign-out"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t('sidebar.logout')"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                    </div>
-
+                    </template>
                     <v-list-sub-header>{{$t('sidebar.lang')}}</v-list-sub-header>
                     <v-list-group>
                         <v-list-item slot="item">
@@ -235,6 +155,20 @@
             },
             toolbarTitleArgs() {
                 return this.$store.state.toolbarTitleArgs
+            },
+            sidebarItems() {
+                return [
+                    { header: 'sidebar.account' },
+                    { logged: 'no', title: 'sidebar.login', link: 'login', icon: 'sign-in' },
+                    { logged: 'yes', title: 'sidebar.profile', link: 'profile', icon: 'user', args: this.account },
+                    { logged: 'yes', title: 'sidebar.payments', icon: 'money', args: this.wallet },
+                    { logged: 'yes', title: 'sidebar.paymenthistory', link: 'payment', icon: 'history' },
+                    { header: 'sidebar.menu' },
+                    { title: 'sidebar.home', link: 'home', icon: 'home' },
+                    { logged: 'yes', title: 'sidebar.services', link: 'service', icon: 'server' },
+                    { logged: 'yes', title: 'sidebar.help', link: 'ticket', icon: 'question-circle' },
+                    { logged: 'yes', title: 'sidebar.logout', method: this.logOut, icon: 'sign-out' }
+                ]
             }
         },
         data () {
