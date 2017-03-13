@@ -30,8 +30,8 @@
                                         <td>
                                             <v-checkbox :id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                         </td>
-                                        <td v-on:click="goToTicket(ticket.id)">#{{ticket.id}}</td>
-                                        <td v-on:click="goToTicket(ticket.id)" style="white-space: nowrap;">
+                                        <td @click="goToTicket(ticket.id)">#{{ticket.id}}</td>
+                                        <td @click="goToTicket(ticket.id)" style="white-space: nowrap;">
                                             <!--
                                             <span v-if="!ticket.closed_at && !ticket.staff_response_needed"
                                                 v-tooltip:bottom="{ html: $t('ticket.status.waiting.long') }">
@@ -52,8 +52,8 @@
                                                 <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
                                             </span>
                                         </td>
-                                        <td v-on:click="goToTicket(ticket.id)">{{ticket.subject}}</td>
-                                        <td v-on:click="goToTicket(ticket.id)">
+                                        <td @click="goToTicket(ticket.id)">{{ticket.subject}}</td>
+                                        <td @click="goToTicket(ticket.id)">
                                             {{ticket.created_at | prettyDateFormat}}
                                             <span class="hidden-sm-and-down"> - {{ticket.created_at | prettyDateFrom}}</span>
                                         </td>

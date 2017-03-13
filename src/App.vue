@@ -25,7 +25,7 @@
                         <v-list-sub-header v-if="item.header" v-text="$t(item.header)" />
                         <v-list-item v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
                             <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link"
-                                v-on:click.native="sidebarOpen = false">
+                                @click.native="sidebarOpen = false">
                                 <v-list-tile-action>
                                     <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                                 </v-list-tile-action>
@@ -33,7 +33,7 @@
                                     <v-list-tile-title v-text="$t(item.title, item.args)"/>
                                 </v-list-tile-content>
                             </v-list-tile>
-                            <v-list-tile v-else v-on:click.native="sidebarOpen = false; if (item.method) { item.method() }">
+                            <v-list-tile v-else @click.native="sidebarOpen = false; if (item.method) { item.method() }">
                                 <v-list-tile-action>
                                     <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                                 </v-list-tile-action>
@@ -45,7 +45,7 @@
                     </template>
                     <v-list-group :active="sidebarLanguagesOpen">
                         <v-list-item slot="item">
-                            <v-list-tile v-on:click.native="sidebarLanguagesOpen = true">
+                            <v-list-tile @click.native="sidebarLanguagesOpen = true">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-chevron-down"></i>
                                 </v-list-tile-action>
@@ -54,7 +54,7 @@
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
-                        <v-list-item v-for="item in sidebarLanguages" v-if="language != item.code" v-on:click="changeLang(item.code)">
+                        <v-list-item v-for="item in sidebarLanguages" v-if="language != item.code" @click="changeLang(item.code)">
                             <v-list-tile>
                                 <v-list-tile-action>
                                     <img :src="'/public/flags/' + item.flag + '.png'">
@@ -75,10 +75,10 @@
                         <v-col lg10>
                             <v-alert warning :value="true">
                                 {{$t('error.' + error)}}
-                                <v-btn v-if="account.email" v-on:click.native="logOut" class="white--text" success>
+                                <v-btn v-if="account.email" @click.native="logOut" class="white--text" success>
                                     {{$t('sidebar.logout')}}
                                 </v-btn>
-                                <v-btn v-on:click.native="refresh" class="white--text" success>
+                                <v-btn @click.native="refresh" class="white--text" success>
                                     {{$t('sidebar.refresh')}}
                                 </v-btn>
                             </v-alert>
@@ -86,7 +86,7 @@
                         </v-col>
                     </v-row>
                     <transition mode="out-in">
-                        <router-view v-on:view="view" v-on:redirectLang="redirectLang"></router-view>
+                        <router-view @view="view" @redirectLang="redirectLang"></router-view>
                     </transition>
                 </v-container>
             </v-content>

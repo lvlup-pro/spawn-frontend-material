@@ -70,11 +70,11 @@
                     </table>
                 </v-table-overflow>
                 <v-card-row actions style="justify-content: flex-start" v-if="loadedStatus">
-                    <v-btn success v-if="(!status.enabled || status.enable_pending) && !status.disable_pending" v-on:click.native="enable"
+                    <v-btn success v-if="(!status.enabled || status.enable_pending) && !status.disable_pending" @click.native="enable"
                         :loading="changingStatus" :disabled="changingStatus">
                         {{$t('vpsip.enable')}}
                     </v-btn>
-                    <v-btn error v-if="(status.enabled || status.disable_pending) && !status.enable_pending" v-on:click.native="disable"
+                    <v-btn error v-if="(status.enabled || status.disable_pending) && !status.enable_pending" @click.native="disable"
                         :loading="changingStatus" :disabled="changingStatus">
                         {{$t('vpsip.disable')}}
                     </v-btn>
@@ -107,17 +107,17 @@
                             </v-card-text>
                             <v-card-row actions>
                                 <v-spacer></v-spacer>
-                                <v-btn flat v-on:click.native="addModal = false" class="primary--text">
+                                <v-btn flat @click.native="addModal = false" class="primary--text">
                                     {{$t('vpsip.add.cancel')}}
                                 </v-btn>
-                                <v-btn flat v-on:click.native="addRule" class="primary--text"
+                                <v-btn flat @click.native="addRule" class="primary--text"
                                     :loading="addingRule" :disabled="addingRule">
                                     {{$t('vpsip.add.submit')}}
                                 </v-btn>
                             </v-card-row>
                         </v-card>
                     </v-modal>
-                    <v-btn error v-on:click.native="deleteRules" :disabled='checked.length === 0'>
+                    <v-btn error @click.native="deleteRules" :disabled='checked.length === 0'>
                         {{$t('vpsip.delete')}}
                     </v-btn>
                 </v-card-row>

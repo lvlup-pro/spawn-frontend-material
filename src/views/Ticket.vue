@@ -93,7 +93,7 @@
                                   v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
                             <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
                         </p>
-                        <v-btn v-on:click.native="addTicketMessage(msg)" success>{{$t('ticket.send')}}</v-btn>
+                        <v-btn @click.native="addTicketMessage(msg)" success>{{$t('ticket.send')}}</v-btn>
                     </div>
                 </v-col>
             </v-row>

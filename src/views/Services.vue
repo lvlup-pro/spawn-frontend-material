@@ -37,15 +37,15 @@
                                                 <v-checkbox :id="'checkbox' + index" filled
                                                             class="text-xs-center"></v-checkbox>
                                             </td>
-                                            <td v-on:click="goToVps(item.id)">
+                                            <td @click="goToVps(item.id)">
                                                 VPS
                                                 <span class="hidden-sm-and-down">
                                                 <span v-if="item.virt === 0">OpenVZ</span>
                                                 <span v-else-if="item.virt === 2">KVM</span>
                                             </span>
                                             </td>
-                                            <td v-on:click="goToVps(item.id)">#{{item.id}}</td>
-                                            <td v-on:click="goToVps(item.id)">
+                                            <td @click="goToVps(item.id)">#{{item.id}}</td>
+                                            <td @click="goToVps(item.id)">
                                             <span v-if="item.name === null" class="grey--text">
                                                 {{ $t('vps.notset') }}
                                             </span>
@@ -53,9 +53,9 @@
                                                 {{ item.name }}
                                             </span>
                                             </td>
-                                            <td v-on:click="goToVps(item.id)" class="hidden-sm-and-down">{{item.ip}}
+                                            <td @click="goToVps(item.id)" class="hidden-sm-and-down">{{item.ip}}
                                             </td>
-                                            <td v-on:click="goToVps(item.id)" style="white-space: nowrap;">
+                                            <td @click="goToVps(item.id)" style="white-space: nowrap;">
                                             <span v-if="item.active === 1">
                                                 <i class="fa fa-circle green--text"></i> {{$t('vps.active')}}
                                             </span>
@@ -63,7 +63,7 @@
                                                 <i class="fa fa-circle red--text"></i> {{$t('vps.locked')}}
                                             </span>
                                             </td>
-                                            <td v-on:click="goToVps(item.id)">
+                                            <td @click="goToVps(item.id)">
                                                 {{item.payed_to | prettyDateFormat}}
                                                 <span class="hidden-sm-and-down"> - {{item.payed_to | prettyDateFrom}}</span>
                                             </td>

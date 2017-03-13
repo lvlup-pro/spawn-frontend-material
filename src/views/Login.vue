@@ -7,7 +7,7 @@
                     <v-card class="mp-5">
                         <v-card-text>
                             <h5>{{ $t('user.login.header') }}</h5>
-                            <form v-on:submit.prevent="login" novalidate>
+                            <form @submit.prevent="login" novalidate>
                                 <text-input
                                     :label="$t('user.username')"
                                     :placeholder="$t('user.placeholder.username')"
