@@ -42,7 +42,6 @@
                             </v-list-tile>
                         </v-list-item>
                     </template>
-                    <v-list-sub-header>{{$t('sidebar.lang')}}</v-list-sub-header>
                     <v-list-group>
                         <v-list-item slot="item">
                             <v-list-tile>
@@ -54,43 +53,13 @@
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
-                        <v-list-item v-if="language != 'en'" v-on:click="changeLang('en')">
+                        <v-list-item v-for="item in sidebarLanguages" v-if="language != item.code" v-on:click="changeLang(item.code)">
                             <v-list-tile>
                                 <v-list-tile-action>
-                                    <img src="/public/flags/EN.png">
+                                    <img :src="'/public/flags/' + item.flag + '.png'">
                                 </v-list-tile-action>
                                 <v-list-tile-content>
-                                    <v-list-tile-title>English (EN)</v-list-tile-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                        <v-list-item v-if="language != 'pl'" v-on:click="changeLang('pl')">
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                    <img src="/public/flags/PL.png">
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>Polski (PL)</v-list-tile-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                        <v-list-item v-if="language != 'de'" v-on:click="changeLang('de')">
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                    <img src="/public/flags/DE.png">
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>Deutsch (DE)</v-list-tile-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                        <v-list-item v-if="language != 'es'" v-on:click="changeLang('es')">
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                    <img src="/public/flags/ES.png">
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>Español (ES)</v-list-tile-title>
+                                    <v-list-tile-title v-text="item.name" />
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
@@ -167,7 +136,16 @@
                     { title: 'sidebar.home', link: 'home', icon: 'home' },
                     { logged: 'yes', title: 'sidebar.services', link: 'service', icon: 'server' },
                     { logged: 'yes', title: 'sidebar.help', link: 'ticket', icon: 'question-circle' },
-                    { logged: 'yes', title: 'sidebar.logout', method: this.logOut, icon: 'sign-out' }
+                    { logged: 'yes', title: 'sidebar.logout', method: this.logOut, icon: 'sign-out' },
+                    { header: 'sidebar.lang' }
+                ]
+            },
+            sidebarLanguages() {
+                return [
+                    { code: 'en', flag: 'EN', name: 'English (EN)' },
+                    { code: 'pl', flag: 'PL', name: 'Polski (PL)' },
+                    { code: 'de', flag: 'DE', name: 'Deutsch (DE)' },
+                    { code: 'es', flag: 'ES', name: 'Español (ES)' }
                 ]
             }
         },
