@@ -4,8 +4,8 @@
 
             <div class="mt-4"></div>
             <div class="text-xs-center">
-                <v-pagination v-bind:length.number="pagination.paging.total_pages"
-                              v-bind:disabled="loading"
+                <v-pagination :length.number="pagination.paging.total_pages"
+                              :disabled="loading"
                               v-model="page"
                 ></v-pagination>
             </div>

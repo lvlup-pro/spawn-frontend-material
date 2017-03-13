@@ -11,7 +11,7 @@
 
                 <div class="mt-4"></div>
                 <div class="text-xs-center">
-                    <v-pagination v-bind:length="totalPages" v-bind:disabled="loading" v-model="page"></v-pagination>
+                    <v-pagination :length="totalPages" :disabled="loading" v-model="page"></v-pagination>
                 </div>
                 <div class="mt-4"></div>
 
@@ -34,7 +34,7 @@
                                     <tbody>
                                         <tr v-if="!services.error" v-for="(item, index) in services.items">
                                             <td>
-                                                <v-checkbox v-bind:id="'checkbox' + index" filled
+                                                <v-checkbox :id="'checkbox' + index" filled
                                                             class="text-xs-center"></v-checkbox>
                                             </td>
                                             <td v-on:click="goToVps(item.id)">

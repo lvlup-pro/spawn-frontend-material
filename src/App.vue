@@ -1,7 +1,7 @@
 <template>
     <v-app top-navbar left-fixed-sidebar>
         <header>
-            <v-progress-linear id="loadingBar" v-if="loading" v-bind:indeterminate="true"></v-progress-linear>
+            <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
                 <v-toolbar-side-icon @click.native.stop="sidebarOpen = !sidebarOpen" class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>

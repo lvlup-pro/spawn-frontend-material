@@ -86,7 +86,7 @@
                         <br>
                     </div>
                     <div v-if="!ticket.closed_at">
-                        <textarea v-bind:placeholder="$t('ticket.textarea')" v-model="msg"></textarea>
+                        <textarea :placeholder="$t('ticket.textarea')" v-model="msg"></textarea>
                         <p>
                             <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
                             <span id="counter-ok"

@@ -4,8 +4,8 @@
 
             <div class="mt-4"></div>
             <div class="text-xs-center">
-                <v-pagination v-bind:length.number="pagination.paging.total_pages"
-                              v-bind:disabled="loading"
+                <v-pagination :length.number="pagination.paging.total_pages"
+                              :disabled="loading"
                               v-model="page"
                 ></v-pagination>
             </div>
@@ -28,7 +28,7 @@
                                 <tbody>
                                     <tr v-if="!pagination.error" v-for="(ticket, index) in pagination.items">
                                         <td>
-                                            <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
+                                            <v-checkbox :id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
                                         </td>
                                         <td v-on:click="goToTicket(ticket.id)">#{{ticket.id}}</td>
                                         <td v-on:click="goToTicket(ticket.id)" style="white-space: nowrap;">
