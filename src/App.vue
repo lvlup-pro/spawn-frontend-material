@@ -3,14 +3,14 @@
         <header>
             <v-progress-linear id="loadingBar" v-if="loading" v-bind:indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
-                <v-toolbar-side-icon @click.native.stop="sidebar = !sidebar" class="hidden-md-and-up white--text">
+                <v-toolbar-side-icon @click.native.stop="sidebarOpen = !sidebarOpen" class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
                 <v-toolbar-logo v-html="getToolbarTitle()"></v-toolbar-logo>
             </v-toolbar>
         </header>
         <main>
-            <v-sidebar fixed ripple router unshift v-model="sidebar">
+            <v-sidebar fixed ripple router unshift v-model="sidebarOpen">
                 <router-link :to="'/' + language + '/home'">
                     <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
                 </router-link>
@@ -24,7 +24,8 @@
                     <template v-for="item in sidebarItems">
                         <v-list-sub-header v-if="item.header" v-text="$t(item.header)" />
                         <v-list-item v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
-                            <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link" v-on:click.native="sidebar = false">
+                            <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link"
+                                v-on:click.native="sidebarOpen = false">
                                 <v-list-tile-action>
                                     <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                                 </v-list-tile-action>
@@ -32,7 +33,7 @@
                                     <v-list-tile-title v-text="$t(item.title, item.args)"/>
                                 </v-list-tile-content>
                             </v-list-tile>
-                            <v-list-tile v-else v-on:click.native="sidebar = false; if (item.method) { item.method() }">
+                            <v-list-tile v-else v-on:click.native="sidebarOpen = false; if (item.method) { item.method() }">
                                 <v-list-tile-action>
                                     <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                                 </v-list-tile-action>
@@ -42,9 +43,9 @@
                             </v-list-tile>
                         </v-list-item>
                     </template>
-                    <v-list-group>
+                    <v-list-group :active="sidebarLanguagesOpen">
                         <v-list-item slot="item">
-                            <v-list-tile>
+                            <v-list-tile v-on:click.native="sidebarLanguagesOpen = true">
                                 <v-list-tile-action>
                                     <i class="fa fa-fw fa-2x fa-chevron-down"></i>
                                 </v-list-tile-action>
@@ -152,7 +153,8 @@
         data () {
             return {
                 lg: '',
-                sidebar: false
+                sidebarOpen: false,
+                sidebarLanguagesOpen: false
             }
         },
         watch: {
@@ -188,6 +190,7 @@
                 this.$store.commit('setLanguage', lang)
                 this.$router.replace({'params': {'lg': lang}})
                 this.getToolbarTitle(true)
+                this.sidebarLanguagesOpen = false
             },
             redirectLang(url) {
                 if (typeof this.$route.params.lg === 'undefined') {
