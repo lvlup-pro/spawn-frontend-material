@@ -69,6 +69,7 @@
         created() {
             let self = this
             if (this.validation != null) {
+                this.$validator.remove(this.name)
                 this.$validator.extend(this.name, {
                     getMessage: function() { return self.validationmessage },
                     validate: (value) => new Promise(resolve => {
