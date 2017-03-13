@@ -1,7 +1,6 @@
 <template>
     <div>
         <v-container>
-
             <div class="mt-4"></div>
             <div class="text-xs-center">
                 <v-pagination :length.number="pagination.paging.total_pages"
@@ -11,42 +10,37 @@
             </div>
             <div class="mt-4"></div>
 
-            <v-row>
-                <v-col xs12>
-                    <v-card>
-                        <v-table-overflow>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>{{$t('table.id')}}</th>
-                                    <th>{{$t('table.start')}}</th>
-                                    <th>{{$t('table.end')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
-                                    <td>
-                                        #{{item.id}}
-                                    </td>
-                                    <td>
-                                        {{item.started_at | prettyDateTime}}
-                                    </td>
-                                    <td>
-                                        {{item.ended_at | prettyDateTime}}
-                                    </td>
-                                </tr>
-                                <tr v-if="pagination.error">
-                                    <td colspan="100%" class="red--text text--darken-3 empty">
-                                        {{ $t('table.empty.ddos') }}
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </v-table-overflow>
-                    </v-card>
-                </v-col>
-            </v-row>
-
+            <v-card>
+                <v-table-overflow>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>{{$t('table.id')}}</th>
+                            <th>{{$t('table.start')}}</th>
+                            <th>{{$t('table.end')}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
+                            <td>
+                                #{{item.id}}
+                            </td>
+                            <td>
+                                {{item.started_at | prettyDateTime}}
+                            </td>
+                            <td>
+                                {{item.ended_at | prettyDateTime}}
+                            </td>
+                        </tr>
+                        <tr v-if="pagination.error">
+                            <td colspan="100%" class="red--text text--darken-3 empty">
+                                {{ $t('table.empty.ddos') }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </v-table-overflow>
+            </v-card>
         </v-container>
     </div>
 </template>
