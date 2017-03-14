@@ -86,14 +86,14 @@
                         <br>
                     </div>
                     <div v-if="!ticket.closed_at">
-                        <textarea v-bind:placeholder="$t('ticket.textarea')" v-model="msg"></textarea>
+                        <textarea :placeholder="$t('ticket.textarea')" v-model="msg"></textarea>
                         <p>
                             <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
                             <span id="counter-ok"
                                   v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
                             <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
                         </p>
-                        <v-btn v-on:click.native="addTicketMessage(msg)" success>{{$t('ticket.send')}}</v-btn>
+                        <v-btn @click.native="addTicketMessage(msg)" success>{{$t('ticket.send')}}</v-btn>
                     </div>
                 </v-col>
             </v-row>
@@ -172,9 +172,7 @@
             },
             loadTicket() {
                 this.$store.commit('setLoading')
-                this.$store.dispatch('ticketInfo', {
-                    'id': this.$route.params.id
-                }).then(() => {
+                this.$store.dispatch('ticketInfo', this.$route.params).then(() => {
                     //after ticket loaded, load messages in this ticket
                     this.$store.commit('setLoaded')
                     this.loadMessages()

@@ -1,59 +1,52 @@
 <template>
     <div>
         <v-container>
-
             <div class="mt-4"></div>
             <div class="text-xs-center">
-                <v-pagination v-bind:length.number="pagination.paging.total_pages"
-                              v-bind:disabled="loading"
+                <v-pagination :length.number="pagination.paging.total_pages"
+                              :disabled="loading"
                               v-model="page"
                 ></v-pagination>
             </div>
             <div class="mt-4"></div>
-
-            <v-row>
-                <v-col xs12>
-                    <v-card>
-                        <v-table-overflow>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>{{$t('table.id')}}</th>
-                                    <th>{{$t('table.start')}}</th>
-                                    <th>{{$t('table.end')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
-                                    <td>
-                                        #{{item.id}}
-                                    </td>
-                                    <td>
-                                        {{item.started_at | prettyDateFormat}}
-                                        <span class="hidden-sm-and-down">- {{item.started_at | prettyDateFrom}}</span>
-                                    </td>
-                                    <td>
-                                        <span v-if="item.ended_at === null">
-                                            -
-                                        </span>
-                                        <span v-else>
-                                            {{item.ended_at | prettyDateFormat}}
-                                        </span>
-                                        <span class="hidden-sm-and-down">- {{item.ended_at | prettyDateFrom}}</span>
-                                    </td>
-                                </tr>
-                                <tr v-if="pagination.error">
-                                    <td colspan="100%" class="red--text text--darken-3 empty">
-                                        {{ $t('table.empty.ddos') }}
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </v-table-overflow>
-                    </v-card>
-                </v-col>
-            </v-row>
-
+            <v-card>
+                <v-table-overflow>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>{{$t('table.id')}}</th>
+                                <th>{{$t('table.start')}}</th>
+                                <th>{{$t('table.end')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
+                            <td>
+                                #{{item.id}}
+                            </td>
+                            <td>
+                                {{item.started_at | prettyDateFormat}}
+                                <span class="hidden-sm-and-down">- {{item.started_at | prettyDateFrom}}</span>
+                            </td>
+                            <td>
+                                <span v-if="item.ended_at === null">
+                                    -
+                                </span>
+                                <span v-else>
+                                    {{item.ended_at | prettyDateFormat}}
+                                </span>
+                                <span class="hidden-sm-and-down">- {{item.ended_at | prettyDateFrom}}</span>
+                            </td>
+                        </tr>
+                        <tr v-if="pagination.error">
+                            <td colspan="100%" class="red--text text--darken-3 empty">
+                                {{ $t('table.empty.ddos') }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </v-table-overflow>
+            </v-card>
         </v-container>
     </div>
 </template>

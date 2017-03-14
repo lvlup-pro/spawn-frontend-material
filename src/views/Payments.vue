@@ -1,67 +1,61 @@
 <template>
     <div>
         <v-container>
-
             <div class="mt-4"></div>
             <div class="text-xs-center">
-                <v-pagination v-bind:length.number="pagination.paging.total_pages"
-                              v-bind:disabled="loading"
+                <v-pagination :length.number="pagination.paging.total_pages"
+                              :disabled="loading"
                               v-model="page"
                 ></v-pagination>
             </div>
             <div class="mt-4"></div>
 
-            <v-row>
-                <v-col xs12>
-                    <v-card>
-                        <v-table-overflow>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th class="select"><i class="fa fa-check"></i></th>
-                                    <th>{{$t('table.id')}}</th>
-                                    <th>{{$t('table.amount')}}</th>
-                                    <th>{{$t('table.created_at')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
-                                        <td>
-                                            <v-checkbox v-bind:id="'checkbox' + index" filled
-                                                        class="text-xs-center"></v-checkbox>
-                                        </td>
-                                        <td>
-                                            #{{item.id}}
-                                        </td>
-                                        <td v-if="item.amount > 0" class="green--text">
-                                            +{{item.amount}}
-                                            <span class="hidden-sm-and-down">PLN</span>
-                                        </td>
-                                        <td v-if="item.amount == 0">
-                                            {{item.amount}}
-                                            <span class="hidden-sm-and-down">PLN</span>
-                                        </td>
-                                        <td v-if="item.amount < 0" class="red--text">
-                                            {{item.amount}}
-                                            <span class="hidden-sm-and-down">PLN</span>
-                                        </td>
-                                        <td>
-                                            {{item.created_at | prettyDateFormat}}
-                                            <span class="hidden-sm-and-down"> - {{item.created_at | prettyDateFrom}}</span>
-                                        </td>
-                                    </tr>
-                                    <tr v-if="pagination.error" >
-                                        <td colspan="100%" class="red--text text--darken-3 empty">
-                                            {{ $t('table.empty.payments') }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </v-table-overflow>
-                    </v-card>
-                </v-col>
-            </v-row>
-
+            <v-card>
+                <v-table-overflow>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="select"><i class="fa fa-check"></i></th>
+                            <th>{{$t('table.id')}}</th>
+                            <th>{{$t('table.amount')}}</th>
+                            <th>{{$t('table.created_at')}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
+                                <td>
+                                    <v-checkbox :id="'checkbox' + index" filled
+                                                class="text-xs-center"></v-checkbox>
+                                </td>
+                                <td>
+                                    #{{item.id}}
+                                </td>
+                                <td v-if="item.amount > 0" class="green--text">
+                                    +{{item.amount}}
+                                    <span class="hidden-sm-and-down">PLN</span>
+                                </td>
+                                <td v-if="item.amount == 0">
+                                    {{item.amount}}
+                                    <span class="hidden-sm-and-down">PLN</span>
+                                </td>
+                                <td v-if="item.amount < 0" class="red--text">
+                                    {{item.amount}}
+                                    <span class="hidden-sm-and-down">PLN</span>
+                                </td>
+                                <td>
+                                    {{item.created_at | prettyDateFormat}}
+                                    <span class="hidden-sm-and-down"> - {{item.created_at | prettyDateFrom}}</span>
+                                </td>
+                            </tr>
+                            <tr v-if="pagination.error" >
+                                <td colspan="100%" class="red--text text--darken-3 empty">
+                                    {{ $t('table.empty.payments') }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </v-table-overflow>
+            </v-card>
         </v-container>
     </div>
 </template>

@@ -1,75 +1,69 @@
 <template>
     <div>
         <v-container>
-
             <div class="mt-4"></div>
             <div class="text-xs-center">
-                <v-pagination v-bind:length.number="pagination.paging.total_pages"
-                              v-bind:disabled="loading"
+                <v-pagination :length.number="pagination.paging.total_pages"
+                              :disabled="loading"
                               v-model="page"
                 ></v-pagination>
             </div>
             <div class="mt-4"></div>
 
-            <v-row>
-                <v-col xs12>
-                    <v-card>
-                        <v-table-overflow>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th class="select"><i class="fa fa-check"></i></th>
-                                    <th>{{$t('table.id')}}</th>
-                                    <th>{{$t('table.status')}}</th>
-                                    <th>{{$t('table.subject')}}</th>
-                                    <th>{{$t('table.created_at')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-if="!pagination.error" v-for="(ticket, index) in pagination.items">
-                                        <td>
-                                            <v-checkbox v-bind:id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
-                                        </td>
-                                        <td v-on:click="goToTicket(ticket.id)">#{{ticket.id}}</td>
-                                        <td v-on:click="goToTicket(ticket.id)" style="white-space: nowrap;">
-                                            <!--
-                                            <span v-if="!ticket.closed_at && !ticket.staff_response_needed"
-                                                v-tooltip:bottom="{ html: $t('ticket.status.waiting.long') }">
-                                                <i class="fa fa-circle blue--text"></i> {{$t('ticket.status.waiting.short')}}
-                                            </span>
-                                            <span v-if="!ticket.closed_at && ticket.staff_response_needed"
-                                                v-tooltip:bottom="{ html: $t('ticket.status.working.long') }">
-                                                <i class="fa fa-circle yellow--text"></i> {{$t('ticket.status.working.short')}}
-                                            </span>
-                                            <span v-if="ticket.closed_at"
-                                                v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
-                                                <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
-                                            !-->
-                                            <span v-if="!ticket.closed">
-                                                <i class="fa fa-circle green--text"></i> {{$t('ticket.status.open.short')}}
-                                            </span>
-                                            <span v-if="ticket.closed">
-                                                <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
-                                            </span>
-                                        </td>
-                                        <td v-on:click="goToTicket(ticket.id)">{{ticket.subject}}</td>
-                                        <td v-on:click="goToTicket(ticket.id)">
-                                            {{ticket.created_at | prettyDateFormat}}
-                                            <span class="hidden-sm-and-down"> - {{ticket.created_at | prettyDateFrom}}</span>
-                                        </td>
-                                    </tr>
-                                    <tr v-if="pagination.error" >
-                                        <td colspan="100%" class="red--text text--darken-3 empty">
-                                            {{ $t('table.empty.tickets') }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </v-table-overflow>
-                    </v-card>
-                </v-col>
-            </v-row>
-
+            <v-card>
+                <v-table-overflow>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="select"><i class="fa fa-check"></i></th>
+                            <th>{{$t('table.id')}}</th>
+                            <th>{{$t('table.status')}}</th>
+                            <th>{{$t('table.subject')}}</th>
+                            <th>{{$t('table.created_at')}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="!pagination.error" v-for="(ticket, index) in pagination.items">
+                                <td>
+                                    <v-checkbox :id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
+                                </td>
+                                <td @click="goToTicket(ticket.id)">#{{ticket.id}}</td>
+                                <td @click="goToTicket(ticket.id)" style="white-space: nowrap;">
+                                    <!--
+                                    <span v-if="!ticket.closed_at && !ticket.staff_response_needed"
+                                        v-tooltip:bottom="{ html: $t('ticket.status.waiting.long') }">
+                                        <i class="fa fa-circle blue--text"></i> {{$t('ticket.status.waiting.short')}}
+                                    </span>
+                                    <span v-if="!ticket.closed_at && ticket.staff_response_needed"
+                                        v-tooltip:bottom="{ html: $t('ticket.status.working.long') }">
+                                        <i class="fa fa-circle yellow--text"></i> {{$t('ticket.status.working.short')}}
+                                    </span>
+                                    <span v-if="ticket.closed_at"
+                                        v-tooltip:bottom="{ html: $t('ticket.status.closed.long') }">
+                                        <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
+                                    !-->
+                                    <span v-if="!ticket.closed">
+                                        <i class="fa fa-circle green--text"></i> {{$t('ticket.status.open.short')}}
+                                    </span>
+                                    <span v-if="ticket.closed">
+                                        <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
+                                    </span>
+                                </td>
+                                <td @click="goToTicket(ticket.id)">{{ticket.subject}}</td>
+                                <td @click="goToTicket(ticket.id)">
+                                    {{ticket.created_at | prettyDateFormat}}
+                                    <span class="hidden-sm-and-down"> - {{ticket.created_at | prettyDateFrom}}</span>
+                                </td>
+                            </tr>
+                            <tr v-if="pagination.error" >
+                                <td colspan="100%" class="red--text text--darken-3 empty">
+                                    {{ $t('table.empty.tickets') }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </v-table-overflow>
+            </v-card>
         </v-container>
     </div>
 </template>
