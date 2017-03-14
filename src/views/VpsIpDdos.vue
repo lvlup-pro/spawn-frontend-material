@@ -33,7 +33,12 @@
                                         <span class="hidden-sm-and-down">- {{item.started_at | prettyDateFrom}}</span>
                                     </td>
                                     <td>
-                                        {{item.ended_at | prettyDateFormat}}
+                                        <span v-if="item.ended_at === null">
+                                            -
+                                        </span>
+                                        <span v-else>
+                                            {{item.ended_at | prettyDateFormat}}
+                                        </span>
                                         <span class="hidden-sm-and-down">- {{item.ended_at | prettyDateFrom}}</span>
                                     </td>
                                 </tr>
