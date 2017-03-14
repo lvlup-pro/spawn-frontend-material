@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.0.0-beta.10 (14.03.2017)
+
+### Features
+
++ DDoS list button is now near UDP whitelist button [#144](https://github.com/lvlup-pro/spawn-frontend-material/pull/144)
+
+### Fixes
+
++ Green send message button in ticket page [#148](https://github.com/lvlup-pro/spawn-frontend-material/issues/148)
++ Cleaner code for sidebar [#151](https://github.com/lvlup-pro/spawn-frontend-material/pull/151)
++ More readable VPS DDoS list page [#152](https://github.com/lvlup-pro/spawn-frontend-material/pull/152)
++ Fix validation rule error on UDP whitelist page [#143](https://github.com/lvlup-pro/spawn-frontend-material/issues/143)
++ Fix 1970 date for currently ongoing DDoS attacks 
+
 ## 3.0.0-beta.9 (12.03.2017)
 
 ### Features

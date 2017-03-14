@@ -9,16 +9,15 @@
                 ></v-pagination>
             </div>
             <div class="mt-4"></div>
-
             <v-card>
                 <v-table-overflow>
                     <table>
                         <thead>
-                        <tr>
-                            <th>{{$t('table.id')}}</th>
-                            <th>{{$t('table.start')}}</th>
-                            <th>{{$t('table.end')}}</th>
-                        </tr>
+                            <tr>
+                                <th>{{$t('table.id')}}</th>
+                                <th>{{$t('table.start')}}</th>
+                                <th>{{$t('table.end')}}</th>
+                            </tr>
                         </thead>
                         <tbody>
                         <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
@@ -26,10 +25,17 @@
                                 #{{item.id}}
                             </td>
                             <td>
-                                {{item.started_at | prettyDateTime}}
+                                {{item.started_at | prettyDateFormat}}
+                                <span class="hidden-sm-and-down">- {{item.started_at | prettyDateFrom}}</span>
                             </td>
                             <td>
-                                {{item.ended_at | prettyDateTime}}
+                                <span v-if="item.ended_at === null">
+                                    -
+                                </span>
+                                <span v-else>
+                                    {{item.ended_at | prettyDateFormat}}
+                                </span>
+                                <span class="hidden-sm-and-down">- {{item.ended_at | prettyDateFrom}}</span>
                             </td>
                         </tr>
                         <tr v-if="pagination.error">
