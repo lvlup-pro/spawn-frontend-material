@@ -29,10 +29,12 @@
                                         #{{item.id}}
                                     </td>
                                     <td>
-                                        {{item.started_at | prettyDateTime}}
+                                        {{item.started_at | prettyDateFormat}}
+                                        <span class="hidden-sm-and-down">- {{item.started_at | prettyDateFrom}}</span>
                                     </td>
                                     <td>
-                                        {{item.ended_at | prettyDateTime}}
+                                        {{item.ended_at | prettyDateFormat}}
+                                        <span class="hidden-sm-and-down">- {{item.ended_at | prettyDateFrom}}</span>
                                     </td>
                                 </tr>
                                 <tr v-if="pagination.error">
