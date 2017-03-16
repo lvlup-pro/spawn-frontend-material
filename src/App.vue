@@ -401,6 +401,10 @@
         flex: 1 0 40px;
     }
 
+    aside.sidebar .list__tile--active .list__tile__title {
+        color: #00cc00;
+    }
+
     i.fa-2x {
         font-size: 1.5em;
     }
