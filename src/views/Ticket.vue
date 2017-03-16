@@ -1,5 +1,8 @@
 <template>
     <div>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="duplicate">{{ $t('ticket.msg_duplicate') }}</v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="tooShort">{{ $t('ticket.msg_too_short') }}</v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="tooLong">{{ $t('ticket.msg_too_long') }}</v-snackbar>
         <v-container v-if="!loading">
             <v-row>
                 <v-col xl2></v-col>
@@ -129,7 +132,10 @@
     export default {
         data () {
             return {
-                msg: ''
+                msg: '',
+                duplicate: false,
+                tooShort: false,
+                tooLong: false
             }
         },
         mounted () {
@@ -138,7 +144,7 @@
             this.$store.commit('setTicketMessages', [])
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth.no'), "right")
+                    this.$store.commit('setNoAuth')
                     this.$router.push('/login')
                 } else {
                     this.loadTicket()
@@ -196,7 +202,7 @@
                 if (messages.length > 0) {
                     var lastMsg = messages[messages.length - 1].message
                     if (msg == lastMsg) {
-                        this.$vuetify.toast.create(this.$t("ticket.msg_duplicate"), "right")
+                        this.duplicate = true
                         //show user that message was probably send earlier when some Internet connection errors occurred
                         this.loadMessages()
                         return false
@@ -205,13 +211,13 @@
 
                 //too short?
                 if (msg.length < 2) {
-                    this.$vuetify.toast.create(this.$t("ticket.msg_too_short"), "right")
+                    this.tooShort = true
                     return false
                 }
 
                 //too long?
                 if (msg.length > 3000) {
-                    this.$vuetify.toast.create(this.$t("ticket.msg_too_long"), "right")
+                    this.tooLong = true
                     return false
                 }
 

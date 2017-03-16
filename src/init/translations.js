@@ -36,5 +36,6 @@ Vue.use(VeeValidate, {
         es: {
             messages: toLambdas(es.validation)
         }
-    }
+    },
+    errorBagName: 'verrors'
 })
