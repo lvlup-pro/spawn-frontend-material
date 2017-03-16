@@ -1,6 +1,7 @@
 <template>
     <v-app top-navbar left-fixed-sidebar>
         <v-snackbar :timeout="2000" :top="true" :right="true" v-model="noAuth">{{ $t('auth.no') }}</v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="alreadyAuth">{{ $t('auth.already') }}</v-snackbar>
         <header>
             <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
@@ -129,6 +130,9 @@
             },
             noAuth() {
                 return this.$store.state.noAuthSnackbar
+            },
+            alreadyAuth() {
+                return this.$store.state.alreadyAuthSnackbar
             },
             sidebarItems() {
                 return [

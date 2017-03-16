@@ -95,7 +95,7 @@
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (!nosession) {
-                    this.$vuetify.toast.create(this.$t('auth.already'), "right")
+                    this.$store.commit('setAlreadyAuth')
                     this.$router.push('/'+this.$route.params.lg+'/service')
                 }
             })
