@@ -138,7 +138,7 @@
             this.$store.commit('setTicketMessages', [])
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth.no'), "right")
+                    this.$store.commit('setNoAuth')
                     this.$router.push('/login')
                 } else {
                     this.loadTicket()

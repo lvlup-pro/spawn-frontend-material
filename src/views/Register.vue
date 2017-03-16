@@ -94,9 +94,7 @@
             this.$store.commit('setToolbarTitle', 'header.register')
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
-                if (nosession) {
-                    //this.$vuetify.toast.create(this.$t('auth.no'), "right")
-                } else {
+                if (!nosession) {
                     this.$vuetify.toast.create(this.$t('auth.already'), "right")
                     this.$router.push('/'+this.$route.params.lg+'/service')
                 }
