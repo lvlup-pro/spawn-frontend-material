@@ -1,5 +1,6 @@
 <template>
     <v-app top-navbar left-fixed-sidebar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="noAuth">{{ $t('auth.no') }}</v-snackbar>
         <header>
             <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
@@ -125,6 +126,9 @@
             },
             toolbarTitleArgs() {
                 return this.$store.state.toolbarTitleArgs
+            },
+            noAuth() {
+                return this.$store.state.noAuthSnackbar
             },
             sidebarItems() {
                 return [

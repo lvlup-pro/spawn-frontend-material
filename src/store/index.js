@@ -67,7 +67,8 @@ export default new Vuex.Store({
         version: '',
         language: '',
         meta: {},
-        logout: false
+        logout: false,
+        noAuthSnackbar: false
     },
     actions: {
         boot ({dispatch, state, commit}) {
@@ -356,6 +357,9 @@ export default new Vuex.Store({
         },
         setLoaded (state) {
             state.loading = false
+        },
+        setNoAuth(state) {
+            state.noAuthSnackbar = true
         },
         setLogout(state, newLogout) {
             state.logout = newLogout
