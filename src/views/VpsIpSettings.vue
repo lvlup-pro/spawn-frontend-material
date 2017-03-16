@@ -87,20 +87,20 @@
                                 <h2 class="title">{{$t('vpsip.add.header')}}</h2>
                             </v-card-text>
                             <v-card-text>
-                                <text-input
+                                <v-text-field
                                     :validationmessage="$t('validation.port')" :validation="validatePortFrom"
                                     :label="$t('vpsip.add.portfrom.label')"
                                     :placeholder="$t('vpsip.add.portfrom.placeholder')"
                                     name="portfrom" type="number" v-model="portFrom"
-                                ></text-input>
-                                <text-input
+                                ></v-text-field>
+                                <v-text-field
                                     :validationmessage="$t('validation.port')" :validation="validatePortTo"
                                     :label="$t('vpsip.add.portto.label')"
                                     :placeholder="$t('vpsip.add.portto.placeholder')"
                                     name="portto" type="number" v-model="portTo"
-                                ></text-input>
+                                ></v-text-field>
                                 <v-select
-                                    :options="selectProtocols"
+                                    :items="selectProtocols"
                                     :label="$t('vpsip.add.protocol')"
                                     v-model="protocol"
                                 ></v-select>
@@ -126,9 +126,13 @@
     </div>
 </template>
 <style>
-select option[disabled] {
-    display: none;
-}
+    select option[disabled] {
+        display: none;
+    }
+
+    div.modal {
+        max-height: initial;
+    }
 </style>
 <script>
     export default {
@@ -139,9 +143,9 @@ select option[disabled] {
                 interval: null,
                 addModal: false,
                 addingRule: false,
-                portFrom: 0,
-                portTo: 0,
-                protocol: 'other',
+                portFrom: '',
+                portTo: '',
+                protocol: { value: 'other', text: 'Other' },
                 protocols: {
                     'arkSurvivalEvolved': 'ARK: Survival Evolved',
                     'arma': 'Arma',
@@ -261,10 +265,10 @@ select option[disabled] {
                 component.$children.forEach(child => {
                     noerrors = this.validate(child) && noerrors
                 })
-                return noerrors && !component.errors.any()
+                return noerrors && !component.verrors.any()
             },
             clearValidation(component) {
-                component.errors.clear()
+                component.verrors.clear()
                 component.$children.forEach(child => {
                     this.clearValidation(child)
                 })
@@ -290,7 +294,7 @@ select option[disabled] {
                     }
                     this.addingRule = true
                     this.$store.dispatch('vpsIpGameRuleAdd', Object.assign(this.$route.params,
-                        { protocol: this.protocol, port_from: portFrom, port_to: portTo })).then(() => {
+                        { protocol: this.protocol.value, port_from: portFrom, port_to: portTo })).then(() => {
                             this.addingRule = false
                             this.addModal = false
                             this.portFrom = ''

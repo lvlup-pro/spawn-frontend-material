@@ -188,12 +188,13 @@
                         <v-card-text>
                             <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-pencil" style="padding-bottom: 1rem;"></i>
-                                <v-text-input
+                                <v-text-field
                                     v-model="newname"
+                                    style="margin-bottom: 0;"
                                     :label="$t('vps.name')"
                                     :placeholder="$t('vps.placeholder.name')">
                                     {{vps.name}}
-                                </v-text-input>
+                                </v-text-field>
                             </v-card-row>
                         </v-card-text>
                         <v-card-row actions style="justify-content: flex-start">
