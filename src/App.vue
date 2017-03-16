@@ -2,6 +2,7 @@
     <v-app top-navbar left-fixed-sidebar>
         <v-snackbar :timeout="2000" :top="true" :right="true" v-model="noAuth">{{ $t('auth.no') }}</v-snackbar>
         <v-snackbar :timeout="2000" :top="true" :right="true" v-model="alreadyAuth">{{ $t('auth.already') }}</v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="invalidSession">{{ $t('auth.invalidsession') }}</v-snackbar>
         <header>
             <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
@@ -162,14 +163,15 @@
             return {
                 lg: '',
                 sidebarOpen: false,
-                sidebarLanguagesOpen: false
+                sidebarLanguagesOpen: false,
+                invalidSession: false
             }
         },
         watch: {
             logout: function(newValue, oldValue) {
                 if (newValue) {
                     this.$store.commit('setLogout', false)
-                    this.$vuetify.toast.create(this.$t('auth.invalidsession'), 'right')
+                    this.invalidSession = true
                     this.$router.push('/' + this.language + '/login')
                 }
             },
