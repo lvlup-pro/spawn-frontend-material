@@ -418,4 +418,8 @@
     i.fa-2x {
         font-size: 1.5em;
     }
+
+    div.table__overflow {
+        overflow-y: hidden;
+    }
 </style>
