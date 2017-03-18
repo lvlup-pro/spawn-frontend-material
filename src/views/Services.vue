@@ -19,7 +19,7 @@
                         <table>
                             <thead>
                             <tr>
-                                <th class="select"><i class="fa fa-check"></i></th>
+                                <!--<th class="select"><i class="fa fa-check"></i></th>-->
                                 <th>{{$t('table.service')}}</th>
                                 <th>{{$t('table.id')}}</th>
                                 <th>{{$t('table.name')}}</th>
@@ -30,10 +30,10 @@
                             </thead>
                             <tbody>
                                 <tr v-if="!services.error" v-for="(item, index) in services.items">
-                                    <td>
-                                        <v-checkbox :id="'checkbox' + index" filled
-                                                    class="text-xs-center"></v-checkbox>
-                                    </td>
+                                    <!--<td>-->
+                                        <!--<v-checkbox :id="'checkbox' + index"-->
+                                                    <!--class="text-xs-center"></v-checkbox>-->
+                                    <!--</td>-->
                                     <td @click="goToVps(item.id)">
                                         VPS
                                         <span class="hidden-sm-and-down">
@@ -87,7 +87,7 @@
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth.no'), "right")
+                    this.$store.commit('setNoAuth')
                     this.$router.push('/login')
                 } else {
                     this.$store.commit('setLoading')

@@ -1,5 +1,8 @@
 <template>
     <div>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="duplicate">{{ $t('ticket.msg_duplicate') }}</v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="tooShort">{{ $t('ticket.msg_too_short') }}</v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="tooLong">{{ $t('ticket.msg_too_long') }}</v-snackbar>
         <v-container v-if="!loading">
             <v-row>
                 <v-col xl2></v-col>
@@ -85,15 +88,35 @@
                         </v-card>
                         <br>
                     </div>
+
                     <div v-if="!ticket.closed_at">
-                        <textarea :placeholder="$t('ticket.textarea')" v-model="msg"></textarea>
-                        <p>
-                            <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
-                            <span id="counter-ok"
-                                  v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
-                            <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
-                        </p>
-                        <v-btn @click.native="addTicketMessage(msg)" success>{{$t('ticket.send')}}</v-btn>
+                        <v-text-field
+                                :label="$t('ticket.textarea')"
+                                name="input-7-1"
+                                multi-line
+                                v-model="msg"
+                                counter
+                                max="3000"
+                        ></v-text-field>
+                        <v-btn v-if="msg.length >= 0 && msg.length <= 1"
+                               @click.native="addTicketMessage(msg)"
+                               grey
+                               block>{{$t('ticket.send')}}
+                        </v-btn>
+                        <v-btn v-if="msg.length <= 3000 && msg.length >= 2"
+                               @click.native="addTicketMessage(msg)"
+                               success
+                               block>{{$t('ticket.send')}}
+                        </v-btn>
+                        <v-btn v-if="msg.length > 3000"
+                               @click.native="addTicketMessage(msg)"
+                               error
+                               block>{{$t('ticket.send')}}
+                        </v-btn>
+                    </div>
+
+                    <div class="mt-5">
+
                     </div>
                 </v-col>
             </v-row>
@@ -101,14 +124,6 @@
     </div>
 </template>
 <style>
-    #counter-ok {
-        color: green;
-    }
-
-    #counter-slow-down {
-        color: red;
-    }
-
     textarea {
         width: 100%;
         border-bottom: 1px solid #ddd;
@@ -129,7 +144,10 @@
     export default {
         data () {
             return {
-                msg: ''
+                msg: '',
+                duplicate: false,
+                tooShort: false,
+                tooLong: false
             }
         },
         mounted () {
@@ -138,7 +156,7 @@
             this.$store.commit('setTicketMessages', [])
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth.no'), "right")
+                    this.$store.commit('setNoAuth')
                     this.$router.push('/login')
                 } else {
                     this.loadTicket()
@@ -196,7 +214,7 @@
                 if (messages.length > 0) {
                     var lastMsg = messages[messages.length - 1].message
                     if (msg == lastMsg) {
-                        this.$vuetify.toast.create(this.$t("ticket.msg_duplicate"), "right")
+                        this.duplicate = true
                         //show user that message was probably send earlier when some Internet connection errors occurred
                         this.loadMessages()
                         return false
@@ -205,13 +223,13 @@
 
                 //too short?
                 if (msg.length < 2) {
-                    this.$vuetify.toast.create(this.$t("ticket.msg_too_short"), "right")
+                    this.tooShort = true
                     return false
                 }
 
                 //too long?
                 if (msg.length > 3000) {
-                    this.$vuetify.toast.create(this.$t("ticket.msg_too_long"), "right")
+                    this.tooLong = true
                     return false
                 }
 

@@ -15,7 +15,6 @@
                     <table>
                         <thead>
                         <tr>
-                            <th class="select"><i class="fa fa-check"></i></th>
                             <th>{{$t('table.id')}}</th>
                             <th>{{$t('table.status')}}</th>
                             <th>{{$t('table.subject')}}</th>
@@ -24,9 +23,6 @@
                         </thead>
                         <tbody>
                             <tr v-if="!pagination.error" v-for="(ticket, index) in pagination.items">
-                                <td>
-                                    <v-checkbox :id="'checkbox' + index" filled class="text-xs-center"></v-checkbox>
-                                </td>
                                 <td @click="goToTicket(ticket.id)">#{{ticket.id}}</td>
                                 <td @click="goToTicket(ticket.id)" style="white-space: nowrap;">
                                     <!--
@@ -85,7 +81,7 @@
             this.$emit('view', this.meta())
             this.$store.dispatch('checkSession').then((nosession) => {
                 if (nosession) {
-                    this.$vuetify.toast.create(this.$t('auth.no'), "right")
+                    this.$store.commit('setNoAuth')
                     this.$router.push('/login')
                 } else {
                     this.$store.commit('setLoading')

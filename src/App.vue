@@ -1,5 +1,8 @@
 <template>
     <v-app top-navbar left-fixed-sidebar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="noAuth">{{ $t('auth.no') }}</v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="alreadyAuth">{{ $t('auth.already') }}</v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="invalidSession">{{ $t('auth.invalidsession') }}</v-snackbar>
         <header>
             <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
@@ -22,7 +25,7 @@
                 <v-list dense>
                     <v-divider light/>
                     <template v-for="item in sidebarItems">
-                        <v-list-sub-header v-if="item.header" v-text="$t(item.header)" />
+                        <v-subheader v-if="item.header" v-text="$t(item.header)" />
                         <v-list-item v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
                             <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link"
                                 @click.native="sidebarOpen = false">
@@ -126,6 +129,12 @@
             toolbarTitleArgs() {
                 return this.$store.state.toolbarTitleArgs
             },
+            noAuth() {
+                return this.$store.state.noAuthSnackbar
+            },
+            alreadyAuth() {
+                return this.$store.state.alreadyAuthSnackbar
+            },
             sidebarItems() {
                 return [
                     { header: 'sidebar.account' },
@@ -154,14 +163,15 @@
             return {
                 lg: '',
                 sidebarOpen: false,
-                sidebarLanguagesOpen: false
+                sidebarLanguagesOpen: false,
+                invalidSession: false
             }
         },
         watch: {
             logout: function(newValue, oldValue) {
                 if (newValue) {
                     this.$store.commit('setLogout', false)
-                    this.$vuetify.toast.create(this.$t('auth.invalidsession'), 'right')
+                    this.invalidSession = true
                     this.$router.push('/' + this.language + '/login')
                 }
             },
@@ -399,9 +409,18 @@
 
     aside.sidebar div.list__tile__action {
         flex: 1 0 40px;
+        min-width: 40px;
+    }
+
+    aside.sidebar .list__tile--active .list__tile__title {
+        color: #00cc00;
     }
 
     i.fa-2x {
         font-size: 1.5em;
+    }
+
+    div.table__overflow {
+        overflow-y: hidden;
     }
 </style>

@@ -1,15 +1,15 @@
 <template>
     <div>
-        <v-text-input
-            v-validate="rules"
+        <!-- hidden checkbox for validation - strange workaround !-->
+        <input v-model="internalValue" v-validate="rules" :name="name" style="display: none;">
+        <v-text-field
             v-model="internalValue"
-            :class="{'custom-text-input': true, 'validation-error': errors.has(name) }"
+            :class="{'input-group--error': hasError }"
             :type="type"
             :label="label"
             :placeholder="placeholder"
-            :name="name"
-        ></v-text-input>
-        <span class="validation-error" v-show="errors.has(name)">{{ errors.first(name) }}</span>
+            :rules="[getError]"
+        ></v-text-field>
     </div>
 </template>
 <style>
@@ -95,6 +95,18 @@
             },
             email() {
                 return this.type === 'email'
+            },
+            hasError() {
+                return this.verrors.has(this.name)
+            }
+        },
+        methods: {
+            getError() {
+                if (this.hasError) {
+                    return this.verrors.first(this.name)
+                } else {
+                    return true
+                }
             }
         },
         watch: {
