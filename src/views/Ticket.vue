@@ -88,6 +88,7 @@
                         </v-card>
                         <br>
                     </div>
+
                     <div v-if="!ticket.closed_at">
                         <v-text-field
                                 :label="$t('ticket.textarea')"
@@ -112,6 +113,9 @@
                                error
                                block>{{$t('ticket.send')}}
                         </v-btn>
+                    </div>
+
+                    <div class="mt-5">
 
                     </div>
                 </v-col>
