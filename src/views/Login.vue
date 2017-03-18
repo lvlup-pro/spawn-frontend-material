@@ -10,16 +10,16 @@
                         <v-card-text>
                             <h5>{{ $t('user.login.header') }}</h5>
                             <form @submit.prevent="" novalidate>
-                                <v-text-field
+                                <text-input
                                     :label="$t('user.username')"
                                     :placeholder="$t('user.placeholder.username')"
                                      name="username" v-model="username"
-                                ></v-text-field>
-                                <v-text-field
+                                ></text-input>
+                                <text-input
                                     :label="$t('user.password')"
                                     :placeholder="$t('user.placeholder.password')"
                                     name="password" type="password" v-model="password"
-                                ></v-text-field>
+                                ></text-input>
                                 <!--<v-select-->
                                 <!--:options="options"-->
                                 <!--label="Remember me for..."-->
