@@ -15,7 +15,6 @@
                     <table>
                         <thead>
                         <tr>
-                            <th class="select"><i class="fa fa-check"></i></th>
                             <th>{{$t('table.id')}}</th>
                             <th>{{$t('table.amount')}}</th>
                             <th>{{$t('table.created_at')}}</th>
@@ -23,10 +22,6 @@
                         </thead>
                         <tbody>
                             <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
-                                <td>
-                                    <v-checkbox :id="'checkbox' + index" filled
-                                                class="text-xs-center"></v-checkbox>
-                                </td>
                                 <td>
                                     #{{item.id}}
                                 </td>
