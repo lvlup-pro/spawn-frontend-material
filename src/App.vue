@@ -25,7 +25,7 @@
                 <v-list dense>
                     <v-divider light/>
                     <template v-for="item in sidebarItems">
-                        <v-list-sub-header v-if="item.header" v-text="$t(item.header)" />
+                        <v-subheader v-if="item.header" v-text="$t(item.header)" />
                         <v-list-item v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
                             <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link"
                                 @click.native="sidebarOpen = false">
@@ -409,6 +409,7 @@
 
     aside.sidebar div.list__tile__action {
         flex: 1 0 40px;
+        min-width: 40px;
     }
 
     aside.sidebar .list__tile--active .list__tile__title {
