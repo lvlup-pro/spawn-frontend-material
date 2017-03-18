@@ -89,14 +89,30 @@
                         <br>
                     </div>
                     <div v-if="!ticket.closed_at">
-                        <textarea :placeholder="$t('ticket.textarea')" v-model="msg"></textarea>
-                        <p>
-                            <span v-if="msg.length >= 0 && msg.length <= 1">{{msg.length}}/3000</span>
-                            <span id="counter-ok"
-                                  v-if="msg.length <= 3000 && msg.length >= 2">{{msg.length}}/3000</span>
-                            <span id="counter-slow-down" v-if="msg.length > 3000">{{msg.length}}/3000</span>
-                        </p>
-                        <v-btn @click.native="addTicketMessage(msg)" success>{{$t('ticket.send')}}</v-btn>
+                        <v-text-field
+                                :label="$t('ticket.textarea')"
+                                name="input-7-1"
+                                multi-line
+                                v-model="msg"
+                                counter
+                                max="3000"
+                        ></v-text-field>
+                        <v-btn v-if="msg.length >= 0 && msg.length <= 1"
+                               @click.native="addTicketMessage(msg)"
+                               grey
+                               block>{{$t('ticket.send')}}
+                        </v-btn>
+                        <v-btn v-if="msg.length <= 3000 && msg.length >= 2"
+                               @click.native="addTicketMessage(msg)"
+                               success
+                               block>{{$t('ticket.send')}}
+                        </v-btn>
+                        <v-btn v-if="msg.length > 3000"
+                               @click.native="addTicketMessage(msg)"
+                               error
+                               block>{{$t('ticket.send')}}
+                        </v-btn>
+
                     </div>
                 </v-col>
             </v-row>
@@ -104,14 +120,6 @@
     </div>
 </template>
 <style>
-    #counter-ok {
-        color: green;
-    }
-
-    #counter-slow-down {
-        color: red;
-    }
-
     textarea {
         width: 100%;
         border-bottom: 1px solid #ddd;
