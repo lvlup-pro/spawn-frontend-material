@@ -83,7 +83,7 @@
                             {{$t('vpsip.add.submit')}}
                         </v-btn>
                         <v-card>
-                            <v-card-text>
+                            <v-card-text class="ml-5 mr-5">
                                 <h2 class="title">{{$t('vpsip.add.header')}}</h2>
                             </v-card-text>
                             <v-card-text>
@@ -104,6 +104,9 @@
                                     :label="$t('vpsip.add.protocol')"
                                     v-model="protocol"
                                 ></v-select>
+                                <div class="pt-5"></div>
+                                <div class="pt-5"></div>
+                                <div class="pt-5"></div>
                             </v-card-text>
                             <v-card-row actions>
                                 <v-spacer></v-spacer>
