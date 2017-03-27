@@ -45,6 +45,7 @@
         "protocol": "Protokół",
         "start": "Start",
         "end": "Koniec",
+        "description": "Opis",
         "empty": {
             "services": "Brak usług",
             "payments": "Brak płatności",
