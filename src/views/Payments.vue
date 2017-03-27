@@ -17,6 +17,7 @@
                         <tr>
                             <th>{{$t('table.id')}}</th>
                             <th>{{$t('table.amount')}}</th>
+                            <th>{{$t('table.description')}}</th>
                             <th>{{$t('table.created_at')}}</th>
                         </tr>
                         </thead>
@@ -36,6 +37,9 @@
                                 <td v-if="item.amount < 0" class="red--text">
                                     {{item.amount}}
                                     <span class="hidden-sm-and-down">PLN</span>
+                                </td>
+                                <td>
+                                    {{ item.description }}
                                 </td>
                                 <td>
                                     {{item.created_at | prettyDateFormat}}
