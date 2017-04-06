@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.0-beta.11 (06.04.2017)
+
+### Features
+
++ Add payments description [#161](https://github.com/lvlup-pro/spawn-frontend-material/pull/161)
++ Vuetify 0.9.2 [#156](https://github.com/lvlup-pro/spawn-frontend-material/issues/156) [#160](https://github.com/lvlup-pro/spawn-frontend-material/pull/160)
+
 ## 3.0.0-beta.10 (14.03.2017)
 
 ### Features
