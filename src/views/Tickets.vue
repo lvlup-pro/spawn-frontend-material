@@ -63,7 +63,7 @@
         </v-container>
     </div>
 </template>
-<style>
+<style scoped>
     tr {
         cursor: pointer;
     }
