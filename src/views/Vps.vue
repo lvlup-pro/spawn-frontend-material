@@ -11,7 +11,8 @@
                             <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-info-circle"></i>
                                 <b>{{$t('vps.state')}}:&nbsp;</b>
-                                <v-chip v-if="locked && vps.abuse" label class="red white--text">{{$t('vps.locked')}}</v-chip>
+                                <v-chip v-if="locked && vps.abuse" label class="red white--text">{{$t('vps.locked')}}
+                                </v-chip>
                                 <v-chip v-else-if="locked" label class="red white--text">{{$t('vps.unpaid')}}</v-chip>
                                 <v-chip v-else-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
                                 <v-chip v-else label class="red white--text">{{$t('vps.off')}}</v-chip>
@@ -60,47 +61,59 @@
                     </v-row>
                 </v-card-text>
                 <v-card-row v-if="!locked" actions style="justify-content: flex-start">
-                    <v-modal v-if="on" v-model="disableModal">
+
+                    <v-dialog v-if="on" v-model="disableModal">
                         <v-btn slot="activator" error
-                            :loading="changingStatus" :disabled="changingStatus"
-                            class="white--text">
+                               :loading="changingStatus" :disabled="changingStatus"
+                               class="white--text">
                             {{$t('vps.disable.submit')}}
                         </v-btn>
-                        <v-card>
-                          <v-card-text>
-                            <h2 class="title">{{$t('vps.disable.header', {id: id, name: wrappedName})}}</h2>
-                          </v-card-text>
-                          <v-card-text class="subheading">{{$t('vps.disable.description')}}</v-card-text>
-                          <v-card-row actions>
-                            <v-spacer></v-spacer>
-                            <v-btn flat @click.native="disableModal = false" class="primary--text">{{$t('vps.disable.cancel')}}</v-btn>
-                            <v-btn flat @click.native="disable" class="primary--text">{{$t('vps.disable.submit')}}</v-btn>
-                          </v-card-row>
-                        </v-card>
-                    </v-modal>
-                    <v-modal v-if="on" v-model="rebootModal">
+                        <v-card-row>
+                            <v-card-title>{{$t('vps.disable.header', {id: id, name: wrappedName})}}</v-card-title>
+                        </v-card-row>
+                        <v-card-row>
+                            <v-card-text>
+                                {{$t('vps.disable.description')}}
+                            </v-card-text>
+                        </v-card-row>
+                        <v-card-row actions>
+                            <v-btn flat @click.native="disableModal = false">
+                                {{$t('vps.disable.cancel')}}
+                            </v-btn>
+                            <v-btn error @click.native="disable">{{$t('vps.disable.submit')}}
+                            </v-btn>
+                        </v-card-row>
+                    </v-dialog>
+
+                    <v-dialog v-if="on" v-model="rebootModal">
                         <v-btn slot="activator" warning
-                            :loading="changingStatus" :disabled="changingStatus"
-                            class="white--text">
+                               :loading="changingStatus" :disabled="changingStatus"
+                               class="white--text">
                             {{$t('vps.reboot.submit')}}
                         </v-btn>
-                        <v-card>
-                          <v-card-text>
-                            <h2 class="title">{{$t('vps.reboot.header', {id: id, name: wrappedName})}}</h2>
-                          </v-card-text>
-                          <v-card-text class="subheading">{{$t('vps.reboot.description')}}</v-card-text>
-                          <v-card-row actions>
-                            <v-spacer></v-spacer>
-                            <v-btn flat @click.native="rebootModal = false" class="primary--text">{{$t('vps.reboot.cancel')}}</v-btn>
-                            <v-btn flat @click.native="reboot" class="primary--text">{{$t('vps.reboot.submit')}}</v-btn>
-                          </v-card-row>
-                        </v-card>
-                    </v-modal>
+                        <v-card-row>
+                            <v-card-title>{{$t('vps.reboot.header', {id: id, name: wrappedName})}}</v-card-title>
+                        </v-card-row>
+                        <v-card-row>
+                            <v-card-text>
+                                {{$t('vps.reboot.description')}}
+                            </v-card-text>
+                        </v-card-row>
+                        <v-card-row actions>
+                            <v-btn flat @click.native="rebootModal = false">
+                                {{$t('vps.reboot.cancel')}}
+                            </v-btn>
+                            <v-btn warning @click.native="reboot">{{$t('vps.reboot.submit')}}
+                            </v-btn>
+                        </v-card-row>
+                    </v-dialog>
+
                     <v-btn v-if="off" success @click.native="enable"
-                        :loading="changingStatus" :disabled="changingStatus"
-                        class="white--text">
+                           :loading="changingStatus" :disabled="changingStatus"
+                           class="white--text">
                         {{$t('vps.turn_on')}}
                     </v-btn>
+
                 </v-card-row>
             </v-card>
             <div class="mb-4"></div>
@@ -189,17 +202,17 @@
                             <v-card-row>
                                 <i class="fa fa-fw fa-2x fa-pencil" style="padding-bottom: 1rem;"></i>
                                 <v-text-field
-                                    v-model="newname"
-                                    style="margin-bottom: 0;"
-                                    :label="$t('vps.name')"
-                                    :placeholder="$t('vps.placeholder.name')">
+                                        v-model="newname"
+                                        style="margin-bottom: 0;"
+                                        :label="$t('vps.name')"
+                                        :placeholder="$t('vps.placeholder.name')">
                                     {{vps.name}}
                                 </v-text-field>
                             </v-card-row>
                         </v-card-text>
                         <v-card-row actions style="justify-content: flex-start">
                             <v-btn :loading="changingSettings" :disabled="!settingsChanged"
-                                success @click.native="save" class="white--text">
+                                   success @click.native="save" class="white--text">
                                 {{$t('vps.save')}}
                             </v-btn>
                         </v-card-row>
@@ -216,8 +229,8 @@
                                 <v-list-tile>
                                     <v-list-tile-content>
                                         <v-list-tile-title>{{item}}</v-list-tile-title>
-                                        <v-list-tile-sub-title v-if="item === vps.ip.main" v-text="$t('vps.ipmain')" />
-                                        <v-list-tile-sub-title v-else v-text="$t('vps.ipadditional')" />
+                                        <v-list-tile-sub-title v-if="item === vps.ip.main" v-text="$t('vps.ipmain')"/>
+                                        <v-list-tile-sub-title v-else v-text="$t('vps.ipadditional')"/>
                                     </v-list-tile-content>
                                     <v-list-tile-action>
                                         <v-btn icon ripple @click.native="goToDdos(item)">
@@ -407,7 +420,7 @@
             stats() {
                 return this.$store.dispatch('vpsInfo', this.$route.params).then(() => {
                     this.$store.commit('setToolbarTitleArgs',
-                        Object.assign(this.$route.params, { name: this.wrappedName }))
+                        Object.assign(this.$route.params, {name: this.wrappedName}))
                 })
             },
             ips() {
