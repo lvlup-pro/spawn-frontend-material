@@ -60,7 +60,10 @@
         </v-container>
     </div>
 </template>
-<style>
+<style scope="props">
+    tr {
+        cursor: pointer;
+    }
 </style>
 <script>
     export default {
