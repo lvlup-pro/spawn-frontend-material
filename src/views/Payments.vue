@@ -1,65 +1,67 @@
 <template>
     <div>
         <v-container>
-            <div class="mt-4"></div>
-            <div class="text-xs-center">
-                <v-pagination :length.number="pagination.paging.total_pages"
-                              :disabled="loading"
-                              v-model="page"
+
+            <!-- pagination with margins for datatable -->
+            <div class="text-xs-center mt-4 mb-4">
+                <v-pagination
+                        v-if="page"
+                        :length.number="pagination.paging.total_pages"
+                        :disabled="loading"
+                        v-model="page"
                 ></v-pagination>
             </div>
-            <div class="mt-4"></div>
 
-            <v-card>
-                <v-table-overflow>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>{{$t('table.id')}}</th>
-                            <th>{{$t('table.amount')}}</th>
-                            <th>{{$t('table.description')}}</th>
-                            <th>{{$t('table.created_at')}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
-                                <td>
-                                    #{{item.id}}
-                                </td>
-                                <td v-if="item.amount > 0" class="green--text">
-                                    +{{item.amount}}
-                                    <span class="hidden-sm-and-down">PLN</span>
-                                </td>
-                                <td v-if="item.amount == 0">
-                                    {{item.amount}}
-                                    <span class="hidden-sm-and-down">PLN</span>
-                                </td>
-                                <td v-if="item.amount < 0" class="red--text">
-                                    {{item.amount}}
-                                    <span class="hidden-sm-and-down">PLN</span>
-                                </td>
-                                <td>
-                                    {{ item.description }}
-                                </td>
-                                <td>
-                                    {{item.created_at | prettyDateFormat}}
-                                    <span class="hidden-sm-and-down"> - {{item.created_at | prettyDateFrom}}</span>
-                                </td>
-                            </tr>
-                            <tr v-if="pagination.error" >
-                                <td colspan="100%" class="red--text text--darken-3 empty">
-                                    {{ $t('table.empty.payments') }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </v-table-overflow>
+            <v-card class="mb-4">
+                <!--
+                 <tr v-if="pagination.error">
+                            <td colspan="100%" class="red--text text--darken-3 empty">
+                                {{  }}
+                            </td>
+                </tr>
+                v-bind:search="search"
+                v-bind:items="pagination.items"
+                :rows-per-page="limit"
+                FIXME empty payments string
+                -->
+                <v-data-table
+                        v-bind:headers="headers"
+                        v-model="pagination.items"
+                        v-bind:no-data-text="$t('table.empty.payments')"
+                        hide-actions
+                        class="elevation-1"
+                >
+                    <template slot="items" scope="props">
+                        <!--<td class="text-xs-right">{{ props.item.id}}</td>-->
+                        <td>
+                            #{{props.item.id}}
+                        </td>
+                        <td v-if="props.item.amount > 0" class="green--text">
+                            +{{props.item.amount}}
+                            <span class="hidden-sm-and-down">PLN</span>
+                        </td>
+                        <td v-if="props.item.amount == 0">
+                            {{props.item.amount}}
+                            <span class="hidden-sm-and-down">PLN</span>
+                        </td>
+                        <td v-if="props.item.amount < 0" class="red--text">
+                            {{props.item.amount}}
+                            <span class="hidden-sm-and-down">PLN</span>
+                        </td>
+                        <td>
+                            {{ props.item.description}}
+                        </td>
+                        <td>
+                            {{props.item.created_at | prettyDateFormat}}
+                            <span class="hidden-sm-and-down"> - {{props.item.created_at | prettyDateFrom}}</span>
+                        </td>
+                    </template>
+                </v-data-table>
             </v-card>
         </v-container>
     </div>
 </template>
 <style scoped>
-tr {cursor:default}
 </style>
 <script>
     export default {
@@ -91,6 +93,31 @@ tr {cursor:default}
             },
             language() {
                 return this.$store.state.language
+            },
+            headers() {
+                return [
+                    {
+                        //sortable: false,
+                        left: true,
+                        text: this.$t('table.id'),
+                        value: this.$t('table.id')
+                    },
+                    {
+                        left: true,
+                        text: this.$t('table.amount'),
+                        value: this.$t('table.amount')
+                    },
+                    {
+                        left: true,
+                        text: this.$t('table.description'),
+                        value: this.$t('table.description')
+                    },
+                    {
+                        left: true,
+                        text: this.$t('table.created_at'),
+                        value: this.$t('table.created_at')
+                    }
+                ]
             }
         },
         data () {
@@ -124,9 +151,6 @@ tr {cursor:default}
                     description: 'Example payments description',
                     keywords: 'vuetify, payments'
                 }
-            },
-            goToTicket(id) {
-                this.$router.push('/' + this.$route.params.lg + '/ticket/' + id)
             }
         }
     }
