@@ -14,11 +14,6 @@
 
             <v-card class="mb-4">
                 <!--
-                 <tr v-if="pagination.error">
-                            <td colspan="100%" class="red--text text--darken-3 empty">
-                                {{  }}
-                            </td>
-                </tr>
                 v-bind:search="search"
                 v-bind:items="pagination.items"
                 :rows-per-page="limit"
