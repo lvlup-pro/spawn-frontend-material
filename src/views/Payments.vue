@@ -17,7 +17,6 @@
                 v-bind:search="search"
                 v-bind:items="pagination.items"
                 :rows-per-page="limit"
-                FIXME empty payments string
                 -->
                 <v-data-table
                         v-bind:headers="headers"
