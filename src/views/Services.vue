@@ -110,31 +110,37 @@
             headers() {
                 return [
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.service'),
                         value: this.$t('table.service')
                     },
                     {
+                        sortable: true,
                         left: true,
                         text: this.$t('table.id'),
                         value: this.$t('table.id')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.name'),
                         value: this.$t('table.name')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.ip'),
                         value: this.$t('table.ip')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.status'),
                         value: this.$t('table.status')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.payed_to'),
                         value: this.$t('table.payed_to')

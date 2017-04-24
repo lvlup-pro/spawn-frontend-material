@@ -84,16 +84,19 @@
             headers() {
                 return [
                     {
+                        sortable: true,
                         left: true,
                         text: this.$t('table.id'),
                         value: this.$t('table.id')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.start'),
                         value: this.$t('table.start')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.end'),
                         value: this.$t('table.end')

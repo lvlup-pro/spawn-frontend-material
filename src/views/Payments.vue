@@ -94,22 +94,25 @@
             headers() {
                 return [
                     {
-                        //sortable: false,
+                        sortable: true,
                         left: true,
                         text: this.$t('table.id'),
                         value: this.$t('table.id')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.amount'),
                         value: this.$t('table.amount')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.description'),
                         value: this.$t('table.description')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.created_at'),
                         value: this.$t('table.created_at')

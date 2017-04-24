@@ -101,21 +101,25 @@
             headers() {
                 return [
                     {
+                        sortable: true,
                         left: true,
                         text: this.$t('table.id'),
                         value: this.$t('table.id')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.status'),
                         value: this.$t('table.status')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.subject'),
                         value: this.$t('table.subject')
                     },
                     {
+                        sortable: false,
                         left: true,
                         text: this.$t('table.created_at'),
                         value: this.$t('table.created_at')

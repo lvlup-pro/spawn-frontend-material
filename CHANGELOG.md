@@ -12,6 +12,7 @@
 ### Fixes
 
 + More responsive tables [#166](https://github.com/lvlup-pro/spawn-frontend-material/pull/166)
++ Enter key works correctly for Login form again
 
 ## 3.0.0-beta.11 (06.04.2017)
 
