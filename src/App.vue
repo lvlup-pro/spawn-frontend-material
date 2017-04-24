@@ -1,18 +1,44 @@
 <template>
     <v-app top-navbar left-fixed-sidebar>
         <v-snackbar :timeout="2000" :top="true" :right="true" v-model="noAuth">{{ $t('auth.no') }}</v-snackbar>
-        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="alreadyAuth">{{ $t('auth.already') }}</v-snackbar>
-        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="invalidSession">{{ $t('auth.invalidsession') }}</v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="alreadyAuth">{{ $t('auth.already') }}
+        </v-snackbar>
+        <v-snackbar :timeout="2000" :top="true" :right="true" v-model="invalidSession">{{ $t('auth.invalidsession') }}
+        </v-snackbar>
         <header>
             <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
             <v-toolbar class="green">
-                <v-toolbar-side-icon @click.native.stop="sidebarOpen = !sidebarOpen" class="hidden-md-and-up white--text">
+                <v-toolbar-side-icon @click.native.stop="sidebarOpen = !sidebarOpen"
+                                     class="hidden-md-and-up white--text">
                     <v-icon class="sideicon">reorder</v-icon>
                 </v-toolbar-side-icon>
                 <v-toolbar-logo v-html="getToolbarTitle()"></v-toolbar-logo>
             </v-toolbar>
         </header>
         <main>
+            <v-dialog v-model="langDialog">
+                <v-card>
+                    <v-card-title>{{$t('sidebar.selectlang')}}</v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-row height="300px">
+                        <v-card-text>
+                            <v-list two-line>
+                                <v-list-item v-for="item in sidebarLanguages" v-if="language != item.code"
+                                             @click="changeLang(item.code)">
+                                    <v-list-tile>
+                                        <v-list-tile-action>
+                                            <img :src="'/public/flags/' + item.flag + '.png'">
+                                        </v-list-tile-action>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title v-text="item.name"/>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                </v-list-item>
+                            </v-list>
+                        </v-card-text>
+                    </v-card-row>
+                </v-card>
+            </v-dialog>
             <v-sidebar fixed ripple router unshift v-model="sidebarOpen">
                 <router-link :to="'/' + language + '/home'">
                     <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
@@ -25,10 +51,20 @@
                 <v-list dense>
                     <v-divider light/>
                     <template v-for="item in sidebarItems">
-                        <v-subheader v-if="item.header" v-text="$t(item.header)" />
-                        <v-list-item v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
+                        <v-subheader v-if="item.header" v-text="$t(item.header)"/>
+                        <v-list-item
+                            v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
                             <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link"
-                                @click.native="sidebarOpen = false">
+                                         @click.native="sidebarOpen = false">
+                                <v-list-tile-action>
+                                    <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="$t(item.title, item.args)"/>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                            <v-list-tile v-else-if="item.lang"
+                                         @click.native.stop="langDialog = !langDialog">
                                 <v-list-tile-action>
                                     <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                                 </v-list-tile-action>
@@ -46,28 +82,6 @@
                             </v-list-tile>
                         </v-list-item>
                     </template>
-                    <v-list-group :active="sidebarLanguagesOpen">
-                        <v-list-item slot="item">
-                            <v-list-tile @click.native="sidebarLanguagesOpen = true">
-                                <v-list-tile-action>
-                                    <i class="fa fa-fw fa-2x fa-chevron-down"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>{{$t('sidebar.selectlang')}}</v-list-tile-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                        <v-list-item v-for="item in sidebarLanguages" v-if="language != item.code" @click="changeLang(item.code)">
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                    <img :src="'/public/flags/' + item.flag + '.png'">
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="item.name" />
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                    </v-list-group>
                 </v-list>
             </v-sidebar>
             <v-content>
@@ -137,17 +151,18 @@
             },
             sidebarItems() {
                 return [
-                    { header: 'sidebar.account' },
-                    { logged: 'no', title: 'sidebar.login', link: 'login', icon: 'sign-in' },
-                    { logged: 'yes', title: 'sidebar.profile', link: 'profile', icon: 'user', args: this.account },
-                    { logged: 'yes', title: 'sidebar.payments', icon: 'money', args: this.wallet },
-                    { logged: 'yes', title: 'sidebar.paymenthistory', link: 'payment', icon: 'history' },
-                    { header: 'sidebar.menu' },
-                    { title: 'sidebar.home', link: 'home', icon: 'home' },
-                    { logged: 'yes', title: 'sidebar.services', link: 'service', icon: 'server' },
-                    { logged: 'yes', title: 'sidebar.help', link: 'ticket', icon: 'question-circle' },
-                    { logged: 'yes', title: 'sidebar.logout', method: this.logOut, icon: 'sign-out' },
-                    { header: 'sidebar.lang' }
+                    {header: 'sidebar.account'},
+                    {logged: 'no', title: 'sidebar.login', link: 'login', icon: 'sign-in'},
+                    {logged: 'yes', title: 'sidebar.profile', link: 'profile', icon: 'user', args: this.account},
+                    {logged: 'yes', title: 'sidebar.payments', icon: 'money', args: this.wallet},
+                    {logged: 'yes', title: 'sidebar.paymenthistory', link: 'payment', icon: 'history'},
+                    {header: 'sidebar.menu'},
+                    {title: 'sidebar.home', link: 'home', icon: 'home'},
+                    {logged: 'yes', title: 'sidebar.services', link: 'service', icon: 'server'},
+                    {logged: 'yes', title: 'sidebar.help', link: 'ticket', icon: 'question-circle'},
+                    {logged: 'yes', title: 'sidebar.logout', method: this.logOut, icon: 'sign-out'},
+                    {header: 'sidebar.lang'},
+                    {title: 'sidebar.selectlang', lang: true, icon: 'globe'}
                 ]
             },
             sidebarLanguages() {
@@ -164,7 +179,8 @@
                 lg: '',
                 sidebarOpen: false,
                 sidebarLanguagesOpen: false,
-                invalidSession: false
+                invalidSession: false,
+                langDialog: false
             }
         },
         watch: {
@@ -175,10 +191,10 @@
                     this.$router.push('/' + this.language + '/login')
                 }
             },
-            toolbarTitle: function(newValue, oldValue) {
+            toolbarTitle: function (newValue, oldValue) {
                 this.getToolbarTitle(true)
             },
-            toolbarTitleArgs: function(newValue, oldValue) {
+            toolbarTitleArgs: function (newValue, oldValue) {
                 this.getToolbarTitle(true)
             }
         },

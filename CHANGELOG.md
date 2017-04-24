@@ -5,9 +5,13 @@
 ### Features
 
 + Vuetify 0.11.0 [#166](https://github.com/lvlup-pro/spawn-frontend-material/pull/166)
-+ More responsive tables [#166](https://github.com/lvlup-pro/spawn-frontend-material/pull/166)
++ Language selector based on dialog instead of grouped list
 + Date and time for DDoS attacks list
 + Username or email in Login input placeholder
+
+### Fixes
+
++ More responsive tables [#166](https://github.com/lvlup-pro/spawn-frontend-material/pull/166)
 
 ## 3.0.0-beta.11 (06.04.2017)
 
