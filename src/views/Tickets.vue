@@ -1,57 +1,58 @@
 <template>
     <div>
-        <v-container>
-
-            <!-- pagination with margins for datatable -->
-            <div class="text-xs-center mt-4 mb-4">
-                <v-pagination
-                        v-if="page"
-                        :length.number="pagination.paging.total_pages"
-                        :disabled="loading"
-                        v-model="page"
-                ></v-pagination>
-            </div>
-
-            <v-card class="mb-4">
-                <v-data-table
-                        v-bind:headers="headers"
-                        v-model="pagination.items"
-                        v-bind:no-data-text="$t('table.empty.tickets')"
-                        hide-actions
-                        class="elevation-1"
-                >
-                    <template slot="items" scope="props">
-                        <td @click="goToTicket(props.item.id)">#{{props.item.id}}</td>
-                        <td @click="goToTicket(props.item.id)" style="white-space: nowrap;">
-                            <!--
-                            <span v-if="!props.item.closed_at && !props.item.staff_response_needed"
-                                v-tooltip:bottom="{ html: $t('props.item.status.waiting.long') }">
-                                <i class="fa fa-circle blue--text"></i> {{$t('props.item.status.waiting.short')}}
-                            </span>
-                            <span v-if="!props.item.closed_at && props.item.staff_response_needed"
-                                v-tooltip:bottom="{ html: $t('props.item.status.working.long') }">
-                                <i class="fa fa-circle yellow--text"></i> {{$t('props.item.status.working.short')}}
-                            </span>
-                            <span v-if="props.item.closed_at"
-                                v-tooltip:bottom="{ html: $t('props.item.status.closed.long') }">
-                                <i class="fa fa-circle red--text"></i> {{$t('props.item.status.closed.short')}}
-                            !-->
-                            <span v-if="!props.item.closed">
+        <v-container fluid>
+            <v-row>
+                <v-col xs12 md10 offset-md1>
+                    <!-- pagination with margins for datatable -->
+                    <div class="text-xs-center mt-4 mb-4">
+                        <v-pagination
+                                v-if="page"
+                                :length.number="pagination.paging.total_pages"
+                                :disabled="loading"
+                                v-model="page"
+                        ></v-pagination>
+                    </div>
+                    <v-card class="mb-4">
+                        <v-data-table
+                                v-bind:headers="headers"
+                                v-model="pagination.items"
+                                v-bind:no-data-text="$t('table.empty.tickets')"
+                                hide-actions
+                                class="elevation-1"
+                        >
+                            <template slot="items" scope="props">
+                                <td @click="goToTicket(props.item.id)">#{{props.item.id}}</td>
+                                <td @click="goToTicket(props.item.id)" style="white-space: nowrap;">
+                                    <!--
+                                    <span v-if="!props.item.closed_at && !props.item.staff_response_needed"
+                                        v-tooltip:bottom="{ html: $t('props.item.status.waiting.long') }">
+                                        <i class="fa fa-circle blue--text"></i> {{$t('props.item.status.waiting.short')}}
+                                    </span>
+                                    <span v-if="!props.item.closed_at && props.item.staff_response_needed"
+                                        v-tooltip:bottom="{ html: $t('props.item.status.working.long') }">
+                                        <i class="fa fa-circle yellow--text"></i> {{$t('props.item.status.working.short')}}
+                                    </span>
+                                    <span v-if="props.item.closed_at"
+                                        v-tooltip:bottom="{ html: $t('props.item.status.closed.long') }">
+                                        <i class="fa fa-circle red--text"></i> {{$t('props.item.status.closed.short')}}
+                                    !-->
+                                    <span v-if="!props.item.closed">
                                 <i class="fa fa-circle green--text"></i> {{$t('ticket.status.open.short')}}
                             </span>
-                            <span v-if="props.item.closed">
+                                    <span v-if="props.item.closed">
                                 <i class="fa fa-circle red--text"></i> {{$t('ticket.status.closed.short')}}
                             </span>
-                        </td>
-                        <td @click="goToTicket(props.item.id)">{{props.item.subject}}</td>
-                        <td @click="goToTicket(props.item.id)">
-                            {{props.item.created_at | prettyDateFormat}}
-                            <span class="hidden-sm-and-down"> - {{props.item.created_at | prettyDateFrom}}</span>
-                        </td>
-                    </template>
-                </v-data-table>
-            </v-card>
-
+                                </td>
+                                <td @click="goToTicket(props.item.id)">{{props.item.subject}}</td>
+                                <td @click="goToTicket(props.item.id)">
+                                    {{props.item.created_at | prettyDateFormat}}
+                                    <span class="hidden-sm-and-down"> - {{props.item.created_at | prettyDateFrom}}</span>
+                                </td>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>

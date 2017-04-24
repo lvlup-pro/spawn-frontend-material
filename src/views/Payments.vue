@@ -1,57 +1,60 @@
 <template>
     <div>
-        <v-container>
-
-            <!-- pagination with margins for datatable -->
-            <div class="text-xs-center mt-4 mb-4">
-                <v-pagination
-                        v-if="page"
-                        :length.number="pagination.paging.total_pages"
-                        :disabled="loading"
-                        v-model="page"
-                ></v-pagination>
-            </div>
-
-            <v-card class="mb-4">
-                <!--
-                v-bind:search="search"
-                v-bind:items="pagination.items"
-                :rows-per-page="limit"
-                -->
-                <v-data-table
-                        v-bind:headers="headers"
-                        v-model="pagination.items"
-                        v-bind:no-data-text="$t('table.empty.payments')"
-                        hide-actions
-                        class="elevation-1"
-                >
-                    <template slot="items" scope="props">
-                        <!--<td class="text-xs-right">{{ props.item.id}}</td>-->
-                        <td>
-                            #{{props.item.id}}
-                        </td>
-                        <td v-if="props.item.amount > 0" class="green--text">
-                            +{{props.item.amount}}
-                            <span class="hidden-sm-and-down">PLN</span>
-                        </td>
-                        <td v-if="props.item.amount == 0">
-                            {{props.item.amount}}
-                            <span class="hidden-sm-and-down">PLN</span>
-                        </td>
-                        <td v-if="props.item.amount < 0" class="red--text">
-                            {{props.item.amount}}
-                            <span class="hidden-sm-and-down">PLN</span>
-                        </td>
-                        <td>
-                            {{ props.item.description}}
-                        </td>
-                        <td>
-                            {{props.item.created_at | prettyDateFormat}}
-                            <span class="hidden-sm-and-down"> - {{props.item.created_at | prettyDateFrom}}</span>
-                        </td>
-                    </template>
-                </v-data-table>
-            </v-card>
+        <v-container fluid>
+            <v-row>
+                <v-col xs12 md10 offset-md1>
+                    <!-- pagination with margins for datatable -->
+                    <div class="text-xs-center mt-4 mb-4">
+                        <v-pagination
+                            v-if="page"
+                            :length.number="pagination.paging.total_pages"
+                            :disabled="loading"
+                            v-model="page"
+                        ></v-pagination>
+                    </div>
+                    <v-card class="mb-4">
+                        <!--
+                        v-bind:search="search"
+                        v-bind:items="pagination.items"
+                        :rows-per-page="limit"
+                        -->
+                        <v-data-table
+                            v-bind:headers="headers"
+                            v-model="pagination.items"
+                            v-bind:no-data-text="$t('table.empty.payments')"
+                            hide-actions
+                            class="elevation-1"
+                        >
+                            <template slot="items" scope="props">
+                                <!--<td class="text-xs-right">{{ props.item.id}}</td>-->
+                                <td>
+                                    #{{props.item.id}}
+                                </td>
+                                <td v-if="props.item.amount > 0" class="green--text">
+                                    +{{props.item.amount}}
+                                    <span class="hidden-sm-and-down">PLN</span>
+                                </td>
+                                <td v-if="props.item.amount == 0">
+                                    {{props.item.amount}}
+                                    <span class="hidden-sm-and-down">PLN</span>
+                                </td>
+                                <td v-if="props.item.amount < 0" class="red--text">
+                                    {{props.item.amount}}
+                                    <span class="hidden-sm-and-down">PLN</span>
+                                </td>
+                                <td>
+                                    {{ props.item.description}}
+                                </td>
+                                <td>
+                                    {{props.item.created_at | prettyDateFormat}}
+                                    <span
+                                        class="hidden-sm-and-down"> - {{props.item.created_at | prettyDateFrom}}</span>
+                                </td>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>

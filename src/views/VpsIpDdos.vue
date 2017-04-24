@@ -1,46 +1,47 @@
 <template>
     <div>
-        <v-container>
-
-            <!-- pagination with margins for datatable -->
-            <div class="text-xs-center mt-4 mb-4">
-                <v-pagination
-                        v-if="page"
-                        :length.number="pagination.paging.total_pages"
-                        :disabled="loading"
-                        v-model="page"
-                ></v-pagination>
-            </div>
-
-            <v-card class="mb-4">
-                <v-data-table
-                        v-bind:headers="headers"
-                        v-model="pagination.items"
-                        v-bind:no-data-text="$t('table.empty.ddos')"
-                        hide-actions
-                        class="elevation-1"
-                >
-                    <template slot="items" scope="props">
-                        <td>
-                            #{{props.item.id}}
-                        </td>
-                        <td>
-                            {{props.item.started_at | prettyDateTime}}
-                            <span>- {{props.item.started_at | prettyDateFrom}}</span>
-                        </td>
-                        <td>
+        <v-container fluid>
+            <v-row>
+                <v-col xs12 md10 offset-md1>
+                    <!-- pagination with margins for datatable -->
+                    <div class="text-xs-center mt-4 mb-4">
+                        <v-pagination
+                            v-if="page"
+                            :length.number="pagination.paging.total_pages"
+                            :disabled="loading"
+                            v-model="page"
+                        ></v-pagination>
+                    </div>
+                    <v-card class="mb-4">
+                        <v-data-table
+                            v-bind:headers="headers"
+                            v-model="pagination.items"
+                            v-bind:no-data-text="$t('table.empty.ddos')"
+                            hide-actions
+                            class="elevation-1"
+                        >
+                            <template slot="items" scope="props">
+                                <td>
+                                    #{{props.item.id}}
+                                </td>
+                                <td>
+                                    {{props.item.started_at | prettyDateTime}}
+                                    <span>- {{props.item.started_at | prettyDateFrom}}</span>
+                                </td>
+                                <td>
                             <span v-if="props.item.ended_at === null">
                                 -
                             </span>
-                            <span v-else>
+                                    <span v-else>
                                 {{props.item.ended_at | prettyDateTime}}
                             </span>
-                            <span>- {{props.item.ended_at | prettyDateFrom}}</span>
-                        </td>
-                    </template>
-                </v-data-table>
-            </v-card>
-
+                                    <span>- {{props.item.ended_at | prettyDateFrom}}</span>
+                                </td>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>
