@@ -9,7 +9,7 @@
                     <v-card class="mb-5">
                         <v-card-text>
                             <h5>{{ $t('user.login.header') }}</h5>
-                            <form @submit.prevent="" novalidate>
+                            <form @submit.prevent="" novalidate autocomplete="on">
                                 <text-input
                                     :label="$t('user.placeholder.username')"
                                      name="username" v-model="username"
