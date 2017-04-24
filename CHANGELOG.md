@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0-beta.12
+## 3.0.0-beta.12 (24.04.2017)
 
 ### Features
 
