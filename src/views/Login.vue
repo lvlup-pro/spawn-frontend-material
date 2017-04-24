@@ -11,8 +11,7 @@
                             <h5>{{ $t('user.login.header') }}</h5>
                             <form @submit.prevent="" novalidate>
                                 <text-input
-                                    :label="$t('user.username')"
-                                    :placeholder="$t('user.placeholder.username')"
+                                    :label="$t('user.placeholder.username')"
                                      name="username" v-model="username"
                                 ></text-input>
                                 <text-input

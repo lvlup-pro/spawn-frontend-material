@@ -84,7 +84,7 @@
         "repeatpassword": "Powtórz hasło",
         "fullname": "Imię i nazwisko",
         "placeholder": {
-            "username": "j.kowalski",
+            "username": "Login lub e-mail",
             "email": "jan.kowalski@example.com",
             "password": "********",
             "fullname": "Jan Kowalski"

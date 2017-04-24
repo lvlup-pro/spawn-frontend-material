@@ -84,7 +84,7 @@
         "repeatpassword": "Repeat password",
         "fullname": "Full name",
         "placeholder": {
-            "username": "j.doe",
+            "username": "Username or e-mail",
             "email": "john.doe@example.com",
             "password": "********",
             "fullname": "John Doe"
