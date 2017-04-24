@@ -1,245 +1,274 @@
 <template>
     <div>
         <v-container id="vps-stats" v-if="!loading">
-            <v-card>
-                <v-card-row class="grey darken-3">
-                    <v-card-title class="white--text">{{$t('vps.control')}}</v-card-title>
-                </v-card-row>
-                <v-card-text>
-                    <v-row>
-                        <v-col md6 xs12>
-                            <v-card-row>
-                                <i class="fa fa-fw fa-2x fa-info-circle"></i>
-                                <b>{{$t('vps.state')}}:&nbsp;</b>
-                                <v-chip v-if="locked && vps.abuse" label class="red white--text">{{$t('vps.locked')}}</v-chip>
-                                <v-chip v-else-if="locked" label class="red white--text">{{$t('vps.unpaid')}}</v-chip>
-                                <v-chip v-else-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
-                                <v-chip v-else label class="red white--text">{{$t('vps.off')}}</v-chip>
-                            </v-card-row>
-                            <v-card-row>
-                                <i class="fa fa-fw fa-2x fa-server"></i>
-                                <b>{{$t('vps.virtualization')}}:&nbsp;</b>
-                                {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}
-                            </v-card-row>
-                            <v-card-row v-if="vps.ip">
-                                <i class="fa fa-fw fa-2x fa-globe"></i>
-                                <b>{{$t('vps.ips')}}:&nbsp;</b>
-                                <u v-if="vps.ip.additional.length > 0">{{vps.ip.main}}</u>
-                                <span v-else>{{vps.ip.main}}</span>
-                                <span v-for="(item, index) in vps.ip.additional">
-                                	, {{item}}
-                                </span>
-                            </v-card-row>
-                        </v-col>
-                        <v-col md6 xs12>
-                            <v-card-row v-if="on">
-                                <i class="fa fa-fw fa-2x fa-clock-o"></i>
-                                <b>{{$t('vps.uptime')}}:&nbsp;</b>
-                                {{upfrom | prettyDateFormat}}
-                                <span class="hidden-sm-and-down">- {{upfrom | prettyDateFrom}}</span>
-                            </v-card-row>
-                            <v-card-row>
-                                <i class="fa fa-fw fa-2x fa-calendar-plus-o"></i>
-                                <b>{{$t('vps.createdat')}}:&nbsp;</b>
-                                {{vps.created_at | prettyDateFormat}}
-                                <span class="hidden-sm-and-down">- {{vps.created_at | prettyDateFrom}}</span>
-                            </v-card-row>
-                            <v-card-row v-if="locked">
-                                <i class="fa fa-fw fa-2x fa-calendar-times-o"></i>
-                                <b>{{$t('vps.lockedfrom')}}:&nbsp;</b>
-                                {{vps.payed_to | prettyDateFormat}}
-                                <span class="hidden-sm-and-down">- {{vps.payed_to | prettyDateFrom}}</span>
-                            </v-card-row>
-                            <v-card-row v-else>
-                                <i class="fa fa-fw fa-2x fa-calendar-check-o"></i>
-                                <b>{{$t('vps.activeto')}}:&nbsp;</b>
-                                {{vps.payed_to | prettyDateFormat}}
-                                <span class="hidden-sm-and-down">- {{vps.payed_to | prettyDateFrom}}</span>
-                            </v-card-row>
-                        </v-col>
-                    </v-row>
-                </v-card-text>
-                <v-card-row v-if="!locked" actions style="justify-content: flex-start">
-                    <v-modal v-if="on" v-model="disableModal">
-                        <v-btn slot="activator" error
-                            :loading="changingStatus" :disabled="changingStatus"
-                            class="white--text">
-                            {{$t('vps.disable.submit')}}
-                        </v-btn>
-                        <v-card>
-                          <v-card-text>
-                            <h2 class="title">{{$t('vps.disable.header', {id: id, name: wrappedName})}}</h2>
-                          </v-card-text>
-                          <v-card-text class="subheading">{{$t('vps.disable.description')}}</v-card-text>
-                          <v-card-row actions>
-                            <v-spacer></v-spacer>
-                            <v-btn flat @click.native="disableModal = false" class="primary--text">{{$t('vps.disable.cancel')}}</v-btn>
-                            <v-btn flat @click.native="disable" class="primary--text">{{$t('vps.disable.submit')}}</v-btn>
-                          </v-card-row>
-                        </v-card>
-                    </v-modal>
-                    <v-modal v-if="on" v-model="rebootModal">
-                        <v-btn slot="activator" warning
-                            :loading="changingStatus" :disabled="changingStatus"
-                            class="white--text">
-                            {{$t('vps.reboot.submit')}}
-                        </v-btn>
-                        <v-card>
-                          <v-card-text>
-                            <h2 class="title">{{$t('vps.reboot.header', {id: id, name: wrappedName})}}</h2>
-                          </v-card-text>
-                          <v-card-text class="subheading">{{$t('vps.reboot.description')}}</v-card-text>
-                          <v-card-row actions>
-                            <v-spacer></v-spacer>
-                            <v-btn flat @click.native="rebootModal = false" class="primary--text">{{$t('vps.reboot.cancel')}}</v-btn>
-                            <v-btn flat @click.native="reboot" class="primary--text">{{$t('vps.reboot.submit')}}</v-btn>
-                          </v-card-row>
-                        </v-card>
-                    </v-modal>
-                    <v-btn v-if="off" success @click.native="enable"
-                        :loading="changingStatus" :disabled="changingStatus"
-                        class="white--text">
-                        {{$t('vps.turn_on')}}
-                    </v-btn>
-                </v-card-row>
-            </v-card>
-            <div class="mb-4"></div>
-            <v-card v-if="on">
-                <v-card-row class="grey darken-3">
-                    <v-card-title class="white--text">{{$t('vps.resources')}}</v-card-title>
-                </v-card-row>
-                <v-card-text>
-                    <v-row>
-                        <v-col md6 xs12>
-                            <h6>{{$t('vps.cpu')}}: {{vps.cpu}}% </h6>
-                            <div class="display-1"></div>
-                            <progress-linear-color v-model="vps.cpu"></progress-linear-color>
-                        </v-col>
-                        <v-col md6 xs12>
-                            <h6>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h6>
-                            <progress-linear-color v-model="ram"></progress-linear-color>
-                        </v-col>
-                        <v-col md6 xs12 v-if="vps.virt == 'openvz'">
-                            <h6>{{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h6>
-                            <progress-linear-color v-model="disk"></progress-linear-color>
-                        </v-col>
-                        <v-col md6 xs12 v-if="vps.virt == 'openvz'">
-                            <h6>{{$t('vps.swap')}}: {{swap}}% ({{vps.swap_mb}} MB/{{vps.max_swap_mb}} MB)</h6>
-                            <progress-linear-color v-model="swap"></progress-linear-color>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col md6 xs12>
-                            <h6>{{$t('vps.network_rt')}}:</h6>
-                            <v-chip label outline class="green green--text">
-                                <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                                {{vps.net_in_bps | prettyBytes}}/s
-                            </v-chip>
-                            <v-chip label outline class="blue blue--text">
-                                <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                                {{vps.net_out_bps | prettyBytes}}/s
-                            </v-chip>
-                        </v-col>
-                        <v-col md6 xs12>
-                            <h6>{{$t('vps.network_all')}}:</h6>
-                            <v-chip label outline class="green green--text">
-                                <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                                {{vps.net_in_b | prettyBytes}}
-                            </v-chip>
-                            <v-chip label outline class="blue blue--text">
-                                <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                                {{vps.net_out_b | prettyBytes}}
-                            </v-chip>
-                        </v-col>
-                    </v-row>
-                    <v-row v-if="vps.virt == 'kvm'">
-                        <v-col md6 xs12>
-                            <h6>{{$t('vps.disk_rt')}}:</h6>
-                            <v-chip label outline class="green green--text">
-                                <i class="fa fa-fw fa-lg fa-cloud-download"></i>
-                                {{vps.disk_read_bps | prettyBytes}}/s
-                            </v-chip>
-                            <v-chip label outline class="blue blue--text">
-                                <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
-                                {{vps.disk_write_bps | prettyBytes}}/s
-                            </v-chip>
-                        </v-col>
-                        <v-col md6 xs12>
-                            <h6>{{$t('vps.disk_all')}}:</h6>
-                            <v-chip label outline class="green green--text">
-                                <i class="fa fa-fw fa-lg fa-upload"></i>
-                                {{vps.disk_read_b | prettyBytes}}
-                            </v-chip>
-                            <v-chip label outline class="blue blue--text">
-                                <i class="fa fa-fw fa-lg fa-download"></i>
-                                {{vps.disk_write_b | prettyBytes}}
-                            </v-chip>
-                        </v-col>
-                    </v-row>
-                </v-card-text>
-            </v-card>
             <v-row>
-                <v-col md6 xs12>
-                    <div class="mb-4"></div>
-                    <v-card v-if="!locked">
+                <v-col xs12>
+                    <v-card>
                         <v-card-row class="grey darken-3">
-                            <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
+                            <v-card-title class="white--text">{{$t('vps.control')}}</v-card-title>
                         </v-card-row>
                         <v-card-text>
-                            <v-card-row>
-                                <i class="fa fa-fw fa-2x fa-pencil" style="padding-bottom: 1rem;"></i>
-                                <v-text-field
-                                    v-model="newname"
-                                    style="margin-bottom: 0;"
-                                    :label="$t('vps.name')"
-                                    :placeholder="$t('vps.placeholder.name')">
-                                    {{vps.name}}
-                                </v-text-field>
-                            </v-card-row>
+                            <v-row>
+                                <v-col md6 xs12>
+                                    <v-card-row>
+                                        <i class="fa fa-fw fa-2x fa-info-circle"></i>
+                                        <b>{{$t('vps.state')}}:&nbsp;</b>
+                                        <v-chip v-if="locked && vps.abuse" label class="red white--text">
+                                            {{$t('vps.locked')}}
+                                        </v-chip>
+                                        <v-chip v-else-if="locked" label class="red white--text">{{$t('vps.unpaid')}}
+                                        </v-chip>
+                                        <v-chip v-else-if="on" label class="green white--text">{{$t('vps.on')}}</v-chip>
+                                        <v-chip v-else label class="red white--text">{{$t('vps.off')}}</v-chip>
+                                    </v-card-row>
+                                    <v-card-row>
+                                        <i class="fa fa-fw fa-2x fa-server"></i>
+                                        <b>{{$t('vps.virtualization')}}:&nbsp;</b>
+                                        {{ {kvm: 'KVM', openvz: 'OpenVZ'}[vps.virt] }}
+                                    </v-card-row>
+                                    <v-card-row v-if="vps.ip">
+                                        <i class="fa fa-fw fa-2x fa-globe"></i>
+                                        <b>{{$t('vps.ips')}}:&nbsp;</b>
+                                        <u v-if="vps.ip.additional.length > 0">{{vps.ip.main}}</u>
+                                        <span v-else>{{vps.ip.main}}</span>
+                                        <span v-for="(item, index) in vps.ip.additional">
+                                	, {{item}}
+                                </span>
+                                    </v-card-row>
+                                </v-col>
+                                <v-col md6 xs12>
+                                    <v-card-row v-if="on">
+                                        <i class="fa fa-fw fa-2x fa-clock-o"></i>
+                                        <b>{{$t('vps.uptime')}}:&nbsp;</b>
+                                        {{upfrom | prettyDateFormat}}
+                                        <span class="hidden-sm-and-down">- {{upfrom | prettyDateFrom}}</span>
+                                    </v-card-row>
+                                    <v-card-row>
+                                        <i class="fa fa-fw fa-2x fa-calendar-plus-o"></i>
+                                        <b>{{$t('vps.createdat')}}:&nbsp;</b>
+                                        {{vps.created_at | prettyDateFormat}}
+                                        <span class="hidden-sm-and-down">- {{vps.created_at | prettyDateFrom}}</span>
+                                    </v-card-row>
+                                    <v-card-row v-if="locked">
+                                        <i class="fa fa-fw fa-2x fa-calendar-times-o"></i>
+                                        <b>{{$t('vps.lockedfrom')}}:&nbsp;</b>
+                                        {{vps.payed_to | prettyDateFormat}}
+                                        <span class="hidden-sm-and-down">- {{vps.payed_to | prettyDateFrom}}</span>
+                                    </v-card-row>
+                                    <v-card-row v-else>
+                                        <i class="fa fa-fw fa-2x fa-calendar-check-o"></i>
+                                        <b>{{$t('vps.activeto')}}:&nbsp;</b>
+                                        {{vps.payed_to | prettyDateFormat}}
+                                        <span class="hidden-sm-and-down">- {{vps.payed_to | prettyDateFrom}}</span>
+                                    </v-card-row>
+                                </v-col>
+                            </v-row>
                         </v-card-text>
-                        <v-card-row actions style="justify-content: flex-start">
-                            <v-btn :loading="changingSettings" :disabled="!settingsChanged"
-                                success @click.native="save" class="white--text">
-                                {{$t('vps.save')}}
+                        <v-card-row v-if="!locked" actions style="justify-content: flex-start">
+
+                            <v-dialog v-if="on" v-model="disableModal">
+                                <v-btn slot="activator" error
+                                       :loading="changingStatus" :disabled="changingStatus"
+                                       class="white--text">
+                                    {{$t('vps.disable.submit')}}
+                                </v-btn>
+                                <v-card-row>
+                                    <v-card-title>{{$t('vps.disable.header', {
+                                        id: id,
+                                        name: wrappedName
+                                    })}}
+                                    </v-card-title>
+                                </v-card-row>
+                                <v-card-row>
+                                    <v-card-text>
+                                        {{$t('vps.disable.description')}}
+                                    </v-card-text>
+                                </v-card-row>
+                                <v-card-row actions>
+                                    <v-btn flat @click.native="disableModal = false">
+                                        {{$t('vps.disable.cancel')}}
+                                    </v-btn>
+                                    <v-btn error @click.native="disable">{{$t('vps.disable.submit')}}
+                                    </v-btn>
+                                </v-card-row>
+                            </v-dialog>
+
+                            <v-dialog v-if="on" v-model="rebootModal">
+                                <v-btn slot="activator" warning
+                                       :loading="changingStatus" :disabled="changingStatus"
+                                       class="white--text">
+                                    {{$t('vps.reboot.submit')}}
+                                </v-btn>
+                                <v-card-row>
+                                    <v-card-title>{{$t('vps.reboot.header', {
+                                        id: id,
+                                        name: wrappedName
+                                    })}}
+                                    </v-card-title>
+                                </v-card-row>
+                                <v-card-row>
+                                    <v-card-text>
+                                        {{$t('vps.reboot.description')}}
+                                    </v-card-text>
+                                </v-card-row>
+                                <v-card-row actions>
+                                    <v-btn flat @click.native="rebootModal = false">
+                                        {{$t('vps.reboot.cancel')}}
+                                    </v-btn>
+                                    <v-btn warning @click.native="reboot">{{$t('vps.reboot.submit')}}
+                                    </v-btn>
+                                </v-card-row>
+                            </v-dialog>
+
+                            <v-btn v-if="off" success @click.native="enable"
+                                   :loading="changingStatus" :disabled="changingStatus"
+                                   class="white--text">
+                                {{$t('vps.turn_on')}}
                             </v-btn>
+
                         </v-card-row>
                     </v-card>
-                </v-col>
-                <v-col md6 xs12>
                     <div class="mb-4"></div>
-                    <v-card v-if="!locked && vps.ip">
+                    <v-card v-if="on">
                         <v-card-row class="grey darken-3">
-                            <v-card-title class="white--text">{{$t('vps.ips')}}</v-card-title>
+                            <v-card-title class="white--text">{{$t('vps.resources')}}</v-card-title>
                         </v-card-row>
-                        <v-list two-line>
-                            <v-list-item v-for="item in [vps.ip.main].concat(vps.ip.additional)">
-                                <v-list-tile>
-                                    <v-list-tile-content>
-                                        <v-list-tile-title>{{item}}</v-list-tile-title>
-                                        <v-list-tile-sub-title v-if="item === vps.ip.main" v-text="$t('vps.ipmain')" />
-                                        <v-list-tile-sub-title v-else v-text="$t('vps.ipadditional')" />
-                                    </v-list-tile-content>
-                                    <v-list-tile-action>
-                                        <v-btn icon ripple @click.native="goToDdos(item)">
-                                            <v-icon class="black--text">warning</v-icon>
-                                        </v-btn>
-                                    </v-list-tile-action>
-                                    <v-list-tile-action v-if="vps.virt === 'kvm'">
-                                        <v-btn icon ripple @click.native="goToIp(item)">
-                                            <v-icon class="black--text">settings</v-icon>
-                                        </v-btn>
-                                    </v-list-tile-action>
-                                </v-list-tile>
-                            </v-list-item>
-                        </v-list>
+                        <v-card-text>
+                            <v-row>
+                                <v-col md6 xs12>
+                                    <h6>{{$t('vps.cpu')}}: {{vps.cpu}}% </h6>
+                                    <div class="display-1"></div>
+                                    <progress-linear-color v-model="vps.cpu"></progress-linear-color>
+                                </v-col>
+                                <v-col md6 xs12>
+                                    <h6>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h6>
+                                    <progress-linear-color v-model="ram"></progress-linear-color>
+                                </v-col>
+                                <v-col md6 xs12 v-if="vps.virt == 'openvz'">
+                                    <h6>
+                                        {{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h6>
+                                    <progress-linear-color v-model="disk"></progress-linear-color>
+                                </v-col>
+                                <v-col md6 xs12 v-if="vps.virt == 'openvz'">
+                                    <h6>{{$t('vps.swap')}}: {{swap}}% ({{vps.swap_mb}} MB/{{vps.max_swap_mb}} MB)</h6>
+                                    <progress-linear-color v-model="swap"></progress-linear-color>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col md6 xs12>
+                                    <h6>{{$t('vps.network_rt')}}:</h6>
+                                    <v-chip label outline class="green green--text">
+                                        <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                                        {{vps.net_in_bps | prettyBytes}}/s
+                                    </v-chip>
+                                    <v-chip label outline class="blue blue--text">
+                                        <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                                        {{vps.net_out_bps | prettyBytes}}/s
+                                    </v-chip>
+                                </v-col>
+                                <v-col md6 xs12>
+                                    <h6>{{$t('vps.network_all')}}:</h6>
+                                    <v-chip label outline class="green green--text">
+                                        <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                                        {{vps.net_in_b | prettyBytes}}
+                                    </v-chip>
+                                    <v-chip label outline class="blue blue--text">
+                                        <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                                        {{vps.net_out_b | prettyBytes}}
+                                    </v-chip>
+                                </v-col>
+                            </v-row>
+                            <v-row v-if="vps.virt == 'kvm'">
+                                <v-col md6 xs12>
+                                    <h6>{{$t('vps.disk_rt')}}:</h6>
+                                    <v-chip label outline class="green green--text">
+                                        <i class="fa fa-fw fa-lg fa-cloud-download"></i>
+                                        {{vps.disk_read_bps | prettyBytes}}/s
+                                    </v-chip>
+                                    <v-chip label outline class="blue blue--text">
+                                        <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
+                                        {{vps.disk_write_bps | prettyBytes}}/s
+                                    </v-chip>
+                                </v-col>
+                                <v-col md6 xs12>
+                                    <h6>{{$t('vps.disk_all')}}:</h6>
+                                    <v-chip label outline class="green green--text">
+                                        <i class="fa fa-fw fa-lg fa-upload"></i>
+                                        {{vps.disk_read_b | prettyBytes}}
+                                    </v-chip>
+                                    <v-chip label outline class="blue blue--text">
+                                        <i class="fa fa-fw fa-lg fa-download"></i>
+                                        {{vps.disk_write_b | prettyBytes}}
+                                    </v-chip>
+                                </v-col>
+                            </v-row>
+                        </v-card-text>
                     </v-card>
+                    <v-row>
+                        <v-col md6 xs12>
+                            <div class="mb-4"></div>
+                            <v-card v-if="!locked">
+                                <v-card-row class="grey darken-3">
+                                    <v-card-title class="white--text">{{$t('vps.settings')}}</v-card-title>
+                                </v-card-row>
+                                <v-card-text>
+                                    <v-card-row>
+                                        <i class="fa fa-fw fa-2x fa-pencil" style="padding-bottom: 1rem;"></i>
+                                        <v-text-field
+                                            v-model="newname"
+                                            style="margin-bottom: 0;"
+                                            :label="$t('vps.name')"
+                                            :placeholder="$t('vps.placeholder.name')">
+                                            {{vps.name}}
+                                        </v-text-field>
+                                    </v-card-row>
+                                </v-card-text>
+                                <v-card-row actions style="justify-content: flex-start">
+                                    <v-btn :loading="changingSettings" :disabled="!settingsChanged"
+                                           success @click.native="save" class="white--text">
+                                        {{$t('vps.save')}}
+                                    </v-btn>
+                                </v-card-row>
+                            </v-card>
+                        </v-col>
+                        <v-col md6 xs12>
+                            <div class="mb-4"></div>
+                            <v-card v-if="!locked && vps.ip">
+                                <v-card-row class="grey darken-3">
+                                    <v-card-title class="white--text">{{$t('vps.ips')}}</v-card-title>
+                                </v-card-row>
+                                <v-list two-line>
+                                    <v-list-item v-for="item in [vps.ip.main].concat(vps.ip.additional)">
+                                        <v-list-tile>
+                                            <v-list-tile-content>
+                                                <v-list-tile-title>{{item}}</v-list-tile-title>
+                                                <v-list-tile-sub-title v-if="item === vps.ip.main"
+                                                                       v-text="$t('vps.ipmain')"/>
+                                                <v-list-tile-sub-title v-else v-text="$t('vps.ipadditional')"/>
+                                            </v-list-tile-content>
+                                            <v-list-tile-action>
+                                                <v-btn icon ripple @click.native="goToDdos(item)">
+                                                    <v-icon class="black--text">warning</v-icon>
+                                                </v-btn>
+                                            </v-list-tile-action>
+                                            <v-list-tile-action v-if="vps.virt === 'kvm'">
+                                                <v-btn icon ripple @click.native="goToIp(item)">
+                                                    <v-icon class="black--text">settings</v-icon>
+                                                </v-btn>
+                                            </v-list-tile-action>
+                                        </v-list-tile>
+                                    </v-list-item>
+                                </v-list>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                    <div class="mb-4"></div>
+                    <!--
+                     TODO
+                     - OpenVZ use vps.nproc
+                     -->
                 </v-col>
             </v-row>
-            <div class="mb-4"></div>
-            <!--
-             TODO
-             - OpenVZ use vps.nproc
-             -->
         </v-container>
     </div>
 </template>
@@ -407,7 +436,7 @@
             stats() {
                 return this.$store.dispatch('vpsInfo', this.$route.params).then(() => {
                     this.$store.commit('setToolbarTitleArgs',
-                        Object.assign(this.$route.params, { name: this.wrappedName }))
+                        Object.assign(this.$route.params, {name: this.wrappedName}))
                 })
             },
             ips() {

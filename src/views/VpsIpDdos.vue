@@ -1,56 +1,51 @@
 <template>
     <div>
-        <v-container>
-            <div class="mt-4"></div>
-            <div class="text-xs-center">
-                <v-pagination :length.number="pagination.paging.total_pages"
-                              :disabled="loading"
-                              v-model="page"
-                ></v-pagination>
-            </div>
-            <div class="mt-4"></div>
-            <v-card>
-                <v-table-overflow>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>{{$t('table.id')}}</th>
-                                <th>{{$t('table.start')}}</th>
-                                <th>{{$t('table.end')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-if="!pagination.error" v-for="(item, index) in pagination.items">
-                            <td>
-                                #{{item.id}}
-                            </td>
-                            <td>
-                                {{item.started_at | prettyDateTime}}
-                                <span class="hidden-sm-and-down">- {{item.started_at | prettyDateFrom}}</span>
-                            </td>
-                            <td>
-                                <span v-if="item.ended_at === null">
-                                    -
-                                </span>
-                                <span v-else>
-                                    {{item.ended_at | prettyDateTime}}
-                                </span>
-                                <span class="hidden-sm-and-down">- {{item.ended_at | prettyDateFrom}}</span>
-                            </td>
-                        </tr>
-                        <tr v-if="pagination.error">
-                            <td colspan="100%" class="red--text text--darken-3 empty">
-                                {{ $t('table.empty.ddos') }}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </v-table-overflow>
-            </v-card>
+        <v-container fluid>
+            <v-row>
+                <v-col xs12 md10 offset-md1>
+                    <!-- pagination with margins for datatable -->
+                    <div class="text-xs-center mt-4 mb-4">
+                        <v-pagination
+                            v-if="page"
+                            :length.number="pagination.paging.total_pages"
+                            :disabled="loading"
+                            v-model="page"
+                        ></v-pagination>
+                    </div>
+                    <v-card class="mb-4">
+                        <v-data-table
+                            v-bind:headers="headers"
+                            v-model="pagination.items"
+                            v-bind:no-data-text="$t('table.empty.ddos')"
+                            hide-actions
+                            class="elevation-1"
+                        >
+                            <template slot="items" scope="props">
+                                <td>
+                                    #{{props.item.id}}
+                                </td>
+                                <td>
+                                    {{props.item.started_at | prettyDateTime}}
+                                    <span>- {{props.item.started_at | prettyDateFrom}}</span>
+                                </td>
+                                <td>
+                            <span v-if="props.item.ended_at === null">
+                                -
+                            </span>
+                                    <span v-else>
+                                {{props.item.ended_at | prettyDateTime}}
+                            </span>
+                                    <span>- {{props.item.ended_at | prettyDateFrom}}</span>
+                                </td>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>
-<style scoped>
+<style scope="props">
     tr {
         cursor: default
     }
@@ -85,6 +80,25 @@
             },
             language() {
                 return this.$store.state.language
+            },
+            headers() {
+                return [
+                    {
+                        left: true,
+                        text: this.$t('table.id'),
+                        value: this.$t('table.id')
+                    },
+                    {
+                        left: true,
+                        text: this.$t('table.start'),
+                        value: this.$t('table.start')
+                    },
+                    {
+                        left: true,
+                        text: this.$t('table.end'),
+                        value: this.$t('table.end')
+                    }
+                ]
             }
         },
         data () {

@@ -1,134 +1,140 @@
 <template>
     <div>
-        <v-container>
-            <v-card>
-                <v-card-row class="grey darken-3">
-                    <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
-                </v-card-row>
-                <v-card-text v-if="loadedStatus">
-                    <v-card-row>
-                        <b>{{$t('vpsip.status.label')}}:&nbsp;</b>
-                        <v-chip v-if="status.enable_pending" label class="yellow">
-                            {{$t('vpsip.status.enabling')}}
-                        </v-chip>
-                        <v-chip v-else-if="status.disable_pending" label class="yellow">
-                            {{$t('vpsip.status.disabling')}}
-                        </v-chip>
-                        <v-chip v-else-if="status.enabled" label class="green white--text">
-                            {{$t('vpsip.status.enabled')}}
-                        </v-chip>
-                        <v-chip v-else label class="red white--text">
-                            {{$t('vpsip.status.disabled')}}
-                        </v-chip>
-                    </v-card-row>
-                </v-card-text>
-                <v-table-overflow v-if="loadedRules">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th class="select"><i class="fa fa-check"></i></th>
-                            <th>{{$t('table.id')}}</th>
-                            <th>{{$t('table.protocol')}}</th>
-                            <th>{{$t('table.ports')}}</th>
-                            <th>{{$t('table.status')}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-if="!rules.error" v-for="(item, index) in rules">
+        <v-container fluid>
+            <v-row>
+                <v-col xs12 md10 offset-md1>
+                    <v-card class="mb-4">
+                        <v-card-row class="grey darken-3">
+                            <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
+                        </v-card-row>
+
+                        <v-card-text v-if="loadedStatus">
+                            <v-card-row>
+                                <b>{{$t('vpsip.status.label')}}:&nbsp;</b>
+                                <v-chip v-if="status.enable_pending" label class="yellow">
+                                    {{$t('vpsip.status.enabling')}}
+                                </v-chip>
+                                <v-chip v-else-if="status.disable_pending" label class="yellow">
+                                    {{$t('vpsip.status.disabling')}}
+                                </v-chip>
+                                <v-chip v-else-if="status.enabled" label class="green white--text">
+                                    {{$t('vpsip.status.enabled')}}
+                                </v-chip>
+                                <v-chip v-else label class="red white--text">
+                                    {{$t('vpsip.status.disabled')}}
+                                </v-chip>
+                            </v-card-row>
+                        </v-card-text>
+
+                        <v-data-table
+                            v-if="loadedRules"
+                            v-bind:headers="headers"
+                            v-model="rules"
+                            v-bind:no-data-text="$t('table.empty.rules')"
+                            hide-actions
+                        >
+                            <template slot="items" scope="props">
                                 <td>
+                                    <!-- FIXME make use of datatable checkbox -->
                                     <div class="input-group text-xs-center">
-                                        <input :id="'checkbox' + item.id" type="checkbox" class="filled"
-                                            :value="item.id" v-model="checked">
-                                        <label :for="'checkbox' + item.id"></label>
+                                        <input :id="'checkbox' + props.item.id" type="checkbox" class="filled"
+                                               :value="props.item.id" v-model="checked">
+                                        <label :for="'checkbox' + props.item.id"></label>
                                     </div>
                                 </td>
-                                <td>#{{item.id}}</td>
-                                <td>{{protocols[item.protocol]}}</td>
-                                <td v-if="item.port_range.from === item.port_range.to">{{item.port_range.from}}</td>
-                                <td v-else>{{item.port_range.from}} - {{item.port_range.to}}</td>
+                                <td>#{{props.item.id}}</td>
+                                <td>{{protocols[props.item.protocol]}}</td>
+                                <td v-if="props.item.port_range.from === props.item.port_range.to">
+                                    {{props.item.port_range.from}}
+                                </td>
+                                <td v-else>{{props.item.port_range.from}} - {{props.item.port_range.to}}</td>
                                 <td>
-                                    <span v-if="item.create_pending">
-                                        <i class="fa fa-circle yellow--text"></i>
-                                        {{$t('vpsip.rule.creating')}}
-                                    </span>
-                                    <span v-else-if="item.delete_pending">
-                                        <i class="fa fa-circle red--text"></i>
-                                        {{$t('vpsip.rule.deleting')}}
-                                    </span>
+                            <span v-if="props.item.create_pending">
+                                <i class="fa fa-circle yellow--text"></i>
+                                {{$t('vpsip.rule.creating')}}
+                            </span>
+                                    <span v-else-if="props.item.delete_pending">
+                                <i class="fa fa-circle red--text"></i>
+                                {{$t('vpsip.rule.deleting')}}
+                            </span>
                                     <span v-else>
-                                        <i class="fa fa-circle green--text"></i>
-                                        {{$t('vpsip.rule.created')}}
-                                    </span>
+                                <i class="fa fa-circle green--text"></i>
+                                {{$t('vpsip.rule.created')}}
+                            </span>
                                 </td>
-                            </tr>
-                            <tr v-if="rules.error">
-                                <td colspan="100%" class="red--text text--darken-3 empty">
-                                    {{ $t('table.empty.rules') }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </v-table-overflow>
-                <v-card-row actions style="justify-content: flex-start" v-if="loadedStatus">
-                    <v-btn success v-if="(!status.enabled || status.enable_pending) && !status.disable_pending" @click.native="enable"
-                        :loading="changingStatus" :disabled="changingStatus">
-                        {{$t('vpsip.enable')}}
-                    </v-btn>
-                    <v-btn error v-if="(status.enabled || status.disable_pending) && !status.enable_pending" @click.native="disable"
-                        :loading="changingStatus" :disabled="changingStatus">
-                        {{$t('vpsip.disable')}}
-                    </v-btn>
-                    <v-modal v-model="addModal">
-                        <v-btn slot="activator" success class="white--text">
-                            {{$t('vpsip.add.submit')}}
-                        </v-btn>
-                        <v-card>
-                            <v-card-text class="ml-5 mr-5">
-                                <h2 class="title">{{$t('vpsip.add.header')}}</h2>
-                            </v-card-text>
-                            <v-card-text>
-                                <v-text-field
-                                    :validationmessage="$t('validation.port')" :validation="validatePortFrom"
-                                    :label="$t('vpsip.add.portfrom.label')"
-                                    :placeholder="$t('vpsip.add.portfrom.placeholder')"
-                                    name="portfrom" type="number" v-model="portFrom"
-                                ></v-text-field>
-                                <v-text-field
-                                    :validationmessage="$t('validation.port')" :validation="validatePortTo"
-                                    :label="$t('vpsip.add.portto.label')"
-                                    :placeholder="$t('vpsip.add.portto.placeholder')"
-                                    name="portto" type="number" v-model="portTo"
-                                ></v-text-field>
-                                <v-select
-                                    :items="selectProtocols"
-                                    :label="$t('vpsip.add.protocol')"
-                                    v-model="protocol"
-                                ></v-select>
-                                <div class="pt-5"></div>
-                                <div class="pt-5"></div>
-                                <div class="pt-5"></div>
-                            </v-card-text>
-                            <v-card-row actions>
-                                <v-spacer></v-spacer>
-                                <v-btn flat @click.native="addModal = false" class="primary--text">
-                                    {{$t('vpsip.add.cancel')}}
-                                </v-btn>
-                                <v-btn flat @click.native="addRule" class="primary--text"
-                                    :loading="addingRule" :disabled="addingRule">
+                            </template>
+                        </v-data-table>
+
+                        <v-card-row actions style="justify-content: flex-start" v-if="loadedStatus">
+                            <v-btn success v-if="(!status.enabled || status.enable_pending) && !status.disable_pending"
+                                   @click.native="enable"
+                                   :loading="changingStatus" :disabled="changingStatus">
+                                {{$t('vpsip.enable')}}
+                            </v-btn>
+                            <v-btn error v-if="(status.enabled || status.disable_pending) && !status.enable_pending"
+                                   @click.native="disable"
+                                   :loading="changingStatus" :disabled="changingStatus">
+                                {{$t('vpsip.disable')}}
+                            </v-btn>
+
+                            <!-- FIXME validation -->
+                            <!-- TODO use fullscreen dialog for mobile -->
+                            <v-dialog v-model="addModal">
+                                <v-btn slot="activator" success class="white--text">
                                     {{$t('vpsip.add.submit')}}
                                 </v-btn>
-                            </v-card-row>
-                        </v-card>
-                    </v-modal>
-                    <v-btn error @click.native="deleteRules" :disabled='checked.length === 0'>
-                        {{$t('vpsip.delete')}}
-                    </v-btn>
-                </v-card-row>
-            </v-card>
+                                <v-card-row>
+                                    <v-card-title>{{$t('vpsip.add.header')}}</v-card-title>
+                                </v-card-row>
+                                <v-card-row height="400px">
+                                    <v-card-text>
+                                        <v-container fluid>
+                                            <v-text-field
+                                                :validationmessage="$t('validation.port')"
+                                                :validation="validatePortFrom"
+                                                :label="$t('vpsip.add.portfrom.label')"
+                                                :placeholder="$t('vpsip.add.portfrom.placeholder')"
+                                                name="portfrom" type="number" v-model="portFrom" required
+                                            ></v-text-field>
+                                            <v-text-field
+                                                :validationmessage="$t('validation.port')" :validation="validatePortTo"
+                                                :label="$t('vpsip.add.portto.label')"
+                                                :placeholder="$t('vpsip.add.portto.placeholder')"
+                                                name="portto" type="number" v-model="portTo" required
+                                            ></v-text-field>
+                                            <v-select
+                                                :items="selectProtocols"
+                                                :label="$t('vpsip.add.protocol')"
+                                                v-model="protocol"
+                                            ></v-select>
+                                            <!--<v-text-field label="Legal last name" hint="example of persistent helper text"
+                                            persistent-hint
+                                            required />
+                                            <small>*indicates required field</small>-->
+                                        </v-container>
+                                    </v-card-text>
+                                </v-card-row>
+                                <v-card-row actions>
+                                    <v-btn flat @click.native="addModal = false">
+                                        {{$t('vpsip.add.cancel')}}
+                                    </v-btn>
+                                    <v-btn success @click.native="addRule"
+                                           :loading="addingRule" :disabled="addingRule">
+                                        {{$t('vpsip.add.submit')}}
+                                    </v-btn>
+                                </v-card-row>
+                            </v-dialog>
+                            <v-btn error @click.native="deleteRules" :disabled='checked.length === 0'>
+                                {{$t('vpsip.delete')}}
+                            </v-btn>
+                        </v-card-row>
+                    </v-card>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>
-<style>
+<style scope="props">
     select option[disabled] {
         display: none;
     }
@@ -148,7 +154,7 @@
                 addingRule: false,
                 portFrom: '',
                 portTo: '',
-                protocol: { value: 'other', text: 'Other' },
+                protocol: {value: 'other', text: 'Other'},
                 protocols: {
                     'arkSurvivalEvolved': 'ARK: Survival Evolved',
                     'arma': 'Arma',
@@ -207,16 +213,50 @@
             selectProtocols() {
                 let array = []
                 for (let key in this.protocols) {
-                    array.push({ text: this.protocols[key], value: key })
+                    array.push({text: this.protocols[key], value: key})
                 }
                 return array
             },
             language() {
                 return this.$store.state.language
+            },
+            headers() {
+                return [
+                    {
+                        sortable: false,
+                        left: true,
+                        text: '✓',
+                        value: 'check'
+                    },
+                    {
+                        sortable: true,
+                        left: true,
+                        text: this.$t('table.id'),
+                        value: this.$t('table.id')
+                    },
+                    {
+                        sortable: false,
+                        left: true,
+                        text: this.$t('table.protocol'),
+                        value: this.$t('table.protocol')
+                    },
+                    {
+                        sortable: false,
+                        left: true,
+                        text: this.$t('table.ports'),
+                        value: this.$t('table.ports')
+                    },
+                    {
+                        sortable: false,
+                        left: true,
+                        text: this.$t('table.status'),
+                        value: this.$t('table.status')
+                    }
+                ]
             }
         },
         watch: {
-            language: function(newValue, oldValue) {
+            language: function (newValue, oldValue) {
                 this.protocols['other'] = this.$t('vpsip.otherprotocol')
             }
         },
@@ -237,7 +277,7 @@
             refresh() {
                 if (!this.rules.error) {
                     let rulesPending = false
-                    this.rules.forEach(function(rule) {
+                    this.rules.forEach(function (rule) {
                         if (rule.create_pending || rule.delete_pending) {
                             rulesPending = true
                         }
@@ -257,10 +297,10 @@
                 }
             },
             enable() {
-                return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, { enabled: true }))
+                return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, {enabled: true}))
             },
             disable() {
-                return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, { enabled: false }))
+                return this.$store.dispatch('vpsIpGameToggle', Object.assign(this.$route.params, {enabled: false}))
             },
             validate(component) {
                 let noerrors = true
@@ -288,7 +328,7 @@
                 return this.validatePort(this.portTo)
             },
             addRule() {
-                if(this.validate(this)) {
+                if (this.validate(this)) {
                     let portFrom = this.portFrom, portTo = this.portTo
                     if (portFrom > portTo) {
                         let tmp = portFrom
@@ -297,24 +337,24 @@
                     }
                     this.addingRule = true
                     this.$store.dispatch('vpsIpGameRuleAdd', Object.assign(this.$route.params,
-                        { protocol: this.protocol.value, port_from: portFrom, port_to: portTo })).then(() => {
-                            this.addingRule = false
-                            this.addModal = false
-                            this.portFrom = ''
-                            this.portTo = ''
-                            this.protocol = 'other'
-                        }).then(() => {
-                            setTimeout(() => {
-                                this.errors.clear()
-                                this.clearValidation(this)
-                            }, 1);
-                        })
+                        {protocol: this.protocol.value, port_from: portFrom, port_to: portTo})).then(() => {
+                        this.addingRule = false
+                        this.addModal = false
+                        this.portFrom = ''
+                        this.portTo = ''
+                        this.protocol = 'other'
+                    }).then(() => {
+                        setTimeout(() => {
+                            this.errors.clear()
+                            this.clearValidation(this)
+                        }, 1);
+                    })
                 }
             },
             deleteRules() {
                 let self = this
-                this.checked.forEach(function(id) {
-                    self.$store.dispatch('vpsIpGameRuleDelete', Object.assign(self.$route.params, { rule_id: id }))
+                this.checked.forEach(function (id) {
+                    self.$store.dispatch('vpsIpGameRuleDelete', Object.assign(self.$route.params, {rule_id: id}))
                 })
                 this.checked = []
             }

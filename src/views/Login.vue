@@ -6,7 +6,7 @@
             <v-row class="mt-5">
                 <v-col md3></v-col>
                 <v-col xs12 md6>
-                    <v-card class="mp-5">
+                    <v-card class="mb-5">
                         <v-card-text>
                             <h5>{{ $t('user.login.header') }}</h5>
                             <form @submit.prevent="" novalidate>
@@ -20,12 +20,7 @@
                                     :placeholder="$t('user.placeholder.password')"
                                     name="password" type="password" v-model="password"
                                 ></text-input>
-                                <!--<v-select-->
-                                <!--:options="options"-->
-                                <!--label="Remember me for..."-->
-                                <!--v-model="remember"-->
-                                <!--&gt;</v-select>-->
-                                <v-btn class="aligned" flat="flat" dark="dark" success block type="submit"
+                                <v-btn light success block type="submit"
                                     @click.native="login"
                                     :loading="loading" :disabled="loading">
                                     <v-icon left>vpn_key</v-icon>
