@@ -29,10 +29,8 @@
                         <template slot="items" scope="props">
                             <td @click="goToVps(props.item.id)">
                                 VPS
-                                <div>
-                                    <span v-if="props.item.virt === 0">OpenVZ</span>
-                                    <span v-else-if="props.item.virt === 2">KVM</span>
-                                </div>
+                                <span v-if="props.item.virt === 0">OpenVZ</span>
+                                <span v-else-if="props.item.virt === 2">KVM</span>
                             </td>
                             <td @click="goToVps(props.item.id)">#{{props.item.id}}</td>
                             <td @click="goToVps(props.item.id)">
