@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.0-beta.13 (03.05.2017)
+
+### Features
+
++ Homepage with latest Discourse forum posts list
++ Moved ticket messages view to component
+
+### Fixes
+
++ One line VPS type description
++ Chrome auto complete in login page
+
 ## 3.0.0-beta.12 (24.04.2017)
 
 ### Features
