@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-beta.14 (03.05.2017)
+
+### Fixes
+
++ Fix CORS issues with Discourse topics component [#171](https://github.com/lvlup-pro/spawn-frontend-material/issues/171)
+
 ## 3.0.0-beta.13 (03.05.2017)
 
 ### Features

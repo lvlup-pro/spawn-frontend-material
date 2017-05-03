@@ -12,9 +12,11 @@ function request({dispatch, state}, method, url, args, callback) {
             url = url.replace(find, args[key])
         }
     }
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+    /* this method is causing problem with requests to other sites */
+    // https://github.com/lvlup-pro/spawn-frontend-material/issues/171
+    // axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
     return method(state.apiUrl + url, args)
-        .then(function(response) {
+        .then(function (response) {
             return callback(response)
         })
         .catch(function (error) {
@@ -23,19 +25,24 @@ function request({dispatch, state}, method, url, args, callback) {
 }
 
 function get({dispatch, state}, url, args, callback) {
-    return request({dispatch, state}, axios.get, url, args, callback)
+    //FIXME duplication of this line
+    let a = axios.create({headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}});
+    return request({dispatch, state}, a.get, url, args, callback)
 }
 
 function post({dispatch, state}, url, args, callback) {
-    return request({dispatch, state}, axios.post, url, args, callback)
+    let a = axios.create({headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}});
+    return request({dispatch, state}, a.post, url, args, callback)
 }
 
 function put({dispatch, state}, url, args, callback) {
-    return request({dispatch, state}, axios.put, url, args, callback)
+    let a = axios.create({headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}});
+    return request({dispatch, state}, a.put, url, args, callback)
 }
 
 function del({dispatch, state}, url, args, callback) {
-    return request({dispatch, state}, axios.delete, url, args, callback)
+    let a = axios.create({headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}});
+    return request({dispatch, state}, a.delete, url, args, callback)
 }
 
 export default new Vuex.Store({
