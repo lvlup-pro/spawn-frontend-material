@@ -3,15 +3,15 @@
         <v-container>
             <v-row>
                 <v-col xs12>
-                    <h4>Hello</h4>
-                    <p>Welcome to lvlup.pro customer panel preview!</p>
+                    <h4>Forum</h4>
+                    <discourse-latest-posts></discourse-latest-posts>
                 </v-col>
             </v-row>
         </v-container>
     </div>
 </template>
-
 <script>
+    import axios from "axios"
     export default {
         mounted () {
             this.$emit('redirectLang', 'home')
