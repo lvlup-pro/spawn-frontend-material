@@ -1,5 +1,22 @@
 # Changelog
 
+## 3.0.0-beta.15
+
+### Features
+
++ Vuetify 0.12.1
+
+### Changes
+
+#### App
+
++ Toolbar height reduced from 60 to 56px
++ Bold text in navigation drawer
+
+#### Login page
+
++ Vertical align
+
 ## 3.0.0-beta.14 (03.05.2017)
 
 ### Fixes

@@ -1,15 +1,15 @@
 <template>
     <div>
         <v-container id="vps-stats" v-if="!loading">
-            <v-row>
-                <v-col xs12>
+            <v-layout>
+                <v-flex xs12>
                     <v-card>
                         <v-card-row class="grey darken-3">
                             <v-card-title class="white--text">{{$t('vps.control')}}</v-card-title>
                         </v-card-row>
                         <v-card-text>
-                            <v-row>
-                                <v-col md6 xs12>
+                            <v-layout>
+                                <v-flex md6 xs12>
                                     <v-card-row>
                                         <i class="fa fa-fw fa-2x fa-info-circle"></i>
                                         <b>{{$t('vps.state')}}:&nbsp;</b>
@@ -35,8 +35,8 @@
                                 	, {{item}}
                                 </span>
                                     </v-card-row>
-                                </v-col>
-                                <v-col md6 xs12>
+                                </v-flex>
+                                <v-flex md6 xs12>
                                     <v-card-row v-if="on">
                                         <i class="fa fa-fw fa-2x fa-clock-o"></i>
                                         <b>{{$t('vps.uptime')}}:&nbsp;</b>
@@ -61,8 +61,8 @@
                                         {{vps.payed_to | prettyDateFormat}}
                                         <span class="hidden-sm-and-down">- {{vps.payed_to | prettyDateFrom}}</span>
                                     </v-card-row>
-                                </v-col>
-                            </v-row>
+                                </v-flex>
+                            </v-layout>
                         </v-card-text>
                         <v-card-row v-if="!locked" actions style="justify-content: flex-start">
 
@@ -134,28 +134,28 @@
                             <v-card-title class="white--text">{{$t('vps.resources')}}</v-card-title>
                         </v-card-row>
                         <v-card-text>
-                            <v-row>
-                                <v-col md6 xs12>
+                            <v-layout>
+                                <v-flex md6 xs12>
                                     <h6>{{$t('vps.cpu')}}: {{vps.cpu}}% </h6>
                                     <div class="display-1"></div>
                                     <progress-linear-color v-model="vps.cpu"></progress-linear-color>
-                                </v-col>
-                                <v-col md6 xs12>
+                                </v-flex>
+                                <v-flex md6 xs12>
                                     <h6>{{$t('vps.ram')}}: {{ram}}% ({{vps.mem_mb}} MB/{{vps.max_mem_mb}} MB)</h6>
                                     <progress-linear-color v-model="ram"></progress-linear-color>
-                                </v-col>
-                                <v-col md6 xs12 v-if="vps.virt == 'openvz'">
+                                </v-flex>
+                                <v-flex md6 xs12 v-if="vps.virt == 'openvz'">
                                     <h6>
                                         {{$t('vps.disk')}}: {{disk}}% ({{vps.disk_mb | mb_to_gb}}/{{vps.max_disk_mb | mb_to_gb}})</h6>
                                     <progress-linear-color v-model="disk"></progress-linear-color>
-                                </v-col>
-                                <v-col md6 xs12 v-if="vps.virt == 'openvz'">
+                                </v-flex>
+                                <v-flex md6 xs12 v-if="vps.virt == 'openvz'">
                                     <h6>{{$t('vps.swap')}}: {{swap}}% ({{vps.swap_mb}} MB/{{vps.max_swap_mb}} MB)</h6>
                                     <progress-linear-color v-model="swap"></progress-linear-color>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col md6 xs12>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout>
+                                <v-flex md6 xs12>
                                     <h6>{{$t('vps.network_rt')}}:</h6>
                                     <v-chip label outline class="green green--text">
                                         <i class="fa fa-fw fa-lg fa-cloud-download"></i>
@@ -165,8 +165,8 @@
                                         <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
                                         {{vps.net_out_bps | prettyBytes}}/s
                                     </v-chip>
-                                </v-col>
-                                <v-col md6 xs12>
+                                </v-flex>
+                                <v-flex md6 xs12>
                                     <h6>{{$t('vps.network_all')}}:</h6>
                                     <v-chip label outline class="green green--text">
                                         <i class="fa fa-fw fa-lg fa-cloud-download"></i>
@@ -176,10 +176,10 @@
                                         <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
                                         {{vps.net_out_b | prettyBytes}}
                                     </v-chip>
-                                </v-col>
-                            </v-row>
-                            <v-row v-if="vps.virt == 'kvm'">
-                                <v-col md6 xs12>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout v-if="vps.virt == 'kvm'">
+                                <v-flex md6 xs12>
                                     <h6>{{$t('vps.disk_rt')}}:</h6>
                                     <v-chip label outline class="green green--text">
                                         <i class="fa fa-fw fa-lg fa-cloud-download"></i>
@@ -189,8 +189,8 @@
                                         <i class="fa fa-fw fa-lg fa-cloud-upload"></i>
                                         {{vps.disk_write_bps | prettyBytes}}/s
                                     </v-chip>
-                                </v-col>
-                                <v-col md6 xs12>
+                                </v-flex>
+                                <v-flex md6 xs12>
                                     <h6>{{$t('vps.disk_all')}}:</h6>
                                     <v-chip label outline class="green green--text">
                                         <i class="fa fa-fw fa-lg fa-upload"></i>
@@ -200,12 +200,12 @@
                                         <i class="fa fa-fw fa-lg fa-download"></i>
                                         {{vps.disk_write_b | prettyBytes}}
                                     </v-chip>
-                                </v-col>
-                            </v-row>
+                                </v-flex>
+                            </v-layout>
                         </v-card-text>
                     </v-card>
-                    <v-row>
-                        <v-col md6 xs12>
+                    <v-layout>
+                        <v-flex md6 xs12>
                             <div class="mb-4"></div>
                             <v-card v-if="!locked">
                                 <v-card-row class="grey darken-3">
@@ -230,8 +230,8 @@
                                     </v-btn>
                                 </v-card-row>
                             </v-card>
-                        </v-col>
-                        <v-col md6 xs12>
+                        </v-flex>
+                        <v-flex md6 xs12>
                             <div class="mb-4"></div>
                             <v-card v-if="!locked && vps.ip">
                                 <v-card-row class="grey darken-3">
@@ -260,15 +260,15 @@
                                     </v-list-item>
                                 </v-list>
                             </v-card>
-                        </v-col>
-                    </v-row>
+                        </v-flex>
+                    </v-layout>
                     <div class="mb-4"></div>
                     <!--
                      TODO
                      - OpenVZ use vps.nproc
                      -->
-                </v-col>
-            </v-row>
+                </v-flex>
+            </v-layout>
         </v-container>
     </div>
 </template>

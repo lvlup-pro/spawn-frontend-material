@@ -1,66 +1,60 @@
 <template>
     <div>
         <v-container fluid>
-            <v-row>
-                <v-col xs12 md10 offset-md1>
-                <!--<v-alert info>{{$t('panel_preview')}}</v-alert>-->
-
-                <!-- pagination with margins for datatable -->
-                <div class="text-xs-center mt-4 mb-4">
-                    <v-pagination
+            <v-layout justify-center>
+                <v-flex xs12>
+                    <!--<v-alert info>{{$t('panel_preview')}}</v-alert>-->
+                    <!-- pagination with margins for datatable -->
+                    <div class="text-xs-center mb-4">
+                        <v-pagination
                             v-if="page"
                             :length="totalPages"
                             :disabled="loading"
                             v-model="page"
-                    ></v-pagination>
-                </div>
-                </v-col>
-            </v-row>
-
-            <v-row>
-                <v-col xs12 md10 offset-md1>
-                <v-card class="mb-4">
-                    <v-data-table
-                            v-bind:headers="headers"
-                            v-model="services.items"
-                            v-bind:no-data-text="$t('table.empty.services')"
+                        ></v-pagination>
+                    </div>
+                    <v-card class="mb-4">
+                        <v-data-table
+                            :headers="headers"
+                            :items="services.items"
+                            :no-data-text="$t('table.empty.services')"
                             hide-actions
-                    >
-                        <template slot="items" scope="props">
-                            <td @click="goToVps(props.item.id)">
-                                VPS
-                                <span v-if="props.item.virt === 0">OpenVZ</span>
-                                <span v-else-if="props.item.virt === 2">KVM</span>
-                            </td>
-                            <td @click="goToVps(props.item.id)">#{{props.item.id}}</td>
-                            <td @click="goToVps(props.item.id)">
+                        >
+                            <template slot="items" scope="props">
+                                <td @click="goToVps(props.item.id)">
+                                    VPS
+                                    <span v-if="props.item.virt === 0">OpenVZ</span>
+                                    <span v-else-if="props.item.virt === 2">KVM</span>
+                                </td>
+                                <td @click="goToVps(props.item.id)">#{{props.item.id}}</td>
+                                <td @click="goToVps(props.item.id)">
                             <span v-if="props.item.name === null" class="grey--text">
                                 {{ $t('vps.notset') }}
                             </span>
-                                <span v-else>
+                                    <span v-else>
                                 {{ props.item.name }}
                             </span>
-                            </td>
-                            <td @click="goToVps(props.item.id)">
-                                {{props.item.ip}}
-                            </td>
-                            <td @click="goToVps(props.item.id)" style="white-space: nowrap;">
+                                </td>
+                                <td @click="goToVps(props.item.id)">
+                                    {{props.item.ip}}
+                                </td>
+                                <td @click="goToVps(props.item.id)" style="white-space: nowrap;">
                             <span v-if="props.item.active === 1">
                                 <i class="fa fa-circle green--text"></i> {{$t('vps.active')}}
                             </span>
-                                <span v-else>
+                                    <span v-else>
                                 <i class="fa fa-circle red--text"></i> {{$t('vps.locked')}}
                             </span>
-                            </td>
-                            <td @click="goToVps(props.item.id)">
-                                {{props.item.payed_to | prettyDateFormat}}
-                                <span> - {{props.item.payed_to | prettyDateFrom}}</span>
-                            </td>
-                        </template>
-                    </v-data-table>
-                </v-card>
-                </v-col>
-            </v-row>
+                                </td>
+                                <td @click="goToVps(props.item.id)">
+                                    {{props.item.payed_to | prettyDateFormat}}
+                                    <span> - {{props.item.payed_to | prettyDateFrom}}</span>
+                                </td>
+                            </template>
+                        </v-data-table>
+                    </v-card>
+                </v-flex>
+            </v-layout>
         </v-container>
     </div>
 </template>

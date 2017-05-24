@@ -7,9 +7,8 @@
         <v-snackbar :timeout="2000" :top="true" :right="true" v-model="tooLong">{{ $t('ticket.msg_too_long') }}
         </v-snackbar>
         <v-container v-if="!loading">
-            <v-row>
-                <v-col xl2></v-col>
-                <v-col xs12 xl8>
+            <v-layout justify-center>
+                <v-flex xs12 lg8>
                     <ticket-messages
                         :ticket="ticket"
                         :messages="ticketMessages"
@@ -17,8 +16,8 @@
                         @newMessage="addTicketMessage"
                     >
                     </ticket-messages>
-                </v-col>
-            </v-row>
+                </v-flex>
+            </v-layout>
         </v-container>
     </div>
 </template>

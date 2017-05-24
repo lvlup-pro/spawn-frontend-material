@@ -5,88 +5,59 @@
         </v-snackbar>
         <v-snackbar :timeout="2000" :top="true" :right="true" v-model="invalidSession">{{ $t('auth.invalidsession') }}
         </v-snackbar>
-        <header>
-            <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
-            <v-toolbar class="green">
-                <v-toolbar-side-icon @click.native.stop="sidebarOpen = !sidebarOpen"
-                                     class="hidden-md-and-up white--text">
-                    <v-icon class="sideicon">reorder</v-icon>
-                </v-toolbar-side-icon>
-                <v-toolbar-logo v-html="getToolbarTitle()"></v-toolbar-logo>
-            </v-toolbar>
-        </header>
-        <main>
-            <v-dialog v-model="langDialog">
-                <v-card>
-                    <v-card-title>{{$t('sidebar.selectlang')}}</v-card-title>
-                    <v-divider></v-divider>
-                    <v-card-row height="300px">
-                        <v-card-text>
-                            <v-list two-line>
-                                <v-list-item v-for="item in sidebarLanguages" v-if="language != item.code"
-                                             @click="changeLang(item.code)">
-                                    <v-list-tile>
-                                        <v-list-tile-action>
-                                            <img :src="'/public/flags/' + item.flag + '.png'">
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title v-text="item.name"/>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list-item>
-                            </v-list>
-                        </v-card-text>
-                    </v-card-row>
-                </v-card>
-            </v-dialog>
-            <v-sidebar fixed ripple router unshift v-model="sidebarOpen">
-                <router-link :to="'/' + language + '/home'">
-                    <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
+        <v-navigation-drawer persistent dark v-model="sidebarOpen" :mini-variant.sync="false">
+            <router-link :to="'/' + language + '/home'">
+                <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
+            </router-link>
+            <p class="text-xs-center">
+                <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
+                    {{$t('sidebar.panel')}} {{version}}
                 </router-link>
-                <p class="text-xs-center">
-                    <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
-                        {{$t('sidebar.panel')}} {{version}}
-                    </router-link>
-                </p>
-                <v-list dense>
-                    <v-divider light/>
-                    <template v-for="item in sidebarItems">
-                        <v-subheader v-if="item.header" v-text="$t(item.header)"/>
-                        <v-list-item
-                            v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
-                            <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link"
-                                         @click.native="sidebarOpen = false">
-                                <v-list-tile-action>
-                                    <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t(item.title, item.args)"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                            <v-list-tile v-else-if="item.lang"
-                                         @click.native.stop="langDialog = !langDialog">
-                                <v-list-tile-action>
-                                    <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t(item.title, item.args)"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                            <v-list-tile v-else @click.native="sidebarOpen = false; if (item.method) { item.method() }">
-                                <v-list-tile-action>
-                                    <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t(item.title, item.args)"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                    </template>
-                </v-list>
-            </v-sidebar>
+            </p>
+            <v-list dense>
+                <v-divider light/>
+                <template v-for="item in sidebarItems">
+                    <v-subheader v-if="item.header" v-text="$t(item.header)"/>
+                    <v-list-item
+                        v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
+                        <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link">
+                            <!--@click.native="sidebarOpen = false"-->
+                            <v-list-tile-action>
+                                <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t(item.title, item.args)"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile v-else-if="item.lang"
+                                     @click.native.stop="langDialog = !langDialog">
+                            <v-list-tile-action>
+                                <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t(item.title, item.args)"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile v-else @click.native="if (item.method) { item.method() }">
+                            <v-list-tile-action>
+                                <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t(item.title, item.args)"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
+                </template>
+            </v-list>
+        </v-navigation-drawer>
+        <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
+        <v-toolbar fixed class="green"><!--class="hidden-md-and-up white--text"-->
+            <v-toolbar-side-icon @click.native.stop="sidebarOpen = !sidebarOpen" light></v-toolbar-side-icon>
+            <v-toolbar-title v-html="getToolbarTitle()"></v-toolbar-title>
+        </v-toolbar>
+        <main>
             <v-content>
                 <v-container fluid>
-                    <div class="mt-3"></div>
                     <v-row v-if="error">
                         <v-col lg1></v-col>
                         <v-col lg10>
@@ -108,6 +79,29 @@
                 </v-container>
             </v-content>
         </main>
+        <v-dialog v-model="langDialog">
+            <v-card>
+                <v-card-title>{{$t('sidebar.selectlang')}}</v-card-title>
+                <v-divider></v-divider>
+                <v-card-row height="300px">
+                    <v-card-text>
+                        <v-list two-line>
+                            <v-list-item v-for="item in sidebarLanguages" v-if="language != item.code"
+                                         @click="changeLang(item.code)">
+                                <v-list-tile>
+                                    <v-list-tile-action>
+                                        <img :src="'/public/flags/' + item.flag + '.png'">
+                                    </v-list-tile-action>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title v-text="item.name"/>
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                            </v-list-item>
+                        </v-list>
+                    </v-card-text>
+                </v-card-row>
+            </v-card>
+        </v-dialog>
     </v-app>
 </template>
 
@@ -167,24 +161,24 @@
             },
             sidebarLanguages() {
                 return [
-                    { code: 'en', flag: 'EN', name: 'English (EN)' },
-                    { code: 'pl', flag: 'PL', name: 'Polski (PL)' },
-                    { code: 'de', flag: 'DE', name: 'Deutsch (DE)' },
-                    { code: 'es', flag: 'ES', name: 'Español (ES)' }
+                    {code: 'en', flag: 'EN', name: 'English (EN)'},
+                    {code: 'pl', flag: 'PL', name: 'Polski (PL)'},
+                    {code: 'de', flag: 'DE', name: 'Deutsch (DE)'},
+                    {code: 'es', flag: 'ES', name: 'Español (ES)'}
                 ]
             }
         },
         data () {
             return {
                 lg: '',
-                sidebarOpen: false,
+                sidebarOpen: true,
                 sidebarLanguagesOpen: false,
                 invalidSession: false,
                 langDialog: false
             }
         },
         watch: {
-            logout: function(newValue, oldValue) {
+            logout: function (newValue, oldValue) {
                 if (newValue) {
                     this.$store.commit('setLogout', false)
                     this.invalidSession = true
@@ -284,9 +278,9 @@
         overflow-x: hidden;
     }
 
-    /* smaller toolbar */
-    .toolbar {
-        height: 60px;
+    /* align drawer activation button after resizing it to 250px */
+    .navigation-drawer--persistent.navigation-drawer--open:not(.navigation-drawer--is-mobile):not(.navigation-drawer--clipped) + .toolbar {
+        padding-left: 250px;
     }
 
     @media screen and (min-width: 992px) {
@@ -301,7 +295,7 @@
         }
 
         /* smaller sidebar */
-        #app main aside {
+        #app aside {
             width: 250px;
         }
 
@@ -339,7 +333,7 @@
     /* smaller and more stylish loading bar */
     #loadingBar {
         margin: 0px;
-        height: 5px!important;
+        height: 5px !important;
         position: absolute;
     }
 
@@ -423,12 +417,12 @@
         font-weight: bold;
     }
 
-    aside.sidebar div.list__tile__action {
+    .navigation-drawer > .list div.list__tile__action {
         flex: 1 0 40px;
         min-width: 40px;
     }
 
-    aside.sidebar .list__tile--active .list__tile__title {
+    .navigation-drawer > .list .list__tile--active .list__tile__title {
         color: #00cc00;
     }
 
