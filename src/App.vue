@@ -291,7 +291,7 @@
         }
 
         /* smaller sidebar */
-        #app main aside {
+        #app aside {
             width: 250px;
         }
 
@@ -413,12 +413,12 @@
         font-weight: bold;
     }
 
-    aside.sidebar div.list__tile__action {
+    .navigation-drawer > .list div.list__tile__action {
         flex: 1 0 40px;
         min-width: 40px;
     }
 
-    aside.sidebar .list__tile--active .list__tile__title {
+    .navigation-drawer > .list .list__tile--active .list__tile__title {
         color: #00cc00;
     }
 
