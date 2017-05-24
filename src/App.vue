@@ -5,9 +5,7 @@
         </v-snackbar>
         <v-snackbar :timeout="2000" :top="true" :right="true" v-model="invalidSession">{{ $t('auth.invalidsession') }}
         </v-snackbar>
-        <v-navigation-drawer persistent light v-model="sidebarOpen" :mini-variant.sync="false">
-            <!--<v-navigation-drawer persistent light :mini-variant.sync="mini" v-model="sidebarOpen">-->
-            <!--<v-sidebar fixed ripple router unshift v-model="sidebarOpen">-->
+        <v-navigation-drawer persistent dark v-model="sidebarOpen" :mini-variant.sync="false">
             <router-link :to="'/' + language + '/home'">
                 <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
             </router-link>
@@ -22,8 +20,8 @@
                     <v-subheader v-if="item.header" v-text="$t(item.header)"/>
                     <v-list-item
                         v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
-                        <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link"
-                                     @click.native="sidebarOpen = false">
+                        <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link">
+                            <!--@click.native="sidebarOpen = false"-->
                             <v-list-tile-action>
                                 <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                             </v-list-tile-action>
@@ -40,7 +38,7 @@
                                 <v-list-tile-title v-text="$t(item.title, item.args)"/>
                             </v-list-tile-content>
                         </v-list-tile>
-                        <v-list-tile v-else @click.native="sidebarOpen = false; if (item.method) { item.method() }">
+                        <v-list-tile v-else @click.native="if (item.method) { item.method() }">
                             <v-list-tile-action>
                                 <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
                             </v-list-tile-action>
@@ -52,7 +50,7 @@
                 </template>
             </v-list>
         </v-navigation-drawer>
-        <!--<v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>-->
+        <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
         <v-toolbar fixed class="green"><!--class="hidden-md-and-up white--text"-->
             <v-toolbar-side-icon @click.native.stop="sidebarOpen = !sidebarOpen" light></v-toolbar-side-icon>
             <v-toolbar-title v-html="getToolbarTitle()"></v-toolbar-title>
