@@ -56,32 +56,8 @@
             <v-toolbar-title v-html="getToolbarTitle()"></v-toolbar-title>
         </v-toolbar>
         <main>
-            <v-dialog v-model="langDialog">
-                <v-card>
-                    <v-card-title>{{$t('sidebar.selectlang')}}</v-card-title>
-                    <v-divider></v-divider>
-                    <v-card-row height="300px">
-                        <v-card-text>
-                            <v-list two-line>
-                                <v-list-item v-for="item in sidebarLanguages" v-if="language != item.code"
-                                             @click="changeLang(item.code)">
-                                    <v-list-tile>
-                                        <v-list-tile-action>
-                                            <img :src="'/public/flags/' + item.flag + '.png'">
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title v-text="item.name"/>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list-item>
-                            </v-list>
-                        </v-card-text>
-                    </v-card-row>
-                </v-card>
-            </v-dialog>
             <v-content>
                 <v-container fluid>
-                    <div class="mt-3"></div>
                     <v-row v-if="error">
                         <v-col lg1></v-col>
                         <v-col lg10>
@@ -103,6 +79,29 @@
                 </v-container>
             </v-content>
         </main>
+        <v-dialog v-model="langDialog">
+            <v-card>
+                <v-card-title>{{$t('sidebar.selectlang')}}</v-card-title>
+                <v-divider></v-divider>
+                <v-card-row height="300px">
+                    <v-card-text>
+                        <v-list two-line>
+                            <v-list-item v-for="item in sidebarLanguages" v-if="language != item.code"
+                                         @click="changeLang(item.code)">
+                                <v-list-tile>
+                                    <v-list-tile-action>
+                                        <img :src="'/public/flags/' + item.flag + '.png'">
+                                    </v-list-tile-action>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title v-text="item.name"/>
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                            </v-list-item>
+                        </v-list>
+                    </v-card-text>
+                </v-card-row>
+            </v-card>
+        </v-dialog>
     </v-app>
 </template>
 
