@@ -2,7 +2,7 @@
     <div>
         <v-container fluid>
             <v-layout justify-center>
-                <v-flex xs12 md10>
+                <v-flex xs12>
                     <!-- pagination with margins for datatable -->
                     <div class="text-xs-center mb-4">
                         <v-pagination
@@ -20,9 +20,9 @@
                         v-model="pagination.items"
                         -->
                         <v-data-table
-                            v-bind:headers="headers"
-                            v-bind:items="pagination.items"
-                            v-bind:no-data-text="$t('table.empty.payments')"
+                            :headers="headers"
+                            :items="pagination.items"
+                            :no-data-text="$t('table.empty.payments')"
                             hide-actions
                             class="elevation-1"
                         >

@@ -1,12 +1,11 @@
 <template>
     <div>
         <v-container fluid>
-            <v-row>
-                <v-col xs12 md10 offset-md1>
+            <v-layout justify-center>
+                <v-flex xs12>
                 <!--<v-alert info>{{$t('panel_preview')}}</v-alert>-->
-
                 <!-- pagination with margins for datatable -->
-                <div class="text-xs-center mt-4 mb-4">
+                <div class="text-xs-center mb-4">
                     <v-pagination
                             v-if="page"
                             :length="totalPages"
@@ -14,16 +13,16 @@
                             v-model="page"
                     ></v-pagination>
                 </div>
-                </v-col>
-            </v-row>
+                </v-flex>
+            </v-layout>
 
             <v-row>
-                <v-col xs12 md10 offset-md1>
+                <v-flex xs12 md10 offset-md1>
                 <v-card class="mb-4">
                     <v-data-table
-                            v-bind:headers="headers"
-                            v-model="services.items"
-                            v-bind:no-data-text="$t('table.empty.services')"
+                            :headers="headers"
+                            :items="services.items"
+                            :no-data-text="$t('table.empty.services')"
                             hide-actions
                     >
                         <template slot="items" scope="props">
@@ -59,7 +58,7 @@
                         </template>
                     </v-data-table>
                 </v-card>
-                </v-col>
+                </v-flex>
             </v-row>
         </v-container>
     </div>
