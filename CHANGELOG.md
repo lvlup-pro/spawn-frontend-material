@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-beta.15
+
+### Description
+
++ Toolbar height reduced from 60 to 56px
+
 ## 3.0.0-beta.14 (03.05.2017)
 
 ### Fixes

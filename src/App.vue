@@ -5,16 +5,58 @@
         </v-snackbar>
         <v-snackbar :timeout="2000" :top="true" :right="true" v-model="invalidSession">{{ $t('auth.invalidsession') }}
         </v-snackbar>
-        <header>
-            <v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>
-            <v-toolbar class="green">
-                <v-toolbar-side-icon @click.native.stop="sidebarOpen = !sidebarOpen"
-                                     class="hidden-md-and-up white--text">
-                    <v-icon class="sideicon">reorder</v-icon>
-                </v-toolbar-side-icon>
-                <v-toolbar-logo v-html="getToolbarTitle()"></v-toolbar-logo>
-            </v-toolbar>
-        </header>
+        <v-navigation-drawer persistent light v-model="sidebarOpen" :mini-variant.sync="false">
+            <!--<v-navigation-drawer persistent light :mini-variant.sync="mini" v-model="sidebarOpen">-->
+            <!--<v-sidebar fixed ripple router unshift v-model="sidebarOpen">-->
+            <router-link :to="'/' + language + '/home'">
+                <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
+            </router-link>
+            <p class="text-xs-center">
+                <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
+                    {{$t('sidebar.panel')}} {{version}}
+                </router-link>
+            </p>
+            <v-list dense>
+                <v-divider light/>
+                <template v-for="item in sidebarItems">
+                    <v-subheader v-if="item.header" v-text="$t(item.header)"/>
+                    <v-list-item
+                        v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
+                        <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link"
+                                     @click.native="sidebarOpen = false">
+                            <v-list-tile-action>
+                                <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t(item.title, item.args)"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile v-else-if="item.lang"
+                                     @click.native.stop="langDialog = !langDialog">
+                            <v-list-tile-action>
+                                <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t(item.title, item.args)"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile v-else @click.native="sidebarOpen = false; if (item.method) { item.method() }">
+                            <v-list-tile-action>
+                                <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="$t(item.title, item.args)"/>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list-item>
+                </template>
+            </v-list>
+        </v-navigation-drawer>
+        <!--<v-progress-linear id="loadingBar" v-if="loading" :indeterminate="true"></v-progress-linear>-->
+        <v-toolbar fixed class="green"><!--class="hidden-md-and-up white--text"-->
+            <v-toolbar-side-icon @click.native.stop="sidebarOpen = !sidebarOpen" light></v-toolbar-side-icon>
+            <v-toolbar-title v-html="getToolbarTitle()"></v-toolbar-title>
+        </v-toolbar>
         <main>
             <v-dialog v-model="langDialog">
                 <v-card>
@@ -39,51 +81,6 @@
                     </v-card-row>
                 </v-card>
             </v-dialog>
-            <v-sidebar fixed ripple router unshift v-model="sidebarOpen">
-                <router-link :to="'/' + language + '/home'">
-                    <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
-                </router-link>
-                <p class="text-xs-center">
-                    <router-link id="credits-link" class="white--text" :to="'/' + language + '/credits'">
-                        {{$t('sidebar.panel')}} {{version}}
-                    </router-link>
-                </p>
-                <v-list dense>
-                    <v-divider light/>
-                    <template v-for="item in sidebarItems">
-                        <v-subheader v-if="item.header" v-text="$t(item.header)"/>
-                        <v-list-item
-                            v-else-if="(item.logged === 'yes' && account.email) || (item.logged === 'no' && !account.email) || !item.logged">
-                            <v-list-tile v-if="item.link" router :href="'/' + language + '/' + item.link"
-                                         @click.native="sidebarOpen = false">
-                                <v-list-tile-action>
-                                    <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t(item.title, item.args)"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                            <v-list-tile v-else-if="item.lang"
-                                         @click.native.stop="langDialog = !langDialog">
-                                <v-list-tile-action>
-                                    <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t(item.title, item.args)"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                            <v-list-tile v-else @click.native="sidebarOpen = false; if (item.method) { item.method() }">
-                                <v-list-tile-action>
-                                    <i :class="'fa fa-fw fa-2x fa-' + item.icon"></i>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-text="$t(item.title, item.args)"/>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                    </template>
-                </v-list>
-            </v-sidebar>
             <v-content>
                 <v-container fluid>
                     <div class="mt-3"></div>
@@ -167,24 +164,24 @@
             },
             sidebarLanguages() {
                 return [
-                    { code: 'en', flag: 'EN', name: 'English (EN)' },
-                    { code: 'pl', flag: 'PL', name: 'Polski (PL)' },
-                    { code: 'de', flag: 'DE', name: 'Deutsch (DE)' },
-                    { code: 'es', flag: 'ES', name: 'Español (ES)' }
+                    {code: 'en', flag: 'EN', name: 'English (EN)'},
+                    {code: 'pl', flag: 'PL', name: 'Polski (PL)'},
+                    {code: 'de', flag: 'DE', name: 'Deutsch (DE)'},
+                    {code: 'es', flag: 'ES', name: 'Español (ES)'}
                 ]
             }
         },
         data () {
             return {
                 lg: '',
-                sidebarOpen: false,
+                sidebarOpen: true,
                 sidebarLanguagesOpen: false,
                 invalidSession: false,
                 langDialog: false
             }
         },
         watch: {
-            logout: function(newValue, oldValue) {
+            logout: function (newValue, oldValue) {
                 if (newValue) {
                     this.$store.commit('setLogout', false)
                     this.invalidSession = true
@@ -284,11 +281,6 @@
         overflow-x: hidden;
     }
 
-    /* smaller toolbar */
-    .toolbar {
-        height: 60px;
-    }
-
     @media screen and (min-width: 992px) {
         /* fix sidebar padding after sidebar resize */
         .with.left-fixed-sidebar main, .with.left-fixed-sidebar footer {
@@ -339,7 +331,7 @@
     /* smaller and more stylish loading bar */
     #loadingBar {
         margin: 0px;
-        height: 5px!important;
+        height: 5px !important;
         position: absolute;
     }
 
