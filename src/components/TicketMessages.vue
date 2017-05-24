@@ -91,12 +91,14 @@
             <v-btn v-if="msg.length <= 3000 && msg.length >= 2"
                    @click.native="addTicketMessage(msg)"
                    success
-                   block>{{$t('ticket.send')}}
+                   block
+                   light>{{$t('ticket.send')}}
             </v-btn>
             <v-btn v-if="msg.length > 3000"
                    @click.native="addTicketMessage(msg)"
                    error
-                   block>{{$t('ticket.send')}}
+                   block
+                   light>{{$t('ticket.send')}}
             </v-btn>
         </div>
         <div class="mt-5"></div>
