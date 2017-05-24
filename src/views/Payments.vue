@@ -1,10 +1,10 @@
 <template>
     <div>
         <v-container fluid>
-            <v-row>
-                <v-col xs12 md10 offset-md1>
+            <v-layout justify-center>
+                <v-flex xs12 md10>
                     <!-- pagination with margins for datatable -->
-                    <div class="text-xs-center mt-4 mb-4">
+                    <div class="text-xs-center mb-4">
                         <v-pagination
                             v-if="page"
                             :length.number="pagination.paging.total_pages"
@@ -17,10 +17,11 @@
                         v-bind:search="search"
                         v-bind:items="pagination.items"
                         :rows-per-page="limit"
+                        v-model="pagination.items"
                         -->
                         <v-data-table
                             v-bind:headers="headers"
-                            v-model="pagination.items"
+                            v-bind:items="pagination.items"
                             v-bind:no-data-text="$t('table.empty.payments')"
                             hide-actions
                             class="elevation-1"
@@ -53,8 +54,8 @@
                             </template>
                         </v-data-table>
                     </v-card>
-                </v-col>
-            </v-row>
+                </v-flex>
+            </v-layout>
         </v-container>
     </div>
 </template>
