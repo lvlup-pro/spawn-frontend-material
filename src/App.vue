@@ -279,6 +279,11 @@
         overflow-x: hidden;
     }
 
+    /* align drawer activation button after resizing it to 250px */
+    .navigation-drawer--persistent.navigation-drawer--open:not(.navigation-drawer--is-mobile):not(.navigation-drawer--clipped) + .toolbar {
+        padding-left: 250px;
+    }
+
     @media screen and (min-width: 992px) {
         /* fix sidebar padding after sidebar resize */
         .with.left-fixed-sidebar main, .with.left-fixed-sidebar footer {
