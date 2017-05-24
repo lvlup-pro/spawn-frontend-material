@@ -1,9 +1,8 @@
 <template>
     <div>
-        <v-container v-if="!loading">
-            <v-row>
-                <v-col xl3 md2></v-col>
-                <v-col xs12 md8 xl6>
+        <v-container fluid v-if="!loading">
+            <v-layout justify-center>
+                <v-flex xs12 md6 lg4>
                     <v-card class="mt-4 mb-4 pl-4 pr-4">
                         <v-card-text>
                             <v-card-row height="75px">
@@ -39,8 +38,8 @@
                             <!--<v-btn flat class="green&#45;&#45;text darken-1">Change data</v-btn>-->
                         <!--</v-card-row>-->
                     </v-card>
-                </v-col>
-            </v-row>
+                </v-flex>
+            </v-layout>
         </v-container>
     </div>
 </template>
