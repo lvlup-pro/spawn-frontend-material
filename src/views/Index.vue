@@ -1,12 +1,12 @@
 <template>
     <div>
         <v-container>
-            <v-row>
-                <v-col xs12>
+            <v-layout justify-center>
+                <v-flex xs12>
                     <h4>Forum</h4>
                     <discourse-latest-posts></discourse-latest-posts>
-                </v-col>
-            </v-row>
+                </v-flex>
+            </v-layout>
         </v-container>
     </div>
 </template>
