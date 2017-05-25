@@ -70,6 +70,7 @@
             </v-stepper-content>
 
             <v-stepper-content step="2">
+                <v-btn @click.native="prevStep()" dark default class="btn--dark-flat-focused">Back</v-btn>
                 <v-layout wrap class="mt-5 mb-4">
                     <v-flex xs12 lg4 @click="nextStep()" class="next-step mb-4">
                         <v-card style="min-height: 189px"
@@ -143,26 +144,226 @@
                         </v-card>
                     </v-flex>
                 </v-layout>
-                <v-btn @click.native="prevStep()" dark default class="btn--dark-flat-focused">Back</v-btn>
             </v-stepper-content>
 
             <v-stepper-content step="3">
+                <v-btn @click.native="prevStep()" dark default class="btn--light-flat-focused">Back</v-btn>
+                <v-btn @click.native="nextStep()" light primary class="btn--light-flat-focused">Next</v-btn>
+
+                <v-container fluid>
+                    <v-layout row wrap>
+                        <v-flex xs12 md6 class="text-xs-center">
+                            <v-card class="elevation-0">
+                                <v-card-text>
+                                    <v-radio label="4GB RAM" v-model="test" value="radio-1" primary dark
+                                             hide-details></v-radio>
+                                    <v-radio label="6GB RAM" v-model="test" value="radio-2" primary dark
+                                             hide-details></v-radio>
+                                    <v-radio label="8GB RAM" v-model="test" value="radio-3" primary dark
+                                             hide-details></v-radio>
+                                </v-card-text>
+                            </v-card>
+                        </v-flex>
+                        <v-flex xs12 md6>
+                            <v-card class="grey lighten-4 elevation-0">
+                                <v-card-text>
+                                    <v-container fluid>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Service</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>VPS</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Package</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>4GB RAM</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Virtualization</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>OpenVZ</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>RAM</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>4 GB</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Virtual RAM</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>512 MB</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Virtual CPU</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>2</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Type of disk</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>SSD</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Size of disk</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>10 GB</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Max network speed</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>200 Mbps</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Monthly bandwidth</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>∞</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Datacenter</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>OVH</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg4>
+                                                <v-subheader>Estimated delivery time</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg4>
+                                                <v-subheader><strong>1 minute</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-container>
+                                </v-card-text>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-stepper-content>
+
+            <v-stepper-content step="4">
                 <v-btn @click.native="prevStep()" dark default class="btn--dark-flat-focused">Back</v-btn>
+                <v-btn @click.native="nextStep()" light primary class="btn--light-flat-focused">Next</v-btn>
                 <v-card class="elevation-0">
                     <v-card-text>
-                        <v-container fluid>
-                            <v-layout row wrap>
-                                <v-switch v-bind:label="`Switch 1: ${ex11.toString()}`" v-model="ex11" dark></v-switch>
-                                <v-flex xs12 sm4 md2>
-                                    <v-radio label="Secondary" v-model="test" value="radio-1" secondary dark hide-details></v-radio>
-                                </v-flex>
-                                <v-flex xs12 sm4 md2>
-                                    <v-radio label="Success" v-model="test" value="radio-2" success dark hide-details></v-radio>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
+                        <v-radio label="7 days" v-model="test" value="radio-1" primary dark hide-details></v-radio>
+                        <v-radio label="14 days" v-model="test" value="radio-2" primary dark hide-details></v-radio>
+                        <v-radio label="1 month" v-model="test" value="radio-3" primary dark hide-details></v-radio>
+                        <v-radio label="2 months" v-model="test" value="radio-4" primary dark hide-details></v-radio>
+                        <v-radio label="3 months" v-model="test" value="radio-5" primary dark hide-details></v-radio>
                     </v-card-text>
                 </v-card>
+            </v-stepper-content>
+
+            <v-stepper-content step="5">
+
+                <v-btn @click.native="prevStep()" dark default class="btn--light-flat-focused">Back</v-btn>
+
+                <v-container fluid>
+                    <v-layout row>
+                        <v-flex xs12 md6 class="text-xs-center">
+                            <h4 class="pa-5">
+                                To be paid
+                            </h4>
+                            <h3 class="green--text">
+                                50,00 PLN
+                            </h3>
+                        </v-flex>
+                        <v-flex xs12 md6>
+                            <v-card class="grey lighten-4 elevation-0">
+                                <v-card-text>
+                                    <v-container fluid>
+                                        <v-layout row>
+                                            <v-flex xs4 lg3>
+                                                <v-subheader>Service</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg3>
+                                                <v-subheader><strong>VPS OpenVZ</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg3>
+                                                <v-subheader>Package</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg3>
+                                                <v-subheader><strong>4GB RAM</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg3>
+                                                <v-subheader>Duration</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg3>
+                                                <v-subheader><strong>7 days</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout row>
+                                            <v-flex xs4 lg3>
+                                                <v-subheader>Estimated delivery time</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs8 lg3>
+                                                <v-subheader><strong>1 minute</strong></v-subheader>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-container>
+                                </v-card-text>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+
+                <section class="mt-4">
+                    <section-header>
+                        Legal stuff
+                    </section-header>
+                    <blockquote class="mb-5">
+                        This is just a <a href="#">demo</a>, no service will be provided
+                    </blockquote>
+                </section>
+
+
+                <v-checkbox label="I agree to the terms above" v-model="agree" dark primary></v-checkbox>
+
+                <v-btn v-if="agree" block success light>
+                    Buy now
+                    <v-icon right light>shopping_cart</v-icon>
+                </v-btn>
+                <v-btn v-else block default light>
+                    Buy now
+                    <v-icon right light>shopping_cart</v-icon>
+                </v-btn>
+
             </v-stepper-content>
 
         </v-stepper>
@@ -177,9 +378,9 @@
     export default {
         data () {
             return {
-                step: 3,
+                step: 5,
                 test: 'radio-1',
-                ex11: true
+                agree: false
             }
         },
         mounted () {
