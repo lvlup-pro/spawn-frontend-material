@@ -1,8 +1,8 @@
 <template>
     <div>
         <v-container fluid>
-            <v-row>
-                <v-col xs12 md10 offset-md1>
+            <v-layout>
+                <v-flex xs12 md10 offset-md1>
                     <v-card class="mb-4">
                         <v-card-row class="grey darken-3">
                             <v-card-title class="white--text">{{$t('vpsip.header')}}</v-card-title>
@@ -29,7 +29,7 @@
                         <v-data-table
                             v-if="loadedRules"
                             v-bind:headers="headers"
-                            v-model="rules"
+                            :items="rules"
                             v-bind:no-data-text="$t('table.empty.rules')"
                             hide-actions
                         >
@@ -66,12 +66,12 @@
                         </v-data-table>
 
                         <v-card-row actions style="justify-content: flex-start" v-if="loadedStatus">
-                            <v-btn success v-if="(!status.enabled || status.enable_pending) && !status.disable_pending"
+                            <v-btn class="white--text" success v-if="(!status.enabled || status.enable_pending) && !status.disable_pending"
                                    @click.native="enable"
                                    :loading="changingStatus" :disabled="changingStatus">
                                 {{$t('vpsip.enable')}}
                             </v-btn>
-                            <v-btn error v-if="(status.enabled || status.disable_pending) && !status.enable_pending"
+                            <v-btn class="white--text" error v-if="(status.enabled || status.disable_pending) && !status.enable_pending"
                                    @click.native="disable"
                                    :loading="changingStatus" :disabled="changingStatus">
                                 {{$t('vpsip.disable')}}
@@ -124,13 +124,13 @@
                                     </v-btn>
                                 </v-card-row>
                             </v-dialog>
-                            <v-btn error @click.native="deleteRules" :disabled='checked.length === 0'>
+                            <v-btn error class="white--text" @click.native="deleteRules" :disabled='checked.length === 0'>
                                 {{$t('vpsip.delete')}}
                             </v-btn>
                         </v-card-row>
                     </v-card>
-                </v-col>
-            </v-row>
+                </v-flex>
+            </v-layout>
         </v-container>
     </div>
 </template>
