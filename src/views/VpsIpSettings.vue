@@ -66,12 +66,14 @@
                         </v-data-table>
 
                         <v-card-row actions style="justify-content: flex-start" v-if="loadedStatus">
-                            <v-btn class="white--text" success v-if="(!status.enabled || status.enable_pending) && !status.disable_pending"
+                            <v-btn class="white--text" success
+                                   v-if="(!status.enabled || status.enable_pending) && !status.disable_pending"
                                    @click.native="enable"
                                    :loading="changingStatus" :disabled="changingStatus">
                                 {{$t('vpsip.enable')}}
                             </v-btn>
-                            <v-btn class="white--text" error v-if="(status.enabled || status.disable_pending) && !status.enable_pending"
+                            <v-btn class="white--text" error
+                                   v-if="(status.enabled || status.disable_pending) && !status.enable_pending"
                                    @click.native="disable"
                                    :loading="changingStatus" :disabled="changingStatus">
                                 {{$t('vpsip.disable')}}
@@ -83,48 +85,52 @@
                                 <v-btn slot="activator" success class="white--text">
                                     {{$t('vpsip.add.submit')}}
                                 </v-btn>
-                                <v-card-row>
-                                    <v-card-title>{{$t('vpsip.add.header')}}</v-card-title>
-                                </v-card-row>
-                                <v-card-row height="400px">
-                                    <v-card-text>
-                                        <v-container fluid>
-                                            <v-text-field
-                                                :validationmessage="$t('validation.port')"
-                                                :validation="validatePortFrom"
-                                                :label="$t('vpsip.add.portfrom.label')"
-                                                :placeholder="$t('vpsip.add.portfrom.placeholder')"
-                                                name="portfrom" type="number" v-model="portFrom" required
-                                            ></v-text-field>
-                                            <v-text-field
-                                                :validationmessage="$t('validation.port')" :validation="validatePortTo"
-                                                :label="$t('vpsip.add.portto.label')"
-                                                :placeholder="$t('vpsip.add.portto.placeholder')"
-                                                name="portto" type="number" v-model="portTo" required
-                                            ></v-text-field>
-                                            <v-select
-                                                :items="selectProtocols"
-                                                :label="$t('vpsip.add.protocol')"
-                                                v-model="protocol"
-                                            ></v-select>
-                                            <!--<v-text-field label="Legal last name" hint="example of persistent helper text"
-                                            persistent-hint
-                                            required />
-                                            <small>*indicates required field</small>-->
-                                        </v-container>
-                                    </v-card-text>
-                                </v-card-row>
-                                <v-card-row actions>
-                                    <v-btn flat @click.native="addModal = false">
-                                        {{$t('vpsip.add.cancel')}}
-                                    </v-btn>
-                                    <v-btn success @click.native="addRule"
-                                           :loading="addingRule" :disabled="addingRule">
-                                        {{$t('vpsip.add.submit')}}
-                                    </v-btn>
-                                </v-card-row>
+                                <v-card>
+                                    <v-card-row>
+                                        <v-card-title>{{$t('vpsip.add.header')}}</v-card-title>
+                                    </v-card-row>
+                                    <v-card-row height="400px">
+                                        <v-card-text>
+                                            <v-container fluid>
+                                                <v-text-field
+                                                    :validationmessage="$t('validation.port')"
+                                                    :validation="validatePortFrom"
+                                                    :label="$t('vpsip.add.portfrom.label')"
+                                                    :placeholder="$t('vpsip.add.portfrom.placeholder')"
+                                                    name="portfrom" type="number" v-model="portFrom" required
+                                                ></v-text-field>
+                                                <v-text-field
+                                                    :validationmessage="$t('validation.port')"
+                                                    :validation="validatePortTo"
+                                                    :label="$t('vpsip.add.portto.label')"
+                                                    :placeholder="$t('vpsip.add.portto.placeholder')"
+                                                    name="portto" type="number" v-model="portTo" required
+                                                ></v-text-field>
+                                                <v-select
+                                                    :items="selectProtocols"
+                                                    :label="$t('vpsip.add.protocol')"
+                                                    v-model="protocol"
+                                                ></v-select>
+                                                <!--<v-text-field label="Legal last name" hint="example of persistent helper text"
+                                                persistent-hint
+                                                required />
+                                                <small>*indicates required field</small>-->
+                                            </v-container>
+                                        </v-card-text>
+                                    </v-card-row>
+                                    <v-card-row actions>
+                                        <v-btn flat @click.native="addModal = false">
+                                            {{$t('vpsip.add.cancel')}}
+                                        </v-btn>
+                                        <v-btn class="white--text" success @click.native="addRule"
+                                               :loading="addingRule" :disabled="addingRule">
+                                            {{$t('vpsip.add.submit')}}
+                                        </v-btn>
+                                    </v-card-row>
+                                </v-card>
                             </v-dialog>
-                            <v-btn error class="white--text" @click.native="deleteRules" :disabled='checked.length === 0'>
+                            <v-btn error class="white--text" @click.native="deleteRules"
+                                   :disabled='checked.length === 0'>
                                 {{$t('vpsip.delete')}}
                             </v-btn>
                         </v-card-row>
