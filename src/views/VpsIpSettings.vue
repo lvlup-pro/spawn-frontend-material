@@ -337,7 +337,7 @@
                     }
                     this.addingRule = true
                     this.$store.dispatch('vpsIpGameRuleAdd', Object.assign(this.$route.params,
-                        {protocol: this.protocol.value, port_from: portFrom, port_to: portTo})).then(() => {
+                        {protocol: this.protocol.value, port_from: parseInt(portFrom), port_to: parseInt(portTo)})).then(() => {
                         this.addingRule = false
                         this.addModal = false
                         this.portFrom = ''
