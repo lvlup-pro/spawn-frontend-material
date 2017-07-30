@@ -8,6 +8,10 @@
 
 Frontend for https://lvlup.pro hosting customer panel available @ https://my.lvlup.pro 
 
+[![Watch the demo video](https://systemz.pl/ext/github/spawn3-frontend.gif)](https://systemz.pl/ext/github/spawn3-frontend.mp4)
+
+*Click image to watch full version*
+
 ## How to play with current release
  
 To see sandbox of current version just go to https://demomy.lvlup.pro
