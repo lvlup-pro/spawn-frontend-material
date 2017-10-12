@@ -2,50 +2,78 @@
     "sidebar": {
         "panel": "Kundenbereich",
         "account": "Konto",
-        "register": "Anmeldung",
+        "register": "Anmelden",
         "login": "Einloggen",
         "logout": "Abmeldung",
         "profile": "{email}",
         "payments": "Zahlungen ({balance_pretty})",
+        "paymenthistory": "Zahlungen liste",
         "menu": "Menu",
-        "home": "Zuhause",
-        "services": "Dienstleistungen",
-        "help": "Beihilfe",
-        "lang": "Sprache"
+        "home": "Home",
+        "services": "Dienste",
+        "help": "Hilfe",
+        "lang": "Sprache",
+        "selectlang": "Sprache wählen",
+        "refresh": "Aktualisieren"
     },
     "header": {
-        "home": "Zuhause",
-        "credits": "Zahlungen",
+        "home": "Home",
+        "credits": "Zahlugen",
         "login": "Einloggen",
-        "register": "Anmeldung",
-        "services": "Dienstleistungen",
-        "ticket_init": "Anwendung",
-        "ticket": "Anwendung #{id}",
-        "tickets": "Anwendungen",
-        "vps_init": "VPS",
-        "vps": "VPS #{id}",
+        "register": "Anmelden",
+        "services": "Dienste",
+        "ticket_init": "Nachrichten",
+        "ticket": "Nachricht #{id}",
+        "tickets": "Nachrichten",
+        "vps": "VPS #{id}[hide-sm]{name}[/hide-sm]",
+        "vpsip": "[hide-sm]VPS #{id} - [/hide-sm]{ip}",
         "payments": "Zahlungen",
-        "profile": "Konto"
+        "profile": "Profile",
+        "ddos": "DDoS-angriffen"
     },
     "table": {
         "id": "ID",
+        "ip": "IP",
         "name": "Name",
-        "service": "Service",
+        "service": "Dienst",
         "subject": "Thema",
-        "amount": "Quote",
+        "amount": "Menge",
         "status": "Status",
-        "created_at": "Erstellt",
-        "payed_to": "Ende der Dienstleistungen"
+        "created_at": "Erstellt am",
+        "payed_to": "Ende der dienstzeit",
+        "ports": "Ports",
+        "protocol": "Protocol",
+        "start": "Starten",
+        "end": "Ende",
+        "description": "Beschreibung",
+        "empty": {
+            "services": "Du hast keine dienste bestellt",
+            "payments": "Keine Zahlungen",
+            "tickets": "Keine Nachrichten",
+            "rules": "Keine Filterregeln",
+            "ddos": "Keine DDoS-angriffen"
+        }
+    },
+    "validation": {
+        "required": "Dieses Feld ist erforderlich",
+        "email": "Bitte geben Sie korrekt email adresse an.",
+        "repeatpassword": "Passwörter stimmen nicht überein.",
+        "port": "Port muss ganzzahlig im Bereich von 1-65535 sein."
+    },
+    "error": {
+        "network" : "Ein netzwerkfehler ist aufgetreten!",
+        "ratelimit": "Rate grenzen überschritten!",
+        "unknown": "Ein unbekannter Fehler ist aufgetreten!"
     },
     "auth": {
-        "no": "Bitte melden Sie sich an",
-        "already": "Sie sind derzeit angemeldet",
-        "success": "Unterzeichnet richtig",
-        "fail": "Ist ein Fehler aufgetreten bei der Anmeldung",
-        "invalidsession": "Bitte melden Sie sich an",
+        "no": "Bitte erst melden Sie sich an",
+        "already": "Sie sind zur zeit angemeldet",
+        "success": "Korrekt angemeldet",
+        "fail": "Anmeldung fehlgeschlagen",
+        "invalidsession": "Session ist abgelaufen anmelden sie sich nochmal an.",
         "register": {
-            "success": "Korrekt registriert",
-            "fail": "Ist ein Fehler aufgetreten bei der Registrierung"
+            "success": "Registrierung erfolgreich",
+            "fail": "Registrierung fehlgeschlagen"
         }
     },
     "user": {
@@ -54,66 +82,136 @@
         "email": "E-mail",
         "password": "Passwort",
         "repeatpassword": "Passwort wiederholen",
-        "fullname": "Ihr Name",
+        "fullname": "Vollständiger Name",
         "placeholder": {
-            "username": "j.doe",
+            "username": "Benutzername oder e-mail",
             "email": "john.doe@example.com",
             "password": "********",
             "fullname": "John Doe"
         },
         "login": {
-            "header": "Ich habe ein Konto mit lvlup.pro",
-            "button": "Einloggen"
+            "header": "Ich habe bereits ein lvlup.pro konto",
+            "button": "Anmelden"
         },
         "register": {
-            "header": "Ich habe kein Konto mit lvlup.pro",
-            "button": "Anmeldung"
+            "header": "Ich habe noch keinem lvlup.pro konto",
+            "button": "Registrieren"
         }
     },
     "ticket": {
         "status": {
             "waiting": {
-                "long": "Wir freuen uns auf Ihre Antwort",
-                "medium": "Wir freuen uns auf den Kunden",
-                "short": "Erwartung"
+                "long": "Erwarte deine Antwort",
+                "medium": "Warten auf kunde",
+                "short": "Warten"
             },
             "working": {
-                "long": "Der Unterstützung arbeitet an einer Antwort",
-                "medium": "Der Unterstützung arbeitet",
-                "short": "Verarbeitung"
+                "long": "Mitarbeiter arbeiten an einer anworten",
+                "medium": "In Bearbeitung",
+                "short": "Wird bearbeitet"
             },
             "closed": {
-                "long": "Der Unterstützung arbeitet bereits auf Anfrage",
-                "medium": "Anwendung geschlossen",
-                "short": "Geschlossen"
+                "long": "Mitarbeiter arbeiten an diesem Nachricht nicht mehr",
+                "medium": "Nachricht abgeschlossen",
+                "short": "Abgeschlossen"
             },
             "open": {
-                "long": "Klicken Sie für mehr",
-                "short": "Offen"
+                "long": "Klicken Sie auf Nachricht, um mehr zu erfahren",
+                "short": "Mehr erfahren"
             }
         },
-        "subject": "Antwort",
-        "response_time": "Sehr geehrter Kunde, so kann die Antwort bis zu 48 Stunden! Bitte haben Sie Geduld",
-        "client": "Kunde",
-        "staff": "lvlup.pro Unterstützung",
-        "textarea": "Schreibe eine Nachricht an Unterstützung",
-        "send": "Senden",
-        "msg_too_long": "Die Nachricht ist zu lang",
-        "msg_too_short": "Die Nachricht ist zu kurzt",
-        "msg_duplicate": "Diese Nachricht wurde bereits gesendet"
+        "subject": "Thema",
+        "response_time": "Die anwort kann bis zu 48 studen dauern",
+        "client": "Du",
+        "staff": "lvlup.pro Mitarbeiter",
+        "textarea": "Geben sie ihre nachricht ein",
+        "send": "Schick",
+        "msg_too_long": "Nachricht ist zu lange",
+        "msg_too_short": "Nachricht ist zu kurz",
+        "msg_duplicate": "Nachricht ist schon geschickt"
     },
     "vps": {
         "control": "Steuern",
+        "settings": "Einstellungen",
         "resources": "Ressourcen",
-        "network": "Netzwerk",
-        "disk": "Scheibe",
-        "turn_on": "Anmachen",
-        "turn_off": "Abschalten",
-        "state": "Bundesland",
+        "network_all": "Netzwerk (Seit dem start)",
+        "network_rt": "Netzwerk (Echtzeit)",
+        "disk": "Disk",
+        "disk_all": "Disk (Seit dem start)",
+        "disk_rt": "Disk (Echtzeit)",
+        "turn_on": "Einschalten",
+        "info": "Information",
+        "state": "Zustand",
+        "ips": "IP adresse",
+        "ipmain": "Haupt IP-adresse",
+        "ipadditional": "Zusätzlich IP-adresse",
+        "virtualization": "Virtualization",
+        "uptime": "Betriebszeit",
+        "days": "Tage",
         "cpu": "CPU",
         "ram": "RAM",
-        "on": "Auf",
-        "off": "Aus"
+        "swap": "Swap",
+        "on": "On",
+        "off": "Off",
+        "lockedfrom": "Unbezahlt von",
+        "activeto": "Bezahlt bis",
+        "createdat": "Erstellt am",
+        "active": "Aktiv",
+        "unpaid": "Unbezahlt",
+        "locked": "Gesperrt",
+        "notset": "Nicht eingestellt",
+        "save": "Sparen",
+        "name": "Name",
+        "ddos": "DDoS-angriffen",
+        "ddos_check": "Mehr erfahren",
+        "placeholder": {
+            "name": "Mein VPS"
+        },
+        "disable": {
+            "header": "Sind sie sicher, dass VPS #{id} ausgeschaltet werden soll?",
+            "description": "Das kann ungesicherte Datenverluste verursachen bist du sicher?",
+            "cancel": "Stornieren",
+            "submit": "Ausschalten"
+        },
+        "reboot": {
+            "header": "Möchten sie VPS #{id} neu starten?",
+            "description": "Das kann ungesicherte Datenverluste verursachen bist du sicher?",
+            "cancel": "Stornieren",
+            "submit": "Neu starten"
+        }
+    },
+    "vpsip": {
+        "header": "UDP filtern",
+        "enable": "Aktivieren",
+        "disable": "Deaktivieren",
+        "status": {
+            "label": "Filtrieren",
+            "enabled": "Aktiviert",
+            "enabling": "Aktivieren",
+            "disabled": "Deaktiviert",
+            "disabling": "Deaktivieren"
+        },
+        "rule": {
+            "created": "Erstellt",
+            "creating": "Erstellen",
+            "deleting": "Löschen"
+        },
+        "add": {
+            "cancel": "Stornieren",
+            "submit": "Hinzufügen",
+            "header": "Filterregel hinzufügen",
+            "portfrom": {
+                "label": "Port reichweite start",
+                "placeholder": "1"
+            },
+            "portto": {
+                "label": "Port reichweite ende",
+                "placeholder": "65535"
+            },
+            "protocol": "Protocol"
+        },
+        "delete": "Löschen",
+        "otherprotocol": "Andere protocol"
     },
     "credits": {
         "contributors": "Mitwirkende",
@@ -121,6 +219,5 @@
         "changelog": "Änderungsprotokoll"
     },
     "loading": "Laden",
-    "panel_preview": "Diese Vorschau-Version des Kunden-Panels zeigt nur VPS-Server",
-    "network_error": "Netzwerkfehler erkannt!"
+    "panel_preview": "This preview version of customer panel only shows VPS servers"
 }
