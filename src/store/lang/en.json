@@ -111,17 +111,17 @@
                 "short": "Processing"
             },
             "closed": {
-                "long": "Staff is not working on this case anymore",
+                "long": "Staff are not working on this case anymore",
                 "medium": "Case closed",
                 "short": "Closed"
             },
             "open": {
-                "long": "Click ticket to find out more",
+                "long": "Click the ticket to find out more",
                 "short": "Open"
             }
         },
         "subject": "Subject",
-        "response_time": "Dear customer, a response to your query may take up to 48h to reach you",
+        "response_time": "Dear customer, the response to your query may take up to 48h to reach you",
         "client": "You",
         "staff": "lvlup.pro Staff",
         "textarea": "Enter the content of your message",
@@ -219,5 +219,5 @@
         "changelog": "Changelog"
     },
     "loading": "Loading",
-    "panel_preview": "This preview version of customer panel only shows VPS servers"
+    "panel_preview": "This preview version of the customer panel only shows VPS servers"
 }
