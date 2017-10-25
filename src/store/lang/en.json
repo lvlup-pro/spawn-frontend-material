@@ -111,7 +111,7 @@
                 "short": "Processing"
             },
             "closed": {
-                "long": "Staff is not working on this case anymore",
+                "long": "Staff are no longer working on this case",
                 "medium": "Case closed",
                 "short": "Closed"
             },
@@ -219,5 +219,5 @@
         "changelog": "Changelog"
     },
     "loading": "Loading",
-    "panel_preview": "This preview version of customer panel only shows VPS servers"
+    "panel_preview": "This preview version of the customer panel only shows VPS servers"
 }
