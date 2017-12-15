@@ -40,7 +40,7 @@
 
         <v-subheader>Menu</v-subheader>
 
-        <v-list-tile @click="$router.push('/home')">
+        <v-list-tile @click="$router.push('/')">
           <v-list-tile-action>
             <i class="fa fa-fw fa-lg fa-newspaper-o" aria-hidden="true"></i>
           </v-list-tile-action>
@@ -55,6 +55,24 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>{{ $t('services') }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile @click="$router.push('/payments')" v-if="$store.state.loggedIn">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-money" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $t('payments') }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile @click="$router.push('/tickets')" v-if="$store.state.loggedIn">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-heart" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $t('help') }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
@@ -137,6 +155,8 @@
           logoSubtitle: 'Customer panel',
           news: 'News',
           services: 'Services',
+          help: 'Help',
+          payments: 'Payments',
           login: 'Log in',
           logOut: 'Log out',
           account: 'Account',
@@ -146,6 +166,8 @@
           logoSubtitle: 'Panel klienta',
           news: 'Nowości',
           services: 'Usługi',
+          help: 'Pomoc',
+          payments: 'Płatności',
           login: 'Zaloguj',
           logOut: 'Wyloguj',
           account: 'Konto',
