@@ -20,6 +20,15 @@
 
         <v-subheader>{{ $t('account') }}</v-subheader>
 
+        <v-list-tile @click="$router.push('/profile')" v-if="$store.state.loggedIn">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-user" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $t('profile') }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
         <v-list-tile @click="logOut()" v-if="$store.state.loggedIn">
           <v-list-tile-action>
             <i class="fa fa-fw fa-lg fa-key" aria-hidden="true"></i>
@@ -160,6 +169,7 @@
           login: 'Log in',
           logOut: 'Log out',
           account: 'Account',
+          profile: 'Profile',
           language: 'Język'
         },
         pl: {
@@ -171,6 +181,7 @@
           login: 'Zaloguj',
           logOut: 'Wyloguj',
           account: 'Konto',
+          profile: 'Profil',
           language: 'Language'
         }
       }

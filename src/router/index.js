@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Login from '@/components/Login'
+import Profile from '@/components/Profile'
 import Services from '@/components/Services'
 import Payments from '@/components/Payments'
 import Tickets from '@/components/Tickets'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
@@ -14,6 +15,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
     },
     {
       path: '/services',
