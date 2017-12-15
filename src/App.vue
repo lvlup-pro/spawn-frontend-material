@@ -6,32 +6,83 @@
       :clipped="clipped"
       v-model="drawer"
       app
+      dark
     >
-      <v-list>
-        <v-list-tile
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-          exact
-        >
+      <v-list dense>
+        <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
+        <p class="text-xs-center">
+          <span class="white--text" id="credits-link">
+            {{ $t('logoSubtitle')}} v3.0.0-rc.1
+          </span>
+        </p>
+
+        <hr light="" class="divider divider--light">
+
+        <v-subheader>{{ $t('account') }}</v-subheader>
+
+        <v-list-tile @click="logOut()" v-if="$store.state.loggedIn">
           <v-list-tile-action>
-            <v-icon light v-html="item.icon"></v-icon>
+            <i class="fa fa-fw fa-lg fa-key" aria-hidden="true"></i>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
+            <v-list-tile-title>{{ $t('logOut')}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+
+        <v-list-tile @click="$router.push('/auth/login')" v-if="!$store.state.loggedIn">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-sign-out" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $t('login')}}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-subheader>Menu</v-subheader>
+
+        <v-list-tile @click="$router.push('/home')">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-newspaper-o" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $t('news') }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile @click="$router.push('/services')" v-if="$store.state.loggedIn">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-list" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $t('services') }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-subheader>{{ $t('language') }}</v-subheader>
+
+        <v-list-tile @click="changeLanguage('pl')" v-if="language === 'en'">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-globe" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Przełącz na Polski</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile @click="changeLanguage('en')" v-if="language === 'pl'">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-globe" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Switch to English</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app :clipped-left="clipped">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" light></v-toolbar-side-icon>
-      <v-btn
-        icon
-        light
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
+    <v-toolbar class="elevation-2" height="60" color="green" fixed app :clipped-left="clipped">
+      <v-toolbar-side-icon @click.stop="drawer = !drawer" dark></v-toolbar-side-icon>
+      <!--
       <v-btn
         icon
         light
@@ -39,18 +90,12 @@
       >
         <v-icon>web</v-icon>
       </v-btn>
-      <v-btn
-        icon
-        light
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+      -->
+      <v-toolbar-title v-text="title" style="color:#fff"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
         icon
-        light
+        dark
         @click.stop="rightDrawer = !rightDrawer"
       >
         <v-icon>menu</v-icon>
@@ -64,6 +109,7 @@
       :right="right"
       v-model="rightDrawer"
       fixed
+      dark
     >
       <v-list>
         <v-list-tile @click="right = !right">
@@ -75,14 +121,36 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app>
-      <span>&copy; 2017</span>
+      <span>&copy; LVL UP 2017</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
   export default {
-    data () {
+    i18n: {
+      messages: {
+        en: {
+          logoSubtitle: 'Customer panel',
+          news: 'News',
+          services: 'Services',
+          login: 'Log in',
+          logOut: 'Log out',
+          account: 'Account',
+          language: 'Język'
+        },
+        pl: {
+          logoSubtitle: 'Panel klienta',
+          news: 'Nowości',
+          services: 'Usługi',
+          login: 'Zaloguj',
+          logOut: 'Wyloguj',
+          account: 'Konto',
+          language: 'Language'
+        }
+      }
+    },
+    data() {
       return {
         clipped: false,
         drawer: true,
@@ -94,8 +162,40 @@
         miniVariant: false,
         right: true,
         rightDrawer: false,
-        title: 'Vuetify.js'
+        title: 'my.lvlup.pro',
+        language: 'en'
+      }
+    },
+    mounted() {
+      this.changeLanguage(this.language)
+      this.$store.dispatch('checkIfLoggedIn')
+    },
+    methods: {
+      logOut() {
+        localStorage.removeItem('token')
+        this.$store.dispatch('setLoggedOut')
+        setTimeout(() => {
+          this.$router.push('/auth/login')
+        }, 500)
+      },
+      changeLanguage(lg) {
+        console.log("Current language: " + this.$root.$i18n.locale)
+        this.$root.$i18n.locale = lg
+        this.language = lg
+        console.log("New language: " + this.$root.$i18n.locale)
       }
     }
   }
 </script>
+
+<style scoped>
+  #logo {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 2%;
+  }
+
+  .navigation-drawer {
+    width: 250px !important;
+  }
+</style>

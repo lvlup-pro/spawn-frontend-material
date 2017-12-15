@@ -28,3 +28,14 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+## package.json
+
+### dependencies section
+All dependencies for spawn-frontend
+
+### dev dependencies section
+All dependencies from vue-cli template
+
+
