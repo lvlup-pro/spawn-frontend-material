@@ -60,7 +60,7 @@
 
         <v-subheader>{{ $t('language') }}</v-subheader>
 
-        <v-list-tile @click="changeLanguage('pl')" v-if="language === 'en'">
+        <v-list-tile @click="changeLanguage()" v-if="$store.state.language === 'en'">
           <v-list-tile-action>
             <i class="fa fa-fw fa-lg fa-globe" aria-hidden="true"></i>
           </v-list-tile-action>
@@ -69,7 +69,7 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile @click="changeLanguage('en')" v-if="language === 'pl'">
+        <v-list-tile @click="changeLanguage()" v-if="$store.state.language === 'pl'">
           <v-list-tile-action>
             <i class="fa fa-fw fa-lg fa-globe" aria-hidden="true"></i>
           </v-list-tile-action>
@@ -91,15 +91,18 @@
         <v-icon>web</v-icon>
       </v-btn>
       -->
+
       <v-toolbar-title v-text="title" style="color:#fff"></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        icon
-        dark
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
+      <!--
+     <v-spacer></v-spacer>
+     <v-btn
+       icon
+       dark
+       @click.stop="rightDrawer = !rightDrawer"
+     >
+       <v-icon>menu</v-icon>
+     </v-btn>
+     -->
     </v-toolbar>
     <v-content>
       <router-view></router-view>
@@ -162,27 +165,20 @@
         miniVariant: false,
         right: true,
         rightDrawer: false,
-        title: 'my.lvlup.pro',
-        language: 'en'
+        title: 'my.lvlup.pro'
       }
     },
     mounted() {
-      this.changeLanguage(this.language)
+      //this.changeLanguage(this.language)
+      this.$store.dispatch('checkLanguage')
       this.$store.dispatch('checkIfLoggedIn')
     },
     methods: {
       logOut() {
-        localStorage.removeItem('token')
         this.$store.dispatch('setLoggedOut')
-        setTimeout(() => {
-          this.$router.push('/auth/login')
-        }, 500)
       },
-      changeLanguage(lg) {
-        console.log("Current language: " + this.$root.$i18n.locale)
-        this.$root.$i18n.locale = lg
-        this.language = lg
-        console.log("New language: " + this.$root.$i18n.locale)
+      changeLanguage() {
+        this.$store.dispatch('changeLanguage')
       }
     }
   }
@@ -197,5 +193,10 @@
 
   .navigation-drawer {
     width: 250px !important;
+  }
+
+  .list__tile__action {
+    padding-left: 10px;
+    min-width: 50px;
   }
 </style>

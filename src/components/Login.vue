@@ -127,6 +127,8 @@
         },
         pl: {
           welcome: 'Zaloguj się do swojego konta',
+          login: 'Login',
+          loginOrMail: 'Login/e-mail',
           password: 'Hasło',
           submit: 'Zaloguj',
           forgot: 'Zapomniałem hasła',

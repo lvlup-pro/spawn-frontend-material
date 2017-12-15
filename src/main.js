@@ -56,12 +56,42 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     loggedIn: false,
-    userJustLoggedOff: false
+    userJustLoggedOff: false,
+    language: 'pl'
   },
   actions: {
+    checkLanguage({dispatch, state, commit}) {
+      //TODO detect browser language
+      if (localStorage.getItem('lang') === null) {
+        localStorage.setItem('lang', 'pl')
+      }
+      commit('language', localStorage.getItem('lang'))
+      //TODO check race condition
+      setTimeout(() => {
+        window.vue.$i18n.locale = localStorage.getItem('lang')
+      }, 1)
+    },
+    changeLanguage({dispatch, state, commit}) {
+      let lg = 'en'
+      if (state.language === 'en') {
+        lg = 'pl'
+      }
+      commit('language', lg)
+      localStorage.setItem('lang', lg)
+      //TODO check race condition
+      setTimeout(() => {
+        window.vue.$i18n.locale = lg
+      }, 1)
+    },
     checkIfLoggedIn({dispatch, state, commit}) {
       if (localStorage.getItem('token') === null) {
         commit('userLogged', false)
+        //TODO redirect to destination page
+        //TODO inform user about log in requirement
+        //TODO check race condition
+        setTimeout(() => {
+          window.vue.$router.push('/auth/login')
+        }, 1)
       } else {
         //TODO check if token is valid
         commit('userLogged', true)
@@ -72,6 +102,11 @@ const store = new Vuex.Store({
       commit('userLogged', true)
     },
     setLoggedOut({dispatch, state, commit}) {
+      localStorage.removeItem('token')
+      console.log(window.vue.$router)
+      setTimeout(() => {
+        window.vue.$router.push('/auth/login')
+      }, 250)
       commit('userLogged', false)
       commit('userJustLoggedOff', true)
     },
@@ -85,6 +120,9 @@ const store = new Vuex.Store({
     },
     userJustLoggedOff(state, newVal) {
       state.userJustLoggedOff = newVal
+    },
+    language(state, newVal) {
+      state.language = newVal
     }
   }
 })

@@ -124,39 +124,7 @@
         totalItems: 0,
         items: [],
         loading: true,
-        pagination: {},
-        headers: [
-          {
-            text: 'ID',
-            align: 'left',
-            sortable: false,
-            value: 'id'
-          },
-          {
-            text: this.$t('type'),
-            align: 'left',
-            value: 'virt'
-          },
-          {
-            text: 'Name',
-            align: 'left',
-            value: 'name'
-          },
-          {
-            text: 'IP',
-            align: 'left',
-            value: 'ip'
-          },
-          {
-            align: 'right',
-            text: 'Active',
-            value: 'active'
-          },
-          {
-            text: 'Payed to',
-            value: 'payed_to'
-          }
-        ]
+        pagination: {}
       }
     },
     watch: {
@@ -172,9 +140,6 @@
       }
     },
     mounted() {
-      if (!this.$store.state.loggedIn) {
-        this.$router.push('/auth/login')
-      }
       // this.getDataFromApi()
       //   .then(data => {
       //     this.items = data.items
@@ -199,7 +164,6 @@
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
             url: this.$config.apiUrl + 'vps?page=' + page + '&limit=' + rowsPerPage
           }).then((res) => {
-            //console.log(res.data.items)
             this.loading = false
             let items = res.data.items
             let total = res.data.paging.total_items
@@ -209,47 +173,12 @@
             })
           }).catch((err) => {
             this.loading = false
+            console.log(err.response.status)
+            if (err.response.status === 401) {
+              this.$store.dispatch('setLoggedOut')
+            }
           })
 
-        })
-      },
-      zgetDataFromApi() {
-        this.getList()
-        this.loading = true
-        return new Promise((resolve, reject) => {
-          const {sortBy, descending, page, rowsPerPage} = this.pagination
-
-          let items = this.getDesserts()
-          const total = items.length
-
-          if (this.pagination.sortBy) {
-            items = items.sort((a, b) => {
-              const sortA = a[sortBy]
-              const sortB = b[sortBy]
-
-              if (descending) {
-                if (sortA < sortB) return 1
-                if (sortA > sortB) return -1
-                return 0
-              } else {
-                if (sortA < sortB) return -1
-                if (sortA > sortB) return 1
-                return 0
-              }
-            })
-          }
-
-          if (rowsPerPage > 0) {
-            items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-          }
-
-          setTimeout(() => {
-            this.loading = false
-            resolve({
-              items,
-              total
-            })
-          }, 1000)
         })
       }
     }
