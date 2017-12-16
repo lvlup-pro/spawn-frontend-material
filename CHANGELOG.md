@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.0-rc.1 (16.12.2017)
+
++ Almost total code rewrite
++ Vuetify 0.17.4
++ Basic PWA functionality
++ No SSR
++ i18n for EN and PL only
++ Simplified code
++ Less global code
++ Template code separated as much as possible from source
+
 ## 3.0.0-beta.15 (20.07.2017)
 
 ### Features
