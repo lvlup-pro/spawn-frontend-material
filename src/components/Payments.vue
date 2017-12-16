@@ -56,7 +56,19 @@
                   <v-flex xs10>
                     <div>
                       <div class="headline">
-                        <v-btn large>
+                        <v-snackbar
+                          bottom
+                          multiline
+                          vertical
+                          timeout="10000"
+                          v-model="shoppingNotImplementedYetSnack"
+                        >
+                          {{ $t('shoppingNotYetReady') }}
+                          <v-btn flat color="pink" @click.native="shoppingNotImplementedYetSnack = false">
+                            {{ $t('okIWillWait') }}
+                          </v-btn>
+                        </v-snackbar>
+                        <v-btn @click="shoppingNotImplementedYetSnack = true" large>
                           {{ $t('buyNewServices') }}
                         </v-btn>
                       </div>
@@ -157,7 +169,9 @@
           createdAt: 'Created',
           rowsPerPage: 'Rows per page',
           from: 'From',
-          to: 'to'
+          to: 'to',
+          shoppingNotYetReady: "Shopping is not yet available in v3 panel",
+          okIWillWait: "Ok, I'll wait"
         },
         pl: {
           payments: 'Płatności',
@@ -171,7 +185,9 @@
           createdAt: 'Utworzono',
           rowsPerPage: 'Wyników na stronę',
           from: 'Od',
-          to: 'do'
+          to: 'do',
+          shoppingNotYetReady: "Zamówienia nie są jeszcze dostępne w panelu v3",
+          okIWillWait: "Rozumiem, poczekam"
         }
       }
     },
@@ -184,7 +200,8 @@
         loading: true,
         pagination: {},
         walletBalance: '? PLN',
-        walletBalanceLoading: true
+        walletBalanceLoading: true,
+        shoppingNotImplementedYetSnack: false
       }
     },
     watch: {
