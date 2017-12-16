@@ -25,6 +25,7 @@ module.exports = {
     }
   },
   module: {
+    noParse: [/moment.js/],
     rules: [
       {
         test: /\.vue$/,

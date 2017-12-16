@@ -81,6 +81,9 @@ Move existing:
 to new template folder and commit in git
 Remember to also tune dependencies section in package.json, all dev dependencies are from template 
 
+Add `noParse: [/moment.js/],` to `module` section in `build/webpack.base.conf.js` file to shrink build
+https://github.com/webpack/webpack/issues/198
+
 ### Fast icon and assets update
 
 https://realfavicongenerator.net and `cli-real-favicon` npm package
