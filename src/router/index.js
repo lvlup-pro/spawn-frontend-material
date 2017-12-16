@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Profile from '@/components/Profile'
 import Services from '@/components/Services'
+import Vps from '@/components/Vps'
 import Payments from '@/components/Payments'
 import Tickets from '@/components/Tickets'
 import Login from '@/components/Login'
@@ -25,6 +26,11 @@ export default new Router({
       path: '/services',
       name: 'Services',
       component: Services
+    },
+    {
+      path: '/service/vps/:id',
+      name: 'Vps',
+      component: Vps
     },
     {
       path: '/payments',

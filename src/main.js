@@ -31,8 +31,18 @@ Vue.filter('prettyDateFormat', function (uts) {
 Vue.filter('prettyDateFrom', function (uts) {
   return moment.unix(uts).from()
 })
-Vue.filter('prettyDateTime', function (uts) {
+Vue.filter('prettyTimeDate', function (uts) {
   return moment.unix(uts).format("HH:mm DD.MM.YYYY")
+})
+Vue.filter('prettyDateTime', function (uts) {
+  return moment.unix(uts).format("DD.MM.YYYY HH:mm")
+})
+Vue.filter('secondsToStartDate', function (seconds) {
+  let timestampNow = Math.floor(Date.now() / 1000)
+  return moment.unix(timestampNow - seconds).format("DD.MM.YYYY HH:mm")
+})
+Vue.filter('secondsToDays', function (seconds) {
+  return Math.floor(seconds / 86400)
 })
 
 // forum widget

@@ -55,11 +55,11 @@
             </tr>
           </template>
           <template slot="items" slot-scope="props">
-            <td>#{{ props.item.id }}</td>
-            <td>{{ props.item.virt | vpsType }}</td>
-            <td>{{ props.item.name }}</td>
-            <td>{{ props.item.ip }}</td>
-            <td class="text-xs-right">
+            <td @click="goToVps(props.item.id)" class="clickable">#{{ props.item.id }}</td>
+            <td @click="goToVps(props.item.id)" class="clickable">{{ props.item.virt | vpsType }}</td>
+            <td @click="goToVps(props.item.id)" class="clickable">{{ props.item.name }}</td>
+            <td @click="goToVps(props.item.id)" class="clickable">{{ props.item.ip }}</td>
+            <td @click="goToVps(props.item.id)" class="clickable text-xs-right">
                <span v-if="props.item.active === 1">
                <i class="fa fa-circle green--text"></i>
                  {{$t('active')}}
@@ -69,7 +69,9 @@
                 {{$t('locked')}}
               </span>
             </td>
-            <td class="text-xs-right">{{ props.item.payed_to | prettyDateTime }}</td>
+            <td @click="goToVps(props.item.id)" class="clickable text-xs-right">{{ props.item.payed_to | prettyDateTime
+              }}
+            </td>
           </template>
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
@@ -180,7 +182,15 @@
           })
 
         })
+      },
+      goToVps(id) {
+        this.$router.push('/service/vps/' + id)
       }
     }
   }
 </script>
+<style>
+  .clickable {
+    cursor: pointer;
+  }
+</style>
