@@ -53,6 +53,7 @@
       </v-flex>
 
       <v-flex xs12 lg6>
+        <br class="hidden-lg-and-up">
         <div class="display-1 grey--text text--darken-1">{{ $t('state') }}</div>
         <br>
         <v-layout row>
@@ -103,8 +104,99 @@
 
     <br>
 
-    <v-layout row wrap v-if="vps.status === 'running'">
+    <v-layout row wrap>
+
       <v-flex xs12 lg6>
+        <div class="display-1 grey--text text--darken-1">{{ $t('security') }}</div>
+        <br>
+        <v-layout row>
+          <v-flex xs12 sm11>
+            <v-card>
+              <v-list>
+                <v-list-tile avatar v-for="ip in ipAll" :key="ip" @click="">
+                  <v-list-tile-action class="hidden-sm-and-down">
+                    <v-icon v-if="ip" color="yellow">star</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title v-text="ip">
+                    </v-list-tile-title>
+                  </v-list-tile-content>
+                  <v-list-tile-avatar>
+                    <v-btn>{{ $t('udpFiltering') }}</v-btn>
+                    <v-btn>{{ $t('ddosAttacks') }}</v-btn>
+                  </v-list-tile-avatar>
+                </v-list-tile>
+              </v-list>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+
+      <v-flex xs12 lg6>
+        <br class="hidden-lg-and-up">
+        <div class="display-1 grey--text text--darken-1">{{ $t('management') }}</div>
+        <br>
+        <v-layout row>
+          <v-flex xs12 sm11>
+            <v-card>
+
+
+              <v-list>
+                <v-list-tile avatar>
+                  <v-btn color="green" dark large v-if="vps.status !== 'running'" @click="turnOnVps()">
+                    <i class="fa fa-fw fa-play"></i>
+                    {{ $t('turnOn')}}
+                  </v-btn>
+                  <v-btn color="red" dark large v-if="vps.status === 'running'" @click="turnOffVps()">
+                    <i class="fa fa-fw fa-plug"></i>
+                    {{ $t('turnOff')}}
+                  </v-btn>
+
+                  <span v-if="vps.status === 'running'">
+                    {{ $t('turnOffDesc')}}
+                  </span>
+                  <span v-else>
+                    {{ $t('turnOnDesc')}}
+                  </span>
+
+                  <v-list-tile-content>
+                    <v-list-tile-title>
+
+                    </v-list-tile-title>
+                  </v-list-tile-content>
+                  <v-list-tile-avatar>
+
+                  </v-list-tile-avatar>
+                </v-list-tile>
+              </v-list>
+
+
+              <v-snackbar
+                bottom
+                :timeout="2000"
+                v-model="vpsTurnedOnSnack"
+              >
+                {{ $t('vpsJustTurnedOn') }}
+              </v-snackbar>
+
+              <v-snackbar
+                bottom
+                :timeout="2000"
+                v-model="vpsTurnedOffSnack"
+              >
+                {{ $t('vpsJustTurnedOff') }}
+              </v-snackbar>
+
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+
+    </v-layout>
+
+    <v-layout row wrap>
+      <v-flex xs12 lg6 v-if="vps.status === 'running'">
+        <br>
         <div class="display-1 grey--text text--darken-1">{{ $t('performance') }}</div>
         <br>
         <v-layout row>
@@ -197,28 +289,6 @@
         </v-layout>
       </v-flex>
 
-      <v-flex xs12 lg6>
-        <div class="display-1 grey--text text--darken-1">{{ $t('state') }}</div>
-        <br>
-        <v-layout row>
-          <v-flex xs12 sm11>
-
-            <v-card>
-              <v-container fluid grid-list-lg>
-                <v-layout row>
-                  <v-flex xs10>
-                    <v-layout row wrap>
-
-                    </v-layout>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card>
-
-          </v-flex>
-        </v-layout>
-      </v-flex>
-
     </v-layout>
 
   </v-container>
@@ -239,9 +309,19 @@
           payedTo: 'Payed to',
           state: 'State',
           turnedOn: 'Turned on',
+          turnOn: 'Turn on',
+          turnOnDesc: 'Currently VPS is offline',
+          vpsJustTurnedOn: 'VPS has been turned on',
           turnedOff: 'Turned off',
+          turnOff: 'Turn off',
+          turnOffDesc: 'Dangerous! Better turn off from SSH',
+          vpsJustTurnedOff: 'VPS has been turned off',
           since: 'Since',
-          performance: 'Performance'
+          performance: 'Performance',
+          security: 'Security',
+          management: 'Management',
+          udpFiltering: 'UDP filter',
+          ddosAttacks: 'DDoS list',
         },
         pl: {
           service: 'Usługa',
@@ -252,9 +332,19 @@
           payedTo: 'Opłacony do',
           state: 'Stan',
           turnedOn: 'Włączony',
+          turnOn: 'Włącz',
+          turnOnDesc: 'Obecnie VPS jest offline',
+          vpsJustTurnedOn: 'VPS został włączony',
           turnedOff: 'Wyłączony',
+          turnOff: 'Wyłącz',
+          turnOffDesc: 'Wyłączenie VPS \'na twardo\' - niebezpieczne!',
+          vpsJustTurnedOff: 'VPS został wyłączony',
           since: 'Od',
-          performance: 'Wydajność'
+          performance: 'Wydajność',
+          security: 'Bezpieczeństwo',
+          management: 'Zarządzanie',
+          udpFiltering: 'Filtr UDP',
+          ddosAttacks: 'Ataki DDoS'
         }
       }
     },
@@ -262,6 +352,9 @@
       return {
         refreshMs: 2000,
         vps: false,
+        ipMain: false,
+        ipAdditional: false,
+        ipAll: [],
         netInB: 0,
         netInBPrev: 0,
         netInBSpeed: 0,
@@ -270,6 +363,8 @@
         netOutBPrev: 0,
         netOutBSpeed: 0,
         netOutBSpeedPercent: 0,
+        vpsTurnedOnSnack: false,
+        vpsTurnedOffSnack: false
       }
     },
     computed: {
@@ -282,11 +377,34 @@
     },
     mounted() {
       this.getVpsInfo()
+      this.getVpsIps()
       setInterval(() => {
         this.getVpsInfo()
       }, this.refreshMs)
     },
     methods: {
+      getVpsIps() {
+        axios({
+          method: 'get',
+          headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
+          url: this.$config.apiUrl + 'vps/' + this.id + '/ip'
+        }).then((res) => {
+          this.ipMain = res.data.main
+          this.ipAdditional = res.data.additional
+          this.ipAll.push(this.ipMain)
+          this.ipAdditional.forEach((element) => {
+            this.ipAll.push(element)
+          });
+        }).catch((err) => {
+          if (err.response.status === 401) {
+            this.$store.dispatch('setLoggedOut')
+          } else {
+            setTimeout(() => {
+              this.getVpsIps()
+            }, 3000)
+          }
+        })
+      },
       getVpsInfo() {
         axios({
           method: 'get',
@@ -324,6 +442,43 @@
         }).catch((err) => {
           if (err.response.status === 401) {
             this.$store.dispatch('setLoggedOut')
+          }
+        })
+      },
+      turnOnVps() {
+        axios({
+          method: 'post',
+          headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
+          url: this.$config.apiUrl + 'vps/' + this.id + '/on'
+        }).then((res) => {
+          this.vpsTurnedOnSnack = true
+          setTimeout(() => {
+            this.getVpsInfo()
+          }, 200)
+        }).catch((err) => {
+          if (err.response.status === 401) {
+            this.$store.dispatch('setLoggedOut')
+          } else if (err.response.status === 429) {
+            //TODO snackbar in App for this
+            console.log("Rate limit reached")
+          }
+        })
+      },
+      turnOffVps() {
+        axios({
+          method: 'post',
+          headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
+          url: this.$config.apiUrl + 'vps/' + this.id + '/off'
+        }).then((res) => {
+          this.vpsTurnedOffSnack = true
+          setTimeout(() => {
+            this.getVpsInfo()
+          }, 200)
+        }).catch((err) => {
+          if (err.response.status === 401) {
+            this.$store.dispatch('setLoggedOut')
+          } else if (err.response.status === 429) {
+            console.log("Rate limit reached")
           }
         })
       }
