@@ -1,5 +1,6 @@
 <template>
   <v-container>
+
     <div class="display-3 grey--text text--darken-1">
       <span v-if="vps.name">{{ vps.name}} -</span>
       {{ $t('service') }} {{ $t('vps') }} #{{ id }}
@@ -113,19 +114,29 @@
           <v-flex xs12 sm11>
             <v-card>
               <v-list>
-                <v-list-tile avatar v-for="ip in ipAll" :key="ip" @click="">
-                  <v-list-tile-action class="hidden-sm-and-down">
-                    <v-icon v-if="ip" color="yellow">star</v-icon>
-                  </v-list-tile-action>
-                  <v-list-tile-content>
-                    <v-list-tile-title v-text="ip">
-                    </v-list-tile-title>
-                  </v-list-tile-content>
-                  <v-list-tile-avatar>
-                    <v-btn>{{ $t('udpFiltering') }}</v-btn>
-                    <v-btn>{{ $t('ddosAttacks') }}</v-btn>
-                  </v-list-tile-avatar>
-                </v-list-tile>
+                <div v-for="ip in ipAll" :key="ip">
+
+                  <v-list-tile avatar @click="">
+                    <v-list-tile-action>
+                      <v-icon v-if="ip" color="yellow">star</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-tile-title v-text="ip">
+                      </v-list-tile-title>
+                    </v-list-tile-content>
+                    <v-list-tile-avatar class="hidden-xs-only">
+                      <v-btn>{{ $t('udpFiltering') }}</v-btn>
+                      <v-btn>{{ $t('ddosAttacks') }}</v-btn>
+                    </v-list-tile-avatar>
+                  </v-list-tile>
+
+                  <v-list-tile avatar @click="" class="hidden-sm-and-up">
+                    <v-list-tile-avatar>
+                      <v-btn>{{ $t('udpFiltering') }}</v-btn>
+                      <v-btn>{{ $t('ddosAttacks') }}</v-btn>
+                    </v-list-tile-avatar>
+                  </v-list-tile>
+                </div>
               </v-list>
             </v-card>
           </v-flex>
