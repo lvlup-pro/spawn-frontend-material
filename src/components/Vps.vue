@@ -125,9 +125,16 @@
                       </v-list-tile-title>
                     </v-list-tile-content>
                     <v-list-tile-avatar class="hidden-xs-only">
-                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')">
-                        {{ $t('udpFiltering') }}
-                      </v-btn>
+                      <v-tooltip top>
+                        <v-btn
+                          slot="activator"
+                          :disabled="!udpFilterAvailable"
+                          @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')"
+                        >
+                          {{ $t('udpFiltering') }}
+                        </v-btn>
+                        <span>{{ $t('kvmOnly') }}</span>
+                      </v-tooltip>
                       <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/attacks')">
                         {{ $t('ddosAttacks') }}
                       </v-btn>
@@ -136,9 +143,16 @@
 
                   <v-list-tile avatar @click="" class="hidden-sm-and-up">
                     <v-list-tile-avatar>
-                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')">
+                      <v-tooltip top>
+                      <v-btn
+                        slot="activator"
+                        :disabled="!udpFilterAvailable"
+                        @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')"
+                      >
                         {{ $t('udpFiltering') }}
                       </v-btn>
+                      <span>{{ $t('kvmOnly') }}</span>
+                      </v-tooltip>
                       <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/attacks')">
                         {{ $t('ddosAttacks') }}
                       </v-btn>
@@ -338,6 +352,7 @@
           security: 'Security',
           management: 'Management',
           udpFiltering: 'UDP filter',
+          kvmOnly: 'Available only for KVM offer',
           ddosAttacks: 'DDoS list',
         },
         pl: {
@@ -361,7 +376,8 @@
           security: 'Bezpieczeństwo',
           management: 'Zarządzanie',
           udpFiltering: 'Filtr UDP',
-          ddosAttacks: 'Ataki DDoS'
+          kvmOnly: 'Dostępne tylko dla KVM',
+          ddosAttacks: 'Lista DDoS'
         }
       }
     },
@@ -391,6 +407,11 @@
       },
       memPercent() {
         return Math.floor((this.vps.mem_mb / this.vps.max_mem_mb) * 100)
+      },
+      udpFilterAvailable() {
+        if (this.vps.virt === 'kvm') {
+          return true
+        }
       }
     },
     mounted() {
