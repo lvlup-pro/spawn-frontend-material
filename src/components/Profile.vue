@@ -20,12 +20,13 @@
                         disabled
                       ></v-text-field>
                       <v-text-field
-                        v-model="fullname"
-                        :label="$t('fullname')"
-                      ></v-text-field>
-                      <v-text-field
                         v-model="username"
                         :label="$t('username')"
+                        disabled
+                      ></v-text-field>
+                      <v-text-field
+                        v-model="fullname"
+                        :label="$t('fullname')"
                       ></v-text-field>
                       <v-text-field
                         v-model="email"
