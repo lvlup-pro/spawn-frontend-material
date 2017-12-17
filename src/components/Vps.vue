@@ -140,7 +140,6 @@
           <v-flex xs12 sm11>
             <v-card>
 
-
               <v-list>
                 <v-list-tile avatar>
                   <v-btn color="green" dark large v-if="vps.status !== 'running'" @click="turnOnVps()">
@@ -169,7 +168,6 @@
                   </v-list-tile-avatar>
                 </v-list-tile>
               </v-list>
-
 
               <v-snackbar
                 bottom

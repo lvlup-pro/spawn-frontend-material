@@ -8,7 +8,7 @@
         <div class="display-1 grey--text text--darken-1">{{ $t('currentBalance') }}</div>
         <br>
         <v-layout row>
-          <v-flex xs11>
+          <v-flex xs12 sm11>
             <v-card color="green darken-4" class="white--text" v-if="walletBalanceLoading">
               <v-container fluid grid-list-lg>
                 <v-layout row>
@@ -28,13 +28,13 @@
             <v-card color="green" class="white--text" v-if="!walletBalanceLoading">
               <v-container fluid grid-list-lg>
                 <v-layout row>
-                  <v-flex xs10>
+                  <v-flex xs9 sm10>
                     <div>
                       <div class="headline">{{ walletBalance }}</div>
                       <div>{{ $t('walletFunds') }}</div>
                     </div>
                   </v-flex>
-                  <v-flex xs2>
+                  <v-flex xs3 sm2>
                     <i class="fa fa-money fa-4x" aria-hidden="true"></i>
                   </v-flex>
                 </v-layout>
@@ -45,15 +45,16 @@
         </v-layout>
       </v-flex>
       <v-flex xs12 lg6>
+        <br class="hidden-lg-and-up">
         <div class="display-1 grey--text text--darken-1">{{ $t('useFunds') }}</div>
         <br>
         <v-layout row>
-          <v-flex xs11>
+          <v-flex xs12>
 
             <v-card color="blue" class="white--text">
               <v-container fluid grid-list-lg>
                 <v-layout row>
-                  <v-flex xs10>
+                  <v-flex xs9 sm10>
                     <div>
                       <div class="headline">
                         <v-snackbar
@@ -74,7 +75,7 @@
                       </div>
                     </div>
                   </v-flex>
-                  <v-flex xs2>
+                  <v-flex xs3 sm2>
                     <i class="fa fa-shopping-cart fa-4x" aria-hidden="true"></i>
                   </v-flex>
                 </v-layout>
