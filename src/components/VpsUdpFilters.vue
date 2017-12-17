@@ -176,7 +176,7 @@
           portTo: 'Port do',
           status: 'Stan',
           ruleOk: 'OK',
-          ruleCreating: 'Adding...',
+          ruleCreating: 'Tworzenie...',
           ruleDeleting: 'Usuwanie...',
           addNewRule: 'Dodaj nową regułę',
           createRule: 'Dodaj',
