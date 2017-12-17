@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Profile from '@/components/Profile'
 import Services from '@/components/Services'
 import Vps from '@/components/Vps'
+import VpsAttacks from '@/components/VpsAttacks'
 import Payments from '@/components/Payments'
 import Tickets from '@/components/Tickets'
 import Login from '@/components/Login'
@@ -31,6 +32,11 @@ export default new Router({
       path: '/service/vps/:id',
       name: 'Vps',
       component: Vps
+    },
+    {
+      path: '/service/vps/:id/ip/:ip/attacks',
+      name: 'VpsAttacks',
+      component: VpsAttacks
     },
     {
       path: '/payments',

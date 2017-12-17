@@ -126,7 +126,9 @@
                     </v-list-tile-content>
                     <v-list-tile-avatar class="hidden-xs-only">
                       <v-btn>{{ $t('udpFiltering') }}</v-btn>
-                      <v-btn>{{ $t('ddosAttacks') }}</v-btn>
+                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/attacks')">
+                        {{ $t('ddosAttacks') }}
+                      </v-btn>
                     </v-list-tile-avatar>
                   </v-list-tile>
 
