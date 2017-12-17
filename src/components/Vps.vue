@@ -125,7 +125,9 @@
                       </v-list-tile-title>
                     </v-list-tile-content>
                     <v-list-tile-avatar class="hidden-xs-only">
-                      <v-btn>{{ $t('udpFiltering') }}</v-btn>
+                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')">
+                        {{ $t('udpFiltering') }}
+                      </v-btn>
                       <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/attacks')">
                         {{ $t('ddosAttacks') }}
                       </v-btn>
@@ -134,8 +136,12 @@
 
                   <v-list-tile avatar @click="" class="hidden-sm-and-up">
                     <v-list-tile-avatar>
-                      <v-btn>{{ $t('udpFiltering') }}</v-btn>
-                      <v-btn>{{ $t('ddosAttacks') }}</v-btn>
+                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')">
+                        {{ $t('udpFiltering') }}
+                      </v-btn>
+                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/attacks')">
+                        {{ $t('ddosAttacks') }}
+                      </v-btn>
                     </v-list-tile-avatar>
                   </v-list-tile>
                 </div>
@@ -375,7 +381,8 @@
         netOutBSpeed: 0,
         netOutBSpeedPercent: 0,
         vpsTurnedOnSnack: false,
-        vpsTurnedOffSnack: false
+        vpsTurnedOffSnack: false,
+        intervalId: null
       }
     },
     computed: {
@@ -389,9 +396,12 @@
     mounted() {
       this.getVpsInfo()
       this.getVpsIps()
-      setInterval(() => {
+      this.intervalId = setInterval(() => {
         this.getVpsInfo()
       }, this.refreshMs)
+    },
+    destroyed() {
+      clearInterval(this.intervalId)
     },
     methods: {
       getVpsIps() {
