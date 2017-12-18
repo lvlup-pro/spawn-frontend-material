@@ -8,6 +8,7 @@ import VpsAttacks from '@/components/VpsAttacks'
 import VpsUdpFilters from '@/components/VpsUdpFilters'
 import Payments from '@/components/Payments'
 import Tickets from '@/components/Tickets'
+import Ticket from '@/components/Ticket'
 import Login from '@/components/Login'
 import NotFound from '@/components/NotFound'
 
@@ -55,6 +56,11 @@ export default new Router({
       path: '/tickets',
       name: 'Tickets',
       component: Tickets
+    },
+    {
+      path: '/ticket/:id',
+      name: 'Ticket',
+      component: Ticket
     },
     {
       path: '/auth/login',

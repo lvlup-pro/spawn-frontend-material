@@ -33,9 +33,9 @@
             </tr>
           </template>
           <template slot="items" slot-scope="props">
-            <td>#{{ props.item.id }}</td>
-            <td>{{ props.item.subject }}</td>
-            <td class="text-xs-right">
+            <td @click="goToTicket(props.item.id)" class="clickable">#{{ props.item.id }}</td>
+            <td @click="goToTicket(props.item.id)" class="clickable">{{ props.item.subject }}</td>
+            <td @click="goToTicket(props.item.id)" class="text-xs-right clickable">
                <span v-if="props.item.closed === null">
                <i class="fa fa-circle green--text"></i>
                  {{$t('open')}}
@@ -45,7 +45,7 @@
                 {{$t('closed')}}
               </span>
             </td>
-            <td class="text-xs-right">{{ props.item.created_at | prettyDateTime }}</td>
+            <td @click="goToTicket(props.item.id)" class="text-xs-right">{{ props.item.created_at | prettyDateTime }}</td>
           </template>
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
@@ -115,8 +115,6 @@
         deep: true
       }
     },
-    mounted() {
-    },
     filters: {
       vpsType(id) {
         if (id === 2) {
@@ -126,6 +124,9 @@
       }
     },
     methods: {
+      goToTicket(id) {
+        this.$router.push('/ticket/' + id)
+      },
       getDataFromApi() {
         this.loading = true
         return new Promise((resolve, reject) => {
@@ -155,3 +156,8 @@
     }
   }
 </script>
+<style scoped>
+  .clickable {
+    cursor: pointer;
+  }
+</style>
