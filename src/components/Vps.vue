@@ -9,51 +9,6 @@
 
     <v-layout row wrap>
       <v-flex xs12 lg6>
-        <div class="display-1 grey--text text--darken-1">{{ $t('payments') }}</div>
-        <br>
-        <v-layout row>
-          <v-flex xs12 sm11>
-
-            <v-card color="green" class="white--text" v-if="vps.active">
-              <v-container fluid grid-list-lg>
-                <v-layout row>
-                  <v-flex xs9 sm10>
-                    <div>
-                      <div class="headline">
-                        {{ $t('active') }}
-                      </div>
-                      <div>{{ $t('payedTo') }} {{ vps.payed_to | prettyDateTime }}</div>
-                    </div>
-                  </v-flex>
-                  <v-flex xs3 sm2>
-                    <i class="fa fa-check fa-4x" aria-hidden="true"></i>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card>
-
-            <v-card color="red darken-3" class="white--text" v-else>
-              <v-container fluid grid-list-lg>
-                <v-layout row>
-                  <v-flex xs9 sm10>
-                    <div>
-                      <div class="headline">
-                        {{ $t('notActive') }}
-                      </div>
-                      <div>{{ $t('payedTo') }} {{ vps.payed_to | prettyDateTime }}</div>
-                    </div>
-                  </v-flex>
-                  <v-flex xs3 sm2>
-                    <i class="fa fa-times fa-4x" aria-hidden="true"></i>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-
-      <v-flex xs12 lg6>
         <br class="hidden-lg-and-up">
         <div class="display-1 grey--text text--darken-1">{{ $t('state') }}</div>
         <br>
@@ -100,70 +55,55 @@
           </v-flex>
         </v-layout>
       </v-flex>
+      <v-flex xs12 lg6>
+        <div class="display-1 grey--text text--darken-1">{{ $t('payments') }}</div>
+        <br>
+        <v-layout row>
+          <v-flex xs12 sm11>
 
+            <v-card color="green" class="white--text" v-if="vps.active">
+              <v-container fluid grid-list-lg>
+                <v-layout row>
+                  <v-flex xs9 sm10>
+                    <div>
+                      <div class="headline">
+                        {{ $t('active') }}
+                      </div>
+                      <div>{{ $t('payedTo') }} {{ vps.payed_to | prettyDateTime }}</div>
+                    </div>
+                  </v-flex>
+                  <v-flex xs3 sm2>
+                    <i class="fa fa-check fa-4x" aria-hidden="true"></i>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card>
+
+            <v-card color="red darken-3" class="white--text" v-else>
+              <v-container fluid grid-list-lg>
+                <v-layout row>
+                  <v-flex xs9 sm10>
+                    <div>
+                      <div class="headline">
+                        {{ $t('notActive') }}
+                      </div>
+                      <div>{{ $t('payedTo') }} {{ vps.payed_to | prettyDateTime }}</div>
+                    </div>
+                  </v-flex>
+                  <v-flex xs3 sm2>
+                    <i class="fa fa-times fa-4x" aria-hidden="true"></i>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-flex>
     </v-layout>
 
     <br>
 
     <v-layout row wrap>
-
-      <v-flex xs12 lg6>
-        <div class="display-1 grey--text text--darken-1">{{ $t('security') }}</div>
-        <br>
-        <v-layout row>
-          <v-flex xs12 sm11>
-            <v-card>
-              <v-list>
-                <div v-for="ip in ipAll" :key="ip">
-
-                  <v-list-tile avatar @click="">
-                    <v-list-tile-action>
-                      <v-icon v-if="ip" color="yellow">star</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title v-text="ip">
-                      </v-list-tile-title>
-                    </v-list-tile-content>
-                    <v-list-tile-avatar class="hidden-xs-only">
-                      <v-tooltip top>
-                        <v-btn
-                          slot="activator"
-                          :disabled="!udpFilterAvailable"
-                          @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')"
-                        >
-                          {{ $t('udpFiltering') }}
-                        </v-btn>
-                        <span>{{ $t('kvmOnly') }}</span>
-                      </v-tooltip>
-                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/attacks')">
-                        {{ $t('ddosAttacks') }}
-                      </v-btn>
-                    </v-list-tile-avatar>
-                  </v-list-tile>
-
-                  <v-list-tile avatar @click="" class="hidden-sm-and-up">
-                    <v-list-tile-avatar>
-                      <v-tooltip top>
-                      <v-btn
-                        slot="activator"
-                        :disabled="!udpFilterAvailable"
-                        @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')"
-                      >
-                        {{ $t('udpFiltering') }}
-                      </v-btn>
-                      <span>{{ $t('kvmOnly') }}</span>
-                      </v-tooltip>
-                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/attacks')">
-                        {{ $t('ddosAttacks') }}
-                      </v-btn>
-                    </v-list-tile-avatar>
-                  </v-list-tile>
-                </div>
-              </v-list>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-flex>
 
       <v-flex xs12 lg6>
         <br class="hidden-lg-and-up">
@@ -218,6 +158,63 @@
                 {{ $t('vpsJustTurnedOff') }}
               </v-snackbar>
 
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+      <v-flex xs12 lg6>
+        <div class="display-1 grey--text text--darken-1">{{ $t('security') }}</div>
+        <br>
+        <v-layout row>
+          <v-flex xs12 sm11>
+            <v-card>
+              <v-list>
+                <div v-for="ip in ipAll" :key="ip">
+
+                  <v-list-tile avatar @click="">
+                    <v-list-tile-action>
+                      <v-icon v-if="ip" color="yellow">star</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-tile-title v-text="ip">
+                      </v-list-tile-title>
+                    </v-list-tile-content>
+                    <v-list-tile-avatar class="hidden-xs-only">
+                      <v-tooltip top>
+                        <v-btn
+                          slot="activator"
+                          :disabled="!udpFilterAvailable"
+                          @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')"
+                        >
+                          {{ $t('udpFiltering') }}
+                        </v-btn>
+                        <span>{{ $t('kvmOnly') }}</span>
+                      </v-tooltip>
+                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/attacks')">
+                        {{ $t('ddosAttacks') }}
+                      </v-btn>
+                    </v-list-tile-avatar>
+                  </v-list-tile>
+
+                  <v-list-tile avatar @click="" class="hidden-sm-and-up">
+                    <v-list-tile-avatar>
+                      <v-tooltip top>
+                        <v-btn
+                          slot="activator"
+                          :disabled="!udpFilterAvailable"
+                          @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/filter')"
+                        >
+                          {{ $t('udpFiltering') }}
+                        </v-btn>
+                        <span>{{ $t('kvmOnly') }}</span>
+                      </v-tooltip>
+                      <v-btn @click="$router.push('/service/vps/'+id+'/ip/'+ip+'/attacks')">
+                        {{ $t('ddosAttacks') }}
+                      </v-btn>
+                    </v-list-tile-avatar>
+                  </v-list-tile>
+                </div>
+              </v-list>
             </v-card>
           </v-flex>
         </v-layout>
