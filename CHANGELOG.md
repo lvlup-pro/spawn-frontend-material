@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0-rc.2 (19.12.2017)
+
++ Almost all functionality from 3.0.0-beta.15
+
 ## 3.0.0-rc.1 (16.12.2017)
 
 + Almost total code rewrite
