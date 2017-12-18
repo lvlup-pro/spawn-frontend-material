@@ -2,6 +2,102 @@
   <v-container>
     <div class="display-3 grey--text text--darken-1">VPS #{{ id }}</div>
     <br>
+    <div class="display-1 grey--text text--darken-1">{{ $t('status') }}</div>
+    <br>
+    <v-layout row wrap>
+      <v-flex xs12 sm6>
+
+        <v-card color="green" class="white--text"
+                v-if="filtering.enabled && !filtering.enable_pending && !filtering.disable_pending">
+          <v-container fluid grid-list-lg>
+            <v-layout row>
+              <v-flex xs9 sm10>
+                <div>
+                  <div class="headline">
+                    <span v-if="filtering.enabled">
+                      {{ $t('filteringEnabled') }}
+                    </span>
+                  </div>
+                  <div>
+                    <v-btn
+                      color="red"
+                      dark
+                      large
+                      v-if="filtering.enabled && !filtering.enable_pending && !filtering.disable_pending"
+                      @click="disableFilteringViaApi()"
+                    >
+                      <i class="fa fa-fw fa-stop"></i>
+                      {{ $t('disableFilter')}}
+                    </v-btn>
+                  </div>
+                </div>
+              </v-flex>
+              <v-flex xs3 sm2>
+                <i class="fa fa-check fa-4x" aria-hidden="true"></i>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card>
+
+        <v-card color="red" class="white--text"
+                v-if="!filtering.enabled && !filtering.enable_pending && !filtering.disable_pending">
+          <v-container fluid grid-list-lg>
+            <v-layout row>
+              <v-flex xs9 sm10>
+                <div>
+                  <div class="headline">
+                    {{ $t('filteringDisabled') }}
+                  </div>
+                  <div>
+                    <v-btn
+                      color="green"
+                      dark large
+                      v-if="!filtering.enabled && !filtering.enable_pending && !filtering.disable_pending"
+                      @click="enableFilteringViaApi()"
+                    >
+                      <i class="fa fa-fw fa-play"></i>
+                      {{ $t('enableFilter')}}
+                    </v-btn>
+                  </div>
+                </div>
+              </v-flex>
+              <v-flex xs3 sm2>
+                <i class="fa fa-times fa-4x" aria-hidden="true"></i>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card>
+
+        <v-card color="blue" class="white--text" v-if="filtering.enable_pending || filtering.disable_pending">
+          <v-container fluid grid-list-lg>
+            <v-layout row>
+              <v-flex xs9 sm10>
+                <div>
+                  <div class="headline">
+
+                    <span v-if="filtering.enable_pending">
+                      {{ $t('filteringEnabling') }}
+                    </span>
+
+                    <span v-if="filtering.disable_pending">
+                      {{ $t('filteringDisabling') }}
+                    </span>
+
+                  </div>
+                </div>
+              </v-flex>
+              <v-flex xs3 sm2>
+                <i class="fa fa-refresh fa-4x" aria-hidden="true"></i>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card>
+
+      </v-flex>
+
+    </v-layout>
+
+    <br>
     <div class="display-1 grey--text text--darken-1">{{ $t('head') }}</div>
     <br>
     <v-slide-y-transition mode="out-in">
@@ -19,6 +115,7 @@
           :loading="loading"
           class="elevation-2"
         >
+
           <template slot="headers" slot-scope="props">
             <tr>
               <th>
@@ -47,6 +144,7 @@
               </th>
             </tr>
           </template>
+
           <template slot="items" slot-scope="props">
             <td>
               <v-checkbox
@@ -70,23 +168,25 @@
                 <i class="fa fa-fw fa-2x fa-refresh"></i> {{ $t('ruleDeleting') }}
               </v-chip>
             </td>
+            <!-- FIXME showing "removing" and "ok" simultaneously -->
             <td class="text-xs-right" v-if="!props.item.create_pending && !props.item.create_pending">
               <v-chip label color="green" text-color="white">
                 <i class="fa fa-fw fa-2x fa-check"></i>
                 {{ $t('ruleOk') }}
               </v-chip>
             </td>
-
-
           </template>
+
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
               Sorry, nothing to display here :(
             </v-alert>
           </template>
+
           <template slot="pageText" slot-scope="{ pageStart, pageStop }">
             {{ $t('from') }} {{ pageStart }} {{ $t('to') }} {{ pageStop }}
           </template>
+
           <template slot="footer">
             <td colspan="100%">
               <v-btn color="red" dark @click="removeRules()">
@@ -100,6 +200,7 @@
               </v-btn>
             </td>
           </template>
+
         </v-data-table>
       </div>
     </v-slide-y-transition>
@@ -163,6 +264,12 @@
           addNewRule: 'Add new rule',
           createRule: 'Add',
           deleteRule: 'Remove',
+          enableFilter: 'Turn on filtering',
+          filteringEnabled: 'Filtering enabled',
+          filteringEnabling: 'Enabling filtering...',
+          disableFilter: 'Turn off filtering',
+          filteringDisabled: 'Filtering disabled',
+          filteringDisabling: 'Disabling filtering...',
           rowsPerPage: 'Rows per page',
           from: 'From',
           to: 'to',
@@ -181,6 +288,12 @@
           addNewRule: 'Dodaj nową regułę',
           createRule: 'Dodaj',
           deleteRule: 'Usuń',
+          enableFilter: 'Włącz filtrowanie',
+          filteringEnabled: 'Filtrowanie jest włączone',
+          filteringEnabling: 'Filtrowanie jest włączane...',
+          disableFilter: 'Wyłącz filtrowanie',
+          filteringDisabled: 'Filtrowanie jest wyłączone',
+          filteringDisabling: 'Filtrowanie jest wyłączane...',
           rowsPerPage: 'Wyników na stronę',
           from: 'Od',
           to: 'do',
@@ -216,7 +329,10 @@
         ],
         addRulePortFrom: null,
         addRulePortTo: null,
-        addRuleProtocol: null
+        addRuleProtocol: null,
+        filtering: false,
+        filterTurnedOnSnack: false,
+        filterTurnedOffSnack: false
       }
     },
     computed: {
@@ -239,8 +355,12 @@
         deep: true
       }
     },
+    mounted() {
+      this.checkFilteringStatusViaApi()
+    },
     methods: {
       refreshRules() {
+        this.checkFilteringStatusViaApi()
         this.getDataFromApi()
           .then(data => {
             this.items = data.items
@@ -258,6 +378,57 @@
           let ind = this.selected.indexOf(rule.id)
           if (ind > -1) {
             this.selected.splice(ind, 1);
+          }
+        })
+      },
+      checkFilteringStatusViaApi() {
+        axios({
+          method: 'get',
+          headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
+          url: this.$config.apiUrl + 'vps/' + this.id + '/ip/' + this.ip + '/game'
+        }).then((res) => {
+          this.filtering = res.data
+          console.log(res.data)
+        }).catch((err) => {
+          console.log(err.response.status)
+          if (err.response.status === 401) {
+            this.$store.dispatch('setLoggedOut')
+          }
+        })
+      },
+      enableFilteringViaApi() {
+        axios({
+          method: 'put',
+          headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
+          url: this.$config.apiUrl + 'vps/' + this.id + '/ip/' + this.ip + '/game',
+          data: {
+            enabled: true
+          }
+        }).then((res) => {
+          console.log(res.data)
+          this.checkFilteringStatusViaApi()
+        }).catch((err) => {
+          console.log(err.response.status)
+          if (err.response.status === 401) {
+            this.$store.dispatch('setLoggedOut')
+          }
+        })
+      },
+      disableFilteringViaApi() {
+        axios({
+          method: 'put',
+          headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
+          url: this.$config.apiUrl + 'vps/' + this.id + '/ip/' + this.ip + '/game',
+          data: {
+            enabled: false
+          }
+        }).then((res) => {
+          console.log(res.data)
+          this.checkFilteringStatusViaApi()
+        }).catch((err) => {
+          console.log(err.response.status)
+          if (err.response.status === 401) {
+            this.$store.dispatch('setLoggedOut')
           }
         })
       },
