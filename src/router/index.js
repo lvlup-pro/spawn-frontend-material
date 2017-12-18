@@ -9,10 +9,12 @@ import VpsUdpFilters from '@/components/VpsUdpFilters'
 import Payments from '@/components/Payments'
 import Tickets from '@/components/Tickets'
 import Login from '@/components/Login'
+import NotFound from '@/components/NotFound'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -58,6 +60,11 @@ export default new Router({
       path: '/auth/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
     }
   ]
 })
