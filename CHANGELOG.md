@@ -1,6 +1,19 @@
 # Changelog
 
+## 3.0.0-rc.3 (19.12.2017)
+
+### Notes
+
+All desired functionality from 3.0.0-beta.15 is now in place,
+only rough edges like data validation feedback remains to resolve
+
+### Features
+
++ Piwik Analytics support
+
 ## 3.0.0-rc.2 (19.12.2017)
+
+### Notes
 
 + Almost all functionality from 3.0.0-beta.15
 
