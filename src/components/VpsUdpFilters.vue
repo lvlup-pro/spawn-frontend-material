@@ -398,7 +398,7 @@
         })
       },
       enableFilteringViaApi() {
-        _paq.push(['trackEvent', 'service', 'vps', 'vps' + this.id, 'filteringTurnOn']);
+        _paq.push(['trackEvent', 'vps', 'filteringTurnOn', 'vps' + this.id]);
         axios({
           method: 'put',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
@@ -417,7 +417,7 @@
         })
       },
       disableFilteringViaApi() {
-        _paq.push(['trackEvent', 'service', 'vps', 'vps' + this.id, 'filteringTurnOff']);
+        _paq.push(['trackEvent', 'vps', 'filteringTurnOff', 'vps' + this.id]);
         axios({
           method: 'put',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
@@ -436,6 +436,7 @@
         })
       },
       addRuleViaApi() {
+        _paq.push(['trackEvent', 'vps', 'filteringRuleAdd', 'vps' + this.id]);
         axios({
           method: 'post',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
@@ -455,6 +456,7 @@
         })
       },
       removeRuleViaApi(ruleId) {
+        _paq.push(['trackEvent', 'vps', 'filteringRuleRemove', 'vps' + this.id]);
         axios({
           method: 'delete',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},

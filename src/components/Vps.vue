@@ -486,7 +486,7 @@
         })
       },
       turnOnVps() {
-        _paq.push(['trackEvent', 'service', 'vps', 'vps' + this.id, 'turnOn']);
+        _paq.push(['trackEvent', 'vps', 'turnOn', 'vps' + this.id]);
         axios({
           method: 'post',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
@@ -506,7 +506,7 @@
         })
       },
       turnOffVps() {
-        _paq.push(['trackEvent', 'service', 'vps', 'vps' + this.id, 'turnOff']);
+        _paq.push(['trackEvent', 'vps', 'turnOff', 'vps' + this.id]);
         axios({
           method: 'post',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
