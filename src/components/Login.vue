@@ -7,7 +7,8 @@
           <v-card-media
             class="white--text"
             height="200px"
-            src="http://www.wallpapereast.com/static/images/green-wallpaper-abstract.jpg"
+            src="/static/img/45-degree-fabric-light.png"
+            style="background-color:black"
           >
             <v-container fill-height fluid>
               <v-layout fill-height>
@@ -156,6 +157,7 @@
       }
     },
     mounted() {
+      this.$store.dispatch('whenMounted')
       if (this.$store.state.loggedIn) {
         this.$router.push('/services')
       }

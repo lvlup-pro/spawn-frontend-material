@@ -142,11 +142,7 @@
       }
     },
     mounted() {
-      // this.getDataFromApi()
-      //   .then(data => {
-      //     this.items = data.items
-      //     this.totalItems = data.total
-      //   })
+      this.$store.dispatch('whenMounted')
     },
     filters: {
       vpsType(id) {

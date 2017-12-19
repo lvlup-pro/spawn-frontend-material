@@ -412,6 +412,7 @@
       }
     },
     mounted() {
+      this.$store.dispatch('whenMounted')
       this.getVpsInfo()
       this.getVpsIps()
       this.intervalId = setInterval(() => {
@@ -485,6 +486,7 @@
         })
       },
       turnOnVps() {
+        _paq.push(['trackEvent', 'service', 'vps', 'vps' + this.id, 'turnOn']);
         axios({
           method: 'post',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
@@ -504,6 +506,7 @@
         })
       },
       turnOffVps() {
+        _paq.push(['trackEvent', 'service', 'vps', 'vps' + this.id, 'turnOff']);
         axios({
           method: 'post',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},

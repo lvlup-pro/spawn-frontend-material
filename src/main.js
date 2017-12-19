@@ -123,6 +123,13 @@ const store = new Vuex.Store({
     setLoggedOutOld({dispatch, state, commit}) {
       commit('userJustLoggedOff', false)
     },
+    whenMounted({dispatch, state, commit}) {
+      setTimeout(() => {
+        let path = 'https://demomy.lvlup.pro' + window.vue.$router.currentRoute.path
+        _paq.push(['setCustomUrl', path])
+        _paq.push(['trackPageView'])
+      }, 0)
+    }
   },
   mutations: {
     userLogged(state, newVal) {

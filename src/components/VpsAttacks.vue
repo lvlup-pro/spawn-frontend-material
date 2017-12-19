@@ -102,6 +102,9 @@
         deep: true
       }
     },
+    mounted() {
+      this.$store.dispatch('whenMounted')
+    },
     methods: {
       getDataFromApi() {
         this.loading = true

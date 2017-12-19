@@ -27,5 +27,8 @@
         }
       }
     },
+    mounted() {
+      this.$store.dispatch('whenMounted')
+    },
   }
 </script>

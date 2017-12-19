@@ -67,6 +67,15 @@
               </v-card>
             </div>
 
+            <br>
+
+            <v-text-field
+              :label="$t('messageHint')"
+              multi-line
+              v-model="message"
+            ></v-text-field>
+            <v-btn block color="secondary" dark>{{ $t('sendMessage') }}</v-btn>
+
           </v-flex>
         </v-layout>
       </v-flex>
@@ -87,7 +96,9 @@
           staff: 'lvlup.pro',
           open: 'Open',
           inProgress: 'In progress',
-          clientResponseNeeded: 'Client response needed'
+          clientResponseNeeded: 'Client response needed',
+          messageHint: 'Type your message here',
+          sendMessage: 'Send'
         },
         pl: {
           ticket: 'Ticket',
@@ -95,17 +106,21 @@
           staff: 'lvlup.pro',
           open: 'Otwarty',
           inProgress: 'W toku',
-          clientResponseNeeded: 'Potrzebna odpowiedź klienta'
+          clientResponseNeeded: 'Potrzebna odpowiedź klienta',
+          messageHint: 'Tu wpisz swoją wiadomość',
+          sendMessage: 'Wyślij'
         }
       }
     },
     data() {
       return {
         ticket: {},
-        messages: {}
+        messages: {},
+        message: ''
       }
     },
     mounted() {
+      this.$store.dispatch('whenMounted');
       this.getTicketInfo()
       this.getTicketMessages()
     },
@@ -143,6 +158,19 @@
         }).then((res) => {
           console.log(res.data)
           this.messages = res.data.messages
+        }).catch((err) => {
+          if (err.response.status === 401) {
+            this.$store.dispatch('setLoggedOut')
+          }
+        })
+      },
+      sendMessage() {
+        axios({
+          method: 'post',
+          headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
+          url: this.$config.apiUrl + 'help/ticket/' + this.id
+        }).then((res) => {
+          this.ticket = res.data
         }).catch((err) => {
           if (err.response.status === 401) {
             this.$store.dispatch('setLoggedOut')

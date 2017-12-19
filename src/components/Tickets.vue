@@ -123,6 +123,9 @@
         return 'OpenVZ'
       }
     },
+    mounted() {
+      this.$store.dispatch('whenMounted')
+    },
     methods: {
       goToTicket(id) {
         this.$router.push('/ticket/' + id)

@@ -356,6 +356,7 @@
       }
     },
     mounted() {
+      this.$store.dispatch('whenMounted')
       this.checkFilteringStatusViaApi()
     },
     methods: {
@@ -397,6 +398,7 @@
         })
       },
       enableFilteringViaApi() {
+        _paq.push(['trackEvent', 'service', 'vps', 'vps' + this.id, 'filteringTurnOn']);
         axios({
           method: 'put',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
@@ -415,6 +417,7 @@
         })
       },
       disableFilteringViaApi() {
+        _paq.push(['trackEvent', 'service', 'vps', 'vps' + this.id, 'filteringTurnOff']);
         axios({
           method: 'put',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},

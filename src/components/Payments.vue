@@ -218,6 +218,7 @@
       }
     },
     mounted() {
+      this.$store.dispatch('whenMounted')
       this.getWalletInfo()
     },
     methods: {

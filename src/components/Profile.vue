@@ -84,6 +84,7 @@
       }
     },
     mounted() {
+      this.$store.dispatch('whenMounted')
       this.getProfileInfo()
     },
     methods: {
