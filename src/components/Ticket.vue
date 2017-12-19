@@ -73,8 +73,25 @@
               :label="$t('messageHint')"
               multi-line
               v-model="message"
+              :disabled="sendingMessagePaused"
             ></v-text-field>
-            <v-btn block color="secondary" dark>{{ $t('sendMessage') }}</v-btn>
+
+            <v-btn
+              block
+              color="blue"
+              dark
+              v-if="!sendingMessagePaused && messageLengthOk"
+              @click="sendMessage()"
+            >
+              {{ $t('sendMessage') }}
+            </v-btn>
+            <v-btn
+              block
+              color="gray"
+              v-else
+            >
+              {{ $t('sendMessage') }}
+            </v-btn>
 
           </v-flex>
         </v-layout>
@@ -116,7 +133,8 @@
       return {
         ticket: {},
         messages: {},
-        message: ''
+        message: '',
+        sendingMessagePaused: true
       }
     },
     mounted() {
@@ -127,6 +145,13 @@
     computed: {
       id() {
         return this.$route.params.id
+      },
+      messageLengthOk() {
+        if (this.message.length >= 2) {
+          return true
+        } else {
+          return false
+        }
       }
     },
     methods: {
@@ -156,8 +181,8 @@
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
           url: this.$config.apiUrl + 'help/ticket/' + this.id + '/message'
         }).then((res) => {
-          console.log(res.data)
           this.messages = res.data.messages
+          this.sendingMessagePaused = false
         }).catch((err) => {
           if (err.response.status === 401) {
             this.$store.dispatch('setLoggedOut')
@@ -165,12 +190,18 @@
         })
       },
       sendMessage() {
+        this.sendingMessagePaused = true
         axios({
           method: 'post',
           headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
-          url: this.$config.apiUrl + 'help/ticket/' + this.id
+          url: this.$config.apiUrl + 'help/ticket/' + this.id + '/message',
+          data: {
+            msg: this.message
+          }
         }).then((res) => {
-          this.ticket = res.data
+          this.getTicketMessages()
+          this.message = ''
+          this.sendingMessagePaused = false
         }).catch((err) => {
           if (err.response.status === 401) {
             this.$store.dispatch('setLoggedOut')
