@@ -32,7 +32,8 @@
           <template slot="items" slot-scope="props">
             <td>#{{ props.item.id }}</td>
             <td class="text-xs-right">{{ props.item.started_at | prettyDateTime }}</td>
-            <td class="text-xs-right">{{ props.item.ended_at | prettyDateTime }}</td>
+            <td class="text-xs-right" v-if="props.item.ended_at">{{ props.item.ended_at | prettyDateTime }}</td>
+            <td class="text-xs-right" v-else>-</td>
           </template>
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
