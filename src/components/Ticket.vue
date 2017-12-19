@@ -10,13 +10,13 @@
             <!--<v-icon left>label</v-icon>-->
             {{ $t('open') }}
           </v-chip>
-          <v-chip label color="green" text-color="white" v-if="ticket.closed_at">
+          <v-chip label color="red" text-color="white" v-if="ticket.closed_at">
             {{ $t('closed') }}
           </v-chip>
           <v-chip label color="green" text-color="white" v-if="ticket.staff_response_needed">
             {{ $t('inProgress') }}
           </v-chip>
-          <v-chip label color="blue" text-color="white" v-else>
+          <v-chip label color="blue" text-color="white" v-if="!ticket.closed_at && !ticket.staff_response_needed">
             {{ $t('clientResponseNeeded') }}
           </v-chip>
 
@@ -74,24 +74,27 @@
               multi-line
               v-model="message"
               :disabled="sendingMessagePaused"
+              v-if="!ticket.closed_at"
             ></v-text-field>
 
-            <v-btn
-              block
-              color="blue"
-              dark
-              v-if="!sendingMessagePaused && messageLengthOk"
-              @click="sendMessage()"
-            >
-              {{ $t('sendMessage') }}
-            </v-btn>
-            <v-btn
-              block
-              color="gray"
-              v-else
-            >
-              {{ $t('sendMessage') }}
-            </v-btn>
+            <div v-if="!ticket.closed_at">
+              <v-btn
+                block
+                color="blue"
+                dark
+                v-if="!sendingMessagePaused && messageLengthOk"
+                @click="sendMessage()"
+              >
+                {{ $t('sendMessage') }}
+              </v-btn>
+              <v-btn
+                block
+                color="gray"
+                v-else
+              >
+                {{ $t('sendMessage') }}
+              </v-btn>
+            </div>
 
           </v-flex>
         </v-layout>
@@ -112,6 +115,7 @@
           you: 'You',
           staff: 'lvlup.pro',
           open: 'Open',
+          closed: 'Closed',
           inProgress: 'In progress',
           clientResponseNeeded: 'Client response needed',
           messageHint: 'Type your message here',
@@ -122,6 +126,7 @@
           you: 'Ty',
           staff: 'lvlup.pro',
           open: 'Otwarty',
+          closed: 'Zamknięty',
           inProgress: 'W toku',
           clientResponseNeeded: 'Potrzebna odpowiedź klienta',
           messageHint: 'Tu wpisz swoją wiadomość',
