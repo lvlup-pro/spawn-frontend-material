@@ -10,6 +10,7 @@ import Payments from '@/components/Payments'
 import Tickets from '@/components/Tickets'
 import Ticket from '@/components/Ticket'
 import Login from '@/components/Login'
+import Order from '@/components/Order'
 import NotFound from '@/components/NotFound'
 
 Vue.use(Router)
@@ -66,6 +67,11 @@ export default new Router({
       path: '/auth/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/order',
+      name: 'Order',
+      component: Order
     },
     {
       path: '*',

@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.7.0",
     "font-awesome-webpack": "0.0.5-beta.2",
     "less": "^2.7.3",
