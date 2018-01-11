@@ -71,6 +71,8 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ### Boilerplate update
 
+[Current commit link](https://github.com/vuetifyjs/pwa/commit/5c980b330c3144df4144c2898af4e757ebba9abb)
+
 Generate new project using vuetify PWA template https://github.com/vuetifyjs/pwa/
 Move existing:
 - src/*

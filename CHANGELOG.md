@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.0-rc.4 (TBA)
+
+### Notes
+
++ Vuetify upgraded to v0.17.6
+
+### Fixes
+
++ Prevent sending ticket messages when ticket is closed
++ More accurate Piwik action tracking
+
 ## 3.0.0-rc.3 (19.12.2017)
 
 ### Notes
