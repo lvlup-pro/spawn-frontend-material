@@ -1,7 +1,7 @@
 <template>
   <v-container>
 
-    <div class="display-3 grey--text text--darken-1">
+    <div class="display-2 grey--text text--darken-1">
       <span v-if="vps.name">{{ vps.name}} -</span>
       {{ $t('service') }} {{ $t('vps') }} #{{ id }}
     </div>
