@@ -259,7 +259,7 @@
                           v-bind:value="vps.cpu"
                           color="primary"
                         >
-                          {{ memPercent }}%
+                          {{ memAmount }}
                         </v-progress-circular>
                         <div class="text-xs-center">
                           RAM
@@ -402,8 +402,11 @@
       id() {
         return this.$route.params.id
       },
-      memPercent() {
-        return Math.floor((this.vps.mem_mb / this.vps.max_mem_mb) * 100)
+      memAmount() {
+        if (this.vps.mem_mb >= 2048) {
+          return Math.abs(this.vps.mem_mb / 1024).toFixed(2) + ' GB'
+        }
+        return this.vps.mem_mb + ' MB'
       },
       udpFilterAvailable() {
         if (this.vps.virt === 'kvm') {
