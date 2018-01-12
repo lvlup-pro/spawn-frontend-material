@@ -169,7 +169,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app>
-      <span>&copy; LVL UP 2017</span>
+      <span>&copy; LVL UP 2018</span>
     </v-footer>
   </v-app>
 </template>
