@@ -58,6 +58,24 @@
           </v-list-tile-content>
         </v-list-tile>
 
+        <v-list-tile @click="redirect('https://status.lvlup.pro')">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-server" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $t('status') }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile @click="redirect('https://stats.lvlup.pro')">
+          <v-list-tile-action>
+            <i class="fa fa-fw fa-lg fa-line-chart" aria-hidden="true"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $t('statistics') }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
         <v-list-tile @click="$router.push('/services')" v-if="$store.state.loggedIn">
           <v-list-tile-action>
             <i class="fa fa-fw fa-lg fa-list" aria-hidden="true"></i>
@@ -164,6 +182,8 @@
           logoSubtitle: 'Customer panel',
           news: 'News',
           services: 'Services',
+          status: "Services status",
+          statistics: "Statistics",
           help: 'Help',
           payments: 'Payments',
           login: 'Log in',
@@ -176,6 +196,8 @@
           logoSubtitle: 'Panel klienta',
           news: 'Nowości',
           services: 'Usługi',
+          status: "Status usług",
+          statistics: "Statystyki",
           help: 'Pomoc',
           payments: 'Płatności',
           login: 'Zaloguj',
@@ -207,6 +229,11 @@
       this.$store.dispatch('checkIfLoggedIn')
     },
     methods: {
+      redirect(url) {
+        if (url !== null) {
+          location.href = url
+        }
+      },
       logOut() {
         this.$store.dispatch('setLoggedOut')
       },
