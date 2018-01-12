@@ -146,6 +146,7 @@
           action: 'Action',
           result: 'Result',
           loginSucessful: 'Successful',
+          loginFailed: 'Failed',
           ipAddress: 'IP adress',
           browser: 'Browser',
           loginAction: 'Log in to the account'
@@ -166,6 +167,7 @@
           action: 'Akcja',
           result: 'Wynik',
           loginSucessful: 'Udane',
+          loginFailed: 'Nieudane',
           ipAddress: 'Adres IP',
           browser: 'Przeglądarka',
           loginAction: 'Logowanie do konta'
