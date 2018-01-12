@@ -153,18 +153,18 @@
               <v-layout row wrap>
                 <v-flex xs12 lg6>
                   Location
-                  <v-checkbox
-                    input-value="true"
-                    value
-                    disabled
-                    label=""
-                  >
-                    <template slot="label">
-                      Fastest installation in France
-                      <span class="flag-icon  flag-icon-fr"></span>
-                    </template>
-                  </v-checkbox>
-
+                  <v-radio-group v-model="location" :mandatory="false">
+                    <v-radio
+                      label="Radio 3"
+                      value="fr"
+                      color="success"
+                    >
+                      <template slot="label">
+                        Fastest installation in France
+                        <span class="flag-icon  flag-icon-fr"></span>
+                      </template>
+                    </v-radio>
+                  </v-radio-group>
                   <br>
                   Plan: {{ plans[plan-1].name }}
                   <br>
@@ -325,6 +325,7 @@
       return {
         service: 'vps-ovz',
         step: 2,
+        location: 'fr',
         plan: 1,
         tosAccept: false,
         plans: [
