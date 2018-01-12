@@ -165,9 +165,7 @@
                       </template>
                     </v-radio>
                   </v-radio-group>
-                  <br>
                   Plan: {{ plans[plan-1].name }}
-                  <br>
                   <v-card-text>
                     <v-slider
                       v-model="plan"
@@ -178,13 +176,31 @@
                       :persistent-hint="true">
                     </v-slider>
                   </v-card-text>
+                  <!-- duration -->
+                  For how long?
+
+                  <v-select
+                    v-bind:items="plans[plan-1].extra.prices"
+                    v-model="buyForTime"
+                    label="Select"
+                    single-line
+                    bottom
+                  >
+                    <template slot="item" slot-scope="data">
+                      <v-list-tile-content v-text="data.item.days"></v-list-tile-content>
+                    </template>
+                    <template slot="selection" slot-scope="data">
+                      {{ data.item.days }} D
+                    </template>
+                  </v-select>
+
                 </v-flex>
                 <v-flex xs12 lg6>
                   <v-card color="teal white--text" height="200px" class="pa-3">
                     <h3 class="text-xs-center">Plan info</h3>
                     <ul style="list-style-type: none">
                       <li v-for="value, name in plans[plan-1].extra">
-                        {{ name }}: {{ value }}
+                        <span v-if="name !== 'prices'">{{ name }}: {{ value }}</span>
                       </li>
                     </ul>
                   </v-card>
@@ -271,10 +287,22 @@
             <div class="display-1 grey--text text--darken-1">
               To pay: xx,xx PLN
             </div>
-
+            <br>
+            <br>
             Choose payment channel
             <br>
-            <br>
+
+            <v-radio-group v-model="paymentChannel" :mandatory="false">
+              <v-radio
+                label="Radio 3"
+                value="wallet"
+                color="success"
+              >
+                <template slot="label">
+                  lvlup.pro wallet funds
+                </template>
+              </v-radio>
+            </v-radio-group>
 
             <v-btn color="primary" @click.native="step = 1">{{ $t('next') }}</v-btn>
             <v-btn flat @click.native="step = 3">{{ $t('back') }}</v-btn>
@@ -324,8 +352,7 @@
     data() {
       return {
         service: 'vps-ovz',
-        step: 2,
-        location: 'fr',
+        step: 1,
         plan: 1,
         tosAccept: false,
         plans: [
@@ -334,7 +361,13 @@
             name: '4GB RAM',
             extra: {
               'ram': '4096',
-              'disk': '10240'
+              'disk': '10240',
+              'prices': [
+                {
+                  "days": "30",
+                  "price": "21.95"
+                }
+              ]
             }
           },
           {
@@ -342,7 +375,13 @@
             name: '6GB RAM',
             extra: {
               'ram': '6144',
-              'disk': '20480'
+              'disk': '20480',
+              'prices': [
+                {
+                  "days": "30",
+                  "price": "32.95"
+                }
+              ]
             }
           },
           {
@@ -350,11 +389,20 @@
             name: '8GB RAM',
             extra: {
               'ram': '8192',
-              'disk': '40960'
+              'disk': '40960',
+              'prices': [
+                {
+                  "days": "30",
+                  "price": "43.95"
+                }
+              ]
             }
           }
         ],
-        e11: [],
+        //placeholders
+        location: 'fr',
+        paymentChannel: 'wallet',
+        buyForTime: '',
         locations: [
           {header: 'France'},
           {name: 'Roubaix', group: 'Group 1', avatar: 'http://via.placeholder.com/128x128'},
