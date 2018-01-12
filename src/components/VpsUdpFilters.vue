@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="display-3 grey--text text--darken-1">VPS #{{ id }}</div>
+    <div class="display-2 grey--text text--darken-1">VPS #{{ id }}</div>
     <br>
     <div class="display-1 grey--text text--darken-1">{{ $t('status') }}</div>
     <br>

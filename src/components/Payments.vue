@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="display-3 grey--text text--darken-1">{{ $t('payments') }}</div>
+    <div class="display-2 grey--text text--darken-1">{{ $t('payments') }}</div>
     <br>
 
     <v-layout row wrap>
