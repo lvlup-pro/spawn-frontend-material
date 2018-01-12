@@ -3,7 +3,7 @@
   "description": "Frontend for lvlup.pro customer panel",
   "author": "Michał Frąckiewicz <hello@systemz.pl> (http://systemz.pl)",
   "license": "MIT",
-  "version": "3.0.0-rc.3",
+  "version": "3.0.0-rc.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/lvlup-pro/spawn-frontend-material.git"
@@ -25,6 +25,7 @@
     "material-design-icons-iconfont": "^3.0.3",
     "moment": "^2.19.4",
     "typeface-roboto": "0.0.45",
+    "ua-parser-js": "^0.7.17",
     "vue": "^2.3.3",
     "vue-i18n": "^7.3.2",
     "vue-router": "^2.3.1",

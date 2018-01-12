@@ -1,10 +1,15 @@
 # Changelog
 
-## 3.0.0-rc.4 (TBA)
+## 3.0.0-rc.4 (12.01.2018)
 
 ### Notes
 
 + Vuetify upgraded to v0.17.6
+
+### New features
+
++ Auth log in profile page
++ Draft of order page
 
 ### Fixes
 
