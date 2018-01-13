@@ -57,19 +57,7 @@
                   <v-flex xs9 sm10>
                     <div>
                       <div class="headline">
-                        <v-snackbar
-                          bottom
-                          multiline
-                          vertical
-                          timeout="10000"
-                          v-model="shoppingNotImplementedYetSnack"
-                        >
-                          {{ $t('shoppingNotYetReady') }}
-                          <v-btn flat color="pink" @click.native="shoppingNotImplementedYetSnack = false">
-                            {{ $t('okIWillWait') }}
-                          </v-btn>
-                        </v-snackbar>
-                        <v-btn @click="shoppingNotImplementedYetSnack = true" large>
+                        <v-btn @click="$router.push('/order')" large>
                           {{ $t('buyNewServices') }}
                         </v-btn>
                       </div>
