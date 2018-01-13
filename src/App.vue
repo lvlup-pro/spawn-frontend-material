@@ -239,11 +239,6 @@
       this.$store.dispatch('checkIfLoggedIn')
     },
     methods: {
-      redirect(url) {
-        if (url !== null) {
-          location.href = url
-        }
-      },
       logOut() {
         this.$store.dispatch('setLoggedOut')
       },
