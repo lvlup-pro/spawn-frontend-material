@@ -13,7 +13,7 @@
           <v-chip label color="red" text-color="white" v-if="ticket.closed_at">
             {{ $t('closed') }}
           </v-chip>
-          <v-chip label color="green" text-color="white" v-if="ticket.staff_response_needed">
+          <v-chip label color="green" text-color="white" v-if="!ticket.closed_at && ticket.staff_response_needed">
             {{ $t('inProgress') }}
           </v-chip>
           <v-chip label color="blue" text-color="white" v-if="!ticket.closed_at && !ticket.staff_response_needed">
