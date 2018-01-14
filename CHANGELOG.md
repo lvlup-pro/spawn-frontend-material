@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.0-rc.5 (TBA)
+
+### New features
+
++ Links to external stats and status services [#183](https://github.com/lvlup-pro/spawn-frontend-material/pull/183)
+
+### Fixes
+
++ Smaller size of font in headers [#185](https://github.com/lvlup-pro/spawn-frontend-material/pull/185)
++ It's 2018 now! [#187](https://github.com/lvlup-pro/spawn-frontend-material/pull/187)
+
 ## 3.0.0-rc.4 (12.01.2018)
 
 ### Notes
