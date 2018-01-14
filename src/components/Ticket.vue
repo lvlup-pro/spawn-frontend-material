@@ -4,7 +4,7 @@
     <v-layout row wrap>
       <v-flex xs12 lg8 offset-lg2>
 
-        <div class="display-3 grey--text text--darken-1">{{ $t('ticket') }} #{{ id }}
+        <div class="display-2 grey--text text--darken-1">{{ $t('ticket') }} #{{ id }}
 
           <v-chip label color="green" text-color="white" v-if="!ticket.closed_at">
             <!--<v-icon left>label</v-icon>-->

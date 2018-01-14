@@ -2,7 +2,7 @@
   <v-container>
     <v-slide-y-transition mode="out-in">
       <v-layout column>
-        <div class="display-3 grey--text text--darken-1">404</div>
+        <div class="display-2 grey--text text--darken-1">404</div>
         <br>
         {{ $t('notFound') }}
       </v-layout>

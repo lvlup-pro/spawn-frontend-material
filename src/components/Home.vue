@@ -2,7 +2,7 @@
   <v-container>
     <v-slide-y-transition mode="out-in">
       <v-layout column>
-        <div class="display-3 grey--text text--darken-1">{{ $t('news') }}</div>
+        <div class="display-2 grey--text text--darken-1">{{ $t('news') }}</div>
         <div class="grey--text text--darken-1 mb-3">
           {{ $t("hello") }}
         </div>
