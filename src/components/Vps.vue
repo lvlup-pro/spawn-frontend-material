@@ -256,7 +256,7 @@
                           v-bind:size="120"
                           v-bind:width="15"
                           v-bind:rotate="-90"
-                          v-bind:value="vps.cpu"
+                          v-bind:value="memPercent"
                           color="primary"
                         >
                           {{ memAmount }}
@@ -407,6 +407,9 @@
           return Math.abs(this.vps.mem_mb / 1024).toFixed(2) + ' GB'
         }
         return this.vps.mem_mb + ' MB'
+      },
+      memPercent() {
+        return Math.floor((this.vps.mem_mb / this.vps.max_mem_mb) * 100)
       },
       udpFilterAvailable() {
         if (this.vps.virt === 'kvm') {
