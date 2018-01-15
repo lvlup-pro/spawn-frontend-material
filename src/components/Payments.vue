@@ -158,9 +158,7 @@
           createdAt: 'Created',
           rowsPerPage: 'Rows per page',
           from: 'From',
-          to: 'to',
-          shoppingNotYetReady: "Shopping is not yet available in v3 panel",
-          okIWillWait: "Ok, I'll wait"
+          to: 'to'
         },
         pl: {
           payments: 'Płatności',
@@ -174,9 +172,7 @@
           createdAt: 'Utworzono',
           rowsPerPage: 'Wyników na stronę',
           from: 'Od',
-          to: 'do',
-          shoppingNotYetReady: "Zamówienia nie są jeszcze dostępne w panelu v3",
-          okIWillWait: "Rozumiem, poczekam"
+          to: 'do'
         }
       }
     },
