@@ -444,6 +444,8 @@
         }).catch((err) => {
           if (err.response.status === 401) {
             this.$store.dispatch('setLoggedOut')
+          } else if (err.response.status === 404) {
+            //TODO something
           } else {
             setTimeout(() => {
               this.getVpsIps()
@@ -488,6 +490,8 @@
         }).catch((err) => {
           if (err.response.status === 401) {
             this.$store.dispatch('setLoggedOut')
+          } else if (err.response.status === 404) {
+            this.$router.push('/404')
           }
         })
       },
