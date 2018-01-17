@@ -271,7 +271,7 @@
                           v-bind:size="120"
                           v-bind:width="15"
                           v-bind:rotate="-90"
-                          v-bind:value="netInBSpeedPercent"
+                          v-bind:value="0"
                           color="green"
                         >
                           <span v-if="netOutBSpeed >= 1024">
@@ -291,7 +291,7 @@
                           v-bind:size="120"
                           v-bind:width="15"
                           v-bind:rotate="-90"
-                          v-bind:value="netOutBSpeedPercent"
+                          v-bind:value="0"
                           color="red"
                         >
                           <span v-if="netOutBSpeed >= 1024">
@@ -388,11 +388,9 @@
         netInB: 0,
         netInBPrev: 0,
         netInBSpeed: 0,
-        netInBSpeedPercent: 0,
         netOutB: 0,
         netOutBPrev: 0,
         netOutBSpeed: 0,
-        netOutBSpeedPercent: 0,
         vpsTurnedOnSnack: false,
         vpsTurnedOffSnack: false,
         intervalId: null
@@ -482,10 +480,6 @@
           let secondsBetween = Math.floor(this.refreshMs / 1000)
           this.netInBSpeed = Math.round(this.netInBSpeed / secondsBetween)
           this.netOutBSpeed = Math.round(this.netOutBSpeed / secondsBetween)
-
-          // 200Mbit = 25MB/s max
-          this.netInBSpeedPercent = Math.round(this.netInBSpeed / (25 * 1024))
-          this.netOutBSpeedPercent = Math.round(this.netInBSpeed / (25 * 1024))
 
         }).catch((err) => {
           if (err.response.status === 401) {
