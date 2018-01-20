@@ -20,7 +20,7 @@
           </v-card-media>
           <v-card-title>
             <div id="form-container">
-              <form>
+              <form @keyup.enter="submit">
                 <v-alert color="success" icon="check_circle" value="true" v-if="correctCredentials">
                   {{ $t('correctCredentials') }}
                 </v-alert>
@@ -65,7 +65,13 @@
                 </v-layout>
 
                 <div class="text-xs-center">
-                  <v-btn color="blue" dark large @click="submit">
+                  <v-btn
+                    :loading="checkingCredentials"
+                    :disabled="checkingCredentials"
+                    color="primary"
+                    large
+                    @click="submit"
+                  >
                     {{ $t('submit') }}
                   </v-btn>
                   <br><br>
@@ -90,7 +96,7 @@
             <div class="headline">{{ $t('noAccountYet') }}</div>
           </v-card-title>
           <div class="text-xs-center">
-            <v-btn color="blue" dark large align-center>{{ $t('createNewAccount') }}</v-btn>
+            <v-btn color="primary" large align-center>{{ $t('createNewAccount') }}</v-btn>
           </div>
           <br>
         </v-card>
