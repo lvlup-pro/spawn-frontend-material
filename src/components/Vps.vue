@@ -271,7 +271,7 @@
                           v-bind:size="120"
                           v-bind:width="15"
                           v-bind:rotate="-90"
-                          v-bind:value="0"
+                          v-bind:value="this.netInBSpeedPercent"
                           color="green"
                         >
                           <span v-if="netOutBSpeed >= 1024">
@@ -291,7 +291,7 @@
                           v-bind:size="120"
                           v-bind:width="15"
                           v-bind:rotate="-90"
-                          v-bind:value="0"
+                          v-bind:value="this.netOutBSpeedPercent"
                           color="red"
                         >
                           <span v-if="netOutBSpeed >= 1024">
@@ -388,9 +388,11 @@
         netInB: 0,
         netInBPrev: 0,
         netInBSpeed: 0,
+        netInBSpeedPercent: 0,
         netOutB: 0,
         netOutBPrev: 0,
         netOutBSpeed: 0,
+        netOutBSpeedPercent: 0,
         vpsTurnedOnSnack: false,
         vpsTurnedOffSnack: false,
         intervalId: null
@@ -481,6 +483,9 @@
           this.netInBSpeed = Math.round(this.netInBSpeed / secondsBetween)
           this.netOutBSpeed = Math.round(this.netOutBSpeed / secondsBetween)
 
+          // 200Mbit = 25MB/s max
+          this.netInBSpeedPercent = Math.abs(this.netInBSpeed / 25600) * 100
+          this.netOutBSpeedPercent = Math.abs(this.netOutBSpeed / 25600) * 100
         }).catch((err) => {
           if (err.response.status === 401) {
             this.$store.dispatch('setLoggedOut')
