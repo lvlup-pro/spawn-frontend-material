@@ -13,7 +13,9 @@
 + RAM usage in VPS [#186](https://github.com/lvlup-pro/spawn-frontend-material/pull/186)
 + It's 2018 now! [#187](https://github.com/lvlup-pro/spawn-frontend-material/pull/187)
 + More responsive icons in login form
-+ PL translation in login form validation 
++ PL translation in login form validation
++ Redirect to 404 page when VPS ID is invalid [fb9ce60](https://github.com/lvlup-pro/spawn-frontend-material/commit/fb9ce60030590412ece169ad3753c7e2f89a9daa)
++ Redirect to 404 page when ticket ID is invalid
 
 ## 3.0.0-rc.4 (12.01.2018)
 
