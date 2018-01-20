@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0-rc.5 (TBA)
+## 3.0.0-rc.5 (20.01.2018)
 
 ### New features
 
