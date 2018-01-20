@@ -27,11 +27,93 @@
                       <v-text-field
                         v-model="fullname"
                         :label="$t('fullname')"
+                        disabled
                       ></v-text-field>
                       <v-text-field
                         v-model="email"
                         :label="$t('email')"
+                        disabled
                       ></v-text-field>
+
+                      <v-dialog v-model="changeEmailDialog" persistent max-width="500px">
+                        <v-btn color="primary" dark slot="activator">{{ $t('changeEmail') }}</v-btn>
+                        <v-card>
+                          <v-card-title>
+                            <span class="headline">{{ $t('changeEmail') }}</span>
+                          </v-card-title>
+                          <v-card-text>
+
+                            <v-container grid-list-md v-if="!changeEmailStep1Done">
+                              {{ $t('step')}} 1
+
+                              <v-alert color="error" icon="warning" dismissible v-model="stepOneWrongEmail">
+                                {{ $t('wrongEmail') }}
+                              </v-alert>
+
+                              <v-alert color="error" icon="warning" dismissible v-model="stepOneWrongPassword">
+                                {{ $t('wrongPassword') }}
+                              </v-alert>
+
+                              <v-layout wrap>
+                                <v-flex xs12>
+                                  <v-text-field
+                                    v-model="newEmail"
+                                    :rules="emailRules"
+                                    :label="$t('newEmail')"
+                                    required>
+                                  </v-text-field>
+                                </v-flex>
+                                <v-flex xs12>
+                                  <v-text-field
+                                    v-model="password"
+                                    :label="$t('password')"
+                                    type="password"
+                                    required>
+                                  </v-text-field>
+                                </v-flex>
+                              </v-layout>
+                              <br>
+                              <v-btn @click="sendConfirmation()" color="primary">{{ $t('sendConfirmation') }}</v-btn>
+                              <br>
+                              {{ $t('sendConfirmationTip') }}
+                            </v-container>
+
+                            <v-container grid-list-md v-if="changeEmailStep1Done && !changeEmailStep2Done">
+                              {{ $t('step')}} 2
+
+                              <v-alert color="error" icon="warning" dismissible v-model="stepTwoWrongToken">
+                                {{ $t('wrongToken') }}
+                              </v-alert>
+
+                              <v-layout wrap>
+                                <v-flex xs12>
+                                  <v-text-field
+                                    v-model="verificationToken"
+                                    :label="$t('confirmationCode')"
+                                    required>
+                                  </v-text-field>
+                                </v-flex>
+                              </v-layout>
+                              <br>
+                              <v-btn @click="verifyEmail()" color="primary">{{ $t('verifyEmail') }}</v-btn>
+                            </v-container>
+
+                            <v-container grid-list-md v-if="changeEmailStep2Done">
+                              {{ $t('step')}} 3
+                              <v-alert color="success" icon="check_circle" value="true">
+                                {{ $t('emailChangeOk') }}
+                              </v-alert>
+                            </v-container>
+
+                          </v-card-text>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" flat @click.native="changeEmailDialog = false">
+                              {{ $t('close') }}
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
 
                     </div>
                   </v-flex>
@@ -97,6 +179,12 @@
             <td v-if="props.item.action === 'LOGIN_FAILED'">
               {{ $t('loginFailed') }}
             </td>
+            <td v-if="props.item.action === 'EMAIL_CHANGE_INIT'">
+              {{ $t('emailChangeInit') }}
+            </td>
+            <td v-if="props.item.action === 'EMAIL_CHANGE_FINISH'">
+              {{ $t('emailChangeFinish') }}
+            </td>
             <td>
               {{ props.item.ip }}
             </td>
@@ -145,11 +233,29 @@
           to: 'to',
           action: 'Action',
           result: 'Result',
+          // log actions
           loginSucessful: 'Successful',
           loginFailed: 'Failed',
+          emailChangeInit: 'E-mail change started',
+          emailChangeFinish: 'E-mail change ended',
+          // rest of table
           ipAddress: 'IP adress',
           browser: 'Browser',
-          loginAction: 'Log in to the account'
+          loginAction: 'Log in to the account',
+          changeEmail: 'Change e-mail',
+          newEmail: 'New e-mail',
+          password: 'Password for lvlup.pro account',
+          wrongPassword: 'Niepoprawne hasło',
+          wrongEmail: 'Niepoprawny email',
+          emailRequired: 'E-mail field is required',
+          confirmationCode: 'Confirmation code',
+          sendConfirmation: 'Send confirmation code',
+          sendConfirmationTip: 'Sends confirmation code to new e-mail address',
+          verifyEmail: 'Verify e-mail',
+          emailChangeOk: 'E-mail address changed',
+          wrongToken: 'Token doesn\'t match',
+          step: 'Step',
+          close: 'Close'
         },
         pl: {
           profile: 'Twój profil',
@@ -166,11 +272,29 @@
           to: 'do',
           action: 'Akcja',
           result: 'Wynik',
+          // log actions
           loginSucessful: 'Udane',
           loginFailed: 'Nieudane',
+          emailChangeInit: 'Zmiana e-mail rozpoczęta',
+          emailChangeFinish: 'Zmiana e-mail zakończona',
+          // rest of table
           ipAddress: 'Adres IP',
           browser: 'Przeglądarka',
-          loginAction: 'Logowanie do konta'
+          loginAction: 'Logowanie do konta',
+          changeEmail: 'Zmień e-mail',
+          newEmail: 'Nowy e-mail',
+          password: 'Hasło do panelu lvlup.pro',
+          wrongPassword: 'Niepoprawne hasło',
+          wrongEmail: 'Niepoprawny e-mail',
+          emailRequired: 'Pole e-mail jest wymagane',
+          confirmationCode: 'Kod potwierdzający',
+          sendConfirmation: 'Wyślij kod',
+          sendConfirmationTip: 'Wysyła wiadomość z kodem potwierdzającym na nowy adres e-mail',
+          verifyEmail: 'Zweryfikuj e-mail',
+          emailChangeOk: 'Adres e-mail został zmieniony',
+          wrongToken: 'Kod nie zgadza się z tym wysłanym na email',
+          step: 'Krok',
+          close: 'Zamknij'
         }
       }
     },
@@ -186,7 +310,22 @@
         items: [],
         loading: true,
         pagination: {},
-        showFullUseragent: false
+        // auth log
+        showFullUseragent: false,
+        // change email
+        newEmail: '',
+        password: '',
+        verificationToken: '',
+        changeEmailDialog: false,
+        changeEmailStep1Done: false,
+        changeEmailStep2Done: false,
+        stepOneWrongEmail: false,
+        stepOneWrongPassword: false,
+        stepTwoWrongToken: false,
+        emailRules: [
+          (v) => !!v || this.$t('emailRequired'),
+          (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.$t('wrongEmail')
+        ]
       }
     },
     watch: {
@@ -269,6 +408,66 @@
 
         })
       },
+      sendConfirmation() {
+        this.stepOneWrongEmail = false
+        this.stepOneWrongPassword = false
+        axios({
+          method: 'post',
+          headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
+          url: this.$config.apiUrl + 'me/email/main/change/init',
+          data: {
+            new_email: this.newEmail,
+            password: this.password
+          }
+        }).then((res) => {
+          this.changeEmailStep1Done = true
+          this.getLogFromApi()
+            .then(data => {
+              this.items = data.items
+              this.totalItems = data.total
+            })
+        }).catch((err) => {
+          if (err.response.status === 400) {
+            if (err.response.data.message[0].includes('valid email')) {
+              this.stepOneWrongEmail = true
+            } else if (err.response.data.message.includes('password')) {
+              this.stepOneWrongPassword = true
+            }
+          }
+          if (err.response.status === 401) {
+            this.$store.dispatch('setLoggedOut')
+          }
+        })
+      },
+      verifyEmail() {
+        this.stepTwoWrongToken = false
+        axios({
+          method: 'post',
+          headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')},
+          url: this.$config.apiUrl + 'me/email/main/change/finish',
+          data: {
+            token: this.verificationToken,
+            password: this.password
+          }
+        }).then((res) => {
+          this.changeEmailStep2Done = true
+          this.getProfileInfo()
+          this.getLogFromApi()
+            .then(data => {
+              this.items = data.items
+              this.totalItems = data.total
+            })
+        }).catch((err) => {
+          if (err.response.status === 400) {
+            if (err.response.data.message.includes('Token')) {
+              this.stepTwoWrongToken = true
+            }
+          }
+          if (err.response.status === 401) {
+            this.$store.dispatch('setLoggedOut')
+          }
+        })
+      }
     }
   }
 </script>

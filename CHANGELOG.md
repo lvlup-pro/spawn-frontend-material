@@ -5,6 +5,7 @@
 ### New features
 
 + Links to external stats and status services [#183](https://github.com/lvlup-pro/spawn-frontend-material/pull/183)
++ Change main e-mail account linked to profile
 
 ### Fixes
 
