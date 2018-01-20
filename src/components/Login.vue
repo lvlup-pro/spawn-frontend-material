@@ -35,10 +35,7 @@
                 </v-alert>
                 <br>
                 <v-layout row wrap>
-                  <v-flex xs2 sm1>
-                    <i class="fa fa-fw fa-2x fa-user fa-form" aria-hidden="true"></i>
-                  </v-flex>
-                  <v-flex xs10 sm11>
+                  <v-flex xs12>
                     <v-text-field
                       :label="$t('loginOrMail')"
                       v-model="username"
@@ -46,15 +43,13 @@
                       :counter="32"
                       @input="$v.username.$touch()"
                       @blur="$v.username.$touch()"
+                      prepend-icon="fa-user fa-2x"
                       required
                     ></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-layout row wrap>
-                  <v-flex xs2 sm1>
-                    <i class="fa fa-fw fa-2x fa-key fa-form" aria-hidden="true"></i>
-                  </v-flex>
-                  <v-flex xs10 sm11>
+                  <v-flex xs12>
                     <v-text-field
                       :label="$t('password')"
                       v-model="password"
@@ -63,6 +58,7 @@
                       @input="$v.password.$touch()"
                       @blur="$v.password.$touch()"
                       type="password"
+                      prepend-icon="fa-key fa-2x"
                       required
                     ></v-text-field>
                   </v-flex>
