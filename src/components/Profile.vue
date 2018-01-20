@@ -46,10 +46,12 @@
                             <v-container grid-list-md v-if="!changeEmailStep1Done">
                               {{ $t('step')}} 1
 
+                              <v-alert color="error" icon="warning" dismissible v-model="stepOneEmailAlreadyTaken">
+                                {{ $t('emailAlreadyTaken') }}
+                              </v-alert>
                               <v-alert color="error" icon="warning" dismissible v-model="stepOneWrongEmail">
                                 {{ $t('wrongEmail') }}
                               </v-alert>
-
                               <v-alert color="error" icon="warning" dismissible v-model="stepOneWrongPassword">
                                 {{ $t('wrongPassword') }}
                               </v-alert>
@@ -245,8 +247,9 @@
           changeEmail: 'Change e-mail',
           newEmail: 'New e-mail',
           password: 'Password for lvlup.pro account',
-          wrongPassword: 'Niepoprawne hasło',
-          wrongEmail: 'Niepoprawny email',
+          wrongPassword: 'Wrong password',
+          wrongEmail: 'Wrong e-mail',
+          emailAlreadyTaken: 'This e-mail is already taken, please use other address',
           emailRequired: 'E-mail field is required',
           confirmationCode: 'Confirmation code',
           sendConfirmation: 'Send confirmation code',
@@ -286,6 +289,7 @@
           password: 'Hasło do panelu lvlup.pro',
           wrongPassword: 'Niepoprawne hasło',
           wrongEmail: 'Niepoprawny e-mail',
+          emailAlreadyTaken: 'Ten adres e-mail jest już zajęty, należy użyć innego',
           emailRequired: 'Pole e-mail jest wymagane',
           confirmationCode: 'Kod potwierdzający',
           sendConfirmation: 'Wyślij kod',
@@ -319,6 +323,7 @@
         changeEmailDialog: false,
         changeEmailStep1Done: false,
         changeEmailStep2Done: false,
+        stepOneEmailAlreadyTaken: false,
         stepOneWrongEmail: false,
         stepOneWrongPassword: false,
         stepTwoWrongToken: false,
@@ -409,6 +414,7 @@
         })
       },
       sendConfirmation() {
+        this.stepOneEmailAlreadyTaken = false
         this.stepOneWrongEmail = false
         this.stepOneWrongPassword = false
         axios({
@@ -428,7 +434,9 @@
             })
         }).catch((err) => {
           if (err.response.status === 400) {
-            if (err.response.data.message[0].includes('valid email')) {
+            if (err.response.data.message.includes('already taken')) {
+              this.stepOneEmailAlreadyTaken = true
+            } else if (err.response.data.message[0].includes('valid email')) {
               this.stepOneWrongEmail = true
             } else if (err.response.data.message.includes('password')) {
               this.stepOneWrongPassword = true
@@ -450,6 +458,7 @@
             password: this.password
           }
         }).then((res) => {
+          this.password = ''
           this.changeEmailStep2Done = true
           this.getProfileInfo()
           this.getLogFromApi()
