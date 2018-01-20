@@ -121,6 +121,7 @@
           sucessfullLogOut: 'You have been logged out',
           noAccountYet: "I don't have an account yet",
           createNewAccount: 'Create new account',
+          thisFieldIsRequired: 'This field is required'
         },
         pl: {
           welcome: 'Zaloguj się do swojego konta',
@@ -134,7 +135,8 @@
           checkingCredentials: 'Sprawdzam...',
           sucessfullLogOut: 'Wylogowano',
           noAccountYet: 'Jeszcze nie mam konta',
-          createNewAccount: 'Załóż konto'
+          createNewAccount: 'Załóż konto',
+          thisFieldIsRequired: 'Te pole jest wymagane'
         }
       }
     },
@@ -204,14 +206,14 @@
       usernameErrors() {
         const errors = []
         if (!this.$v.username.$dirty) return errors
-        !this.$v.username.maxLength && errors.push('Username must be at most 10 characters long')
-        !this.$v.username.required && errors.push('Username is required.')
+        //!this.$v.username.maxLength && errors.push('Username must be at most 10 characters long')
+        !this.$v.username.required && errors.push(this.$t('thisFieldIsRequired'))
         return errors
       },
       passwordErrors() {
         const errors = []
         if (!this.$v.password.$dirty) return errors
-        !this.$v.password.required && errors.push('Password is required')
+        !this.$v.password.required && errors.push(this.$t('thisFieldIsRequired'))
         return errors
       }
     }
