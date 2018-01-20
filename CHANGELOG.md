@@ -10,7 +10,10 @@
 ### Fixes
 
 + Smaller size of font in headers [#185](https://github.com/lvlup-pro/spawn-frontend-material/pull/185)
++ RAM usage in VPS [#186](https://github.com/lvlup-pro/spawn-frontend-material/pull/186)
 + It's 2018 now! [#187](https://github.com/lvlup-pro/spawn-frontend-material/pull/187)
++ More responsive icons in login form
++ PL translation in login form validation 
 
 ## 3.0.0-rc.4 (12.01.2018)
 
