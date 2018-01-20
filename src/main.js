@@ -55,6 +55,7 @@ Vue.mixin({
   created: function () {
     this.$config = {
       apiUrl: 'https://demoapi.lvlup.pro/v3/'
+      //apiUrl: 'http://localhost/v3/'
     }
   }
 })
