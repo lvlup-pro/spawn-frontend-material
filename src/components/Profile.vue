@@ -36,7 +36,7 @@
                       ></v-text-field>
 
                       <v-dialog v-model="changeEmailDialog" persistent max-width="500px">
-                        <v-btn color="primary" dark slot="activator">{{ $t('changeEmail') }}</v-btn>
+                        <v-btn color="primary" slot="activator">{{ $t('changeEmail') }}</v-btn>
                         <v-card>
                           <v-card-title>
                             <span class="headline">{{ $t('changeEmail') }}</span>
@@ -75,7 +75,14 @@
                                 </v-flex>
                               </v-layout>
                               <br>
-                              <v-btn @click="sendConfirmation()" color="primary">{{ $t('sendConfirmation') }}</v-btn>
+                              <v-btn
+                                :disabled="emailChangeLoading"
+                                :loading="emailChangeLoading"
+                                @click="sendConfirmation()"
+                                color="primary"
+                              >
+                                {{ $t('sendConfirmation') }}
+                              </v-btn>
                               <br>
                               {{ $t('sendConfirmationTip') }}
                             </v-container>
@@ -97,7 +104,14 @@
                                 </v-flex>
                               </v-layout>
                               <br>
-                              <v-btn @click="verifyEmail()" color="primary">{{ $t('verifyEmail') }}</v-btn>
+                              <v-btn
+                                :disabled="emailChangeLoading"
+                                :loading="emailChangeLoading"
+                                @click="verifyEmail()"
+                                color="primary"
+                              >
+                                {{ $t('verifyEmail') }}
+                              </v-btn>
                             </v-container>
 
                             <v-container grid-list-md v-if="changeEmailStep2Done">
@@ -317,6 +331,7 @@
         // auth log
         showFullUseragent: false,
         // change email
+        emailChangeLoading: false,
         newEmail: '',
         password: '',
         verificationToken: '',
@@ -414,6 +429,7 @@
         })
       },
       sendConfirmation() {
+        this.emailChangeLoading = true
         this.stepOneEmailAlreadyTaken = false
         this.stepOneWrongEmail = false
         this.stepOneWrongPassword = false
@@ -426,6 +442,7 @@
             password: this.password
           }
         }).then((res) => {
+          this.emailChangeLoading = false
           this.changeEmailStep1Done = true
           this.getLogFromApi()
             .then(data => {
@@ -433,6 +450,7 @@
               this.totalItems = data.total
             })
         }).catch((err) => {
+          this.emailChangeLoading = false
           if (err.response.status === 400) {
             if (err.response.data.message.includes('already taken')) {
               this.stepOneEmailAlreadyTaken = true
@@ -448,6 +466,7 @@
         })
       },
       verifyEmail() {
+        this.emailChangeLoading = true
         this.stepTwoWrongToken = false
         axios({
           method: 'post',
@@ -458,6 +477,7 @@
             password: this.password
           }
         }).then((res) => {
+          this.emailChangeLoading = false
           this.password = ''
           this.changeEmailStep2Done = true
           this.getProfileInfo()
@@ -467,6 +487,7 @@
               this.totalItems = data.total
             })
         }).catch((err) => {
+          this.emailChangeLoading = false
           if (err.response.status === 400) {
             if (err.response.data.message.includes('Token')) {
               this.stepTwoWrongToken = true
