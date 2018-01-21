@@ -140,7 +140,7 @@
           </template>
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
-              Sorry, nothing to display here :(
+              {{ $t('noPayments') }}
             </v-alert>
           </template>
           <template slot="pageText" slot-scope="{ pageStart, pageStop }">
@@ -172,7 +172,8 @@
           from: 'From',
           to: 'to',
           shoppingNotYetReady: "Shopping is not yet available in v3 panel",
-          okIWillWait: "Ok, I'll wait"
+          okIWillWait: 'Ok, I\'ll wait',
+          noPayments: 'No payments detected so far'
         },
         pl: {
           payments: 'Płatności',
@@ -187,8 +188,9 @@
           rowsPerPage: 'Wyników na stronę',
           from: 'Od',
           to: 'do',
-          shoppingNotYetReady: "Zamówienia nie są jeszcze dostępne w panelu v3",
-          okIWillWait: "Rozumiem, poczekam"
+          shoppingNotYetReady: 'Zamówienia nie są jeszcze dostępne w panelu v3',
+          okIWillWait: 'Rozumiem, poczekam',
+          noPayments: 'Nie odnotowano żadnych płatności'
         }
       }
     },

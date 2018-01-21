@@ -75,7 +75,7 @@
           </template>
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
-              Sorry, nothing to display here :(
+              {{ $t('noServices') }}
             </v-alert>
           </template>
           <template slot="pageText" slot-scope="{ pageStart, pageStop }">
@@ -103,7 +103,8 @@
           validTo: 'Valid to',
           rowsPerPage: 'Rows per page',
           from: 'From',
-          to: 'to'
+          to: 'to',
+          noServices: 'No services, maybe create a new one?'
         },
         pl: {
           services: 'Usługi',
@@ -115,7 +116,8 @@
           validTo: 'Ważny do',
           rowsPerPage: 'Wyników na stronę',
           from: 'Od',
-          to: 'do'
+          to: 'do',
+          noServices: 'Brak usług, może warto coś dodać?'
         }
       }
     },

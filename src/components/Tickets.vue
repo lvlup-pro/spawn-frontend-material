@@ -49,7 +49,7 @@
           </template>
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
-              Sorry, nothing to display here :(
+              {{ $t('noTickets') }}
             </v-alert>
           </template>
           <template slot="pageText" slot-scope="{ pageStart, pageStop }">
@@ -77,7 +77,8 @@
           createdAt: 'Created',
           rowsPerPage: 'Rows per page',
           from: 'From',
-          to: 'to'
+          to: 'to',
+          noTickets: 'No tickets created (yet)'
         },
         pl: {
           help: 'Pomoc',
@@ -89,7 +90,8 @@
           createdAt: 'Utworzono',
           rowsPerPage: 'Wyników na stronę',
           from: 'Od',
-          to: 'do'
+          to: 'do',
+          noTickets: 'Nie utworzono żadnych zgłoszeń (jeszcze)'
         }
       }
     },

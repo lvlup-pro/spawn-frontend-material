@@ -214,7 +214,7 @@
           </template>
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
-              Sorry, nothing to display here :(
+              {{ $t('noLog') }}
             </v-alert>
           </template>
           <template slot="pageText" slot-scope="{ pageStart, pageStop }">
@@ -272,7 +272,8 @@
           emailChangeOk: 'E-mail address changed',
           wrongToken: 'Token doesn\'t match',
           step: 'Step',
-          close: 'Close'
+          close: 'Close',
+          noLog: 'No log entries yet'
         },
         pl: {
           profile: 'Twój profil',
@@ -312,7 +313,8 @@
           emailChangeOk: 'Adres e-mail został zmieniony',
           wrongToken: 'Kod nie zgadza się z tym wysłanym na email',
           step: 'Krok',
-          close: 'Zamknij'
+          close: 'Zamknij',
+          noLog: 'Póki co brak wpisów w dzienniku'
         }
       }
     },

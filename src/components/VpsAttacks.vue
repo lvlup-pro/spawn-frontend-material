@@ -37,7 +37,7 @@
           </template>
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
-              Sorry, nothing to display here :(
+              {{ $t('noAttacks') }}
             </v-alert>
           </template>
           <template slot="pageText" slot-scope="{ pageStart, pageStop }">
@@ -61,7 +61,8 @@
           endedAt: 'Ended at',
           rowsPerPage: 'Rows per page',
           from: 'From',
-          to: 'to'
+          to: 'to',
+          noAttacks: 'No attacks reported so far. List is updated every ~5 minutes'
         },
         pl: {
           attacks: 'Lista ataków DDoS',
@@ -69,7 +70,8 @@
           endedAt: 'Zakończenie',
           rowsPerPage: 'Wyników na stronę',
           from: 'Od',
-          to: 'do'
+          to: 'do',
+          noAttacks: 'Nie odnotowano jeszcze żadnych ataków. Lista jest aktualizowana co około 5 minut'
         }
       }
     },

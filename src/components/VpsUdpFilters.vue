@@ -179,7 +179,7 @@
 
           <template slot="no-data">
             <v-alert :value="true" color="info" icon="info" v-if="!loading">
-              Sorry, nothing to display here :(
+              {{ $t('noPortsSet') }}
             </v-alert>
           </template>
 
@@ -274,7 +274,8 @@
           from: 'From',
           to: 'to',
           cancel: 'Cancel',
-          refresh: 'Refresh'
+          refresh: 'Refresh',
+          noPortsSet: 'No ports added to UDP whitelist'
         },
         pl: {
           head: 'Reguły filtrowania UDP',
@@ -298,7 +299,8 @@
           from: 'Od',
           to: 'do',
           cancel: 'Anuluj',
-          refresh: 'Odśwież'
+          refresh: 'Odśwież',
+          noPortsSet: 'Brak portów na whiteliście UDP'
         }
       }
     },
