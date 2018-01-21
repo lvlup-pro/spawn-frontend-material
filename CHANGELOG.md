@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-rc.6 (TBA)
+
+### Fixes
+
++ Enter key on login form
+
 ## 3.0.0-rc.5 (20.01.2018)
 
 ### New features
