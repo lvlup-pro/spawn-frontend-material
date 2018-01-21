@@ -146,7 +146,14 @@ const store = new Vuex.Store({
 })
 
 import 'font-awesome-webpack'
+
+/*
+this pack doesn't cover needed latin-ext for polish language
+proper method was to download two needed .woff2 files from google fonts
+and place them in static folder, imported localy works awesome
 import 'typeface-roboto'
+ */
+
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 /*

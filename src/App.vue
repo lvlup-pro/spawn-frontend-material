@@ -273,4 +273,30 @@
   .no-deco {
     text-decoration: none;
   }
+
+  /*
+   source of Roboto
+   https://fonts.google.com/specimen/Roboto?selection.family=Roboto&selection.subset=latin-ext
+   https://github.com/google/roboto
+   https://fonts.googleapis.com/css?family=Roboto&amp;subset=latin-ext
+  */
+
+  /* latin-ext */
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto'), local('Roboto-Regular'), url('/static/font/roboto/v18/Fcx7Wwv8OzT71A3E1XOAjvesZW2xOQ-xsNqO47m55DA.woff2') format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+  }
+
+  /* latin */
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto'), local('Roboto-Regular'), url('/static/font/roboto/v18/CWB0XYA8bzo0kSThX0UTuA.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+  }
+
 </style>
