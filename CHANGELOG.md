@@ -5,6 +5,11 @@
 ### Fixes
 
 + Enter key on login form
++ Polish language is rendering properly
++ i18n on empty tables
++ Disable buttons when loading at email changing procedure
++ Check for taken email when changing email
++ Pretty scrollbar for sidebar
 
 ## 3.0.0-rc.5 (20.01.2018)
 
