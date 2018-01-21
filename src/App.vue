@@ -12,7 +12,7 @@
         <img id="logo" src="https://lvlup.pro/assets/home/img/logo.png">
         <p class="text-xs-center">
           <span class="white--text" id="credits-link">
-            {{ $t('logoSubtitle')}} v3.0.0-rc.5
+            {{ $t('logoSubtitle')}} v3.0.0-rc.6
           </span>
         </p>
 
