@@ -366,14 +366,14 @@
           vpsJustTurnedOn: 'VPS został włączony',
           turnedOff: 'Wyłączony',
           turnOff: 'Wyłącz',
-          turnOffDesc: 'Wyłączenie VPS \'na twardo\' - niebezpieczne!',
+          turnOffDesc: 'Wyłącz teraz! (Niebezpieczne)',
           vpsJustTurnedOff: 'VPS został wyłączony',
           since: 'Od',
           performance: 'Wydajność',
           security: 'Bezpieczeństwo',
           management: 'Zarządzanie',
           udpFiltering: 'Filtr UDP',
-          kvmOnly: 'Dostępne tylko dla KVM',
+          kvmOnly: 'Dostępne tylko dla serwerów KVM',
           ddosAttacks: 'Lista DDoS'
         }
       }
