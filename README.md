@@ -1,6 +1,8 @@
 # LVL UP Spawn v3 - frontend (RC)
 > Material edition
 
+[![forthebadge](http://forthebadge.com/images/badges/gluten-free.svg)](http://forthebadge.com)
+
 [![Build Status](https://travis-ci.org/lvlup-pro/spawn-frontend-material.svg?branch=master)](https://travis-ci.org/lvlup-pro/spawn-frontend-material)
 [![Code Climate](https://codeclimate.com/github/lvlup-pro/spawn-frontend-material/badges/gpa.svg)](https://codeclimate.com/github/lvlup-pro/spawn-frontend-material)
 [![Dependencies](https://david-dm.org/lvlup-pro/spawn-frontend-material/status.svg)](https://david-dm.org/lvlup-pro/spawn-frontend-material)
