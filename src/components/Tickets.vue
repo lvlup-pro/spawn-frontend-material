@@ -34,7 +34,7 @@
           </template>
           <template slot="items" slot-scope="props">
             <td @click="goToTicket(props.item.id)" class="clickable">#{{ props.item.id }}</td>
-            <td @click="goToTicket(props.item.id)" class="clickable">{{ props.item.subject }}</td>
+            <td @click="goToTicket(props.item.id)" class="clickable" v-html="props.item.subject"></td>
             <td @click="goToTicket(props.item.id)" class="text-xs-right clickable">
                <span v-if="props.item.closed === null">
                <i class="fa fa-circle green--text"></i>

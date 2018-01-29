@@ -22,7 +22,7 @@
 
         </div>
 
-        <div class="headline grey--text text--darken-1">{{ ticket.subject }}</div>
+        <div class="headline grey--text text--darken-1" v-html="ticket.subject"></div>
         <br>
 
         <v-layout row wrap>
@@ -45,7 +45,7 @@
             </v-toolbar>
             <v-card color="grey lighten-4">
               <v-card-text>
-                {{ ticket.message }}
+                <span v-html="nl2br(ticket.message)"></span>
               </v-card-text>
             </v-card>
 
@@ -62,7 +62,7 @@
               </v-toolbar>
               <v-card color="grey lighten-4">
                 <v-card-text>
-                  {{ msg.message }}
+                  <span v-html="nl2br(msg.message)"></span>
                 </v-card-text>
               </v-card>
             </div>
@@ -160,6 +160,9 @@
       }
     },
     methods: {
+      nl2br(text) {
+        return text.replace(/\n/g, '<br>')
+      },
       ticketHeaderColor(staff) {
         if (staff) {
           return "green"
