@@ -60,6 +60,10 @@ Vue.mixin({
   }
 })
 
+// copypasta, now even easier!
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)
+
 // store for global data
 import Vuex from 'vuex'
 
