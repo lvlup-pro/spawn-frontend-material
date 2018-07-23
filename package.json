@@ -21,7 +21,7 @@
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.7.0",
     "font-awesome-webpack": "0.0.5-beta.2",
-    "less": "^2.7.3",
+    "less": "^3.0.2",
     "material-design-icons-iconfont": "^3.0.3",
     "moment": "^2.19.4",
     "ua-parser-js": "^0.7.17",
