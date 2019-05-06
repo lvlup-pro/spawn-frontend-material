@@ -14,7 +14,9 @@
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e"
+    "test": "npm run unit && npm run e2e",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -31,7 +33,8 @@
     "vuelidate": "^0.6.1",
     "vuetify": "^0.17.6",
     "vuex": "^3.0.1",
-    "vue-clipboard2": "0.0.8"
+    "vue-clipboard2": "0.0.8",
+    "snyk": "^1.161.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -104,5 +107,6 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "snyk": true
 }
